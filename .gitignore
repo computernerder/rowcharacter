@@ -42,6 +42,9 @@ test-results.xml
 # IDE / editor
 .vscode/
 .idea/
+.pytest_cache/
+.vscode/
+
 
 # OS-specific
 .DS_Store
