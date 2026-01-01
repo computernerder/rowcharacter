@@ -1,10 +1,11 @@
 
 
 
+from __future__ import annotations
 from dataclasses import dataclass
-from typing import Dict, List, Callable
+from typing import Dict, List, Callable, TYPE_CHECKING
 
-from main import Player
+
 
 
 
@@ -19,7 +20,8 @@ class Race:
 
     special_abilities: List[str]
 
-
+    if TYPE_CHECKING:
+        from main import Player
 
     def apply(self, player: Player):
         for lang in self.base_languages:

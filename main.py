@@ -2,8 +2,53 @@ from enum import Enum
 from ROW_constants import *
 from ROW_race import *
 
+from dataclasses import dataclass, field
+from typing import List, Dict, Callable
 
 
+@dataclass
+class Character:
+    name: str
+    alive: bool = True
+    roll_method: RollType = RollType.STANDARD_ARRAY
+    # attributes = {attr: 10 for attr in Attribute}  # Initialize all attributes to 10
+    languages: set[str] = field(default_factory=set)
+    speed: int = 30  # Default speed
+    # defense = [DEFENSE_BASE, attribute_modifier(attributes[Attribute.AGILITY]), 0, 0]  # Base 9 + agl mod + armor + misc
+    # defense_total = sum(defense)  # Default total defense (including modifiers)
+    # health_points = 10 + attribute_modifier(attributes[Attribute.ENDURANCE])  # Default HP
+    
+    # skills = {skill: [attribute_modifier(skill.attribute.value), 0, 0] for skill in Skill}  # skill name -> bonus/rank (default 0)
+    #skill_totals = {skill: 0 for skill in Skill}   # skill name -> total bonus
+    # self.skills[skill.value] = [attr_mod, 0, 0]  # [attr_mod, rank, misc]
+    
+    # Path Related
+    primary_path: Path = None
+    secondary_path: List[Path] = field(default_factory=list)
+    talent_points: int = 0
+    spellcraft_points: int = 0
+    casting_points: int = 0
+
+
+    experience_points: int = 0
+    level: int = 1
+    advancement_points: int = 0  # This is equal to Intellect modifier on level up
+
+
+    def __post_init__(self):
+        self.attributes = {attr: 10 for attr in Attribute}  # Initialize all attributes to 10
+        # self.skills = {skill: [attribute_modifier(self.attributes[SKILL_ATTRIBUTE[skill]]), 0, 0] for skill in Skill}  # skill name -> bonus/rank (default 0)
+        self.skills = {
+            skill: [attribute_modifier(self.attributes[skill.attribute]), 0, 0] for skill in Skill
+        }
+        self.skill_totals = {skill: sum(self.skills[skill]) for skill in Skill}   # skill name -> total bonus
+        self.defense = [DEFENSE_BASE, attribute_modifier(self.attributes[Attribute.AGILITY]), 0, 0]  # Base 9 + agl mod + armor + misc
+        self.defense_total = sum(self.defense)  # Default total defense (including modifiers)
+        self.health_points = 10 + attribute_modifier(self.attributes[Attribute.ENDURANCE])  # Default HP
+
+
+
+    
 
 
 
@@ -16,7 +61,8 @@ class Player:
 
 
         # Attributes
-        self.attributes = {"Might": 10, "Agility": 16, "Endurance": 10, "Wisdom": 15, "Intellect": 15, "Charisma": 15}
+        self.attributes = {attr.value: 10 for attr in Attribute}  # Initialize all attributes to 10
+
         # self.create_player()
         #Create Player
         self.languages = set()
