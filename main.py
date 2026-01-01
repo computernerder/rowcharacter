@@ -12,18 +12,17 @@ class Character:
     alive: bool = True
     roll_method: RollType = RollType.STANDARD_ARRAY
     # attributes = {attr: 10 for attr in Attribute}  # Initialize all attributes to 10
+    
+    attributes: Dict[Attribute, int] = field(default_factory=lambda: {attr: [10,attribute_modifier(10),0,0] for attr in Attribute})  # Initialize all attributes to 10
+
     languages: set[str] = field(default_factory=set)
     speed: int = 30  # Default speed
-    # defense = [DEFENSE_BASE, attribute_modifier(attributes[Attribute.AGILITY]), 0, 0]  # Base 9 + agl mod + armor + misc
-    # defense_total = sum(defense)  # Default total defense (including modifiers)
-    # health_points = 10 + attribute_modifier(attributes[Attribute.ENDURANCE])  # Default HP
-    
-    # skills = {skill: [attribute_modifier(skill.attribute.value), 0, 0] for skill in Skill}  # skill name -> bonus/rank (default 0)
-    #skill_totals = {skill: 0 for skill in Skill}   # skill name -> total bonus
-    # self.skills[skill.value] = [attr_mod, 0, 0]  # [attr_mod, rank, misc]
-    
+
+
+
+
     # Path Related
-    primary_path: Path = None
+    primary_path: Path | None = None
     secondary_path: List[Path] = field(default_factory=list)
     talent_points: int = 0
     spellcraft_points: int = 0
@@ -34,9 +33,24 @@ class Character:
     level: int = 1
     advancement_points: int = 0  # This is equal to Intellect modifier on level up
 
+    # Computed / derived stats (dataclass pattern):
+    # These values are *derived* from the character’s core state (attributes, gear, bonuses, etc.)
+    # and are therefore not provided by the caller in __init__ (init=False). They are calculated
+    # in __post_init__ so every Character instance starts in a consistent, ready-to-use state.
+    #
+    # Declaring them as dataclass fields (instead of creating them dynamically in __post_init__)
+    # makes them visible in repr/debugging, easier for the IDE/type-checker to reason about, and
+    # prevents “forgot to set this attribute” bugs.
+    
+    skills: Dict[Skill, List[int]] = field(init=False)  # skill name -> [attr_mod, rank, misc]
+    skill_totals: Dict[Skill, int] = field(init=False)   # skill name -> total bonus
+    defense: List[int] = field(init=False)  # [base, agl_mod, armor, misc]
+    defense_total: int = field(init=False)  # Default total defense (including modifiers)
+    health_points: int = field(init=False)  # Default HP
+
 
     def __post_init__(self):
-        self.attributes = {attr: 10 for attr in Attribute}  # Initialize all attributes to 10
+        
         # self.skills = {skill: [attribute_modifier(self.attributes[SKILL_ATTRIBUTE[skill]]), 0, 0] for skill in Skill}  # skill name -> bonus/rank (default 0)
         self.skills = {
             skill: [attribute_modifier(self.attributes[skill.attribute]), 0, 0] for skill in Skill
@@ -45,6 +59,8 @@ class Character:
         self.defense = [DEFENSE_BASE, attribute_modifier(self.attributes[Attribute.AGILITY]), 0, 0]  # Base 9 + agl mod + armor + misc
         self.defense_total = sum(self.defense)  # Default total defense (including modifiers)
         self.health_points = 10 + attribute_modifier(self.attributes[Attribute.ENDURANCE])  # Default HP
+
+    
 
 
 

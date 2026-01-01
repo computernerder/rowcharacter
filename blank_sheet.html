@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="blank_sheet.css">
+</head>
+<body>
+
+<!-- ==================== PAGE 1 ==================== -->
+<div class="page">
+    <div class="page-footer">© 2026 MagiTomes LLC. Copying is permitted for personal use.</div>
+
+    <!-- HEADER -->
+    <div class="header">
+        <div class="header-top">
+            <img class="logo" src="images/row_small_logo.png" alt="Realm of Warriors" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+            <div class="logo-fallback">REALM OF WARRIORS</div>
+            
+            <div class="header-box">
+                <span class="label">Character Name</span>
+                <div class="character-name-value"></div>
+            </div>
+        </div>
+        
+        <div class="info-inner">
+            <div class="section info-section">
+                <div class="section-title">Information</div>
+                <table class="header-grid info-grid">
+                    <tr>
+                        <td style="width:25%"><span class="label">Player</span><span class="value"></span></td>
+                        <td style="width:25%"><span class="label">Profession</span><span class="value"></span></td>
+                        <td style="width:25%"><span class="label">Primary Path</span><span class="value"></span></td>
+                        <td style="width:25%"><span class="label">Secondary Path(s)</span><span class="value"></span></td>
+                    </tr>
+                    <tr>
+                        <td style="width:33%"><span class="label">Background</span><span class="value"></span></td>
+                        <td style="width:22%"><span class="label">Race</span><span class="value"></span></td>
+                        <td style="width:22%"><span class="label">Ancestry</span><span class="value"></span></td>
+                        <td style="width:23%"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN TWO-COLUMN LAYOUT -->
+    <table class="main-table">
+        <tr>
+            <!-- LEFT COLUMN -->
+            <td class="col-left">
+                <!-- ABILITY SCORES -->
+                <div class="section">
+                    <div class="section-title">Ability Scores</div>
+                    <table class="inner stats-table">
+                        <thead>
+                            <tr><th></th><th>MOD</th><th>SAVE</th><th>TOTAL</th><th>ROLL</th><th>RACE</th><th>MISC</th></tr>
+                        </thead>
+                        <tbody>
+                            
+                            
+                            <tr>
+                                <td class="stat-name">MGT</td>
+                                <td class="mod-cell"></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            
+                            
+                            <tr>
+                                <td class="stat-name">AGL</td>
+                                <td class="mod-cell"></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            
+                            
+                            <tr>
+                                <td class="stat-name">END</td>
+                                <td class="mod-cell"></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            
+                            
+                            <tr>
+                                <td class="stat-name">INT</td>
+                                <td class="mod-cell"></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            
+                            
+                            <tr>
+                                <td class="stat-name">WIS</td>
+                                <td class="mod-cell"></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            
+                            
+                            <tr>
+                                <td class="stat-name">CHA</td>
+                                <td class="mod-cell"></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- ATTACK MODIFIERS -->
+                <div class="section">
+                    <div class="section-title">Attack Modifiers</div>
+                    <table class="grid-table">
+                        <tr>
+                            <td style="width:50%">
+                                <span class="label" style="font-size:8pt;font-weight:bold;color:#000">Melee</span>
+                                <table class="inner" style="margin-top:3px">
+                                    <tr>
+                                        <td><span class="label">MGT</span><div class="value-box"></div></td>
+                                        <td><span class="label">Misc</span><div class="value-box"></div></td>
+                                        <td><span class="label" style="font-weight:bold;color:#000">Total</span><div class="value-box" style="font-weight:bold;border-width:2px;font-size:11pt"></div></td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td style="width:50%">
+                                <span class="label" style="font-size:8pt;font-weight:bold;color:#000">Ranged</span>
+                                <table class="inner" style="margin-top:3px">
+                                    <tr>
+                                        <td><span class="label">AGL</span><div class="value-box"></div></td>
+                                        <td><span class="label">Misc</span><div class="value-box"></div></td>
+                                        <td><span class="label" style="font-weight:bold;color:#000">Total</span><div class="value-box" style="font-weight:bold;border-width:2px;font-size:11pt"></div></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- PASSIVE STATS -->
+                <div class="section">
+                    <div class="section-title">Passive Stats</div>
+                    <table class="grid-table">
+                        <tr>
+                            <td style="width:50%">
+                                <span class="label">Perception (WIS)</span>
+                                <table class="inner" style="margin-top:3px">
+                                    <tr>
+                                        <td style="width:25%"><span class="label">Base</span><div class="value-box">10</div></td>
+                                        <td style="width:25%"><span class="label">Skill</span><div class="value-box"></div></td>
+                                        <td style="width:25%"><span class="label">Misc</span><div class="value-box"></div></td>
+                                        <td style="width:25%"><span class="label">Total</span><div class="value-box" style="font-weight:bold;border-width:2px"></div></td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td style="width:50%">
+                                <span class="label">Insight (INT)</span>
+                                <table class="inner" style="margin-top:3px">
+                                    <tr>
+                                        <td style="width:25%"><span class="label">Base</span><div class="value-box">10</div></td>
+                                        <td style="width:25%"><span class="label">Skill</span><div class="value-box"></div></td>
+                                        <td style="width:25%"><span class="label">Misc</span><div class="value-box"></div></td>
+                                        <td style="width:25%"><span class="label">Total</span><div class="value-box" style="font-weight:bold;border-width:2px"></div></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- FEATURES & TRAITS -->
+                <div class="section">
+                    <div class="section-title">Features & Traits</div>
+                    <table class="inner feature-table">
+                        <tbody>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- TALENTS -->
+                <div class="section">
+                    <div class="section-title">Talents</div>
+                    <table class="talent-row">
+                        <tr>
+                            <td class="text-left"><span class="label">Talent List</span></td>
+                            <td style="width:90px;text-align:right">
+                                <span class="label" style="display:inline;margin-right:5px">Stored:</span>
+                                <div class="stored-box"></div>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="inner talent-table">
+                        <tbody>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </td>
+
+            <!-- RIGHT COLUMN -->
+            <td class="col-right">
+                <!-- COMBAT STATS -->
+                <div class="section combat-stats-block">
+                    <div class="section-title">Combat Stats</div>
+                    <table class="grid-table">
+                        <tr>
+                            <td style="width:50%">
+                                <span class="label">Defense</span>
+                                <table class="inner" style="margin-top:3px">
+                                    <tr>
+                                        <td><span class="label">Base</span><div class="value-box">9</div></td>
+                                        <td><span class="label">AGL</span><div class="value-box"></div></td>
+                                        <td><span class="label">Shield</span><div class="empty-box"></div></td>
+                                        <td><span class="label">Misc</span><div class="value-box"></div></td>
+                                        <td><span class="label" style="font-weight:bold;color:#000">Total</span><div class="value-box" style="font-weight:bold;border-width:2px;font-size:11pt"></div></td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td style="width:25%">
+                                <span class="label">Initiative</span>
+                                <div class="value-box-lg" style="margin-top:3px"></div>
+                            </td>
+                            <td style="width:25%">
+                                <span class="label">Walk Speed</span>
+                                <div class="value-box-lg" style="margin-top:3px"></div>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <table class="grid-table mt-1">
+                        <tr>
+                            <td style="width:33.33%">
+                                <span class="label">Armor HP</span>
+                                <table class="inner" style="margin-top:3px">
+                                    <tr>
+                                        <td><span class="label">Cur</span><div class="empty-box-lg"></div></td>
+                                        <td><span class="label">Max</span><div class="value-box-lg"></div></td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td style="width:33.33%">
+                                <span class="label">Health HP</span>
+                                <table class="inner" style="margin-top:3px">
+                                    <tr>
+                                        <td><span class="label">Cur</span><div class="empty-box-lg"></div></td>
+                                        <td><span class="label">Max</span><div class="value-box-lg"></div></td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td style="width:33.33%">
+                                <span class="label">Life Points</span>
+                                <table class="inner" style="margin-top:3px">
+                                    <tr>
+                                        <td><span class="label">Cur</span><div class="empty-box-lg"></div></td>
+                                        <td><span class="label">Max</span><div class="value-box-lg"></div></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- WEAPONS & ATTACKS -->
+                <div class="section">
+                    <div class="section-title">Weapons & Attacks</div>
+                    <table class="inner weapons-table">
+                        <thead>
+                            <tr>
+                                <th style="width:28%">Attack Action</th>
+                                <th style="width:12%">Bonus</th>
+                                <th style="width:18%">Damage</th>
+                                <th style="width:20%">Type</th>
+                                <th style="width:22%">Range</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr><tr><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr><tr><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr><tr><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- SKILLS -->
+                <div class="section">
+                    <div class="section-title">Skills <span class="title-note">T = trained</span></div>
+                    <table class="inner skills-table">
+                        <thead>
+                            <tr>
+                                <th class="trained-col">T</th>
+                                <th class="skill-name">Skill Name</th>
+                                <th class="attr-col">Attr</th>
+                                <th class="num-col">Mod</th>
+                                <th class="num-col">Rank</th>
+                                <th class="num-col">Misc</th>
+                                <th class="num-col">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            <tr>
+                                <td><span class="checkbox "></span></td>
+                                <td class="skill-name">Acrobatics</td>
+                                <td>AGL</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><span class="checkbox "></span></td>
+                                <td class="skill-name">Animal Handling</td>
+                                <td>WIS</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><span class="checkbox "></span></td>
+                                <td class="skill-name">Appraisal</td>
+                                <td>INT</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><span class="checkbox "></span></td>
+                                <td class="skill-name">Arcana</td>
+                                <td>INT</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><span class="checkbox "></span></td>
+                                <td class="skill-name">Athletics</td>
+                                <td>MGT</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><span class="checkbox "></span></td>
+                                <td class="skill-name">Crafting</td>
+                                <td>INT</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><span class="checkbox "></span></td>
+                                <td class="skill-name">Deception</td>
+                                <td>CHA</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><span class="checkbox "></span></td>
+                                <td class="skill-name">History</td>
+                                <td>INT</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><span class="checkbox "></span></td>
+                                <td class="skill-name">Insight</td>
+                                <td>WIS</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><span class="checkbox "></span></td>
+                                <td class="skill-name">Intimidation</td>
+                                <td>CHA</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><span class="checkbox "></span></td>
+                                <td class="skill-name">Investigation</td>
+                                <td>INT</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><span class="checkbox "></span></td>
+                                <td class="skill-name">Medicine</td>
+                                <td>WIS</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><span class="checkbox "></span></td>
+                                <td class="skill-name">Nature</td>
+                                <td>INT</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><span class="checkbox "></span></td>
+                                <td class="skill-name">Perception</td>
+                                <td>WIS</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><span class="checkbox "></span></td>
+                                <td class="skill-name">Performance</td>
+                                <td>CHA</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><span class="checkbox "></span></td>
+                                <td class="skill-name">Persuasion</td>
+                                <td>CHA</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><span class="checkbox "></span></td>
+                                <td class="skill-name">Religion</td>
+                                <td>INT</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><span class="checkbox "></span></td>
+                                <td class="skill-name">Sleight of Hand</td>
+                                <td>AGL</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><span class="checkbox "></span></td>
+                                <td class="skill-name">Stealth</td>
+                                <td>AGL</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            
+                            <tr>
+                                <td><span class="checkbox "></span></td>
+                                <td class="skill-name">Survival</td>
+                                <td>WIS</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<!-- ==================== PAGE 2 ==================== -->
+<div class="page">
+    <img class="corner corner-tl" src="images/Corner.png" alt="" onerror="this.style.display='none'">
+    <img class="corner corner-tr" src="images/Corner.png" alt="" onerror="this.style.display='none'">
+    <img class="corner corner-bl" src="images/Corner.png" alt="" onerror="this.style.display='none'">
+    <img class="corner corner-br" src="images/Corner.png" alt="" onerror="this.style.display='none'">
+    <div class="page-footer">© 2026 MagiTomes LLC. Copying is permitted for personal use.</div>
+
+    <!-- Page 2 Header -->
+    <div style="text-align:center;margin-bottom:10px;border-bottom:3px solid #000;padding-bottom:6px;background:rgba(255,255,255,0.9)">
+        <span style="font-size:14pt;font-weight:bold">Character Name</span>
+        <span style="font-size:10pt;color:#666;margin-left:25px">Page 2</span>
+    </div>
+
+    <table class="main-table">
+        <tr>
+            <!-- LEFT COLUMN -->
+            <td class="col-left">
+                <!-- ALIGNMENT & REPUTATION -->
+                <div class="section">
+                    <div class="section-title">Alignment & Reputation</div>
+                    <table class="grid-table">
+                        <tr>
+                            <td style="width:35%"><span class="label">Alignment</span><div style="min-height:20px;font-weight:bold"></div></td>
+                            <td style="width:15%"><span class="label">Mod</span><div style="min-height:20px;font-weight:bold;font-size:12pt"></div></td>
+                            <td style="width:35%"><span class="label">Reputation</span><div style="min-height:20px;font-weight:bold"></div></td>
+                            <td style="width:15%"><span class="label">Mod</span><div style="min-height:20px;font-weight:bold;font-size:12pt"></div></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- PERSONALITY -->
+                <div class="section">
+                    <div class="section-title">Personality Traits</div>
+                    <table class="grid-table">
+                        <tr>
+                            <td><span class="label" style="font-weight:bold;color:#000;border-bottom:1px solid #999;margin-bottom:2px;padding-bottom:2px">Traits</span><div style="min-height:45px"></div></td>
+                            <td><span class="label" style="font-weight:bold;color:#000;border-bottom:1px solid #999;margin-bottom:2px;padding-bottom:2px">Ideal</span><div style="min-height:45px"></div></td>
+                        </tr>
+                        <tr>
+                            <td><span class="label" style="font-weight:bold;color:#000;border-bottom:1px solid #999;margin-bottom:2px;padding-bottom:2px">Bond</span><div style="min-height:45px"></div></td>
+                            <td><span class="label" style="font-weight:bold;color:#000;border-bottom:1px solid #999;margin-bottom:2px;padding-bottom:2px">Flaw</span><div style="min-height:45px"></div></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- PHYSICAL TRAITS -->
+                <div class="section">
+                    <div class="section-title">Physical Traits</div>
+                    <table class="grid-table">
+                        <tr>
+                            <td><span class="label">Height</span><br><span class="value"></span></td>
+                            <td><span class="label">Weight</span><br><span class="value"></span></td>
+                            <td><span class="label">Size</span><br><span class="value"></span></td>
+                            <td><span class="label">Age</span><br><span class="value"></span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="label">Creature Type</span><br><span class="value"></span></td>
+                            <td><span class="label">Eyes</span><br><span class="value"></span></td>
+                            <td><span class="label">Skin</span><br><span class="value"></span></td>
+                            <td><span class="label">Hair</span><br><span class="value"></span></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- ADVANCEMENT -->
+                <div class="section">
+                    <div class="section-title">Advancement</div>
+                    <table class="grid-table">
+                        <tr>
+                            <td style="width:33%"><span class="label">Level</span><div class="value"></div></td>
+                            <td style="width:34%"><span class="label">Experience (XP)</span><div class="value"></div></td>
+                            <td style="width:33%"><span class="label">Stored Advance</span><div class="value"></div></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- PROFICIENCIES -->
+                <div class="section">
+                    <div class="section-title">Proficiencies</div>
+                    <table class="inner prof-table" style="width:100%">
+                        <tbody>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- LANGUAGES -->
+                <div class="section">
+                    <div class="section-title">Languages</div>
+                    <table class="inner lang-table" style="width:100%">
+                        <tbody>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </td>
+
+            <!-- RIGHT COLUMN -->
+            <td class="col-right">
+                <!-- SPELLCRAFTING -->
+                <div class="section">
+                    <div class="section-title">Spellcrafting</div>
+                    <table class="grid-table">
+                        <tr>
+                            <td style="width:25%"><span class="label">Spell TN Save</span><br><span class="value"></span><div style="font-size:6pt;color:#666">8 + INT Mod</div></td>
+                            <td style="width:25%"><span class="label">Attack Bonus</span><br><span class="value"></span><div style="font-size:6pt;color:#666">INT Mod</div></td>
+                            <td style="width:25%">
+                                <span class="label">Crafting Pts</span>
+                                <table class="inner" style="margin-top:3px;border:none">
+                                    <tr>
+                                        <td style="border:none"><span class="label">Cur</span><div class="empty-box"></div></td>
+                                        <td style="border:none"><span class="label">Max</span><div class="value-box"></div></td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td style="width:25%"><span class="label">Casting</span><br><span class="value"></span></td>
+                        </tr>
+                    </table>
+                    <table class="inner" style="margin-top:5px">
+                        <thead>
+                            <tr><th style="width:30%">Spell Name</th><th style="width:10%">CP</th><th style="width:60%">Details</th></tr>
+                        </thead>
+                        <tbody>
+                            
+                            <tr style="height:18px"><td>&nbsp;</td><td></td><td></td></tr><tr style="height:18px"><td>&nbsp;</td><td></td><td></td></tr><tr style="height:18px"><td>&nbsp;</td><td></td><td></td></tr><tr style="height:18px"><td>&nbsp;</td><td></td><td></td></tr><tr style="height:18px"><td>&nbsp;</td><td></td><td></td></tr><tr style="height:18px"><td>&nbsp;</td><td></td><td></td></tr><tr style="height:18px"><td>&nbsp;</td><td></td><td></td></tr><tr style="height:18px"><td>&nbsp;</td><td></td><td></td></tr><tr style="height:18px"><td>&nbsp;</td><td></td><td></td></tr><tr style="height:18px"><td>&nbsp;</td><td></td><td></td></tr><tr style="height:18px"><td>&nbsp;</td><td></td><td></td></tr><tr style="height:18px"><td>&nbsp;</td><td></td><td></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- EQUIPMENT -->
+                <div class="section equipment-section">
+                    <div class="section-title">Equipment & Inventory</div>
+                    <div class="text-area" style="min-height:230px"></div>
+                    <div class="weight-row">
+                        <span class="label">Total Weight</span>
+                        <div class="value-box" style="width:80px;min-height:20px"></div>
+                    </div>
+                </div>
+
+                <!-- CURRENCY -->
+                <div class="section">
+                    <div class="section-title">Currency</div>
+                    <table class="grid-table">
+                        <tr>
+                            <td><span class="label" style="font-weight:bold;color:#000">CP</span><div class="empty-box-lg"></div></td>
+                            <td><span class="label" style="font-weight:bold;color:#000">BP</span><div class="empty-box-lg"></div></td>
+                            <td><span class="label" style="font-weight:bold;color:#000">SP</span><div class="empty-box-lg"></div></td>
+                            <td><span class="label" style="font-weight:bold;color:#000">GP</span><div class="empty-box-lg"></div></td>
+                            <td><span class="label" style="font-weight:bold;color:#000">PP</span><div class="empty-box-lg"></div></td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <!-- Sticky Notes across both columns -->
+    <div class="notes-sticky">
+        <div class="notes-inner">
+            <div class="section">
+                <div class="section-title">Notes</div>
+                <div class="text-area" style="min-height:120px"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

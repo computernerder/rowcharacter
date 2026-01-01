@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+@page { size: letter; margin: 0.4in; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', Tahoma, sans-serif; font-size: 9pt; line-height: 1.2; width: 7.7in; }
+
+.page { width: 7.7in; min-height: 10.2in; padding: 0.1in; position: relative; page-break-after: always; }
+.page:last-child { page-break-after: avoid; }
+
+.corner { position: absolute; width: 60px; height: 60px; opacity: 0.7; }
+.corner-tl { top: 0; left: 0; }
+.corner-tr { top: 0; right: 0; transform: rotate(90deg); }
+.corner-bl { bottom: 0; left: 0; transform: rotate(-90deg); }
+.corner-br { bottom: 0; right: 0; transform: rotate(180deg); }
+
+.two-column { display: table; width: 100%; table-layout: fixed; }
+.two-column > .col { display: table-cell; vertical-align: top; padding: 3px; }
+.col-left { width: 48%; }
+.col-right { width: 52%; }
+
+.section { border: 1.5px solid #000; padding: 4px 6px; margin-bottom: 5px; }
+.section-title { font-weight: bold; font-size: 8pt; text-transform: uppercase; background: #000; color: #fff; padding: 2px 5px; margin: -4px -6px 4px -6px; }
+.label { font-size: 6pt; text-transform: uppercase; color: #666; display: block; }
+.value { font-size: 10pt; font-weight: bold; }
+.value-lg { font-size: 14pt; font-weight: bold; }
+.value-box { border: 1px solid #000; min-height: 18px; text-align: center; padding: 1px 2px; }
+.value-box-lg { border: 1px solid #000; min-height: 24px; text-align: center; padding: 2px; font-size: 12pt; font-weight: bold; }
+.empty-box { border: 1px solid #000; min-height: 18px; background: #fafafa; }
+
+.header { margin-bottom: 8px; }
+.logo { height: 45px; margin-bottom: 4px; }
+.header-grid { display: table; width: 100%; table-layout: fixed; border-collapse: collapse; }
+.header-row { display: table-row; }
+.header-cell { display: table-cell; border: 1px solid #000; padding: 2px 4px; text-align: center; vertical-align: top; }
+.header-cell.wide { width: 20%; }
+.header-cell.narrow { width: 10%; }
+.header-cell.medium { width: 15%; }
+
+table.fixed { width: 100%; border-collapse: collapse; table-layout: fixed; }
+table.fixed th, table.fixed td { border: 1px solid #000; padding: 2px 3px; text-align: center; font-size: 8pt; overflow: hidden; }
+table.fixed th { background: #eee; font-size: 6pt; text-transform: uppercase; }
+
+.stats-table .stat-name { font-weight: bold; background: #ddd; width: 40px; }
+.stats-table .mod-cell { background: #f5f5f5; font-weight: bold; font-size: 10pt; width: 35px; }
+.stats-table td { width: 35px; }
+
+.combat-grid { display: table; width: 100%; table-layout: fixed; }
+.combat-row { display: table-row; }
+.combat-cell { display: table-cell; border: 1px solid #000; padding: 3px; text-align: center; vertical-align: top; }
+.defense-breakdown { display: table; width: 100%; table-layout: fixed; margin-top: 2px; font-size: 7pt; }
+.defense-breakdown > div { display: table-cell; text-align: center; border: 1px solid #ccc; padding: 1px; }
+
+.hp-grid { display: table; width: 100%; table-layout: fixed; }
+.hp-cell { display: table-cell; border: 1px solid #000; padding: 3px; text-align: center; vertical-align: top; width: 33.33%; }
+.hp-inner { display: table; width: 100%; table-layout: fixed; }
+.hp-inner > div { display: table-cell; text-align: center; padding: 2px; }
+
+.skills-table { font-size: 7pt; }
+.skills-table th, .skills-table td { border: 1px solid #ccc; padding: 1px 2px; }
+.skills-table .skill-name { text-align: left; padding-left: 3px; width: 90px; }
+.skills-table .trained-col { width: 15px; }
+.skills-table .attr-col { width: 28px; }
+.skills-table .num-col { width: 25px; }
+.checkbox { display: inline-block; width: 10px; height: 10px; border: 1px solid #000; text-align: center; line-height: 8px; font-size: 8pt; }
+.checkbox.checked::after { content: "✓"; }
+
+.passive-grid { display: table; width: 100%; table-layout: fixed; }
+.passive-stat { display: table-cell; border: 1px solid #000; padding: 3px; text-align: center; width: 50%; }
+.passive-inner { display: table; width: 100%; table-layout: fixed; margin-top: 2px; }
+.passive-inner > div { display: table-cell; text-align: center; font-size: 7pt; }
+.passive-inner .value-box { font-size: 8pt; min-height: 16px; }
+
+.attack-grid { display: table; width: 100%; table-layout: fixed; }
+.attack-cell { display: table-cell; border: 1px solid #000; padding: 4px; text-align: center; width: 50%; }
+.attack-breakdown { display: table; width: 100%; table-layout: fixed; margin-top: 3px; }
+.attack-breakdown > div { display: table-cell; text-align: center; font-size: 7pt; }
+
+.weapons-table th, .weapons-table td { font-size: 7pt; }
+.weapons-table .name-col { width: 30%; }
+.weapons-table .bonus-col { width: 12%; }
+.weapons-table .damage-col { width: 18%; }
+.weapons-table .type-col { width: 20%; }
+.weapons-table .range-col { width: 20%; }
+
+.text-area { border: 1px solid #000; padding: 4px; font-size: 8pt; white-space: pre-wrap; min-height: 50px; }
+.text-area.tall { min-height: 80px; }
+.text-area.short { min-height: 35px; }
+
+.currency-grid { display: table; width: 100%; table-layout: fixed; }
+.currency-cell { display: table-cell; border: 1px solid #000; padding: 3px; text-align: center; width: 20%; }
+.currency-cell .label { font-weight: bold; color: #000; }
+
+.talent-header { display: table; width: 100%; table-layout: fixed; margin-bottom: 3px; }
+.talent-header > div { display: table-cell; vertical-align: middle; }
+.talent-points { width: 120px; text-align: right; }
+.talent-points-boxes { display: inline-block; }
+.talent-points-boxes .empty-box { display: inline-block; width: 18px; height: 18px; margin-left: 2px; }
+
+.prof-grid { display: table; width: 100%; table-layout: fixed; }
+.prof-cell { display: table-cell; vertical-align: top; padding-right: 8px; }
+.prof-cell:last-child { padding-right: 0; }
+
+.traits-grid { display: table; width: 100%; table-layout: fixed; }
+.traits-cell { display: table-cell; border: 1px solid #000; padding: 2px 4px; text-align: center; width: 25%; }
+
+.personality-grid { display: table; width: 100%; table-layout: fixed; }
+.personality-cell { display: table-cell; border: 1px solid #000; padding: 3px; vertical-align: top; width: 50%; }
+.personality-cell .label { font-weight: bold; color: #000; border-bottom: 1px solid #ccc; margin-bottom: 2px; padding-bottom: 1px; }
+
+.spells-header { display: table; width: 100%; table-layout: fixed; margin-bottom: 3px; }
+.spells-header > div { display: table-cell; border: 1px solid #000; padding: 3px; text-align: center; }
+.spells-table th, .spells-table td { font-size: 7pt; }
+
+.mt-1 { margin-top: 4px; }
+.text-left { text-align: left; }
+</style>
+</head>
+<body>
+<!-- PAGE 1 -->
+<div class="page">
+<img class="corner corner-tl" src="images/Corner.png" alt="" onerror="this.style.display='none'">
+<img class="corner corner-tr" src="images/Corner.png" alt="" onerror="this.style.display='none'">
+<img class="corner corner-bl" src="images/Corner.png" alt="" onerror="this.style.display='none'">
+<img class="corner corner-br" src="images/Corner.png" alt="" onerror="this.style.display='none'">
+
+<div class="header">
+<div style="text-align: center;">
+<img class="logo" src="images/row_small_logo.png" alt="Realm of Warriors" onerror="this.outerHTML='<div style=font-size:18pt;font-weight:bold>Realm of Warriors</div>'">
+</div>
+<div class="header-grid">
+<div class="header-row">
+<div class="header-cell wide"><span class="label">Character Name</span><span class="value"></span></div>
+<div class="header-cell medium"><span class="label">Profession</span><span class="value"></span></div>
+<div class="header-cell narrow"><span class="label">Level</span><span class="value"></span></div>
+<div class="header-cell medium"><span class="label">Experience</span><span class="value"></span></div>
+<div class="header-cell narrow"><span class="label">Stored Adv.</span><span class="value"></span></div>
+<div class="header-cell medium"><span class="label">Player</span><span class="value"></span></div>
+</div>
+<div class="header-row">
+<div class="header-cell"><span class="label">Primary Path</span><span class="value"></span></div>
+<div class="header-cell"><span class="label">Race</span><span class="value"></span></div>
+<div class="header-cell"><span class="label">Background</span><span class="value"></span></div>
+<div class="header-cell"><span class="label">Alignment</span><span class="value"></span></div>
+<div class="header-cell narrow"><span class="label">Align Mod</span><span class="value"></span></div>
+<div class="header-cell narrow"><span class="label">Rep Mod</span><span class="value"></span></div>
+</div>
+</div>
+</div>
+
+<div class="two-column">
+<div class="col col-left">
+<!-- ABILITY SCORES -->
+<div class="section">
+<div class="section-title">Ability Scores</div>
+<table class="fixed stats-table">
+<thead><tr><th></th><th>MOD</th><th>SAVE</th><th>TOTAL</th><th>ROLL</th><th>RACE</th><th>MISC</th></tr></thead>
+<tbody>
+
+
+<tr>
+<td class="stat-name">MGT</td>
+<td class="mod-cell"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+
+<tr>
+<td class="stat-name">AGL</td>
+<td class="mod-cell"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+
+<tr>
+<td class="stat-name">END</td>
+<td class="mod-cell"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+
+<tr>
+<td class="stat-name">INT</td>
+<td class="mod-cell"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+
+<tr>
+<td class="stat-name">WIS</td>
+<td class="mod-cell"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+
+<tr>
+<td class="stat-name">CHA</td>
+<td class="mod-cell"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+</tbody>
+</table>
+</div>
+
+<!-- PASSIVE STATS -->
+<div class="section">
+<div class="section-title">Passive Stats</div>
+<div class="passive-grid">
+<div class="passive-stat">
+<span class="label">Perception (WIS)</span>
+<span class="value-lg"></span>
+<div class="passive-inner">
+<div><span class="label">Base</span><div class="value-box">10</div></div>
+<div><span class="label">Skill</span><div class="value-box"></div></div>
+<div><span class="label">Misc</span><div class="value-box"></div></div>
+<div><span class="label">Total</span><div class="value-box" style="font-weight:bold"></div></div>
+</div>
+</div>
+<div class="passive-stat">
+<span class="label">Insight (INT)</span>
+<span class="value-lg"></span>
+<div class="passive-inner">
+<div><span class="label">Base</span><div class="value-box">10</div></div>
+<div><span class="label">Skill</span><div class="value-box"></div></div>
+<div><span class="label">Misc</span><div class="value-box"></div></div>
+<div><span class="label">Total</span><div class="value-box" style="font-weight:bold"></div></div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- PROFICIENCIES & LANGUAGES -->
+<div class="section">
+<div class="section-title">Proficiencies & Languages</div>
+<div class="prof-grid">
+<div class="prof-cell" style="width:60%"><span class="label">Proficiencies</span><div class="text-area short"></div></div>
+<div class="prof-cell" style="width:40%"><span class="label">Languages</span><div class="text-area short"></div></div>
+</div>
+</div>
+
+<!-- FEATURES -->
+<div class="section">
+<div class="section-title">Features & Traits</div>
+<div class="text-area tall"></div>
+</div>
+
+<!-- TALENTS -->
+<div class="section">
+<div class="section-title">Talents</div>
+<div class="talent-header">
+<div class="text-left"><span class="label">Talent List</span></div>
+<div class="talent-points"><span class="label" style="display:inline">Stored Points:</span>
+<div class="talent-points-boxes">
+<div class="empty-box"></div><div class="empty-box"></div><div class="empty-box"></div><div class="empty-box"></div><div class="empty-box"></div>
+</div></div>
+</div>
+<div class="text-area short"></div>
+</div>
+
+<!-- CURRENCY -->
+<div class="section">
+<div class="section-title">Currency</div>
+<div class="currency-grid">
+<div class="currency-cell"><span class="label">CP</span><div class="empty-box" style="min-height:20px"></div></div>
+<div class="currency-cell"><span class="label">BP</span><div class="empty-box" style="min-height:20px"></div></div>
+<div class="currency-cell"><span class="label">SP</span><div class="empty-box" style="min-height:20px"></div></div>
+<div class="currency-cell"><span class="label">GP</span><div class="empty-box" style="min-height:20px"></div></div>
+<div class="currency-cell"><span class="label">PP</span><div class="empty-box" style="min-height:20px"></div></div>
+</div>
+</div>
+</div>
+
+<div class="col col-right">
+<!-- COMBAT STATS -->
+<div class="section">
+<div class="section-title">Combat Stats</div>
+<div class="combat-grid">
+<div class="combat-row">
+<div class="combat-cell" style="width:50%">
+<span class="label">Defense</span><span class="value-lg"></span>
+<div class="defense-breakdown">
+<div><span class="label">Base</span><div class="value-box">9</div></div>
+<div><span class="label">AGL</span><div class="value-box"></div></div>
+<div><span class="label">Shield</span><div class="empty-box" style="min-height:16px"></div></div>
+<div><span class="label">Misc</span><div class="value-box"></div></div>
+</div>
+</div>
+<div class="combat-cell" style="width:25%"><span class="label">Initiative</span><span class="value-lg"></span></div>
+<div class="combat-cell" style="width:25%"><span class="label">Walk Speed</span><span class="value-lg"></span></div>
+</div>
+</div>
+<div class="hp-grid mt-1">
+<div class="hp-cell"><span class="label">Armor HP</span><div class="hp-inner">
+<div><span class="label">Cur</span><div class="empty-box" style="min-height:22px"></div></div>
+<div><span class="label">Max</span><div class="value-box-lg"></div></div>
+</div></div>
+<div class="hp-cell"><span class="label">Health HP</span><div class="hp-inner">
+<div><span class="label">Cur</span><div class="empty-box" style="min-height:22px"></div></div>
+<div><span class="label">Max</span><div class="value-box-lg"></div></div>
+</div></div>
+<div class="hp-cell"><span class="label">Life Points</span><div class="hp-inner">
+<div><span class="label">Cur</span><div class="empty-box" style="min-height:22px"></div></div>
+<div><span class="label">Max</span><div class="value-box-lg"></div></div>
+</div></div>
+</div>
+</div>
+
+<!-- ATTACK MODIFIERS -->
+<div class="section">
+<div class="section-title">Attack Modifiers</div>
+<div class="attack-grid">
+<div class="attack-cell"><span class="label">Melee</span><span class="value-lg"></span>
+<div class="attack-breakdown">
+<div><span class="label">MGT Mod</span><div class="value-box"></div></div>
+<div><span class="label">Misc</span><div class="value-box"></div></div>
+</div></div>
+<div class="attack-cell"><span class="label">Ranged</span><span class="value-lg"></span>
+<div class="attack-breakdown">
+<div><span class="label">AGL Mod</span><div class="value-box"></div></div>
+<div><span class="label">Misc</span><div class="value-box"></div></div>
+</div></div>
+</div>
+</div>
+
+<!-- SKILLS -->
+<div class="section">
+<div class="section-title">Skills</div>
+<table class="fixed skills-table">
+<thead><tr><th class="trained-col">T</th><th class="skill-name">Skill Name</th><th class="attr-col">Attr</th><th class="num-col">Mod</th><th class="num-col">Rank</th><th class="num-col">Misc</th><th class="num-col">Total</th></tr></thead>
+<tbody>
+
+<tr>
+<td><span class="checkbox "></span></td>
+<td class="skill-name">Acrobatics</td>
+<td>AGL</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td><span class="checkbox "></span></td>
+<td class="skill-name">Animal Handling</td>
+<td>WIS</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td><span class="checkbox "></span></td>
+<td class="skill-name">Appraisal</td>
+<td>INT</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td><span class="checkbox "></span></td>
+<td class="skill-name">Arcana</td>
+<td>INT</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td><span class="checkbox "></span></td>
+<td class="skill-name">Athletics</td>
+<td>MGT</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td><span class="checkbox "></span></td>
+<td class="skill-name">Crafting</td>
+<td>INT</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td><span class="checkbox "></span></td>
+<td class="skill-name">Deception</td>
+<td>CHA</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td><span class="checkbox "></span></td>
+<td class="skill-name">History</td>
+<td>INT</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td><span class="checkbox "></span></td>
+<td class="skill-name">Insight</td>
+<td>WIS</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td><span class="checkbox "></span></td>
+<td class="skill-name">Intimidation</td>
+<td>CHA</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td><span class="checkbox "></span></td>
+<td class="skill-name">Investigation</td>
+<td>INT</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td><span class="checkbox "></span></td>
+<td class="skill-name">Medicine</td>
+<td>WIS</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td><span class="checkbox "></span></td>
+<td class="skill-name">Nature</td>
+<td>INT</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td><span class="checkbox "></span></td>
+<td class="skill-name">Perception</td>
+<td>WIS</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td><span class="checkbox "></span></td>
+<td class="skill-name">Performance</td>
+<td>CHA</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td><span class="checkbox "></span></td>
+<td class="skill-name">Persuasion</td>
+<td>CHA</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td><span class="checkbox "></span></td>
+<td class="skill-name">Religion</td>
+<td>INT</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td><span class="checkbox "></span></td>
+<td class="skill-name">Sleight of Hand</td>
+<td>AGL</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td><span class="checkbox "></span></td>
+<td class="skill-name">Stealth</td>
+<td>AGL</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td><span class="checkbox "></span></td>
+<td class="skill-name">Survival</td>
+<td>WIS</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+</tbody>
+</table>
+</div>
+
+<!-- WEAPONS -->
+<div class="section">
+<div class="section-title">Weapons & Attacks</div>
+<table class="fixed weapons-table">
+<thead><tr><th class="name-col">Attack Action</th><th class="bonus-col">Bonus</th><th class="damage-col">Damage</th><th class="type-col">Type</th><th class="range-col">Range</th></tr></thead>
+<tbody>
+
+<tr><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr><tr><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr><tr><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr><tr><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr><tr><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+<img class="corner corner-tl" src="images/Corner.png" alt="" onerror="this.style.display='none'">
+<img class="corner corner-tr" src="images/Corner.png" alt="" onerror="this.style.display='none'">
+<img class="corner corner-bl" src="images/Corner.png" alt="" onerror="this.style.display='none'">
+<img class="corner corner-br" src="images/Corner.png" alt="" onerror="this.style.display='none'">
+
+<div style="text-align:center;margin-bottom:8px;border-bottom:2px solid #000;padding-bottom:4px">
+<span style="font-size:12pt;font-weight:bold">Character Name</span>
+<span style="font-size:9pt;color:#666;margin-left:20px">Page 2</span>
+</div>
+
+<div class="two-column">
+<div class="col col-left">
+<!-- PHYSICAL TRAITS -->
+<div class="section">
+<div class="section-title">Physical Traits</div>
+<div class="traits-grid">
+<div class="traits-cell"><span class="label">Height</span><br><span class="value"></span></div>
+<div class="traits-cell"><span class="label">Weight</span><br><span class="value"></span></div>
+<div class="traits-cell"><span class="label">Size</span><br><span class="value"></span></div>
+<div class="traits-cell"><span class="label">Age</span><br><span class="value"></span></div>
+</div>
+<div class="traits-grid mt-1">
+<div class="traits-cell"><span class="label">Creature Type</span><br><span class="value"></span></div>
+<div class="traits-cell"><span class="label">Eyes</span><br><span class="value"></span></div>
+<div class="traits-cell"><span class="label">Skin</span><br><span class="value"></span></div>
+<div class="traits-cell"><span class="label">Hair</span><br><span class="value"></span></div>
+</div>
+</div>
+
+<!-- PERSONALITY -->
+<div class="section">
+<div class="section-title">Personality</div>
+<div class="personality-grid">
+<div class="personality-cell"><span class="label">Traits</span><div style="min-height:40px"></div></div>
+<div class="personality-cell"><span class="label">Ideal</span><div style="min-height:40px"></div></div>
+</div>
+<div class="personality-grid">
+<div class="personality-cell"><span class="label">Bond</span><div style="min-height:40px"></div></div>
+<div class="personality-cell"><span class="label">Flaw</span><div style="min-height:40px"></div></div>
+</div>
+</div>
+
+<!-- BACKSTORY -->
+<div class="section">
+<div class="section-title">Backstory</div>
+<div class="text-area" style="min-height:200px"></div>
+</div>
+</div>
+
+<div class="col col-right">
+<!-- SPELLCRAFTING -->
+<div class="section">
+<div class="section-title">Spellcrafting</div>
+<div class="spells-header">
+<div style="width:25%"><span class="label">Spell TN Save</span><br><span class="value"></span><div style="font-size:6pt;color:#666">8 + INT Mod</div></div>
+<div style="width:25%"><span class="label">Attack Bonus</span><br><span class="value"></span><div style="font-size:6pt;color:#666">INT Mod</div></div>
+<div style="width:25%"><span class="label">Crafting Pts</span><br><div class="hp-inner">
+<div><span class="label">Cur</span><div class="empty-box"></div></div>
+<div><span class="label">Max</span><div class="value-box"></div></div>
+</div></div>
+<div style="width:25%"><span class="label">Casting</span><br><span class="value"></span></div>
+</div>
+<table class="fixed spells-table">
+<thead><tr><th style="width:30%">Spell Name</th><th style="width:10%">CP</th><th style="width:60%">Details</th></tr></thead>
+<tbody>
+
+<tr><td>&nbsp;</td><td></td><td></td></tr><tr><td>&nbsp;</td><td></td><td></td></tr><tr><td>&nbsp;</td><td></td><td></td></tr><tr><td>&nbsp;</td><td></td><td></td></tr><tr><td>&nbsp;</td><td></td><td></td></tr><tr><td>&nbsp;</td><td></td><td></td></tr><tr><td>&nbsp;</td><td></td><td></td></tr><tr><td>&nbsp;</td><td></td><td></td></tr><tr><td>&nbsp;</td><td></td><td></td></tr><tr><td>&nbsp;</td><td></td><td></td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- EQUIPMENT -->
+<div class="section">
+<div class="section-title">Equipment & Inventory</div>
+<div class="text-area" style="min-height:150px"></div>
+</div>
+
+<!-- NOTES -->
+<div class="section">
+<div class="section-title">Notes</div>
+<div class="text-area" style="min-height:150px"></div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

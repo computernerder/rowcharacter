@@ -1,0 +1,523 @@
+@page { 
+    size: letter; 
+    margin: 0; 
+}
+
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body { 
+    font-family: 'Segoe UI', Tahoma, sans-serif; 
+    font-size: 9pt; 
+    line-height: 1.2; 
+}
+
+.page {
+    width: 8.25in;
+    height: 10.5in;
+    margin: 0.25in auto;
+    padding: 0.15in;
+    padding-bottom: 0.5in;
+    position: relative;
+    page-break-after: always;
+    background-image: url('images/background.jpeg');
+    background-repeat: repeat;
+    background-size: auto;
+    background-color: #f5f0e6;
+    border: none;
+    box-shadow: inset 0 0 0 4px #000;
+    overflow: hidden;
+}
+
+.page:last-child {
+    page-break-after: avoid;
+}
+
+/* Corner flourishes - tight to edge */
+.corner {
+    display: none;
+}
+.corner-tl { top: 0; left: 0; }
+.corner-tr { top: 0; right: 0; transform: rotate(90deg); }
+.corner-bl { bottom: 0; left: 0; transform: rotate(-90deg); }
+.corner-br { bottom: 0; right: 0; transform: rotate(180deg); }
+
+/* Footer */
+.page-footer {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 7pt;
+    color: #555;
+}
+.page-footer::after {
+    content: "Print at 100% scale (no fit-to-page)";
+    display: block;
+    font-size: 6pt;
+    color: #666;
+    margin-top: 2px;
+}
+
+/* === LAYOUT TABLES === */
+.main-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.main-table > tbody > tr > td {
+    vertical-align: top;
+    padding: 3px;
+}
+
+.col-left { width: 46%; }
+.col-right { width: 54%; }
+
+/* === COMMON STYLES === */
+.section {
+    border: 1.5px solid #000;
+    padding: 5px 7px;
+    margin-bottom: 6px;
+    background: rgba(255,255,255,0.85);
+}
+
+.section-title {
+    font-weight: bold;
+    font-size: 9pt;
+    text-transform: uppercase;
+    background: #000;
+    color: #fff;
+    padding: 3px 6px;
+    margin: -5px -7px 5px -7px;
+    letter-spacing: 0.5px;
+}
+
+.section-title .title-note {
+    font-weight: normal;
+    font-size: 6pt;
+    text-transform: none;
+    margin-left: 6px;
+    color: #e6e6e6;
+}
+
+.label {
+    font-size: 6pt;
+    text-transform: uppercase;
+    color: #333;
+    display: block;
+    font-weight: 600;
+}
+
+.value {
+    font-size: 11pt;
+    font-weight: bold;
+}
+
+.value-lg {
+    font-size: 16pt;
+    font-weight: bold;
+}
+
+.value-box {
+    border: 1px solid #000;
+    min-height: 20px;
+    text-align: center;
+    padding: 2px 3px;
+    background: rgba(255,255,255,0.9);
+}
+
+.value-box-lg {
+    border: 1.5px solid #000;
+    min-height: 28px;
+    text-align: center;
+    padding: 3px;
+    font-size: 14pt;
+    font-weight: bold;
+    background: rgba(255,255,255,0.9);
+}
+
+.empty-box {
+    border: 1.5px solid #000;
+    min-height: 22px;
+    background: rgba(255,255,255,0.95);
+}
+
+.empty-box-lg {
+    border: 2px solid #000;
+    min-height: 30px;
+    background: rgba(255,255,255,0.95);
+}
+
+/* === HEADER === */
+.header {
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.header-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 6px;
+}
+
+.logo {
+    height: 50px;
+    margin-bottom: 0;
+}
+
+.header-box {
+    display: inline-block;
+    border: 2px solid #000;
+    background: rgba(255,255,255,0.9);
+    padding: 6px 15px;
+    margin-bottom: 0;
+}
+
+.header-grid {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 3px;
+    table-layout: fixed;
+}
+
+.header-grid td {
+    border: 1.5px solid #000;
+    padding: 3px 5px;
+    text-align: center;
+    vertical-align: top;
+    background: rgba(255,255,255,0.9);
+}
+
+/* Information block (profession/path/race/etc.) */
+.info-section {
+    display: inline-block;
+    text-align: left;
+    padding-left: 7px;
+    padding-right: 7px;
+    margin-top: 4px;
+}
+
+.info-inner {
+    padding: 0 3px;
+}
+
+.info-grid td {
+    min-height: 36px;
+    font-size: 9pt;
+    padding: 5px 6px;
+}
+
+.info-grid .value {
+    font-size: 12pt;
+    display: block;
+    min-height: 18px;
+}
+
+/* === INNER TABLES === */
+table.inner {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+table.inner th,
+table.inner td {
+    border: 1px solid #000;
+    padding: 2px 3px;
+    text-align: center;
+    font-size: 8pt;
+}
+
+table.inner th {
+    background: rgba(0,0,0,0.1);
+    font-size: 7pt;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+/* === STATS TABLE === */
+.stats-table .stat-name {
+    font-weight: bold;
+    background: rgba(0,0,0,0.15);
+    width: 42px;
+    font-size: 9pt;
+}
+
+.stats-table .mod-cell {
+    background: rgba(255,255,255,0.9);
+    font-weight: bold;
+    font-size: 11pt;
+    width: 36px;
+}
+
+.stats-table td {
+    width: 36px;
+    height: 20px;
+}
+
+/* === GRID LAYOUTS (using tables) === */
+.grid-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.grid-table td {
+    border: 1.5px solid #000;
+    padding: 4px;
+    text-align: center;
+    vertical-align: top;
+    background: rgba(255,255,255,0.85);
+}
+
+/* === SKILLS TABLE === */
+.skills-table { font-size: 7pt; }
+.skills-table th, .skills-table td { border: 1px solid #666; padding: 1px 2px; }
+.skills-table .skill-name { text-align: left; padding-left: 3px; width: 70px; font-size: 8pt; }
+.skills-table .trained-col { width: 16px; }
+.skills-table .attr-col { width: 28px; }
+.skills-table .num-col { width: 26px; }
+
+.checkbox {
+    display: inline-block;
+    width: 11px;
+    height: 11px;
+    border: 1.5px solid #000;
+    text-align: center;
+    line-height: 9px;
+    font-size: 9pt;
+    background: #fff;
+}
+.checkbox.checked::after { content: "✓"; }
+
+/* === WEAPONS TABLE === */
+.weapons-table th, .weapons-table td { font-size: 8pt; height: 22.6px; }
+.weapons-table td:first-child {
+    border-left: 2px dotted #999;
+    padding-left: 6px;
+}
+
+/* === TEXT AREAS === */
+.text-area {
+    border: 1px solid #000;
+    padding: 4px;
+    font-size: 8pt;
+    white-space: pre-wrap;
+    min-height: 45px;
+    background: rgba(255,255,255,0.9);
+    background-image: repeating-linear-gradient(
+        transparent,
+        transparent 18px,
+        rgba(0, 0, 0, 0.08) 18px,
+        rgba(0, 0, 0, 0.08) 19px
+    );
+}
+.text-area.tall { min-height: 140px; }
+.text-area.medium { min-height: 100px; }
+.text-area.short { min-height: 35px; }
+
+/* === TALENTS === */
+.talent-row {
+    width: 100%;
+    border-collapse: collapse;
+}
+.talent-row td {
+    vertical-align: middle;
+    padding: 2px;
+}
+.stored-box {
+    display: inline-block;
+    border: 2px solid #000;
+    width: 35px;
+    height: 26px;
+    vertical-align: middle;
+    background: rgba(255,255,255,0.95);
+}
+
+/* Handwriting guides on dense areas only */
+.feature-table td,
+.talent-table td {
+    height: 20px;
+    background-image: repeating-linear-gradient(
+        transparent,
+        transparent 18px,
+        rgba(0, 0, 0, 0.08) 18px,
+        rgba(0, 0, 0, 0.08) 19px
+    );
+}
+
+.notes-sticky .text-area {
+    background-image: repeating-linear-gradient(
+        transparent,
+        transparent 18px,
+        rgba(0, 0, 0, 0.08) 18px,
+        rgba(0, 0, 0, 0.08) 19px
+    );
+}
+
+/* === UTILITIES === */
+.mt-1 { margin-top: 5px; }
+.text-left { text-align: left; }
+
+/* === POSITIONING HELPERS ===
+   Goal: make layout tweaks happen in CSS (not inline styles).
+   Edit these variables/classes to reposition/rescale sections.
+*/
+:root {
+    --logo-fallback-font-size: 20pt;
+    --logo-fallback-letter-spacing: 2px;
+    --logo-fallback-margin-bottom: 6px;
+
+    --character-name-font-size: 16pt;
+    --character-name-min-height: 22px;
+    --character-name-min-width: 250px;
+
+    --hdr-profession-width: 20%;
+    --hdr-level-width: 12%;
+    --hdr-experience-width: 18%;
+    --hdr-stored-adv-width: 14%;
+    --hdr-player-width: 18%;
+
+    /* Combat Stats height target to pull it to the bottom of the frame */
+    --combat-stats-min-height: 169px;
+}
+
+.logo-fallback {
+    display: none;
+    font-size: var(--logo-fallback-font-size);
+    font-weight: bold;
+    letter-spacing: var(--logo-fallback-letter-spacing);
+    margin-bottom: var(--logo-fallback-margin-bottom);
+}
+
+.character-name-value {
+    font-size: var(--character-name-font-size);
+    font-weight: bold;
+    min-height: var(--character-name-min-height);
+    min-width: var(--character-name-min-width);
+}
+
+.hdr-profession { width: var(--hdr-profession-width); }
+.hdr-level { width: var(--hdr-level-width); }
+.hdr-experience { width: var(--hdr-experience-width); }
+.hdr-stored-adv { width: var(--hdr-stored-adv-width); }
+.hdr-player { width: var(--hdr-player-width); }
+
+.combat-stats-block { min-height: var(--combat-stats-min-height); }
+
+/* Sticky Notes bar on page 2 */
+.notes-sticky {
+    position: absolute;
+    left: 0.15in;
+    right: 0.15in;
+    bottom: 48px;
+    z-index: 5;
+}
+.notes-inner {
+    padding: 0 3px;
+}
+.notes-sticky .section { margin-bottom: 0; }
+
+/* General utilities used to replace inline styles */
+.w-50p { width: 50%; }
+.w-33p { width: 33.33%; }
+.w-25p { width: 25%; }
+.w-60p { width: 60%; }
+.w-40p { width: 40%; }
+.w-28p { width: 28%; }
+.w-22p { width: 22%; }
+.w-20p { width: 20%; }
+.w-18p { width: 18%; }
+.w-14p { width: 14%; }
+.w-12p { width: 12%; }
+.w-30p { width: 30%; }
+.w-10p { width: 10%; }
+.w-90px { width: 90px; }
+
+.mt-3 { margin-top: 3px; }
+.mt-5 { margin-top: 5px; }
+.mb-10 { margin-bottom: 10px; }
+.pb-6 { padding-bottom: 6px; }
+.pr-8 { padding-right: 8px; }
+.ml-25 { margin-left: 25px; }
+
+.text-right { text-align: right; }
+.text-center { text-align: center; }
+
+.font-bold { font-weight: bold; }
+.text-black { color: #000; }
+.fz-14pt { font-size: 14pt; }
+.fz-10pt { font-size: 10pt; }
+.fz-12pt { font-size: 12pt; }
+.fz-8pt { font-size: 8pt; }
+.fz-6pt { font-size: 6pt; }
+.text-muted { color: #666; }
+
+.border-none { border: none; }
+.border-bottom-3 { border-bottom: 3px solid #000; }
+
+.value-box-total {
+    font-weight: bold;
+    border-width: 2px;
+}
+
+.value-box-total-lg {
+    font-weight: bold;
+    border-width: 2px;
+    font-size: 11pt;
+}
+
+.label-strong {
+    font-weight: bold;
+    color: #000;
+}
+
+.label-strong-8pt {
+    font-size: 8pt;
+    font-weight: bold;
+    color: #000;
+}
+
+.page2-header {
+    text-align: center;
+    margin-bottom: 10px;
+    border-bottom: 3px solid #000;
+    padding-bottom: 6px;
+    background: rgba(255,255,255,0.9);
+}
+
+/* Languages table rows */
+.lang-table td { height: 18px; }
+.prof-table td {
+    height: 18px;
+}
+.prof-table { min-height: 160px; }
+.lang-table { min-height: 90px; }
+.feature-table td,
+.talent-table td {
+    height: 20px;
+}
+.skills-table tbody tr:nth-child(even) td { background: rgba(0,0,0,0.04); }
+
+.weight-row {
+    margin-top: 2px;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.equipment-section {
+    min-height: 300px;
+}
