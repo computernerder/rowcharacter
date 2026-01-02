@@ -345,7 +345,7 @@ table.inner th {
 /* === WEAPONS TABLE === */
 .weapons-table th, .weapons-table td { font-size: 8pt; height: 22.6px; }
 .weapons-table td:first-child {
-    border-left: 2px dotted #999;
+    border-left: 2px solid #000;
     padding-left: 6px;
 }
 
