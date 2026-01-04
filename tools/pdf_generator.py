@@ -25,7 +25,9 @@ from pathlib import Path
 from typing import Optional, Union
 import sys
 import json
+import tempfile
 from jinja2 import Environment, FileSystemLoader, BaseLoader
+from ROW_constants import Skill, Attribute
 
 try:
     from playwright.sync_api import sync_playwright
@@ -495,10 +497,41 @@ class SharedSheetPDF:
         if not self.template_path.exists():
             raise FileNotFoundError(f"Shared sheet template not found at {self.template_path}")
 
+    def _default_skills(self) -> list[tuple[str, str]]:
+        attr_abbr = {
+            Attribute.MIGHT: "MGT",
+            Attribute.AGILITY: "AGL",
+            Attribute.ENDURANCE: "END",
+            Attribute.INTELLECT: "INT",
+            Attribute.WISDOM: "WIS",
+            Attribute.CHARISMA: "CHA",
+        }
+        skills = []
+        for skill in Skill:
+            label = skill.value
+            slug = label.lower().replace(" ", "_")
+            abbr = attr_abbr.get(skill.attribute, "")
+            skills.append({"label": label, "slug": slug, "attr": abbr})
+        return skills
+
+    def _render_template(self) -> str:
+        env = Environment(loader=FileSystemLoader(str(self.sheet_root)))
+        env.filters["make_list"] = list
+        template = env.get_template("standalone.html")
+        return template.render(skills=self._default_skills())
+
     def _build_init_script(self, sheet_data: dict, fallback_data: Optional[dict]) -> str:
         data_json = json.dumps(sheet_data or {}, ensure_ascii=False)
-        fallback_json = json.dumps(fallback_data or {}, ensure_ascii=False)
-        return f"window.sheetData = {data_json}; window.sheetFallback = {fallback_json};"
+        script = (
+            "(() => {"
+            f"const data = {data_json};"
+            "Object.defineProperty(window, 'sheetData', { value: data, writable: false, configurable: false });"
+        )
+        if fallback_data is not None:
+            fallback_json = json.dumps(fallback_data or {}, ensure_ascii=False)
+            script += f"Object.defineProperty(window, 'sheetFallback', {{ value: {fallback_json}, writable: false, configurable: false }});"
+        script += "})();"
+        return script
 
     def generate(
         self,
@@ -517,7 +550,11 @@ class SharedSheetPDF:
                 context = browser.new_context()
                 page = context.new_page()
                 page.add_init_script(self._build_init_script(sheet_data, fallback_data))
-                page.goto(self.template_path.as_uri())
+                rendered_html = self._render_template()
+                with tempfile.NamedTemporaryFile("w", suffix=".html", delete=False, dir=self.sheet_root) as tmp:
+                    tmp.write(rendered_html)
+                    temp_path = Path(tmp.name)
+                page.goto(temp_path.as_uri())
                 page.wait_for_load_state("networkidle")
                 if wait_ms:
                     page.wait_for_timeout(wait_ms)
@@ -526,6 +563,10 @@ class SharedSheetPDF:
                     Path(pdf_path).write_bytes(pdf_bytes)
                 return pdf_bytes
             finally:
+                try:
+                    temp_path.unlink(missing_ok=True)
+                except Exception:
+                    pass
                 browser.close()
 
     def generate_to_file(self, sheet_data: dict, output_path: Union[str, Path], fallback_data: Optional[dict] = None) -> None:
