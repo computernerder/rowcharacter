@@ -1,0 +1,35 @@
+{
+  "id": "labrynthos",
+  "name": "Labrynthos",
+  "race_id": "taurin",
+  "description": "Taurin raised in maze-like cliff settlements where spatial memory is everything.",
+  
+  "region": "Labrynthos Cliffforts",
+  
+  "ability_modifiers": {
+    "Intellect": 1
+  },
+  
+  "languages": [],
+  "language_choices": {
+    "count": 1,
+    "options": ["Dwarvish", "Goblin", "Elvish"]
+  },
+  
+  "features": [
+    {
+      "name": "Maze Mind",
+      "description": "You are proficient in Survival checks and have advantage on Survival checks."
+    }
+  ],
+  
+  "skill_proficiencies": ["Survival"],
+  "skill_bonuses": {},
+  
+  "reputation_modifier": {
+    "region": "Labrynthos Cliffforts",
+    "value": 1
+  },
+  
+  "personality": "Tactical, calm, thoughtful."
+}

@@ -1,0 +1,32 @@
+{
+  "id": "tesharai",
+  "name": "Tesharai",
+  "race_id": "simari",
+  "description": "Street-smart diplomats and traders who act as jungle emissaries to the regions.",
+  
+  "region": "Tesharai Trading Outposts",
+  
+  "ability_modifiers": {
+    "Charisma": 1
+  },
+  
+  "languages": ["Simarru", "Common"],
+  "language_choices": null,
+  
+  "features": [
+    {
+      "name": "Negotiator",
+      "description": "You are proficient in Persuasion checks and have advantage on Persuasion checks."
+    }
+  ],
+  
+  "skill_proficiencies": ["Persuasion"],
+  "skill_bonuses": {},
+  
+  "reputation_modifier": {
+    "region": "Tesharai Trading Outposts",
+    "value": 1
+  },
+  
+  "personality": "Friendly, witty, thoughtful."
+}

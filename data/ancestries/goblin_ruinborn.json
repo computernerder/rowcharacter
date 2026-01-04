@@ -1,0 +1,35 @@
+{
+  "id": "ruinborn",
+  "name": "Ruinborn",
+  "race_id": "goblin",
+  "description": "Goblins raised among ancient rubble and dangerous relics.",
+  
+  "region": "Old Krath Ruins",
+  
+  "ability_modifiers": {
+    "Intellect": 1
+  },
+  
+  "languages": [],
+  "language_choices": {
+    "count": 1,
+    "options": ["Draconic", "Ancient Dwarvish"]
+  },
+  
+  "features": [
+    {
+      "name": "Scrap Expertise",
+      "description": "You may use any tool kit for any task at disadvantage if it is not intended for the job."
+    }
+  ],
+  
+  "skill_proficiencies": [],
+  "skill_bonuses": {},
+  
+  "reputation_modifier": {
+    "region": "Old Krath Ruins",
+    "value": 1
+  },
+  
+  "personality": "Eccentric, fearless, inventive."
+}

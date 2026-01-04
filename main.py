@@ -6,14 +6,29 @@ from dataclasses import dataclass, field
 from typing import List, Dict, Callable
 
 
+
+
+
 @dataclass
 class Character:
-    name: str
-    alive: bool = True
+    ''' 
+    Represents a player character in the RPG system.
+    Should be loaded with a player object as defined in charactertemplate.json
+    
+    '''    
+    
+    
+    
+    
+    
+    
+    name: str = "Default Name"
+
+    alive: bool = True 
     roll_method: RollType = RollType.STANDARD_ARRAY
     # attributes = {attr: 10 for attr in Attribute}  # Initialize all attributes to 10
     
-    attributes: Dict[Attribute, int] = field(default_factory=lambda: {attr: [10,attribute_modifier(10),0,0] for attr in Attribute})  # Initialize all attributes to 10
+    # attributes: Dict[Attribute, int] = field(default_factory=lambda: {attr: [10,attribute_modifier(10),0,0] for attr in Attribute})  # Initialize all attributes to 10
 
     languages: set[str] = field(default_factory=set)
     speed: int = 30  # Default speed
@@ -49,6 +64,8 @@ class Character:
     health_points: int = field(init=False)  # Default HP
 
 
+
+
     def __post_init__(self):
         
         # self.skills = {skill: [attribute_modifier(self.attributes[SKILL_ATTRIBUTE[skill]]), 0, 0] for skill in Skill}  # skill name -> bonus/rank (default 0)
@@ -60,7 +77,10 @@ class Character:
         self.defense_total = sum(self.defense)  # Default total defense (including modifiers)
         self.health_points = 10 + attribute_modifier(self.attributes[Attribute.ENDURANCE])  # Default HP
 
-    
+
+
+
+
 
 
 

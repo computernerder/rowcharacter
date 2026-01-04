@@ -1,0 +1,39 @@
+{
+  "id": "taurin",
+  "name": "Taurin",
+  "description": "Towering, bull-headed humanoids whose cultures emphasize honor, craftsmanship, and physical discipline. Taurin often live in mountain strongholds or cliffside fortresses.",
+  
+  "creature_type": "Humanoid",
+  "size": "Medium",
+  "speed": 30,
+  
+  "languages": ["Common", "Tauric"],
+  "bonus_language_choices": 0,
+  
+  "darkvision": 0,
+  
+  "ability_modifiers": {
+    "Might": 1,
+    "Endurance": 1,
+    "Charisma": -1
+  },
+  
+  "skill_proficiencies": ["Perception"],
+  
+  "features": [
+    {
+      "name": "Primal Senses",
+      "description": "You are proficient in Perception checks and have advantage on Perception checks."
+    },
+    {
+      "name": "Horn Attack",
+      "description": "You are proficient with your horns. You may make an unarmed attack dealing 1d6 + Might modifier piercing damage."
+    },
+    {
+      "name": "Immovable",
+      "description": "You have advantage on checks and saving throws to resist being shoved or knocked prone."
+    }
+  ],
+  
+  "ancestries": ["stonegrave", "gorath", "labrynthos"]
+}

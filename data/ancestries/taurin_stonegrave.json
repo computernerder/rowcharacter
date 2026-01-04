@@ -1,0 +1,35 @@
+{
+  "id": "stonegrave",
+  "name": "Stonegrave",
+  "race_id": "taurin",
+  "description": "Defenders of ancient mountain fortresses carved generations ago.",
+  
+  "region": "Stonegrave Bastions",
+  
+  "ability_modifiers": {
+    "Endurance": 1
+  },
+  
+  "languages": [],
+  "language_choices": {
+    "count": 1,
+    "options": ["Dwarvish", "Orcish"]
+  },
+  
+  "features": [
+    {
+      "name": "Stonehide",
+      "description": "Add your Endurance modifier as temporary hit points. You regain these points after a short rest."
+    }
+  ],
+  
+  "skill_proficiencies": [],
+  "skill_bonuses": {},
+  
+  "reputation_modifier": {
+    "region": "Stonegrave Bastions",
+    "value": 1
+  },
+  
+  "personality": "Stern, protective, traditional."
+}

@@ -1,0 +1,35 @@
+{
+  "id": "gorath",
+  "name": "Gorath Plains",
+  "race_id": "taurin",
+  "description": "Nomadic Taurin who roam vast grasslands with herds and caravans.",
+  
+  "region": "Plains of Gorath",
+  
+  "ability_modifiers": {
+    "Wisdom": 1
+  },
+  
+  "languages": [],
+  "language_choices": {
+    "count": 1,
+    "options": ["Elvish", "Halffolk"]
+  },
+  
+  "features": [
+    {
+      "name": "Charging Step",
+      "description": "As part of your attack action, when you move 20 ft straight toward a target, your next horn attack deals an additional 1d6 damage."
+    }
+  ],
+  
+  "skill_proficiencies": [],
+  "skill_bonuses": {},
+  
+  "reputation_modifier": {
+    "region": "Plains of Gorath",
+    "value": 1
+  },
+  
+  "personality": "Free-spirited, loyal, bold."
+}

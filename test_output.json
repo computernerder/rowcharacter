@@ -1,0 +1,133 @@
+{
+  "id": "",
+  "character_name": "Test Character",
+  "player": "",
+  "profession": "",
+  "primary_path": null,
+  "race": "",
+  "ancestry": "",
+  "background": "",
+  "level": 1,
+  "total_experience": 0,
+  "stored_advance": "",
+  "ability_scores": {},
+  "defense": {
+    "base": 9,
+    "agility": 0,
+    "shield": "",
+    "misc": 0,
+    "total": ""
+  },
+  "speed": 30,
+  "initiative": 0,
+  "health": {
+    "max": 0,
+    "current": 0,
+    "wounds": 0
+  },
+  "armor_hp": {
+    "max": 0,
+    "current": 0
+  },
+  "life_points": {
+    "max": 0,
+    "current": 0
+  },
+  "focus": {
+    "max": 0,
+    "current": 0
+  },
+  "passive": {
+    "perception": {
+      "base": 10,
+      "skill": 0,
+      "misc": 0,
+      "total": 10
+    },
+    "insight": {
+      "base": 10,
+      "skill": 0,
+      "misc": 0,
+      "total": 10
+    }
+  },
+  "attack_mods": {
+    "melee": {
+      "attr": 0,
+      "misc": 0,
+      "total": 0
+    },
+    "ranged": {
+      "attr": 0,
+      "misc": 0,
+      "total": 0
+    }
+  },
+  "skills": {},
+  "proficiencies": [],
+  "languages": [
+    "Common",
+    "Elvish",
+    "Sylvan"
+  ],
+  "attacks": [],
+  "talents": [],
+  "features": [
+    {
+      "name": "Darkvision",
+      "text": "You can see in dim light within 60 feet as if it were bright light, and in darkness as if it were dim light."
+    },
+    {
+      "name": "Fey Ancestry",
+      "text": "You have advantage on saving throws against being charmed, and magic can't put you to sleep."
+    },
+    {
+      "name": "Life Bond",
+      "text": "Once per long rest, you may touch yourself or an ally to restore 2d6 hit points."
+    }
+  ],
+  "spellcrafting": {
+    "save_dc": 0,
+    "attack_bonus": 0,
+    "crafting_points": {
+      "max": 0
+    },
+    "casting": "",
+    "spells": []
+  },
+  "inventory": {
+    "items": [],
+    "total_weight": ""
+  },
+  "notes": "",
+  "physical_traits": {
+    "height": "",
+    "weight": "",
+    "size": "Medium",
+    "age": "",
+    "creature_type": "Humanoid (Elf)",
+    "eyes": "",
+    "skin": "",
+    "hair": ""
+  },
+  "personality": {
+    "traits": "",
+    "ideal": "",
+    "bond": "",
+    "flaw": ""
+  },
+  "alignment": {
+    "alignment": "",
+    "mod": 0
+  },
+  "reputation": {
+    "reputation": "",
+    "mod": 1
+  },
+  "qr_payload": "",
+  "footer": {
+    "datecode": "",
+    "config": "",
+    "id": ""
+  }
+}

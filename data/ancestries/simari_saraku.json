@@ -1,0 +1,32 @@
+{
+  "id": "saraku",
+  "name": "Saraku",
+  "race_id": "simari",
+  "description": "Tree-dwellers raised among woven bridges and sky-paths.",
+  
+  "region": "Saraku Canopy Villages",
+  
+  "ability_modifiers": {
+    "Agility": 1
+  },
+  
+  "languages": ["Simarru"],
+  "language_choices": null,
+  
+  "features": [
+    {
+      "name": "Skybound",
+      "description": "You are proficient in Acrobatics checks and have advantage on Acrobatics checks."
+    }
+  ],
+  
+  "skill_proficiencies": ["Acrobatics"],
+  "skill_bonuses": {},
+  
+  "reputation_modifier": {
+    "region": "Aetherwood",
+    "value": 1
+  },
+  
+  "personality": "Energetic, cheerful, bold."
+}

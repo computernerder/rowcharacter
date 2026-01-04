@@ -1,0 +1,35 @@
+{
+  "id": "velari",
+  "name": "Velari",
+  "race_id": "human",
+  "description": "Inquisitive explorers, Velari humans seek knowledge above all else. They often travel far from their homes, drawn to libraries, temples, and strange ruins. Velari communities value open discourse and shared learning.",
+  
+  "region": "Various scholarly enclaves",
+  
+  "ability_modifiers": {
+    "Intellect": 1
+  },
+  
+  "languages": [],
+  "language_choices": {
+    "count": 1,
+    "options": ["Elvish", "Dwarvish"]
+  },
+  
+  "features": [
+    {
+      "name": "Keen Mind",
+      "description": "You are proficient in History checks and gain advantage when attempting to recall lore, maps, or spoken words."
+    }
+  ],
+  
+  "skill_proficiencies": ["History"],
+  "skill_bonuses": {},
+  
+  "reputation_modifier": {
+    "region": "Aetherwood",
+    "value": 1
+  },
+  
+  "personality": "Curious, optimistic, friendly."
+}

@@ -1,0 +1,37 @@
+{
+  "id": "dwarf",
+  "name": "Dwarf",
+  "description": "Stout and resolute, dwarves stand as pillars of endurance. Whether hewing stone halls or defending ancient keeps, dwarves prize tradition, craftsmanship, and clan honor.",
+  
+  "creature_type": "Humanoid (Dwarf)",
+  "size": "Medium",
+  "speed": 25,
+  
+  "languages": ["Common", "Dwarvish"],
+  "bonus_language_choices": 0,
+  
+  "darkvision": 60,
+  
+  "ability_modifiers": {
+    "Endurance": 1
+  },
+  
+  "skill_proficiencies": [],
+  
+  "features": [
+    {
+      "name": "Darkvision",
+      "description": "You can see in dim light within 60 feet as if it were bright light, and in darkness as if it were dim light."
+    },
+    {
+      "name": "Stonecunning",
+      "description": "You are proficient in History checks and gain advantage when related to stonework."
+    },
+    {
+      "name": "Iron Stomach",
+      "description": "You have resistance to poison damage."
+    }
+  ],
+  
+  "ancestries": ["grundari", "ironhills", "molvryn"]
+}

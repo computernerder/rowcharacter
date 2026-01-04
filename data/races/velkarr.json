@@ -1,0 +1,32 @@
+{
+  "id": "velkarr",
+  "name": "Velkarr",
+  "description": "Sleek, disciplined panther-folk known for their unmatched stealth and agility. Velkarr communities emphasize loyalty, honor, and precise coordination in hunting or scouting.",
+  
+  "creature_type": "Humanoid",
+  "size": "Medium",
+  "speed": 35,
+  
+  "languages": ["Common", "Velkarran"],
+  "bonus_language_choices": 0,
+  
+  "darkvision": 0,
+  
+  "ability_modifiers": {
+    "Agility": 1
+  },
+  
+  "skill_proficiencies": ["Perception"],
+  "skill_bonuses": {
+    "Perception": 2
+  },
+  
+  "features": [
+    {
+      "name": "Primal Senses",
+      "description": "You are proficient in Perception checks and have a +2 miscellaneous bonus."
+    }
+  ],
+  
+  "ancestries": ["shadowfen", "nightspire", "umbravale"]
+}

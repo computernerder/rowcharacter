@@ -1,0 +1,29 @@
+{
+  "id": "halffolk",
+  "name": "Halffolk",
+  "description": "Warm-hearted and resilient, halffolk cherish community, celebration, and small joys. Their caravans and river-villages create tightly knit cultures that survive by kindness and cleverness.",
+  
+  "creature_type": "Humanoid (Halffolk)",
+  "size": "Small",
+  "speed": 25,
+  
+  "languages": ["Common", "Halffolk"],
+  "bonus_language_choices": 0,
+  
+  "darkvision": 0,
+  
+  "ability_modifiers": {
+    "Agility": 1
+  },
+  
+  "skill_proficiencies": [],
+  
+  "features": [
+    {
+      "name": "Lucky",
+      "description": "You gain the general talent of Luck at tier 1."
+    }
+  ],
+  
+  "ancestries": ["nimrell", "brindleford", "tavari"]
+}

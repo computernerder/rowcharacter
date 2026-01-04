@@ -1,0 +1,53 @@
+{
+  "id": "defense",
+  "name": "Defense",
+  "description": "Masters of protection and endurance, Defense path characters excel at holding the line and shielding allies from harm.",
+  
+  "prerequisites": {
+    "primary": {
+      "attribute": "Endurance",
+      "minimum": 15
+    },
+    "secondary": {
+      "options": ["Might", "Intellect"],
+      "minimum": 13
+    }
+  },
+  
+  "primary_bonus": {
+    "Endurance": 2,
+    "Wisdom": 2
+  },
+  
+  "talent_points_attribute": "Endurance",
+  
+  "attack_bonus_melee": 1,
+  "attack_bonus_ranged": 1,
+  
+  "role": "Defender",
+  
+  "features": [
+    {
+      "name": "Hold the Line",
+      "description": "When a hostile creature you can see moves within 5 feet of you, you may use your Reaction to make a melee attack against them. On a hit, the creature's speed becomes 0 until the end of your next turn."
+    },
+    {
+      "name": "Read the Threat",
+      "description": "At the start of combat, you may make an Insight check with advantage to identify the most dangerous visible enemy (TN 8+DR). On a success, your first attack against that enemy has advantage."
+    },
+    {
+      "name": "Unyielding Focus",
+      "description": "You have advantage on saving throws made to resist being knocked prone, disarmed, or shoved."
+    }
+  ],
+  
+  "talents": [
+    "protector",
+    "guard", 
+    "adrenal_push",
+    "tactics",
+    "keen_mind",
+    "last_stand",
+    "master_of_defense"
+  ]
+}

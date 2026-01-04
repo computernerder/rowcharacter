@@ -1,0 +1,70 @@
+{
+  "id": "warrior",
+  "name": "Warrior",
+  "description": "Strong fighters trained for battle, serving with militias, mercenary crews, caravan guards, or local patrols.",
+  
+  "base_hp": 10,
+  
+  "feature": {
+    "name": "Soldier's Network",
+    "description": "You have ties to local fighters, guards, and mercenaries who can offer basic shelter, news, or introductions."
+  },
+  
+  "armor_proficiencies": ["Light", "Medium"],
+  "weapon_proficiencies": ["Simple"],
+  "tool_proficiencies": [],
+  
+  "tool_choices": {
+    "count": 1,
+    "options": ["Artisan tool", "Gaming set"]
+  },
+  
+  "skill_choices": {
+    "count": 2,
+    "options": ["Athletics", "Intimidation", "Perception", "Insight", "Streetwise", "Nature"]
+  },
+  
+  "suggested_paths": ["Defense", "Power"],
+  
+  "duties": [
+    {
+      "id": "fighter",
+      "name": "Fighter",
+      "description": "Frontline combatant trained in heavy arms and disciplined formations.",
+      "suggested_paths": ["Defense", "Power"],
+      "armor_proficiencies": ["Heavy"],
+      "weapon_proficiencies": ["Martial"],
+      "tool_choices": {
+        "count": 1,
+        "options": ["Whetstone kit", "Armorer's tools", "Drill-sergeant whistle"]
+      },
+      "skill_choices": {
+        "count": 1,
+        "options": ["Athletics", "Intimidation", "Appraisal"]
+      },
+      "equipment_pack": "Heavy Warrior Pack (heavy armor, longsword or warhammer, whetstone, travel kit)",
+      "gold_alternative": 65
+    },
+    {
+      "id": "ranger",
+      "name": "Ranger",
+      "description": "Scout and tracker skilled at fighting in the wilds.",
+      "suggested_paths": ["Defense", "Survival"],
+      "armor_proficiencies": ["Medium"],
+      "weapon_proficiencies": ["Finesse", "Ranged"],
+      "tool_choices": {
+        "count": 1,
+        "options": ["Hunting tools", "Snare kit", "Herbal pouch"]
+      },
+      "skill_choices": {
+        "count": 1,
+        "options": ["Perception", "Animal Handling", "Nature"]
+      },
+      "equipment_pack": "Wilderness Pack (medium armor, bow or spear, herb kit, travel cloak)",
+      "gold_alternative": 65
+    }
+  ],
+  
+  "equipment_pack": "",
+  "gold_alternative": 0
+}

@@ -1,0 +1,30 @@
+{
+  "id": "scholar",
+  "name": "Scholar",
+  "description": "A seeker of knowledge, trained in research, history, and the arcane arts.",
+  
+  "base_hp": 8,
+  
+  "feature": {
+    "name": "Academic Circles",
+    "description": "You can request help from scribes, professors, and archivists who share information or grant access to rare texts."
+  },
+  
+  "armor_proficiencies": [],
+  "weapon_proficiencies": ["Simple"],
+  "tool_proficiencies": ["Arcane Focus"],
+  
+  "tool_choices": null,
+  
+  "skill_choices": {
+    "count": 2,
+    "options": ["Arcana", "History", "Investigation", "Nature", "Religion", "Medicine"]
+  },
+  
+  "suggested_paths": ["Mystic", "Divine"],
+  
+  "duties": [],
+  
+  "equipment_pack": "Scholar's Pack (robes, spellbook, ink and quills, reference tomes)",
+  "gold_alternative": 40
+}

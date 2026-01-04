@@ -1,0 +1,32 @@
+{
+  "id": "sylari",
+  "name": "Sylari",
+  "race_id": "elf",
+  "description": "Elves of the deep green reaches, tending groves older than most nations. Their lives revolve around balance and communion with natural spirits.",
+  
+  "region": "Forest Realms of Sylvarren",
+  
+  "ability_modifiers": {
+    "Wisdom": 1
+  },
+  
+  "languages": ["Sylvan"],
+  "language_choices": null,
+  
+  "features": [
+    {
+      "name": "Life Bond",
+      "description": "Once per long rest, you may touch yourself or an ally to restore 2d6 hit points."
+    }
+  ],
+  
+  "skill_proficiencies": [],
+  "skill_bonuses": {},
+  
+  "reputation_modifier": {
+    "region": "Sylvarren",
+    "value": 1
+  },
+  
+  "personality": "Gentle, observant, spiritually attuned."
+}

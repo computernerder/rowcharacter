@@ -1,0 +1,35 @@
+{
+  "id": "mirekin",
+  "name": "Mirekin",
+  "race_id": "goblin",
+  "description": "Masters of swamp survival and ambush tactics.",
+  
+  "region": "Mire Marshlands",
+  
+  "ability_modifiers": {
+    "Endurance": 1
+  },
+  
+  "languages": [],
+  "language_choices": {
+    "count": 1,
+    "options": ["Draconic", "Elvish"]
+  },
+  
+  "features": [
+    {
+      "name": "Bog Strider",
+      "description": "You ignore difficult terrain caused by mud or marsh."
+    }
+  ],
+  
+  "skill_proficiencies": [],
+  "skill_bonuses": {},
+  
+  "reputation_modifier": {
+    "region": "Mire Marshlands",
+    "value": 1
+  },
+  
+  "personality": "Wary, clever, resilient."
+}

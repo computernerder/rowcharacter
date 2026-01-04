@@ -1,0 +1,33 @@
+{
+  "id": "simari",
+  "name": "Simari",
+  "description": "Jungle-born, agile, expressive, and curious, the Simari use their prehensile tails and flexible frames to explore impossible terrain. Their villages sit high among sprawling canopy bridges.",
+  
+  "creature_type": "Humanoid",
+  "size": "Medium",
+  "speed": 30,
+  
+  "languages": ["Common", "Simarru"],
+  "bonus_language_choices": 0,
+  
+  "darkvision": 0,
+  
+  "ability_modifiers": {
+    "Agility": 1
+  },
+  
+  "skill_proficiencies": ["Perception"],
+  
+  "features": [
+    {
+      "name": "Primal Senses",
+      "description": "You are proficient in Perception checks."
+    },
+    {
+      "name": "Prehensile Tail",
+      "description": "You can grasp light objects, assist climbing, and manipulate tools with your tail. You may use any tool kit at disadvantage if it is not intended for the job."
+    }
+  ],
+  
+  "ancestries": ["saraku", "jinroku", "tesharai"]
+}

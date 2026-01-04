@@ -1,0 +1,32 @@
+{
+  "id": "jinroku",
+  "name": "Jinroku",
+  "race_id": "simari",
+  "description": "Simari who grow up near fast rivers and dense root forests, learning to swim and climb equally well.",
+  
+  "region": "Jinroku River-Jungles",
+  
+  "ability_modifiers": {
+    "Might": 1
+  },
+  
+  "languages": ["Simarru"],
+  "language_choices": null,
+  
+  "features": [
+    {
+      "name": "River Pulse",
+      "description": "You gain a swimming speed equal to your walking speed."
+    }
+  ],
+  
+  "skill_proficiencies": [],
+  "skill_bonuses": {},
+  
+  "reputation_modifier": {
+    "region": "Jinroku River-Jungles",
+    "value": 1
+  },
+  
+  "personality": "Curious, instinctive, empathetic."
+}

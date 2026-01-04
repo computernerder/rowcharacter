@@ -1,0 +1,53 @@
+{
+  "id": "mystic",
+  "name": "Mystic",
+  "description": "Wielders of arcane power, Mystic path characters harness magical energies to devastating effect.",
+  
+  "prerequisites": {
+    "primary": {
+      "attribute": "Intellect",
+      "minimum": 15
+    },
+    "secondary": {
+      "options": ["Wisdom", "Charisma"],
+      "minimum": 13
+    }
+  },
+  
+  "primary_bonus": {
+    "Intellect": 2,
+    "Wisdom": 2
+  },
+  
+  "talent_points_attribute": "Intellect",
+  
+  "attack_bonus_melee": 0,
+  "attack_bonus_ranged": 2,
+  
+  "role": "Specialist",
+  
+  "features": [
+    {
+      "name": "Arcane Initiate",
+      "description": "You gain a Spellcrafting Book, an arcane focus, and basic training in shaping magical energy."
+    },
+    {
+      "name": "Spell Attunement",
+      "description": "Your Spell Attack modifier equals your Intellect modifier. Your Spell Save TN equals 8 + your Intellect modifier."
+    },
+    {
+      "name": "Flow of Thought",
+      "description": "Once per short rest, as a Bonus Action, you gain advantage on Intellect saving throws until the start of your next turn."
+    }
+  ],
+  
+  "talents": [
+    "spellcrafting",
+    "blood_pact",
+    "divination",
+    "scholar",
+    "spell_focus",
+    "warding",
+    "master_of_mystic"
+  ]
+}

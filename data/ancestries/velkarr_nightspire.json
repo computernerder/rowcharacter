@@ -1,0 +1,32 @@
+{
+  "id": "nightspire",
+  "name": "Nightspire",
+  "race_id": "velkarr",
+  "description": "Velkarr hunters who scale sheer cliffs and hunt from high vantage points.",
+  
+  "region": "Nightspire Cliffs",
+  
+  "ability_modifiers": {
+    "Might": 1
+  },
+  
+  "languages": ["Velkarran"],
+  "language_choices": null,
+  
+  "features": [
+    {
+      "name": "Pounce Strike",
+      "description": "When you fall at least 10 ft intentionally as part of your movement, your next melee attack for that turn deals +1d4 bludgeoning damage."
+    }
+  ],
+  
+  "skill_proficiencies": [],
+  "skill_bonuses": {},
+  
+  "reputation_modifier": {
+    "region": "Nightspire Cliffs",
+    "value": 1
+  },
+  
+  "personality": "Fierce, calculating, proud."
+}

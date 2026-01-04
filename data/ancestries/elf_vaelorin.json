@@ -1,0 +1,32 @@
+{
+  "id": "vaelorin",
+  "name": "Vaelorin",
+  "race_id": "elf",
+  "description": "High-spire elves who dedicate centuries to scholarship, arcane study, and the preservation of cosmic lore.",
+  
+  "region": "Starspire Highlands",
+  
+  "ability_modifiers": {
+    "Intellect": 1
+  },
+  
+  "languages": ["Celestial"],
+  "language_choices": null,
+  
+  "features": [
+    {
+      "name": "Astral Memory",
+      "description": "You are proficient in Arcana checks and gain advantage when related to celestial events or ancient magic."
+    }
+  ],
+  
+  "skill_proficiencies": ["Arcana"],
+  "skill_bonuses": {},
+  
+  "reputation_modifier": {
+    "region": "Starspire Highlands",
+    "value": 1
+  },
+  
+  "personality": "Analytical, quiet, patient."
+}

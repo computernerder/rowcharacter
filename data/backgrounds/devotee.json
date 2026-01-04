@@ -1,0 +1,60 @@
+{
+  "id": "devotee",
+  "name": "Devotee",
+  "description": "You served in a temple, shrine, or faith community, dedicating yourself to the service of gods or cosmic truths.",
+  
+  "skill_proficiencies": ["Insight", "History"],
+  
+  "languages_granted": 2,
+  
+  "tool_proficiencies": [],
+  
+  "equipment": [
+    "Symbol of faith",
+    "Ritual book or prayer beads",
+    "Common clothes",
+    "10 bronze"
+  ],
+  
+  "feature": {
+    "name": "Shelter of the Faithful",
+    "description": "You command the respect of those who share your faith, and you can perform the religious ceremonies of your deity. You and your companions can expect free healing and care at temples of your faith, though you must provide material components for spells."
+  },
+  
+  "personality_tables": {
+    "traits": [
+      {"roll": 1, "text": "I speak in parables and symbols.", "morality": 0, "reputation": 0},
+      {"roll": 2, "text": "I see omens in every event.", "morality": 0, "reputation": 0},
+      {"roll": 3, "text": "I am patient and calm even in chaos.", "morality": 1, "reputation": 1},
+      {"roll": 4, "text": "I quote sacred texts at every opportunity.", "morality": 0, "reputation": 0},
+      {"roll": 5, "text": "I am tolerant of other faiths.", "morality": 1, "reputation": 1},
+      {"roll": 6, "text": "I've spent so long in the temple that I have little practical experience.", "morality": 0, "reputation": 0},
+      {"roll": 7, "text": "I've enjoyed fine food and drink at the temple.", "morality": 0, "reputation": 0},
+      {"roll": 8, "text": "Nothing can shake my optimistic attitude.", "morality": 0, "reputation": 1}
+    ],
+    "ideals": [
+      {"roll": 1, "text": "Faith. My devotion guides every step.", "morality": 1, "reputation": 1},
+      {"roll": 2, "text": "Charity. I must help those in need.", "morality": 1, "reputation": 2},
+      {"roll": 3, "text": "Change. We must help bring about the changes the gods are working.", "morality": 0, "reputation": 0},
+      {"roll": 4, "text": "Power. I seek to rise in the hierarchy of my faith.", "morality": -1, "reputation": 1},
+      {"roll": 5, "text": "Tradition. Ancient rites must be preserved.", "morality": 0, "reputation": 1},
+      {"roll": 6, "text": "Aspiration. I seek to prove worthy of my god's favor.", "morality": 0, "reputation": 0}
+    ],
+    "bonds": [
+      {"roll": 1, "text": "My temple is my family.", "morality": 1, "reputation": 1},
+      {"roll": 2, "text": "I protect a sacred relic.", "morality": 0, "reputation": 1},
+      {"roll": 3, "text": "I owe my life to a priest who took me in.", "morality": 1, "reputation": 0},
+      {"roll": 4, "text": "Everything I do is for the common people.", "morality": 1, "reputation": 1},
+      {"roll": 5, "text": "I will do anything to protect my temple.", "morality": 0, "reputation": 0},
+      {"roll": 6, "text": "I seek to preserve a sacred text.", "morality": 0, "reputation": 0}
+    ],
+    "flaws": [
+      {"roll": 1, "text": "I am intolerant of other faiths.", "morality": -1, "reputation": -1},
+      {"roll": 2, "text": "I put faith above compassion.", "morality": -1, "reputation": -1},
+      {"roll": 3, "text": "I secretly doubt my gods.", "morality": 0, "reputation": -1},
+      {"roll": 4, "text": "My piety sometimes leads to rigid thinking.", "morality": 0, "reputation": 0},
+      {"roll": 5, "text": "I am suspicious of strangers.", "morality": 0, "reputation": -1},
+      {"roll": 6, "text": "Once I pick a goal, I become obsessed.", "morality": 0, "reputation": 0}
+    ]
+  }
+}

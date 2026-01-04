@@ -1,0 +1,33 @@
+{
+  "id": "brindleford",
+  "name": "Brindleford",
+  "race_id": "halffolk",
+  "description": "Gardeners and herbalists, Brindlefords are famous for their horticulture and trickster-themed festivals.",
+  
+  "region": "Brindleford Gardens",
+  
+  "ability_modifiers": {
+    "Intellect": 1
+  },
+  
+  "languages": ["Sylvan"],
+  "language_choices": null,
+  
+  "features": [
+    {
+      "name": "Herbal Touch",
+      "description": "You are proficient with Herbalism Kits. Foraging takes half the normal time."
+    }
+  ],
+  
+  "skill_proficiencies": [],
+  "skill_bonuses": {},
+  "tool_proficiencies": ["Herbalism Kit"],
+  
+  "reputation_modifier": {
+    "region": "Brindleford Gardens",
+    "value": 1
+  },
+  
+  "personality": "Mischievous, calm, insightful."
+}

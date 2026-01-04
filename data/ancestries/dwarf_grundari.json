@@ -1,0 +1,36 @@
+{
+  "id": "grundari",
+  "name": "Grundari",
+  "race_id": "dwarf",
+  "description": "Champions of classic dwarven tradition: builders, smiths, guardians of the old halls.",
+  
+  "region": "Grundar Forgeholds",
+  
+  "ability_modifiers": {
+    "Might": 1
+  },
+  
+  "languages": [],
+  "language_choices": {
+    "count": 1,
+    "options": ["Orcish", "Goblin"]
+  },
+  
+  "features": [
+    {
+      "name": "Forged",
+      "description": "You are proficient with Blacksmith and Leatherworker tools. These kits repair at twice the regular amount per charge."
+    }
+  ],
+  
+  "skill_proficiencies": [],
+  "skill_bonuses": {},
+  "tool_proficiencies": ["Blacksmith Tools", "Leatherworker Tools"],
+  
+  "reputation_modifier": {
+    "region": "Grundar Forgeholds",
+    "value": 1
+  },
+  
+  "personality": "Loyal, blunt, dependable."
+}

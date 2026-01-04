@@ -1,0 +1,35 @@
+{
+  "id": "tavari",
+  "name": "Tavari",
+  "race_id": "halffolk",
+  "description": "River-folk who travel by boat, ferrying goods and stories across long trade routes.",
+  
+  "region": "Tavari Riverlands",
+  
+  "ability_modifiers": {
+    "Endurance": 1
+  },
+  
+  "languages": [],
+  "language_choices": {
+    "count": 1,
+    "options": ["Elvish", "Dwarvish", "Aquan"]
+  },
+  
+  "features": [
+    {
+      "name": "River Runner",
+      "description": "You gain a swimming speed equal to your walking speed."
+    }
+  ],
+  
+  "skill_proficiencies": [],
+  "skill_bonuses": {},
+  
+  "reputation_modifier": {
+    "region": "Tavari Riverlands",
+    "value": 1
+  },
+  
+  "personality": "Free-spirited, observant, brave."
+}

@@ -1,0 +1,34 @@
+{
+  "id": "thornkin",
+  "name": "Thornkin",
+  "race_id": "elf",
+  "description": "Elves adapted to thorn-choked plains and overgrown ruins. Their bodies show faint leaf-vein patterns, and they move with silent, druidic grace.",
+  
+  "region": "Bramblehold Expanse",
+  
+  "ability_modifiers": {
+    "Agility": 1,
+    "Intellect": 1,
+    "Charisma": -1
+  },
+  
+  "languages": ["Sylvan"],
+  "language_choices": null,
+  
+  "features": [
+    {
+      "name": "Bramble Step",
+      "description": "You ignore nonmagical difficult terrain caused by ruins or overgrowth."
+    }
+  ],
+  
+  "skill_proficiencies": [],
+  "skill_bonuses": {},
+  
+  "reputation_modifier": {
+    "region": "Bramblehold Expanse",
+    "value": 1
+  },
+  
+  "personality": "Protective, decisive, distrustful of outsiders."
+}

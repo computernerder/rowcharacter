@@ -1,0 +1,35 @@
+{
+  "id": "nimrell",
+  "name": "Nimrell",
+  "race_id": "halffolk",
+  "description": "Cheerful wanderers with a reputation for courage and generosity.",
+  
+  "region": "Nimrel Caravan Routes",
+  
+  "ability_modifiers": {
+    "Charisma": 1
+  },
+  
+  "languages": [],
+  "language_choices": {
+    "count": 1,
+    "options": ["Elvish", "Dwarvish", "Goblin"]
+  },
+  
+  "features": [
+    {
+      "name": "Resilient Spirit",
+      "description": "Once per long rest, when you fail a saving throw, you may choose to succeed instead."
+    }
+  ],
+  
+  "skill_proficiencies": [],
+  "skill_bonuses": {},
+  
+  "reputation_modifier": {
+    "region": "Nimrel Caravan Routes",
+    "value": 1
+  },
+  
+  "personality": "Optimistic, talkative, adventurous."
+}

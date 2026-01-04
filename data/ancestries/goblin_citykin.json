@@ -1,0 +1,35 @@
+{
+  "id": "citykin",
+  "name": "Citykin",
+  "race_id": "goblin",
+  "description": "Urban goblins known for business savvy and sharp negotiation.",
+  
+  "region": "Grand Markets of Vaskra",
+  
+  "ability_modifiers": {
+    "Charisma": 1
+  },
+  
+  "languages": [],
+  "language_choices": {
+    "count": 1,
+    "options": ["Elvish", "Dwarvish", "Halffolk"]
+  },
+  
+  "features": [
+    {
+      "name": "Silver Tongue",
+      "description": "You are proficient in Persuasion checks and have advantage on Persuasion checks."
+    }
+  ],
+  
+  "skill_proficiencies": ["Persuasion"],
+  "skill_bonuses": {},
+  
+  "reputation_modifier": {
+    "region": "Vaskra",
+    "value": 1
+  },
+  
+  "personality": "Ambitious, smooth-talking, industrious."
+}

@@ -1,0 +1,32 @@
+{
+  "id": "shadowfen",
+  "name": "Shadowfen",
+  "race_id": "velkarr",
+  "description": "Velkarr trained in low-swamp marsh regions where stealth is survival.",
+  
+  "region": "Shadowfen Lowlands",
+  
+  "ability_modifiers": {
+    "Intellect": 1
+  },
+  
+  "languages": ["Velkarran"],
+  "language_choices": null,
+  
+  "features": [
+    {
+      "name": "Murkstep",
+      "description": "You are proficient in Stealth checks and have advantage on Stealth checks in dim light or darkness."
+    }
+  ],
+  
+  "skill_proficiencies": ["Stealth"],
+  "skill_bonuses": {},
+  
+  "reputation_modifier": {
+    "region": "Shadowfen Lowlands",
+    "value": 1
+  },
+  
+  "personality": "Quiet, calculating, confident."
+}

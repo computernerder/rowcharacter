@@ -1,0 +1,32 @@
+{
+  "id": "umbravale",
+  "name": "Umbravale",
+  "race_id": "velkarr",
+  "description": "Forest Velkarr who train in absolute silence, using shadow and terrain to their advantage.",
+  
+  "region": "Umbravale Forest Province",
+  
+  "ability_modifiers": {
+    "Wisdom": 1
+  },
+  
+  "languages": ["Velkarran"],
+  "language_choices": null,
+  
+  "features": [
+    {
+      "name": "Silent Step",
+      "description": "You are proficient in Stealth checks and have advantage on Stealth checks when moving at half speed, as you make no sound."
+    }
+  ],
+  
+  "skill_proficiencies": ["Stealth"],
+  "skill_bonuses": {},
+  
+  "reputation_modifier": {
+    "region": "Umbravale Forest Province",
+    "value": 1
+  },
+  
+  "personality": "Disciplined, spiritual, focused."
+}

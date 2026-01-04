@@ -1,0 +1,36 @@
+{
+  "id": "human",
+  "name": "Human",
+  "description": "Adaptive and ambitious, humans thrive in nearly every environment. Their strength lies not in physical dominance or magical prowess, but in their versatility and drive.",
+  
+  "creature_type": "Humanoid",
+  "size": "Medium",
+  "speed": 30,
+  
+  "languages": ["Common"],
+  "bonus_language_choices": 1,
+  
+  "darkvision": 0,
+  
+  "ability_modifiers": {},
+  "flexible_ability_adjustment": {
+    "type": "human_core",
+    "description": "+1 to one ability OR +2 to one and -1 to another (not already adjusted by ancestry)"
+  },
+  
+  "skill_proficiencies": [],
+  "skill_choices": {
+    "count": 2,
+    "options": "any",
+    "description": "Adaptability: Gain two additional skill proficiencies of your choice."
+  },
+  
+  "features": [
+    {
+      "name": "Adaptability",
+      "description": "Gain two additional skill proficiencies of your choice."
+    }
+  ],
+  
+  "ancestries": ["velari", "thalven", "hrothkari"]
+}

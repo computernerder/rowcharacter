@@ -1,0 +1,35 @@
+{
+  "id": "thalven",
+  "name": "Thalven",
+  "race_id": "human",
+  "description": "Masters of the seas, Thalven humans are bold seafarers, shipwrights, and conquerors. Their society prizes cunning and ambition, thriving on trade and exploration. Thalven often see themselves as natural leaders.",
+  
+  "region": "Sunforge Coast",
+  
+  "ability_modifiers": {
+    "Might": 1
+  },
+  
+  "languages": [],
+  "language_choices": {
+    "count": 1,
+    "options": ["Aquan", "Orcish"]
+  },
+  
+  "features": [
+    {
+      "name": "Waveborn",
+      "description": "You gain a swimming speed equal to your walking speed. You are proficient with water vehicles."
+    }
+  ],
+  
+  "skill_proficiencies": [],
+  "skill_bonuses": {},
+  
+  "reputation_modifier": {
+    "region": "Sunforge Coast",
+    "value": 1
+  },
+  
+  "personality": "Adventurous, pragmatic, proud."
+}

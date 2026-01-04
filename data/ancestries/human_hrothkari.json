@@ -1,0 +1,35 @@
+{
+  "id": "hrothkari",
+  "name": "Hrothkari",
+  "race_id": "human",
+  "description": "Born across the frozen expanses of the far-northern Hrothkar Ice Plains, the Hrothkari are renowned for their unmatched resilience. Their nomadic clans survive in conditions that would kill most others.",
+  
+  "region": "Hrothkar Ice Plains",
+  
+  "ability_modifiers": {
+    "Endurance": 1
+  },
+  
+  "languages": [],
+  "language_choices": {
+    "count": 1,
+    "options": ["Dwarvish", "Orcish"]
+  },
+  
+  "features": [
+    {
+      "name": "Winterborn",
+      "description": "You have resistance to non-magical cold damage. You are proficient in Survival checks and have advantage on Survival checks."
+    }
+  ],
+  
+  "skill_proficiencies": ["Survival"],
+  "skill_bonuses": {},
+  
+  "reputation_modifier": {
+    "region": "Hrothkar Ice Plains",
+    "value": 1
+  },
+  
+  "personality": "Stoic, proud, deeply loyal."
+}

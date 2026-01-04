@@ -1,0 +1,35 @@
+{
+  "id": "ironhills",
+  "name": "Ironhills",
+  "race_id": "dwarf",
+  "description": "Harsh, proud dwarves whose ancestors carved citadels beneath the Iron Mountains. They see their lineage as unmatched.",
+  
+  "region": "Northern Iron Mountains",
+  
+  "ability_modifiers": {
+    "Intellect": 1
+  },
+  
+  "languages": [],
+  "language_choices": {
+    "count": 1,
+    "options": ["Orcish", "Goblin"]
+  },
+  
+  "features": [
+    {
+      "name": "Mountain Resolve",
+      "description": "You have resistance to non-magical cold damage. You are proficient in Survival checks and have advantage on Survival checks."
+    }
+  ],
+  
+  "skill_proficiencies": ["Survival"],
+  "skill_bonuses": {},
+  
+  "reputation_modifier": {
+    "region": "Iron Mountains",
+    "value": 1
+  },
+  
+  "personality": "Stoic, demanding, intense."
+}

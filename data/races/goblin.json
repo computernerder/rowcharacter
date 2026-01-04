@@ -1,0 +1,33 @@
+{
+  "id": "goblin",
+  "name": "Goblin",
+  "description": "Clever, adaptive, and often underestimated, goblins thrive through cunning and creativity. Whether in bustling cities or wild outlaw camps, goblins bring a unique spark to every corner of the Realm.",
+  
+  "creature_type": "Humanoid (Goblin)",
+  "size": "Small",
+  "speed": 30,
+  
+  "languages": ["Common", "Goblin"],
+  "bonus_language_choices": 0,
+  
+  "darkvision": 60,
+  
+  "ability_modifiers": {
+    "Agility": 1
+  },
+  
+  "skill_proficiencies": [],
+  
+  "features": [
+    {
+      "name": "Darkvision",
+      "description": "You can see in dim light within 60 feet as if it were bright light, and in darkness as if it were dim light."
+    },
+    {
+      "name": "Nimble Escape",
+      "description": "You can take the Disengage or Hide action as a bonus action."
+    }
+  ],
+  
+  "ancestries": ["mirekin", "citykin", "ruinborn"]
+}

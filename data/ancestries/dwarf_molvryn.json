@@ -1,0 +1,32 @@
+{
+  "id": "molvryn",
+  "name": "Molvryn",
+  "race_id": "dwarf",
+  "description": "Secretive dwarves who live around rune-carved caverns where ancient magic still hums.",
+  
+  "region": "Molvryn Deep Warrens",
+  
+  "ability_modifiers": {
+    "Wisdom": 1
+  },
+  
+  "languages": ["Ancient Dwarvish"],
+  "language_choices": null,
+  
+  "features": [
+    {
+      "name": "Rune Sense",
+      "description": "You have advantage on checks involving magical inscriptions or runes."
+    }
+  ],
+  
+  "skill_proficiencies": [],
+  "skill_bonuses": {},
+  
+  "reputation_modifier": {
+    "region": "Molvryn Deep Warrens",
+    "value": 1
+  },
+  
+  "personality": "Quiet, thoughtful, enigmatic."
+}
