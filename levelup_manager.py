@@ -31,6 +31,7 @@ from pathlib import Path
 
 from template_model import CharacterTemplate, load_character_template, dump_character_template
 from core import Path as CharacterPath, load_all_paths
+from validation import CharacterValidator, ValidationResult
 
 
 # XP thresholds for each level (cumulative XP needed)
@@ -169,24 +170,28 @@ class LevelUpManager:
         Args:
             data_dir: Path to the data directory containing paths, talents, etc.
         """
-        self.data_dir = data_dir
+        self.data_path = Path(data_dir)
+        self.data_dir = str(self.data_path)
         self.character: Optional[CharacterTemplate] = None
         self.character_data: Optional[Dict[str, Any]] = None
         self.paths: Dict[str, CharacterPath] = {}
         self.general_talents: List[Dict[str, Any]] = []
+        self.validator = CharacterValidator(data_dir=self.data_dir)
+        self.last_validation: Optional[ValidationResult] = None
         
         self._load_game_data()
     
     def _load_game_data(self):
         """Load paths and talents from data files."""
+        data_path = self.data_path
         try:
-            self.paths = load_all_paths(f"{self.data_dir}/paths")
+            self.paths = load_all_paths(str(data_path / "paths"))
         except Exception as e:
             print(f"Warning: Could not load paths: {e}")
             self.paths = {}
         
         # Load general talents if available
-        talents_file = Path(self.data_dir) / "talents" / "general.json"
+        talents_file = data_path / "talents" / "general.json"
         if talents_file.exists():
             with open(talents_file, "r", encoding="utf-8") as f:
                 self.general_talents = json.load(f)
@@ -427,6 +432,67 @@ class LevelUpManager:
             spellcrafting_points=sp_gain,
             casting_points_increase=cp_gain,
         )
+
+    def _validate_level_up_inputs(
+        self,
+        options: LevelUpOptions,
+        talent_choices: List[TalentChoice],
+        advancement_choices: List[AdvancementChoice],
+        ability_increase: Optional[Dict[str, int]],
+    ) -> ValidationResult:
+        """Validate choices for a pending level up."""
+        ability_payload = ability_increase or {}
+        talent_payload = []
+        advancement_payload = []
+
+        current_talents = options.current_talents or {}
+        for choice in talent_choices:
+            current_rank = current_talents.get(choice.talent_name, 0)
+            talent_payload.append({
+                "talent_id": choice.talent_id,
+                "new_rank": choice.new_rank,
+                "current_rank": current_rank,
+                "points_spent": choice.points_spent,
+                "path_id": choice.path_id,
+            })
+
+        for choice in advancement_choices:
+            advancement_payload.append({
+                "choice_type": choice.choice_type,
+                "target": choice.target,
+                "points_spent": choice.points_spent,
+            })
+
+        result = self.validator.validate_level_up(
+            current_level=options.current_level,
+            target_level=options.new_level,
+            talent_choices=talent_payload,
+            advancement_choices=advancement_payload,
+            ability_increase=None,
+            available_tp=options.talent_points,
+            available_ap=options.advancement_points,
+        )
+
+        # Ensure ability increases are handled even when empty
+        result.merge(self.validator.validate_ability_increase(
+            ability_payload, options.new_level
+        ))
+
+        trained_skills = set(self.get_trained_skills())
+        known_languages = set(self.character.languages if self.character else [])
+        known_proficiencies = set(self.character.proficiencies if self.character else [])
+
+        for choice in advancement_choices:
+            result.merge(self.validator.validate_advancement_choice(
+                choice.choice_type,
+                choice.target,
+                choice.points_spent,
+                trained_skills=trained_skills,
+                known_languages=known_languages,
+                known_proficiencies=known_proficiencies,
+            ))
+
+        return result
     
     def level_up(self, 
                  talent_choices: List[TalentChoice] = None,
@@ -449,6 +515,17 @@ class LevelUpManager:
             return False
         
         options = self.get_level_up_options()
+
+        talent_choices = talent_choices or []
+        advancement_choices = advancement_choices or []
+        self.last_validation = self._validate_level_up_inputs(
+            options,
+            talent_choices,
+            advancement_choices,
+            ability_increase,
+        )
+        if not self.last_validation.valid:
+            return False
         
         # Increment level
         self.character.level = options.new_level

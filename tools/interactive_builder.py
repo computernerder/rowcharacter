@@ -9,10 +9,36 @@ import json
 import os
 import textwrap
 import random
-from typing import List, Optional, Set
+from pathlib import Path
+from typing import Dict, List, Optional, Set
+import sys
+
+# Make project root importable when running from tools/
+ROOT_DIR = Path(__file__).resolve().parent.parent
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
 
 from character_builder import CharacterBuilder, BuilderStep, PendingChoice
 from template_model import dump_character_template
+from validation import CharacterValidator
+
+VALIDATOR = CharacterValidator(data_dir=str(ROOT_DIR / "data"))
+
+
+def _validate_scores(scores: Dict[str, int], method: str) -> bool:
+    """Validate ability scores using CharacterValidator."""
+    result = VALIDATOR.validate_ability_scores(scores, method=method)
+    if not result.valid:
+        print("\n  ✗ Ability scores are invalid:")
+        for err in result.errors:
+            print(f"    - {err}")
+        input("\n  Press Enter to adjust...")
+        return False
+    if result.warnings:
+        print("\n  ⚠ Ability score warnings:")
+        for warn in result.warnings:
+            print(f"    - {warn}")
+    return True
 
 
 def clear_screen():
@@ -296,6 +322,8 @@ def step_ability_scores(builder: CharacterBuilder) -> bool:
             
             if choice == "7":
                 if points_remaining >= 0:
+                    if not _validate_scores(scores, "point_draw"):
+                        continue
                     builder.set_ability_scores(scores)
                     show_path_availability(builder)
                     return True
@@ -355,6 +383,8 @@ def step_ability_scores(builder: CharacterBuilder) -> bool:
                 except ValueError:
                     print(f"    Enter a number from: {remaining}")
         
+        if not _validate_scores(scores, "standard_array"):
+            return False
         builder.set_ability_scores(scores)
         show_path_availability(builder)
         return True
@@ -393,20 +423,25 @@ def step_ability_scores(builder: CharacterBuilder) -> bool:
                 except ValueError:
                     print(f"    Enter a number from: {remaining}")
         
+        if not _validate_scores(scores, "roll"):
+            return False
         builder.set_ability_scores(scores)
         show_path_availability(builder)
         return True
     
     elif method == "4":
         # Quick test - all 12s
-        builder.set_ability_scores({
+        scores = {
             "Might": 12,
             "Agility": 12,
             "Endurance": 12,
             "Intellect": 12,
             "Wisdom": 12,
             "Charisma": 12,
-        })
+        }
+        if not _validate_scores(scores, "quick_test"):
+            return False
+        builder.set_ability_scores(scores)
         print("\n  Set all abilities to 12")
         show_path_availability(builder)
         return True
@@ -738,6 +773,26 @@ def finalize_character(builder: CharacterBuilder):
     print(f"  Passive Insight: {char.passive_insight.total}")
     print(f"  Melee Attack: {char.attack_mods_melee.total:+d}")
     print(f"  Ranged Attack: {char.attack_mods_ranged.total:+d}")
+
+    # Validate final character before export
+    character_dict = dump_character_template(char)
+    validation = VALIDATOR.validate_character(character_dict)
+    if not validation.valid:
+        print("\n  ✗ Character validation failed:")
+        for err in validation.errors:
+            print(f"    - {err}")
+        if validation.warnings:
+            print("\n  ⚠ Warnings:")
+            for warn in validation.warnings:
+                print(f"    - {warn}")
+        confirm = input("\n  Save anyway? (y/N) > ").strip().lower()
+        if confirm != "y":
+            input("\n  Press Enter to return...")
+            return
+    elif validation.warnings:
+        print("\n  ⚠ Warnings:")
+        for warn in validation.warnings:
+            print(f"    - {warn}")
     
     # Export options
     print_subheader("Export")
@@ -764,14 +819,12 @@ def finalize_character(builder: CharacterBuilder):
         if not filename.endswith(".json"):
             filename += ".json"
         
-        output = dump_character_template(char)
         with open(filename, "w", encoding="utf-8") as f:
-            json.dump(output, f, indent=2)
+            json.dump(character_dict, f, indent=2)
         print(f"\n  ✓ Saved to {filename}")
     
     elif export == "2":
-        output = dump_character_template(char)
-        print("\n" + json.dumps(output, indent=2))
+        print("\n" + json.dumps(character_dict, indent=2))
     
     input("\n  Press Enter to exit...")
 
@@ -790,7 +843,7 @@ def main():
     
     print("\n  Loading game data...")
     try:
-        builder.load_game_data("data")
+        builder.load_game_data(str(ROOT_DIR / "data"))
         print(f"  ✓ Loaded {len(builder.races)} races, {len(builder.ancestries)} ancestries")
         print(f"  ✓ Loaded {len(builder.professions)} professions, {len(builder.paths)} paths")
         print(f"  ✓ Loaded {len(builder.backgrounds)} backgrounds")

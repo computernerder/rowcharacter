@@ -1,12 +1,16 @@
 """
 Test script for ROW character creation system.
 
-Run from the FightingSystem directory:
-    python test_core.py
+Run from the project root (or via python -m tests.test_core).
 """
 
 import json
 from pathlib import Path
+import sys
+
+ROOT_DIR = Path(__file__).resolve().parent.parent
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
 
 # Test 1: Import core modules
 print("=" * 60)
@@ -30,7 +34,7 @@ print("\n" + "=" * 60)
 print("TEST 2: Loading JSON data files...")
 print("=" * 60)
 
-data_dir = Path("data")
+data_dir = ROOT_DIR / "data"
 
 try:
     races = load_all_races(str(data_dir / "races"))
@@ -258,11 +262,11 @@ try:
     
     output = dump_character_template(char)
     
-    # Write to file
-    with open("test_output.json", "w", encoding="utf-8") as f:
+    output_path = Path(__file__).resolve().parent / "test_output.json"
+    with open(output_path, "w", encoding="utf-8") as f:
         json.dump(output, f, indent=2)
     
-    print("✓ Wrote test_output.json")
+    print(f"✓ Wrote {output_path}")
     print(f"  Character: {output.get('character_name')}")
     print(f"  Speed: {output.get('speed')}")
     print(f"  Languages: {output.get('languages')}")

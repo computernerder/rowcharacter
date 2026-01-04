@@ -138,30 +138,15 @@ class Player:
 
 
     def create_skills(self):
-        def _normalize_attr_key(attr) -> str:
-            return attr.value if isinstance(attr, Enum) else attr
-
         self.skills = {}         # skill name -> [attr_mod, rank, misc]
         self.skill_totals = {}   # skill name -> total bonus
 
         for skill in Skill:
-            attr = SKILL_ATTRIBUTE.get(skill, SKILL_ATTRIBUTE.get(skill.value))
-            if attr is None:
-                raise KeyError(f"Missing SKILL_ATTRIBUTE mapping for {skill!r}")
-
-            attr_key = _normalize_attr_key(attr)
-            attr_mod = self.return_attribute_modifier(self.attributes[attr_key])
-
-            self.skills[skill.value] = [attr_mod, 0, 0]  # [attr_mod, rank, misc]
+            attr_mod = self.return_attribute_modifier(
+                self.attributes[skill.attribute.value]
+            )
+            self.skills[skill.value] = [attr_mod, 0, 0]
             self.skill_totals[skill.value] = sum(self.skills[skill.value])
-
-        
-        # print("Skills (formatted):")
-        # from pprint import pprint
-        # pprint(self.skills, sort_dicts=False, width=120)
-
-        # print("Skill totals (formatted):")
-        # pprint(self.skill_totals, sort_dicts=False, width=120)
 
         for skill_name in self.skills.keys():
                 print(f'Skill: {skill_name}, Total Bonus: {self.skill_totals[skill_name]}')

@@ -11,7 +11,13 @@ import json
 import sys
 import os
 import random
+from pathlib import Path
 from typing import List, Optional, Dict, Any
+
+# Make project root importable when running from tools/
+ROOT_DIR = Path(__file__).resolve().parent.parent
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
 
 from levelup_manager import (
     LevelUpManager, 
@@ -387,7 +393,8 @@ def do_level_up(manager: LevelUpManager, target_level: int = None):
         ability_increase=ability_increase,
         hp_roll=hp_roll,
     )
-    
+    validation = getattr(manager, "last_validation", None)
+
     if success:
         print(f"\n  ✓ Advanced to Level {options.new_level}!")
         if ability_increase:
@@ -400,8 +407,21 @@ def do_level_up(manager: LevelUpManager, target_level: int = None):
             for ac in advancement_choices:
                 print(f"    {ac.choice_type}: {ac.target}")
         print(f"    HP: {manager.character.health.max}")
+        if validation and validation.warnings:
+            print("\n  ⚠ Warnings:")
+            for warn in validation.warnings:
+                print(f"    - {warn}")
     else:
         print("\n  ✗ Level up failed!")
+        if validation:
+            if validation.errors:
+                print("\n  Errors:")
+                for err in validation.errors:
+                    print(f"    - {err}")
+            if validation.warnings:
+                print("\n  Warnings:")
+                for warn in validation.warnings:
+                    print(f"    - {warn}")
     
     return success
 
@@ -459,7 +479,7 @@ def main():
         return
     
     # Create manager and load character
-    manager = LevelUpManager()
+    manager = LevelUpManager(data_dir=str(ROOT_DIR / "data"))
     
     print(f"\n  Loading {filepath}...")
     if not manager.load_character(filepath):
@@ -480,7 +500,7 @@ def main():
         print("  4. Save character")
         print("  5. Save and exit")
         print("  0. Exit without saving")
-        
+
         choice = input("\n  > ").strip()
         
         if choice == "0":

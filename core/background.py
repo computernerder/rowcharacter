@@ -1,236 +1,207 @@
 """
-Background dataclass - represents background traits loaded from JSON.
+Background class for Realm of Warriors character creation.
 
 Backgrounds provide:
-- Skill proficiencies
-- Languages granted (count to choose)
-- Tool proficiencies (if any)
-- Equipment
-- Feature (narrative ability)
+- Skill proficiencies (2 skills)
+- Languages (0-2 choices)
+- Tool proficiencies (0-1)
+- Starting equipment
+- Background feature
 - Personality tables (traits, ideals, bonds, flaws)
-- Morality/reputation modifiers from personality choices
 """
 
 from dataclasses import dataclass, field
-from typing import Dict, List, Any, Optional, TYPE_CHECKING
+from typing import Dict, List, Any, Optional
 import json
 from pathlib import Path
-
-from .common import Feature
-
-if TYPE_CHECKING:
-    from template_model import CharacterTemplate
 
 
 @dataclass
 class PersonalityEntry:
-    """A single entry in a personality table."""
-    roll: int  # d8 for traits, d6 for ideals/bonds/flaws
+    """A single entry in a personality table (ideal, bond, flaw, trait)."""
+    roll: int
     text: str
-    morality: int = 0
-    reputation: int = 0
-
-    @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> "PersonalityEntry":
-        return cls(
-            roll=data.get("roll", 1),
-            text=data.get("text", ""),
-            morality=data.get("morality", 0),
-            reputation=data.get("reputation", 0),
-        )
-
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "roll": self.roll,
-            "text": self.text,
-            "morality": self.morality,
-            "reputation": self.reputation,
-        }
+    morality: int = 0       # -1 to +1
+    reputation: int = 0     # -2 to +2
 
 
 @dataclass
 class PersonalityTables:
-    """Personality tables for a background."""
-    traits: List[PersonalityEntry] = field(default_factory=list)  # d8
-    ideals: List[PersonalityEntry] = field(default_factory=list)  # d6
-    bonds: List[PersonalityEntry] = field(default_factory=list)   # d6
-    flaws: List[PersonalityEntry] = field(default_factory=list)   # d6
-
+    """Complete personality tables for a background."""
+    traits: List[PersonalityEntry] = field(default_factory=list)
+    ideals: List[PersonalityEntry] = field(default_factory=list)
+    bonds: List[PersonalityEntry] = field(default_factory=list)
+    flaws: List[PersonalityEntry] = field(default_factory=list)
+    
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "PersonalityTables":
+        """Create from dictionary."""
+        def parse_entries(entries: List[Dict]) -> List[PersonalityEntry]:
+            result = []
+            for e in entries:
+                result.append(PersonalityEntry(
+                    roll=e.get("roll", 0),
+                    text=e.get("text", ""),
+                    morality=e.get("morality", 0),
+                    reputation=e.get("reputation", 0),
+                ))
+            return result
+        
         return cls(
-            traits=[PersonalityEntry.from_dict(e) for e in data.get("traits", [])],
-            ideals=[PersonalityEntry.from_dict(e) for e in data.get("ideals", [])],
-            bonds=[PersonalityEntry.from_dict(e) for e in data.get("bonds", [])],
-            flaws=[PersonalityEntry.from_dict(e) for e in data.get("flaws", [])],
+            traits=parse_entries(data.get("traits", [])),
+            ideals=parse_entries(data.get("ideals", [])),
+            bonds=parse_entries(data.get("bonds", [])),
+            flaws=parse_entries(data.get("flaws", [])),
         )
 
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "traits": [e.to_dict() for e in self.traits],
-            "ideals": [e.to_dict() for e in self.ideals],
-            "bonds": [e.to_dict() for e in self.bonds],
-            "flaws": [e.to_dict() for e in self.flaws],
-        }
+
+@dataclass
+class BackgroundFeature:
+    """A special feature granted by a background."""
+    name: str
+    description: str
 
 
 @dataclass
 class Background:
-    """A background loaded from JSON data."""
+    """
+    Represents a character background.
     
+    Backgrounds provide roleplay hooks, skills, and starting equipment.
+    """
     id: str
     name: str
-    description: str = ""
+    description: str
     
-    # Skill proficiencies granted
+    # Proficiencies
     skill_proficiencies: List[str] = field(default_factory=list)
-    
-    # Languages granted (count to choose)
-    languages_granted: int = 0
-    
-    # Tool proficiencies
     tool_proficiencies: List[str] = field(default_factory=list)
+    
+    # Languages
+    languages_granted: int = 0  # Number of languages to choose
     
     # Equipment
     equipment: List[str] = field(default_factory=list)
     
-    # Feature (narrative ability)
-    feature: Optional[Feature] = None
+    # Feature
+    feature: Optional[BackgroundFeature] = None
     
-    # Personality tables
+    # Personality
     personality_tables: Optional[PersonalityTables] = None
-
+    
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "Background":
-        feature_data = data.get("feature")
-        feature = Feature.from_dict(feature_data) if feature_data else None
+        """Create a Background from a dictionary (loaded from JSON)."""
+        feature = None
+        if "feature" in data and data["feature"]:
+            feature = BackgroundFeature(
+                name=data["feature"].get("name", ""),
+                description=data["feature"].get("description", ""),
+            )
         
-        tables_data = data.get("personality_tables")
-        tables = PersonalityTables.from_dict(tables_data) if tables_data else None
+        personality = None
+        if "personality_tables" in data:
+            personality = PersonalityTables.from_dict(data["personality_tables"])
         
         return cls(
             id=data.get("id", ""),
             name=data.get("name", ""),
             description=data.get("description", ""),
             skill_proficiencies=data.get("skill_proficiencies", []),
-            languages_granted=data.get("languages_granted", 0),
             tool_proficiencies=data.get("tool_proficiencies", []),
+            languages_granted=data.get("languages_granted", 0),
             equipment=data.get("equipment", []),
             feature=feature,
-            personality_tables=tables,
+            personality_tables=personality,
         )
-
+    
     def to_dict(self) -> Dict[str, Any]:
+        """Convert to dictionary for JSON serialization."""
         result = {
             "id": self.id,
             "name": self.name,
             "description": self.description,
             "skill_proficiencies": self.skill_proficiencies,
-            "languages_granted": self.languages_granted,
             "tool_proficiencies": self.tool_proficiencies,
+            "languages_granted": self.languages_granted,
             "equipment": self.equipment,
         }
-        if self.feature:
-            result["feature"] = self.feature.to_dict()
-        if self.personality_tables:
-            result["personality_tables"] = self.personality_tables.to_dict()
-        return result
-
-    def apply(self, character: "CharacterTemplate", chosen_languages: List[str] = None,
-              chosen_trait: PersonalityEntry = None,
-              chosen_ideal: PersonalityEntry = None,
-              chosen_bond: PersonalityEntry = None,
-              chosen_flaw: PersonalityEntry = None) -> None:
-        """
-        Apply background traits to a character object.
         
-        Args:
-            character: The CharacterTemplate to modify
-            chosen_languages: Languages chosen by the user
-            chosen_trait/ideal/bond/flaw: Personality choices
+        if self.feature:
+            result["feature"] = {
+                "name": self.feature.name,
+                "description": self.feature.description,
+            }
+        
+        if self.personality_tables:
+            result["personality_tables"] = {
+                "traits": [{"roll": e.roll, "text": e.text} for e in self.personality_tables.traits],
+                "ideals": [{"roll": e.roll, "text": e.text, "morality": e.morality, "reputation": e.reputation} for e in self.personality_tables.ideals],
+                "bonds": [{"roll": e.roll, "text": e.text, "morality": e.morality, "reputation": e.reputation} for e in self.personality_tables.bonds],
+                "flaws": [{"roll": e.roll, "text": e.text, "morality": e.morality, "reputation": e.reputation} for e in self.personality_tables.flaws],
+            }
+        
+        return result
+    
+    def apply(self, character: Any) -> List[Dict[str, Any]]:
         """
-        # Add skill proficiencies
+        Apply this background to a character.
+        
+        Returns list of pending choices (e.g., language selection).
+        """
+        pending = []
+        
+        # Apply skill proficiencies
         for skill in self.skill_proficiencies:
             if skill in character.skills:
-                character.skills[skill].trained = True
-                if character.skills[skill].rank == 0:
+                if not character.skills[skill].trained:
+                    character.skills[skill].trained = True
                     character.skills[skill].rank = 1
         
-        # Add chosen languages
-        if chosen_languages:
-            for lang in chosen_languages:
-                if lang not in character.languages:
-                    character.languages.append(lang)
+        # Apply tool proficiencies
+        for tool in self.tool_proficiencies:
+            if tool not in character.proficiencies:
+                character.proficiencies.append(tool)
         
-        # Add tool proficiencies
-        for prof in self.tool_proficiencies:
-            if prof not in character.proficiencies:
-                character.proficiencies.append(prof)
-        
-        # Add equipment to inventory
-        for item in self.equipment:
-            character.inventory.items.append(item)
-        
-        # Add feature
+        # Apply feature
         if self.feature:
             character.features.append({
                 "name": self.feature.name,
                 "text": self.feature.description,
+                "source": f"Background: {self.name}",
             })
         
-        # Apply personality choices
-        morality_total = 0
-        reputation_total = 0
+        # Queue language choices
+        if self.languages_granted > 0:
+            pending.append({
+                "type": "language",
+                "count": self.languages_granted,
+                "source": f"Background: {self.name}",
+            })
         
-        if chosen_trait:
-            character.personality.traits = chosen_trait.text
-            morality_total += chosen_trait.morality
-            reputation_total += chosen_trait.reputation
-        
-        if chosen_ideal:
-            character.personality.ideal = chosen_ideal.text
-            morality_total += chosen_ideal.morality
-            reputation_total += chosen_ideal.reputation
-        
-        if chosen_bond:
-            character.personality.bond = chosen_bond.text
-            morality_total += chosen_bond.morality
-            reputation_total += chosen_bond.reputation
-        
-        if chosen_flaw:
-            character.personality.flaw = chosen_flaw.text
-            morality_total += chosen_flaw.morality
-            reputation_total += chosen_flaw.reputation
-        
-        # Update alignment/reputation scores
-        character.alignment.mod += morality_total
-        character.reputation.mod += reputation_total
-
-    def calculate_morality(self, ideal: PersonalityEntry, 
-                          bond: PersonalityEntry, 
-                          flaw: PersonalityEntry) -> int:
-        """Calculate total morality score from personality choices."""
-        return ideal.morality + bond.morality + flaw.morality
-
-    def calculate_reputation(self, ideal: PersonalityEntry,
-                            bond: PersonalityEntry,
-                            flaw: PersonalityEntry) -> int:
-        """Calculate total reputation modifier from personality choices."""
-        return ideal.reputation + bond.reputation + flaw.reputation
+        return pending
 
 
 def load_background(filepath: str) -> Background:
     """Load a background from a JSON file."""
-    with open(filepath, 'r', encoding='utf-8') as f:
+    with open(filepath, "r", encoding="utf-8") as f:
         data = json.load(f)
     return Background.from_dict(data)
 
 
 def load_all_backgrounds(directory: str) -> Dict[str, Background]:
-    """Load all backgrounds from a directory of JSON files."""
+    """Load all backgrounds from a directory."""
     backgrounds = {}
-    path = Path(directory)
-    for file in path.glob("*.json"):
-        background = load_background(str(file))
-        backgrounds[background.id] = background
+    dir_path = Path(directory)
+    
+    if not dir_path.exists():
+        return backgrounds
+    
+    for filepath in dir_path.glob("*.json"):
+        try:
+            bg = load_background(str(filepath))
+            backgrounds[bg.id] = bg
+        except Exception as e:
+            print(f"Error loading {filepath}: {e}")
+    
     return backgrounds

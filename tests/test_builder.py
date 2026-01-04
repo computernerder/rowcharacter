@@ -1,11 +1,16 @@
 """
 Test script for the CharacterBuilder.
 
-Run from the FightingSystem directory:
-    python test_builder.py
+Run from the project root (or via python -m tests.test_builder).
 """
 
 import json
+from pathlib import Path
+import sys
+
+ROOT_DIR = Path(__file__).resolve().parent.parent
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
 
 print("=" * 60)
 print("CHARACTER BUILDER TEST")
@@ -163,10 +168,12 @@ for f in character.features:
 # Export to JSON
 print("\n17. Exporting to JSON...")
 from template_model import dump_character_template
+
 output = dump_character_template(character)
-with open("test_built_character.json", "w", encoding="utf-8") as f:
+output_path = Path(__file__).resolve().parent / "test_built_character.json"
+with open(output_path, "w", encoding="utf-8") as f:
     json.dump(output, f, indent=2)
-print("   Wrote test_built_character.json")
+print(f"   Wrote {output_path}")
 
 print("\n" + "=" * 60)
 print("ALL TESTS COMPLETE")

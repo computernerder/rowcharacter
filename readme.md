@@ -4,6 +4,33 @@
 
 This document describes the character creation process for Realm of Warriors (RoW) v2.0.1, structured for programmatic implementation.
 
+### Tooling Updates (2026-01-03)
+- `template_model.py` now maps JSON to a single `CharacterTemplate` root with nested dataclasses; it auto-uses `ROW_constants` enums when possible and round-trips to the same JSON shape.
+- `interactive_builder.py` now shows which Paths are unlocked immediately after setting ability scores (primary needs 15+ in primary stat and 13+ in a secondary); default export filename is `name_player.json` when saving.
+- `interactive_levelup.py` lists available character `.json` files from the current working directory and the script directory; you can pick by number or type a path.
+- CLIs now validate ability scores and final characters with `CharacterValidator`, enforce level-up prerequisites, and load data relative to the project root (`data/`).
+
+### Project Layout (2026-01-03)
+- `assets/`: HTML/CSS templates and `charactertemplate.json` samples
+- `tools/`: CLIs (`interactive_builder.py`, `interactive_levelup.py`, `pdf_generator.py`)
+- `tests/`: Python tests plus their JSON artifacts
+- `exports/`: Generated PDFs (e.g., `blank_sheet.pdf`, `character_sheet.pdf`)
+- `characters/`: Saved character sheets
+- `data/`: Game data JSON (races, ancestries, paths, etc.)
+- `core/`: Core domain models and loaders
+- `docs/`: Planning notes (`plans.md`)
+- Run the CLIs from the project root: `python tools/interactive_builder.py` or `python tools/interactive_levelup.py`
+
+### Product Features (what ships in this repo)
+- Interactive Builder CLI (`tools/interactive_builder.py`): guided character creation with race, ancestry, profession, path, background, pending choice resolution, and integrated validation of ability scores and the finished character.
+- Interactive Level Up CLI (`tools/interactive_levelup.py`): loads an existing character JSON, walks through level-up options, validates talent/AP spend and ability bumps, and reports warnings before applying changes.
+- PDF Generator (`tools/pdf_generator.py`): renders HTML templates from `assets/` (blank sheet and character sheet) into PDFs saved under `exports/`.
+- Validation layer (`validation.py`): `CharacterValidator` checks ability score methods, race/path IDs, talent ranks, advancement spends, and full character JSONs; CLIs call this automatically.
+- Core models (`core/`): domain objects and loaders for races, ancestries, professions, paths, backgrounds, and talents sourced from `data/`.
+- Data packs (`data/`): JSON definitions for game content; add or adjust records here to extend the system.
+- Tests (`tests/`): regression coverage for builder/core/player flows; run with `python -m pytest tests` from the project root.
+- Assets (`assets/`): HTML/CSS and example templates for PDF output and UI shaping; customize to change sheet look and feel.
+
 ---
 
 ## Character Creation Steps (in order)
