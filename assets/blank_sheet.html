@@ -25,10 +25,6 @@
                     <div class="character-name-value"></div>
                 </div>
             </div>
-
-            <div class="qr-box">
-                <img src="images/qrcode.png" alt="QR Code" onerror="this.style.display='none';this.parentElement.style.backgroundColor='blue'">
-            </div>
         </div>
         
         <div class="info-inner">
@@ -716,10 +712,13 @@
 
     <!-- Sticky Notes across both columns -->
     <div class="notes-sticky">
-        <div class="notes-inner">
-            <div class="section">
+        <div class="notes-inner notes-with-qr">
+            <div class="section notes-main">
                 <div class="section-title">Notes</div>
                 <div class="text-area" style="min-height:120px"></div>
+            </div>
+            <div class="qr-box qr-notes">
+                <img src="images/qrcode.png" alt="QR Code" onerror="this.style.display='none';this.parentElement.style.backgroundColor='blue'">
             </div>
         </div>
     </div>

@@ -22,9 +22,15 @@ Usage:
 """
 
 from pathlib import Path
-from typing import Union
+from typing import Optional, Union
 import sys
+import json
 from jinja2 import Environment, FileSystemLoader, BaseLoader
+
+try:
+    from playwright.sync_api import sync_playwright
+except ImportError:  # pragma: no cover
+    sync_playwright = None
 
 # Make project root importable when running from tools/
 ROOT_DIR = Path(__file__).resolve().parent.parent
@@ -468,6 +474,63 @@ class CharacterSheetPDF:
         """Save the rendered HTML to a file (useful for debugging)."""
         html_content = self.render_html(character_data)
         Path(output_path).write_text(html_content)
+
+
+# === Shared JS-driven sheet ===
+class SharedSheetPDF:
+    """Render the shared rowcharactersheet template with Playwright."""
+
+    def __init__(self, sheet_root: Union[str, Path, None] = None):
+        self.sheet_root = Path(sheet_root) if sheet_root else ROOT_DIR / "external" / "rowcharactersheet"
+        self.template_path = self.sheet_root / "standalone.html"
+
+    def _ensure_playwright(self) -> None:
+        if sync_playwright is None:  # pragma: no cover - optional dependency
+            raise ImportError(
+                "Playwright is required for SharedSheetPDF. Install with `pip install playwright` "
+                "and run `playwright install chromium`."
+            )
+
+    def _assert_template(self) -> None:
+        if not self.template_path.exists():
+            raise FileNotFoundError(f"Shared sheet template not found at {self.template_path}")
+
+    def _build_init_script(self, sheet_data: dict, fallback_data: Optional[dict]) -> str:
+        data_json = json.dumps(sheet_data or {}, ensure_ascii=False)
+        fallback_json = json.dumps(fallback_data or {}, ensure_ascii=False)
+        return f"window.sheetData = {data_json}; window.sheetFallback = {fallback_json};"
+
+    def generate(
+        self,
+        sheet_data: dict,
+        fallback_data: Optional[dict] = None,
+        pdf_path: Union[str, Path, None] = None,
+        wait_ms: int = 200,
+    ) -> bytes:
+        """Generate the shared sheet PDF using Playwright and return PDF bytes."""
+        self._ensure_playwright()
+        self._assert_template()
+
+        with sync_playwright() as p:  # type: ignore[call-arg]
+            browser = p.chromium.launch(args=["--no-sandbox"], headless=True)
+            try:
+                context = browser.new_context()
+                page = context.new_page()
+                page.add_init_script(self._build_init_script(sheet_data, fallback_data))
+                page.goto(self.template_path.as_uri())
+                page.wait_for_load_state("networkidle")
+                if wait_ms:
+                    page.wait_for_timeout(wait_ms)
+                pdf_bytes = page.pdf(format="Letter", print_background=True)
+                if pdf_path:
+                    Path(pdf_path).write_bytes(pdf_bytes)
+                return pdf_bytes
+            finally:
+                browser.close()
+
+    def generate_to_file(self, sheet_data: dict, output_path: Union[str, Path], fallback_data: Optional[dict] = None) -> None:
+        """Generate and write the PDF to disk."""
+        self.generate(sheet_data, fallback_data=fallback_data, pdf_path=output_path)
 
 
 # === EXAMPLE DATA STRUCTURE ===
