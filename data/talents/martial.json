@@ -1,0 +1,112 @@
+{
+  "category": "path",
+  "path_id": "martial",
+  "path_name": "Martial",
+  "description": "For those who master motion itself, striking with purpose, balance, and perfect control.",
+  
+  "talents": [
+    {
+      "id": "martial_arts",
+      "name": "Martial Arts",
+      "max_rank": 10,
+      "is_primary": true,
+      "prerequisites": {"Agility": 15},
+      "description": "Through discipline, endurance, and focus, you've turned your body into a living weapon. Each motion becomes a calculated flow of balance, precision, and intent.",
+      "ranks": {
+        "1": "While unarmored and unshielded, your Armor Points = Agility modifier + Martial Rank. You regain these points after a long rest.",
+        "2": "Your unarmed strike damage increases to 1d6 + Agility modifier. You may use Agility instead of Might for unarmed attacks.",
+        "3": "Gain +1 to Initiative and +1 to Defense while unarmored.",
+        "4": "Unarmed strike damage increases to 1d8 + Agility modifier. You may make two unarmed strikes as a single Attack action.",
+        "5": "As a Bonus Action, enter Flow State for 1 minute: +2 to all melee attacks and Agility saving throws. Costs 1 Martial Point (you have Martial Points = Agility modifier).",
+        "6": "Unarmed strike damage increases to 1d10 + Agility modifier. In Flow State, you may Disengage as part of your movement.",
+        "7": "Gain +2 Defense while in Flow State. Martial Points regenerate after a short rest.",
+        "8": "In Flow State, your movement doesn't provoke opportunity attacks.",
+        "9": "During Flow State, you may make an extra attack as a Reaction against an enemy that misses you with a melee attack.",
+        "10": "Unarmed strike damage increases to 1d12 + Agility modifier. While unarmored, gain +2 Defense Points and +10 ft movement speed. You may maintain Flow State indefinitely until you choose to end it."
+      }
+    },
+    {
+      "id": "balanced_stance",
+      "name": "Balanced Stance",
+      "max_rank": 3,
+      "prerequisites": {"Agility": 12},
+      "description": "You shift your weight with subtle precision, grounding each motion for stability and timing.",
+      "ranks": {
+        "1": "When you remain in the same space for your entire turn, gain +1 bonus to Defense until the start of your next turn.",
+        "2": "When an enemy misses you with a melee attack, you may shift 5 ft in any direction without provoking opportunity attacks.",
+        "3": "Defense bonus increases to +2. Once per short rest, when you would be knocked prone, you may remain standing."
+      }
+    },
+    {
+      "id": "defensive_stance",
+      "name": "Defensive Stance",
+      "max_rank": 3,
+      "prerequisites": {"Endurance": 13},
+      "description": "You anchor your movements with perfect posture, turning defense into momentum and control.",
+      "ranks": {
+        "1": "Gain +1 Defense Point while not wearing heavy armor or using a shield. Gain advantage on saving throws against being knocked prone or pushed. When a creature misses you with a melee attack, you may shift 5 ft.",
+        "2": "Once per short rest, when you take the Dodge action, also gain resistance to all damage until the start of your next turn.",
+        "3": "Defense bonus increases to +2. When you shift after being missed, you may make an unarmed strike as a Reaction."
+      }
+    },
+    {
+      "id": "quick_hands",
+      "name": "Quick Hands",
+      "max_rank": 3,
+      "prerequisites": {"Agility": 12},
+      "description": "You fight with fluid efficiency, turning reflex into motion and speed into precision.",
+      "ranks": {
+        "1": "Gain +2 bonus to Acrobatics and Sleight of Hand checks. You may draw or stow one weapon or item as part of any Action or Attack. Gain +1 to Melee Attack Bonus.",
+        "2": "You can interact with one additional object each turn for free. Gain +1 to Initiative.",
+        "3": "Once per turn, you may make a Sleight of Hand check to disarm an opponent as part of an Attack action."
+      }
+    },
+    {
+      "id": "terrain_flow",
+      "name": "Terrain Flow",
+      "max_rank": 3,
+      "prerequisites": {"Agility": 12, "Wisdom": 12, "prereq_type": "or"},
+      "description": "You read your surroundings instinctively, adapting your movement to shifting ground and obstacles.",
+      "ranks": {
+        "1": "Gain +2 on Survival, you are now trained.",
+        "2": "Difficult terrain caused by non-magical sources costs you no extra movement for 1 round after you Dash.",
+        "3": "Once per long rest, when you enter difficult terrain, treat it as normal terrain for 1 minute. Gain advantage on saving throws against environmental hazards."
+      }
+    },
+    {
+      "id": "unencumbered_thought",
+      "name": "Unencumbered Thought",
+      "max_rank": 3,
+      "prerequisites": {"Agility": 13},
+      "description": "By emptying your mind of distraction, you act with instinctive precision and react faster than conscious thought.",
+      "ranks": {
+        "1": "Gain advantage on Initiative rolls. You can't be surprised while conscious. Gain +1 bonus to Agility saving throws.",
+        "2": "Gain +1 to Defense and +1 to Agility saving throws. When you roll Initiative, you may move up to half your speed before combat begins.",
+        "3": "Once per short rest, take two Reactions in a single round. Gain immunity to the Frightened condition."
+      }
+    },
+    {
+      "id": "vertical_ascension",
+      "name": "Vertical Ascension",
+      "max_rank": 3,
+      "prerequisites": {"Agility": 15},
+      "description": "Your training allows you to defy gravity for brief moments, using momentum, balance, and precision to scale vertical surfaces with supernatural efficiency.",
+      "ranks": {
+        "1": "You may move up vertical surfaces for up to 10 feet as part of your movement, but must end your turn on solid ground or fall.",
+        "2": "When you Dash, you may run along walls or ceilings for your full movement, ending on solid ground.",
+        "3": "You may end your turn on a vertical surface or ceiling. Gain a climb speed equal to your walking speed."
+      }
+    },
+    {
+      "id": "master_of_martial",
+      "name": "Master of Martial",
+      "max_rank": 1,
+      "is_capstone": true,
+      "prerequisites": {"all_path_talents": true},
+      "description": "You have achieved the ultimate synthesis of mind, motion, and will.",
+      "ranks": {
+        "1": "While unarmored, gain +2 Defense and +2 to all saving throws. Your unarmed strike critical range expands to 18–20. You radiate a passive Flow Aura: Enemies that begin their turn within 5 ft of you must make a Wisdom save (TN = 8 + your Agility modifier + your level), if they fail they have disadvantage on attacks against you until the start of their next turn."
+      }
+    }
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "category": "path",
+  "path_id": "defense",
+  "path_name": "Defense",
+  "description": "For those who stand unbroken, shielding others from chaos and leading through courage and conviction.",
+  
+  "talents": [
+    {
+      "id": "protector",
+      "name": "Protector",
+      "max_rank": 10,
+      "is_primary": true,
+      "prerequisites": {},
+      "description": "You are the first into danger and the last to fall. Your defensive instincts harden into a physical aura of protection.",
+      "ranks": {
+        "1": "When a creature you can see within 5 ft is targeted by an attack, you may use your Reaction to impose disadvantage on the attacker.",
+        "2": "Gain +1 Defense Point while wearing armor.",
+        "3": "Gain +1 Defense Point (stacks). When you use your Reaction to protect an ally, they also gain +1 Defense until the start of their next turn.",
+        "4": "Gain +1 Life Point. When you take damage for an ally, reduce that damage by your Endurance modifier.",
+        "5": "Allies within 10 ft gain +1 Defense while you are conscious.",
+        "6": "Your protection Reaction now also grants the ally resistance to the triggering damage type.",
+        "7": "Gain +5 HP and +1 to all saving throws while wearing armor.",
+        "8": "Once per short rest, when an ally within 10 ft would drop to 0 HP, they instead drop to 1 HP.",
+        "9": "Gain +2 Defense Points (total). Your protection aura extends to 15 ft.",
+        "10": "Ultimate Protector: Allies in your aura cannot be critically hit. Once per long rest, negate all damage from one attack or spell targeting you or an adjacent ally."
+      }
+    },
+    {
+      "id": "guard",
+      "name": "Guard",
+      "max_rank": 3,
+      "prerequisites": {"Endurance": 12},
+      "description": "You defend your position with unyielding precision, reading the flow of battle and intercepting threats.",
+      "ranks": {
+        "1": "Gain +1 to Defense while wielding a shield or two-handed weapon.",
+        "2": "Once per turn, when an ally within 5 ft would take damage, you can take half of that damage instead.",
+        "3": "When you take the Dodge action, allies within 5 ft also gain +2 Defense until the start of your next turn."
+      }
+    },
+    {
+      "id": "adrenal_push",
+      "name": "Adrenal Push",
+      "max_rank": 4,
+      "prerequisites": {"Endurance": 13},
+      "description": "Pain fuels your focus. You channel endurance into bursts of unstoppable resolve.",
+      "ranks": {
+        "1": "As a Bonus Action once per short rest, gain 5 temporary hit points and advantage on Might saving throws until the start of your next turn.",
+        "2": "Temporary hit points increase to 10 and you gain resistance to poison for 1 minute.",
+        "3": "When reduced below half HP, automatically gain 5 temporary HP (once per short rest).",
+        "4": "Temporary HP from this talent increases to 15. While you have temporary HP, gain +1 to all attack rolls."
+      }
+    },
+    {
+      "id": "tactics",
+      "name": "Tactics",
+      "max_rank": 3,
+      "prerequisites": {"Intellect": 12, "Wisdom": 12, "prereq_type": "or"},
+      "description": "You turn battlefield awareness into victory, predicting enemy intent and coordinating allies.",
+      "ranks": {
+        "1": "Use a Bonus Action to grant one ally within 30 ft advantage on their next attack or saving throw.",
+        "2": "Two allies may benefit from the same command. Your Melee and Ranged Base Attack Bonus each increase by +1.",
+        "3": "Once per short rest, allow an ally to take their turn immediately after yours (they lose their normal turn in initiative)."
+      }
+    },
+    {
+      "id": "keen_mind",
+      "name": "Keen Mind",
+      "max_rank": 3,
+      "prerequisites": {"Wisdom": 11},
+      "description": "Through relentless discipline, you anticipate enemy movements before they happen.",
+      "ranks": {
+        "1": "Gain advantage on Initiative and Perception checks.",
+        "2": "Gain +1 to all Wisdom saving throws.",
+        "3": "Once per short rest, automatically detect hidden or invisible creatures within 15 ft at the start of combat."
+      }
+    },
+    {
+      "id": "last_stand",
+      "name": "Last Stand",
+      "max_rank": 3,
+      "prerequisites": {"Endurance": 14},
+      "description": "When all hope falters, your sheer will refuses to yield.",
+      "ranks": {
+        "1": "When you drop below half your Health Points, gain +1 Armor Point and advantage on Endurance saving throws.",
+        "2": "Once per short rest, when reduced to 0 HP, you may immediately take a turn before falling unconscious.",
+        "3": "Allies within 10 ft gain +2 to saving throws when you are below half HP. When you use Last Stand, deal +1d6 damage on your attacks that turn."
+      }
+    },
+    {
+      "id": "master_of_defense",
+      "name": "Master of Defense",
+      "max_rank": 1,
+      "is_capstone": true,
+      "prerequisites": {"all_path_talents": true},
+      "description": "Your presence turns battlefields into bastions. Where you stand, others survive.",
+      "ranks": {
+        "1": "You and allies within 10 ft cannot be surprised. You always act on the first round of combat, even if incapacitated (you act after the surprise round). Once per short rest as a Reaction, nullify a single attack or spell that targets you or an ally within 15 ft; the attack automatically misses or the spell fails. Gain immunity to the Frightened condition and resistance to all physical damage while above half your Health Points."
+      }
+    }
+  ]
+}

@@ -1,0 +1,295 @@
+{
+  "category": "general",
+  "description": "General talents represent innate talent, personal growth, and practical knowledge gained through life experience. They are not tied to any one Path, and can be chosen freely if prerequisites are met.",
+  
+  "talents": [
+    {
+      "id": "alertness",
+      "name": "Alertness",
+      "max_rank": 3,
+      "prerequisites": {"Wisdom": 11},
+      "description": "Your senses are keen, and danger rarely surprises you.",
+      "ranks": {
+        "1": "Gain +2 to Initiative and passive Perception.",
+        "2": "You cannot be surprised while conscious.",
+        "3": "Gain +4 to Perception checks and +2 TN versus hidden or invisible attackers."
+      }
+    },
+    {
+      "id": "archery_focus",
+      "name": "Archery Focus",
+      "max_rank": 3,
+      "prerequisites": {"Agility": 12},
+      "description": "You are a keen-eyed marksman trained in ranged precision.",
+      "ranks": {
+        "1": "Gain proficiency with bows and crossbows; ranged attacks ignore half cover.",
+        "2": "Ranged Base Attack Bonus increases +1 and ranged weapons deal +2 damage.",
+        "3": "You ignore all cover short of full cover; ranged attacks deal +1d6 damage."
+      }
+    },
+    {
+      "id": "armor_training",
+      "name": "Armor Training",
+      "max_rank": 3,
+      "prerequisites": {"Might": 12},
+      "description": "You've trained to move and fight while wearing protective armor.",
+      "ranks": {
+        "1": "Proficiency with Light Armor. Wearing light armor no longer reduces your Agility-based skill checks.",
+        "2": "Proficiency with Medium Armor. While wearing armor you're proficient with, all attacks against you have -1 penalty.",
+        "3": "Proficiency with Heavy Armor. You may don or doff armor in half time; gain +1 Defense while armored."
+      }
+    },
+    {
+      "id": "athlete",
+      "name": "Athlete",
+      "max_rank": 3,
+      "prerequisites": {"Might": 10, "Agility": 10, "prereq_type": "or"},
+      "description": "Through practice and conditioning, you excel at physical feats.",
+      "ranks": {
+        "1": "Advantage on climbing, jumping, and swimming tests.",
+        "2": "+5 ft movement; stand from prone using only 5 ft of movement.",
+        "3": "Gain +2 to Might and Agility saving throws."
+      }
+    },
+    {
+      "id": "book_smart",
+      "name": "Book Smart",
+      "max_rank": 3,
+      "prerequisites": {"Intellect": 12},
+      "description": "Structured reasoning and study sharpen your analysis.",
+      "ranks": {
+        "1": "+2 to History and Investigation. When the RM calls for an Investigation check, you automatically roll.",
+        "2": "+2 to Arcana and Nature. You may use Intellect instead of Wisdom for saving throws.",
+        "3": "Once per short rest, reroll a failed knowledge check with advantage."
+      }
+    },
+    {
+      "id": "common_sense",
+      "name": "Common Sense",
+      "max_rank": 3,
+      "prerequisites": {"Wisdom": 12},
+      "description": "Grounded intuition helps you spot danger and deception.",
+      "ranks": {
+        "1": "+2 to Perception and Insight; advantage on Wisdom saves vs. being Charmed or Deceived.",
+        "2": "Advantage on Initiative; advantage on Agility saves vs. non-magical hazards.",
+        "3": "+2 to all Wisdom-based skill checks."
+      }
+    },
+    {
+      "id": "defensive_training",
+      "name": "Defensive Training",
+      "max_rank": 3,
+      "prerequisites": {"Agility": 11, "Might": 11, "prereq_type": "or"},
+      "description": "You rely on quick reflexes or defensive maneuvers.",
+      "ranks": {
+        "1": "Melee Base Attack Bonus increases +1.",
+        "2": "Reaction: gain +2 attack bonus when making an opportunity attack.",
+        "3": "When a melee attack against you misses, immediately move up to 10 ft without provoking."
+      }
+    },
+    {
+      "id": "dual_wielding",
+      "name": "Dual Wielding",
+      "max_rank": 3,
+      "prerequisites": {"Agility": 12},
+      "description": "You've mastered fighting with a weapon in each hand.",
+      "ranks": {
+        "1": "Wield a light off-hand weapon without penalty.",
+        "2": "Add your Agility modifier to off-hand damage.",
+        "3": "Make one extra off-hand attack once per round and gain +1 attack bonus to melee attacks."
+      }
+    },
+    {
+      "id": "experienced",
+      "name": "Experienced",
+      "max_rank": 3,
+      "prerequisites": {"level": 5},
+      "prerequisites_by_rank": {
+        "1": {"level": 5},
+        "2": {"level": 10},
+        "3": {"level": 15}
+      },
+      "description": "Seasoned competence across every discipline.",
+      "ranks": {
+        "1": "+1 to all saving throws.",
+        "2": "+1 to Melee and Ranged Attack Bonuses.",
+        "3": "+1 to all weapon damage."
+      }
+    },
+    {
+      "id": "fighting_style",
+      "name": "Fighting Style",
+      "max_rank": 3,
+      "prerequisites": {"Might": 12, "Agility": 12, "prereq_type": "or"},
+      "description": "A distinct combat approach defines your rhythm in battle.",
+      "requires_choice": true,
+      "choice_options": ["Defensive", "Dueling", "Archery", "Two-Weapon", "Thrown Weapon", "Unarmed"],
+      "ranks": {
+        "1": "Choose one style: Defensive (+2 Defense); Dueling (+2 damage with one-handed weapon); Archery (+2 ranged attack bonus); Two-Weapon (+2 off-hand attack rolls); Thrown Weapon (+2 ranged attack bonus with thrown); Unarmed (+2 unarmed damage).",
+        "2": "Your chosen style grants an additional +1 to its primary benefit.",
+        "3": "Gain a secondary benefit based on style; Defensive: +1 to saves; Dueling: +1 attack; Archery: ignore half cover; Two-Weapon: +1 off-hand damage; Thrown: +10 ft range; Unarmed: +1 unarmed attack."
+      }
+    },
+    {
+      "id": "lucky",
+      "name": "Lucky",
+      "max_rank": 3,
+      "prerequisites": {},
+      "description": "Uncanny timing tilts fate your way.",
+      "ranks": {
+        "1": "Gain Luck Points equal to half Wisdom modifier (minimum 1). Spend 1/round to reroll a failed d20 test.",
+        "2": "Spend a Luck Point to force another creature to reroll before results are known.",
+        "3": "1/round, automatically succeed on a d20 roll of natural 1 by spending 2 Luck Points."
+      }
+    },
+    {
+      "id": "mobile",
+      "name": "Mobile",
+      "max_rank": 3,
+      "prerequisites": {"Agility": 12},
+      "description": "Swift on your feet and hard to pin down.",
+      "ranks": {
+        "1": "+10 ft movement.",
+        "2": "Ignore difficult terrain.",
+        "3": "Creatures you attack in melee can't opportunity attack you this round."
+      }
+    },
+    {
+      "id": "natural_leader",
+      "name": "Natural Leader",
+      "max_rank": 3,
+      "prerequisites": {"Charisma": 12},
+      "description": "Your presence inspires others.",
+      "ranks": {
+        "1": "Allies within 30 ft gain advantage on Wisdom saves vs. charmed or frightened.",
+        "2": "Bonus Action: grant an ally advantage on their next attack or save.",
+        "3": "1/long rest, rally up to 4 allies for +2 to attacks and saves for 1 minute."
+      }
+    },
+    {
+      "id": "observant",
+      "name": "Observant",
+      "max_rank": 3,
+      "prerequisites": {"Intellect": 11, "Wisdom": 11, "prereq_type": "or"},
+      "description": "You notice what others miss.",
+      "ranks": {
+        "1": "+1 to Investigation and Perception, you are now trained in each.",
+        "2": "You can read lips and identify patterns by sight.",
+        "3": "+4 Passive Perception and Passive Investigation."
+      }
+    },
+    {
+      "id": "persuasive",
+      "name": "Persuasive",
+      "max_rank": 3,
+      "prerequisites": {"Charisma": 12},
+      "description": "Commanding words bend outcomes.",
+      "ranks": {
+        "1": "Gain proficiency and +1 in Persuasion and Deception.",
+        "2": "1/short rest, reroll a failed Charisma check involving negotiation or influence.",
+        "3": "Equal or lower-level creatures have disadvantage on Wisdom checks to resist your influence."
+      }
+    },
+    {
+      "id": "quick_learner",
+      "name": "Quick Learner",
+      "max_rank": 3,
+      "prerequisites": {"Intellect": 12},
+      "description": "You absorb and apply new knowledge rapidly.",
+      "ranks": {
+        "1": "Gain +10% XP.",
+        "2": "Learn a tool proficiency or skill at half cost.",
+        "3": "1/rest, reroll a failed skill check with advantage."
+      }
+    },
+    {
+      "id": "quickness",
+      "name": "Quickness",
+      "max_rank": 3,
+      "prerequisites": {"Agility": 12},
+      "description": "Speed defines your movement, thought, and reflexes.",
+      "ranks": {
+        "1": "+10 ft movement.",
+        "2": "Advantage on Initiative and Agility saves.",
+        "3": "1/long rest, take one additional Reaction this round."
+      }
+    },
+    {
+      "id": "resilient",
+      "name": "Resilient",
+      "max_rank": 3,
+      "prerequisites": {"Endurance": 12},
+      "description": "Your body and mind resist harmful effects.",
+      "requires_choice": true,
+      "choice_options": ["Might", "Agility", "Endurance", "Intellect", "Wisdom", "Charisma"],
+      "ranks": {
+        "1": "Choose one core ability; you gain +1 to its saving throw bonus.",
+        "2": "Choose a second core ability; you gain +1 to its saving throw bonus.",
+        "3": "+1 to all saving throws."
+      }
+    },
+    {
+      "id": "resourceful",
+      "name": "Resourceful",
+      "max_rank": 3,
+      "prerequisites": {"Intellect": 12, "Wisdom": 12, "prereq_type": "or"},
+      "description": "You make the most of whatever's at hand.",
+      "ranks": {
+        "1": "Advantage on crafting and survival checks.",
+        "2": "After combat, recover up to half + 1d6 expended ammo.",
+        "3": "1/rest, improvise a needed tool or component (temporary proficiency for 1 hour)."
+      }
+    },
+    {
+      "id": "skill_focus",
+      "name": "Skill Focus",
+      "max_rank": 3,
+      "prerequisites": {},
+      "description": "You've specialized in a particular skill.",
+      "requires_choice": true,
+      "choice_options": "any_trained_skill",
+      "ranks": {
+        "1": "Choose one trained skill; +2 to all rolls with it.",
+        "2": "Gain expertise in that skill (double proficiency bonus).",
+        "3": "1/rest, auto-succeed on a roll with that skill if TN ≤ 15."
+      }
+    },
+    {
+      "id": "tinkerer",
+      "name": "Tinkerer",
+      "max_rank": 3,
+      "prerequisites": {"Intellect": 12},
+      "prerequisites_alternative": "Artisan's Tools proficiency",
+      "description": "Clever methods speed up non-magical crafting.",
+      "ranks": {
+        "1": "Craft at half the amount of time; gain +2 to crafting checks.",
+        "2": "Crafting uses half of the required material. 1/short rest, improvise a missing tool/part.",
+        "3": "Craft at half cost. 1/long rest, create a temporary item that lasts 24 hours."
+      }
+    },
+    {
+      "id": "toughness",
+      "name": "Toughness",
+      "max_rank": 3,
+      "prerequisites": {"Endurance": 12},
+      "description": "You can take punishment that would fell others.",
+      "ranks": {
+        "1": "+5 Health Points and +1 Life Point.",
+        "2": "+5 Health Points and advantage on exhaustion checks.",
+        "3": "+5 Health Points and +2 on Endurance saves."
+      }
+    },
+    {
+      "id": "weapon_mastery",
+      "name": "Weapon Mastery",
+      "max_rank": 3,
+      "prerequisites": {"Might": 12, "Agility": 12, "prereq_type": "or"},
+      "description": "Seamless motion of strikes, counters, and control.",
+      "ranks": {
+        "1": "Once per round, make one extra attack (no attack bonus).",
+        "2": "Reaction attacks gain +1; you have two reactions per round. Add attack bonus to all off-hand proficient attacks.",
+        "3": "1/rest, turn a missed attack into a hit. Critical hits deal +1 damage die."
+      }
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "category": "path",
+  "path_id": "divine",
+  "path_name": "Divine",
+  "description": "Those who draw abilities from the gifts allowed to them by their deity, not enchantment. Their belief becomes their armor, their will the weapon that shields others and purifies corruption.",
+  
+  "talents": [
+    {
+      "id": "divinity",
+      "name": "Divinity",
+      "max_rank": 10,
+      "is_primary": true,
+      "prerequisites": {"Wisdom": 15},
+      "description": "Your conviction manifests as a radiant presence, empowering allies and scouring corruption.",
+      "ranks": {
+        "1": "You may channel conviction as an Action, releasing a wave of inner light in a 10-foot radius. Allies in range regain 1d6 Health Points; enemies of opposed alignment take 1d6 radiant or force damage.",
+        "2": "Allies healed also gain +1 to their next saving throw. Enemies take 2d6 damage.",
+        "3": "Channel conviction as a Bonus Action instead. Radius increases to 15 ft.",
+        "4": "Allies regain 2d6 HP. You gain +1 to spell-like Divine abilities.",
+        "5": "Enemies in radius must make a Wisdom save or be frightened for 1 round.",
+        "6": "Once per short rest, channel conviction to remove one condition (charmed, frightened, poisoned) from each ally in radius.",
+        "7": "Allies regain 3d6 HP. Radius increases to 20 ft.",
+        "8": "Enemies of opposed alignment have disadvantage on attacks against you and allies in radius for 1 round.",
+        "9": "Once per long rest, channel conviction to resurrect an ally who died within the last minute (they return at 1 HP).",
+        "10": "Divine Presence: Allies in radius gain resistance to all damage for 1 round after you channel. You may channel conviction at will without Action cost once per round."
+      }
+    },
+    {
+      "id": "enlightened",
+      "name": "Enlightened",
+      "max_rank": 3,
+      "prerequisites": {"Wisdom": 13},
+      "description": "Faith sharpens your perception and resolve. You see the truth behind falsehoods and illusions.",
+      "ranks": {
+        "1": "Gain advantage on Insight and Perception checks against deceitful or disguised entities.",
+        "2": "Automatically sense the presence of unnatural corruption or malice (such as charm or possession) within 15 feet.",
+        "3": "Once per short rest, see through illusions and magical disguises for 1 minute. Gain +2 to Wisdom saving throws."
+      }
+    },
+    {
+      "id": "divine_burst",
+      "name": "Divine Burst",
+      "max_rank": 4,
+      "prerequisites": {"Wisdom": 14},
+      "description": "In moments of peril, you release an explosive pulse of conviction, forcing enemies to falter.",
+      "ranks": {
+        "1": "Once per short rest, as an Action, emit a shockwave of force in a 10-foot radius. Enemies must make a Wisdom save or be pushed back 10 feet and take 1d6 + level radiant or force damage.",
+        "2": "Damage increases to 2d6 + level. Enemies who fail are also knocked prone.",
+        "3": "Radius increases to 15 ft. Allies in radius gain temporary HP equal to your Wisdom modifier.",
+        "4": "Damage increases to 3d6 + level. Once per long rest, Divine Burst automatically affects all enemies within 20 ft with no save (half damage on save)."
+      }
+    },
+    {
+      "id": "faiths_guard",
+      "name": "Faith's Guard",
+      "max_rank": 3,
+      "prerequisites": {"Endurance": 13, "Wisdom": 13, "prereq_type": "or"},
+      "description": "Your unshakable resolve deflects pain and fortifies those beside you.",
+      "ranks": {
+        "1": "When you or an ally within 10 feet takes damage, you may use your Reaction to reduce that damage by 1d6.",
+        "2": "Once per short rest, you may intercept the attack entirely, taking the damage yourself instead.",
+        "3": "Damage reduction increases to 2d6. When you intercept damage, gain temporary HP equal to your Wisdom modifier."
+      }
+    },
+    {
+      "id": "conviction_aura",
+      "name": "Conviction Aura",
+      "max_rank": 3,
+      "prerequisites": {"Charisma": 14},
+      "description": "Your sheer will radiates outward, bolstering allies' hearts and burning away despair.",
+      "ranks": {
+        "1": "Allies within 20 feet gain +1 to saving throws.",
+        "2": "Aura expands to 40 feet; allies also gain +1 to attack rolls while you are conscious.",
+        "3": "Once per short rest, when you drop to 0 Health Points, all allies in your aura gain advantage on all rolls until the start of your next turn."
+      }
+    },
+    {
+      "id": "master_of_divinity",
+      "name": "Master of Divinity",
+      "max_rank": 1,
+      "is_capstone": true,
+      "prerequisites": {"all_path_talents": true},
+      "description": "Your faith is unbreakable. You are the bastion of conviction in a world of doubt.",
+      "ranks": {
+        "1": "Gain permanent immunity to being Frightened, Charmed, or Diseased. Once per long rest, you can't be killed by a single blow: when an attack would reduce you to 0 LP, you instead drop to 1 LP and unleash a free Divine Burst as reaction. Once per long rest, channel your full divine presence for 1 minute: Allies within 30 feet regain 3d6 + Wis HP each round; Enemies of opposed morality take 2d6 radiant or force damage each round; You gain +3 Defense and advantage on all saving throws. This state ends early if you fall unconscious or choose to release it."
+      }
+    }
+  ]
+}

@@ -259,6 +259,128 @@ XP_THRESHOLDS = {
     20: 400000,  # +43000 per level after 20
 }
 
+
+class ArmorProficiency(Enum):
+    """Armor proficiency types."""
+    NONE = "None"
+    LIGHT = "Light"
+    MEDIUM = "Medium"
+    HEAVY = "Heavy"
+
+
+class WeaponProficiency(Enum):
+    """Weapon proficiency types."""
+    SIMPLE = "Simple"
+    MARTIAL = "Martial"
+    LIGHT = "Light"
+    FINESSE = "Finesse"
+    RANGED = "Ranged"
+    TWO_HANDED = "Two-Handed"
+    MELEE = "Melee"
+
+
+class ToolProficiency(Enum):
+    """Tool proficiency types from professions, ancestries, and backgrounds."""
+    # Artisan Tools (general category)
+    ARTISAN_TOOL = "Artisan Tool"
+    
+    # Specific Artisan Tools
+    SMITHING_TOOLS = "Smithing Tools"
+    BLACKSMITH_TOOLS = "Blacksmith Tools"
+    LEATHERWORKING_TOOLS = "Leatherworking Tools"
+    LEATHERWORKER_TOOLS = "Leatherworker Tools"
+    CARPENTERS_TOOLS = "Carpenter's Tools"
+    JEWELERS_TOOLS = "Jeweler's Tools"
+    PAINTERS_TOOLS = "Painter's Tools"
+    MASONS_TOOLS = "Mason's Tools"
+    ARMORERS_TOOLS = "Armorer's Tools"
+    
+    # Thievery/Stealth Tools
+    THIEVES_TOOLS = "Thieves' Tools"
+    DISGUISE_KIT = "Disguise Kit"
+    
+    # Survival/Nature Tools
+    HERBALISM_KIT = "Herbalism Kit"
+    HERBAL_KIT = "Herbal Kit"
+    HUNTING_TOOLS = "Hunting Tools"
+    SNARE_KIT = "Snare Kit"
+    HERBAL_POUCH = "Herbal Pouch"
+    
+    # Navigation/Travel
+    NAVIGATORS_TOOLS = "Navigator's Tools"
+    
+    # Gaming/Entertainment
+    GAMING_SET = "Gaming Set"
+    MUSICAL_INSTRUMENT = "Musical Instrument"
+    
+    # Military/Combat
+    WHETSTONE_KIT = "Whetstone Kit"
+    DRILL_SERGEANT_WHISTLE = "Drill-Sergeant Whistle"
+    
+    # Vehicles
+    WATER_VEHICLES = "Water Vehicles"
+
+
+class Language(Enum):
+    """Languages available in the game."""
+    # Common Languages
+    COMMON = "Common"
+    ELVISH = "Elvish"
+    DWARVISH = "Dwarvish"
+    ORCISH = "Orcish"
+    GOBLIN = "Goblin"
+    HALFFOLK = "Halffolk"
+    
+    # Exotic Languages
+    DRACONIC = "Draconic"
+    CELESTIAL = "Celestial"
+    INFERNAL = "Infernal"
+    SYLVAN = "Sylvan"
+    AQUAN = "Aquan"
+    
+    # Racial Languages
+    TAURIC = "Tauric"
+    SIMARRU = "Simarru"
+    VELKARRAN = "Velkarran"
+    
+    # Ancient/Rare Languages
+    ANCIENT_DWARVISH = "Ancient Dwarvish"
+
+
+class CreatureType(Enum):
+    """Creature types for races."""
+    HUMANOID = "Humanoid"
+    HUMANOID_ELF = "Humanoid (Elf)"
+    HUMANOID_DWARF = "Humanoid (Dwarf)"
+    HUMANOID_HALFFOLK = "Humanoid (Halffolk)"
+    HUMANOID_GOBLIN = "Humanoid (Goblin)"
+
+
+class Size(Enum):
+    """Size categories."""
+    TINY = "Tiny"
+    SMALL = "Small"
+    MEDIUM = "Medium"
+    LARGE = "Large"
+    HUGE = "Huge"
+    GARGANTUAN = "Gargantuan"
+
+
+class PathRole(Enum):
+    """Combat/narrative roles for paths."""
+    DEFENDER = "Defender"
+    STRIKER = "Striker"
+    SUPPORT = "Support"
+    SPECIALIST = "Specialist"
+
+
+# Quick reference dictionaries for validation
+ALL_ARMOR_PROFICIENCIES = {e.value for e in ArmorProficiency}
+ALL_WEAPON_PROFICIENCIES = {e.value for e in WeaponProficiency}
+ALL_TOOL_PROFICIENCIES = {e.value for e in ToolProficiency}
+ALL_LANGUAGES = {e.value for e in Language}
+
+
 # Advancement Point Costs
 # Advancement points given  on advancement equal to their Intellect Mod
 AP_COSTS = {

@@ -1,0 +1,112 @@
+{
+  "category": "path",
+  "path_id": "power",
+  "path_name": "Power",
+  "description": "Those who unleash their inner fury to become living engines of destruction. Warriors of instinct and endurance who trade control for devastating strength.",
+  
+  "talents": [
+    {
+      "id": "rage",
+      "name": "Rage",
+      "max_rank": 10,
+      "is_primary": true,
+      "prerequisites": {"Might": 15, "secondary": {"Agility": 15, "Endurance": 15, "Wisdom": 15, "prereq_type": "or"}},
+      "description": "Your fury becomes a weapon, an instinctive state that channels pure energy into every strike.",
+      "ranks": {
+        "1": "As a Bonus Action, enter into rage for 1 minute. While raging, you gain advantage on Might checks and saving throws, deal +2 damage to melee attacks, and gain resistance to bludgeoning, piercing, and slashing damage.",
+        "2": "Rage damage bonus increases to +3.",
+        "3": "+1 to melee attack rolls while raging. You can rage one additional time per long rest.",
+        "4": "Rage damage bonus increases to +4. Gain +10 ft movement while raging.",
+        "5": "While raging, you cannot be charmed or frightened.",
+        "6": "Rage damage bonus increases to +5. Gain +1 to all saving throws while raging.",
+        "7": "You can rage one additional time per long rest (total 3). Rage lasts 2 minutes.",
+        "8": "Rage damage bonus increases to +6. Attacks against you while raging have -1 penalty.",
+        "9": "While raging, your critical hits deal triple damage dice instead of double.",
+        "10": "Eternal Rage: Your rage no longer has a time limit. While raging, you are immune to exhaustion and gain regeneration (regain 5 HP at the start of each of your turns if you have at least 1 HP)."
+      }
+    },
+    {
+      "id": "brutal_strike",
+      "name": "Brutal Strike",
+      "max_rank": 3,
+      "prerequisites": {"Might": 13},
+      "description": "Your attacks land with bone-shattering impact, breaking both body and morale.",
+      "ranks": {
+        "1": "When you score a critical hit, roll one additional damage die.",
+        "2": "Your critical hits are on 19-20. On a critical hit, knock the target prone or push them 10 ft (no save).",
+        "3": "Once per turn, if you reduce a target to 0 HP, make a free melee attack against another creature within reach."
+      }
+    },
+    {
+      "id": "detect_danger",
+      "name": "Detect Danger",
+      "max_rank": 3,
+      "prerequisites": {"Wisdom": 12},
+      "description": "Instinct keeps you alive, you sense danger before others perceive it.",
+      "ranks": {
+        "1": "You cannot be surprised while conscious.",
+        "2": "Gain advantage on Initiative and +2 Passive Perception.",
+        "3": "Once per short rest, enter Predator's Focus for 1 minute, granting advantage on d20 rolls during the first round of combat."
+      }
+    },
+    {
+      "id": "primal_armor",
+      "name": "Primal Armor",
+      "max_rank": 3,
+      "prerequisites": {"Endurance": 13},
+      "description": "Your body hardens under duress, adapting to absorb punishment.",
+      "ranks": {
+        "1": "While not wearing armor, your Armor Hit Points equal your Endurance score. These points are restored after a short rest and can be healed.",
+        "2": "Gain resistance to bludgeoning, piercing, and slashing damage. Attacks against you have -1 penalty while you have Primal Armor points remaining.",
+        "3": "Primal Armor points equal Endurance score + level. Once per long rest, when reduced to 0 Primal Armor, immediately regain half your maximum."
+      }
+    },
+    {
+      "id": "primal_instinct",
+      "name": "Primal Instinct",
+      "max_rank": 3,
+      "prerequisites": {"Endurance": 12, "Might": 12, "prereq_type": "or"},
+      "description": "The deeper your fury runs, the more your body moves without thought or hesitation.",
+      "ranks": {
+        "1": "When damage drops you below half HP, gain +10 ft movement and +1 to melee attack rolls until the end of your next turn.",
+        "2": "Gain advantage against fear and charm effects.",
+        "3": "Once per short rest, when you take damage, immediately move up to half your speed without provoking opportunity attacks."
+      }
+    },
+    {
+      "id": "reckless_tactics",
+      "name": "Reckless Tactics",
+      "max_rank": 3,
+      "prerequisites": {"Might": 13},
+      "description": "You abandon defense for overwhelming offense, pressing every opening.",
+      "ranks": {
+        "1": "When you attack, you may choose to attack recklessly, gaining advantage on all melee attacks until your next turn. Attacks against you also gain advantage during this time.",
+        "2": "Gain +1 damage die on critical hits while attacking recklessly.",
+        "3": "Once per short rest, when attacking recklessly, your attacks deal +2d6 damage for the round."
+      }
+    },
+    {
+      "id": "savage_momentum",
+      "name": "Savage Momentum",
+      "max_rank": 3,
+      "prerequisites": {"Might": 12},
+      "description": "Each strike fuels your next, driving you into a devastating rhythm of continuous power.",
+      "ranks": {
+        "1": "When you hit a creature with a melee attack, gain +1 damage on your next melee attack made before the end of your next turn.",
+        "2": "When you reduce a creature to 0 LP, immediately move up to half your movement without provoking opportunity attacks.",
+        "3": "Damage bonus stacks up to +3. When you score a critical hit, gain a free attack against another creature within reach."
+      }
+    },
+    {
+      "id": "master_of_power",
+      "name": "Master of Power",
+      "max_rank": 1,
+      "is_capstone": true,
+      "prerequisites": {"all_path_talents": true},
+      "description": "You are the embodiment of raw force, a storm of muscle, instinct, and unbreakable will.",
+      "ranks": {
+        "1": "Your Rage becomes permanent and cannot be suppressed by external means. When an attack or effect would reduce you to 0 LP or fewer, remain at 1 LP until the end of your next turn (you have disadvantage on attacks, saves, and checks before collapsing, receiving –2 Life Points). You are immune to the Frightened and Charmed conditions. Once per long rest, when you reduce a creature to 0 LP, regain all Primal Armor Points. When you roll a natural 20 on an attack, your strike deals triple dice damage instead of double."
+      }
+    }
+  ]
+}

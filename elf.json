@@ -2,12 +2,12 @@
   "id": "",
   "character_name": "Trela",
   "player": "Jeric",
-  "profession": "Blacksmith",
+  "profession": "blacksmith",
   "primary_path": "Power",
-  "race": "Elf",
+  "race": "elf",
   "ancestry": "Sylari",
-  "background": "Village Champion",
-  "level": 1,
+  "background": "village champion",
+  "level": 2,
   "total_experience": 0,
   "stored_advance": "",
   "ability_scores": {
@@ -70,8 +70,8 @@
   "speed": 30,
   "initiative": 2,
   "health": {
-    "max": 11,
-    "current": 11,
+    "max": 18,
+    "current": 18,
     "wounds": 0
   },
   "armor_hp": {
@@ -155,7 +155,7 @@
       "misc": 0,
       "total": 2
     },
-    "Desception": {
+    "Deception": {
       "trained": false,
       "mod": -1,
       "rank": 0,
@@ -239,7 +239,7 @@
       "misc": 0,
       "total": 1
     },
-    "Slight of Hand": {
+    "Sleight of Hand": {
       "trained": false,
       "mod": 2,
       "rank": 0,
@@ -291,7 +291,20 @@
     "Tauric"
   ],
   "attacks": [],
-  "talents": [],
+  "talents": [
+    {
+      "name": "Range",
+      "rank": 2,
+      "path": "primary",
+      "text": "Range (Rank 2)"
+    },
+    {
+      "name": "Mele",
+      "rank": 1,
+      "path": "primary",
+      "text": "Mele (Rank 1)"
+    }
+  ],
   "features": [
     {
       "name": "Darkvision",

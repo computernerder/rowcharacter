@@ -276,8 +276,7 @@
     }
   },
   "proficiencies": [
-    "Simple",
-    "Arcane Focus"
+    "Simple"
   ],
   "languages": [
     "Common",
@@ -301,11 +300,11 @@
     },
     {
       "name": "Academic Circles",
-      "text": "You can request help from scribes, professors, and archivists who share information or grant access to rare texts."
+      "text": "You may request help from scribes, professors, and archivists who share information or grant access to rare texts."
     },
     {
       "name": "Arcane Initiate",
-      "text": "You gain a Spellcrafting Book, an arcane focus, and basic training in shaping magical energy."
+      "text": "You gain a Spellcrafting Book containing six Rank 1 Novice spells, an arcane focus, and basic training in shaping energy."
     },
     {
       "name": "Spell Attunement",
@@ -313,7 +312,7 @@
     },
     {
       "name": "Flow of Thought",
-      "text": "Once per short rest, as a Bonus Action, you gain advantage on Intellect saving throws until the start of your next turn."
+      "text": "Once per short rest, as a Bonus Action, gain advantage on Intellect saving throws until the start of your next turn."
     },
     {
       "name": "Researcher",
@@ -331,11 +330,9 @@
   },
   "inventory": {
     "items": [
-      "Ink and quills",
-      "Parchment",
-      "Small knife",
-      "Reference book",
-      "Common clothes",
+      "Writing kit",
+      "Book of lore",
+      "Simple clothes",
       "10 bronze"
     ],
     "total_weight": ""
@@ -352,18 +349,18 @@
     "hair": ""
   },
   "personality": {
-    "traits": "I use polysyllabic words that convey the impression of great erudition.",
-    "ideal": "Knowledge. The path to power is through knowledge.",
-    "bond": "It is my duty to protect my students.",
-    "flaw": "I am easily distracted by the promise of information."
+    "traits": "I quote obscure facts at every opportunity.",
+    "ideal": "Knowledge. Truth must be pursued regardless of cost.",
+    "bond": "My mentor still guides me.",
+    "flaw": "I hoard knowledge and refuse to share."
   },
   "alignment": {
     "alignment": "",
-    "mod": 1
+    "mod": 0
   },
   "reputation": {
     "reputation": "",
-    "mod": 2
+    "mod": 0
   },
   "qr_payload": "",
   "footer": {

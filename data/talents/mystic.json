@@ -1,0 +1,102 @@
+{
+  "category": "path",
+  "path_id": "mystic",
+  "path_name": "Mystic",
+  "description": "Masters of thought, will, and the unseen threads that bind reality.",
+  
+  "talents": [
+    {
+      "id": "spellcrafting",
+      "name": "Spellcrafting",
+      "max_rank": 10,
+      "is_primary": true,
+      "prerequisites": {"Intellect": 15},
+      "description": "You manipulate the structure of energy itself through disciplined will. Each Rank deepens your understanding of elemental force, shaping magic into lines, arcs, fields, and spells recorded within your Spellcrafting Book.",
+      "ranks": {
+        "1": "Gain Elemental Burst: As an Attack action, release a 30 ft line of fire, frost, or lightning dealing 1d8 + INT modifier damage (Agility save for half). Gain 2 SP.",
+        "2": "Elemental Burst damage increases to 2d8. Gain 2 SP.",
+        "3": "Elemental Burst can now be shaped as a 15 ft cone instead of a line. Gain 2 SP.",
+        "4": "Elemental Burst damage increases to 3d8. Gain +1 Spell Attack. Gain 2 SP.",
+        "5": "Elemental Burst can now target a 10 ft radius sphere within 60 ft. Gain 2 SP.",
+        "6": "Elemental Burst damage increases to 4d8. Gain +1 Spell Save TN. Gain 2 SP.",
+        "7": "Once per short rest, cast Elemental Burst without spending CP. Gain 2 SP.",
+        "8": "Elemental Burst damage increases to 5d8. Choose a second element type. Gain 2 SP.",
+        "9": "Gain an additional 2 SP once.",
+        "10": "Elemental Burst no longer requires concentration. Choose two spells as Signature Spells: cast once per round for -2 CP, if CP is reduced below 0, regain CP. Immune to Charm, Fear, and magical mental exhaustion. Once per day, enter Focused State for 5 rounds: Gain +5 on spell attacks. Act twice each round."
+      }
+    },
+    {
+      "id": "blood_pact",
+      "name": "Blood Pact",
+      "max_rank": 3,
+      "prerequisites": {},
+      "description": "You bind your lifeforce to your magic, empowering your spells through sacrifice.",
+      "ranks": {
+        "1": "Sacrifice 1 Life Point to regain 1 CP (once per short rest). When reduced to 0 Health Points, your spells gain +1 attack and +1 TN until healed.",
+        "2": "When casting a spell, spend 1 Life Point to increase its damage die (d6→d8, etc.). When healed, regain 1 CP.",
+        "3": "Once per long rest, sacrifice 3 LP to cast any spell you know without spending CP. Your spells deal +1d6 damage when you are below half HP."
+      }
+    },
+    {
+      "id": "divination",
+      "name": "Divination",
+      "max_rank": 3,
+      "prerequisites": {},
+      "description": "Your foresight cuts through lies, illusion, and coincidence.",
+      "ranks": {
+        "1": "+2 Insight, +2 Perception, +1 Defense.",
+        "2": "Roll two dice for Initiative and take the higher. Once per short rest, reroll one failed attack or save. You cannot be surprised while conscious.",
+        "3": "Advantage on saves vs Illusion or Charm. Spend 1 CP to give advantage to an ally's next roll."
+      }
+    },
+    {
+      "id": "scholar",
+      "name": "Scholar",
+      "max_rank": 4,
+      "prerequisites": {},
+      "description": "Your power comes from research, logic, and academic refinement.",
+      "ranks": {
+        "1": "+2 Arcana, +2 History, you are now trained.",
+        "2": "+2 Investigation, +2 Nature, you are now trained.",
+        "3": "Reduce CP costs by 1 (minimum 1). Once per short rest, reroll a failed Arcana, History, or Investigation check with advantage.",
+        "4": "+2 to all Intellect-based skill checks. Once per long rest, recall any piece of lore as if you had studied it."
+      }
+    },
+    {
+      "id": "spell_focus",
+      "name": "Spell Focus",
+      "max_rank": 4,
+      "prerequisites": {},
+      "description": "You anchor your spellcasting through clarity and control.",
+      "ranks": {
+        "1": "+1 Spell Attack. Add Intellect modifier to spell damage (if not already applied).",
+        "2": "+1 Spell Save and +1 spell attack. Advantage on Concentration checks.",
+        "3": "Reroll any 1 on damage dice, you must take the new roll. Once per short rest, ignore disadvantage on a spell attack.",
+        "4": "+1 to all spell attacks and Spell Save. Once per long rest, maximize the damage of one spell."
+      }
+    },
+    {
+      "id": "warding",
+      "name": "Warding",
+      "max_rank": 3,
+      "prerequisites": {},
+      "description": "You shape magical force into protective shields and barriers.",
+      "ranks": {
+        "1": "Bonus Action: spend 1 CP to create a Ward Shield for 1 minute. Grants +2 Defense Points and resistance to elemental damage.",
+        "2": "Extend Ward Shield to an ally within 10 ft. Once per rest, spend 2 CP to remain at 1 LP instead of dropping to 0.",
+        "3": "Ward Shield grants +3 Defense and absorbs the first 10 damage each round. Once per long rest, create a 10 ft barrier that blocks all projectiles for 1 minute."
+      }
+    },
+    {
+      "id": "master_of_mystics",
+      "name": "Master of Mystics",
+      "max_rank": 1,
+      "is_capstone": true,
+      "prerequisites": {"all_path_talents": true},
+      "description": "You embody the laws of magic, becoming a living source of arcane power.",
+      "ranks": {
+        "1": "+2 to all Spell attack rolls and advantage on spell saving throws against you; +2 Spell Save. Maintain three Concentration effects without needing concentration. Once per long rest, enter Arcane Ascension for 5 rounds: All spells cost 0 CP; +3 to all spell attacks; Immune to all conditions; Your spells cannot be counterspelled or dispelled."
+      }
+    }
+  ]
+}
