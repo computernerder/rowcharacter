@@ -1,0 +1,53 @@
+{
+  "id": "mercenary",
+  "name": "Mercenary",
+  "description": "Coin has been your creed, contracts your scripture. You have fought for causes not your own, and lived to tell the tale.",
+  
+  "skill_proficiencies": ["Athletics", "Intimidation"],
+  "languages_granted": 0,
+  "tool_proficiencies": [],
+  
+  "equipment": ["Old weapon", "Mercenary contract", "Traveler's clothes", "10 bronze"],
+  
+  "feature": {
+    "name": "Mercenary Contacts",
+    "description": "You know how to find mercenary work and can make contacts in sellsword companies. You can identify mercenary bands by their insignia and know their reputations."
+  },
+  
+  "personality_tables": {
+    "traits": [
+      {"roll": 1, "text": "I talk about past battles constantly.", "morality": 0, "reputation": 0},
+      {"roll": 2, "text": "I size up everyone I meet as a potential threat.", "morality": 0, "reputation": 0},
+      {"roll": 3, "text": "I have a dark sense of humor.", "morality": 0, "reputation": 0},
+      {"roll": 4, "text": "I am always calm, even in crisis.", "morality": 0, "reputation": 0},
+      {"roll": 5, "text": "I negotiate everything, even small purchases.", "morality": 0, "reputation": 0},
+      {"roll": 6, "text": "I never let my guard down.", "morality": 0, "reputation": 0},
+      {"roll": 7, "text": "I prefer action to words.", "morality": 0, "reputation": 0},
+      {"roll": 8, "text": "I keep count of my kills.", "morality": 0, "reputation": -1}
+    ],
+    "ideals": [
+      {"roll": 1, "text": "Loyalty. My comrades are my family.", "morality": 1, "reputation": 1},
+      {"roll": 2, "text": "Coin. Gold speaks louder than honor.", "morality": -1, "reputation": -1},
+      {"roll": 3, "text": "Survival. The living collect the pay.", "morality": 0, "reputation": 0},
+      {"roll": 4, "text": "Honor. A contract is sacred.", "morality": 1, "reputation": 1},
+      {"roll": 5, "text": "Independence. I answer to no king or lord.", "morality": 0, "reputation": 0},
+      {"roll": 6, "text": "Might. The strong determine what is right.", "morality": -1, "reputation": 0}
+    ],
+    "bonds": [
+      {"roll": 1, "text": "I will never abandon my companions.", "morality": 1, "reputation": 1},
+      {"roll": 2, "text": "Someone I served with saved my life.", "morality": 1, "reputation": 0},
+      {"roll": 3, "text": "I hunt the one who betrayed my company.", "morality": 0, "reputation": 0},
+      {"roll": 4, "text": "I keep a trophy from my greatest victory.", "morality": 0, "reputation": 0},
+      {"roll": 5, "text": "I send coin home to someone I care about.", "morality": 1, "reputation": 0},
+      {"roll": 6, "text": "A former employer owes me, and I will collect.", "morality": 0, "reputation": 0}
+    ],
+    "flaws": [
+      {"roll": 1, "text": "I am ruthless to enemies.", "morality": -1, "reputation": -1},
+      {"roll": 2, "text": "I have trouble trusting anyone.", "morality": 0, "reputation": 0},
+      {"roll": 3, "text": "I drink or gamble to forget what I've done.", "morality": 0, "reputation": -1},
+      {"roll": 4, "text": "I hold grudges and never forgive.", "morality": 0, "reputation": -1},
+      {"roll": 5, "text": "Violence is always my first solution.", "morality": -1, "reputation": -1},
+      {"roll": 6, "text": "I will do anything for the right price.", "morality": -1, "reputation": -1}
+    ]
+  }
+}

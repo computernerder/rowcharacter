@@ -1,0 +1,53 @@
+{
+  "id": "wanderer",
+  "name": "Wanderer",
+  "description": "Born without roots, you drifted across lands and cultures. You adapt easily but often struggle to belong.",
+  
+  "skill_proficiencies": ["Survival", "Performance"],
+  "languages_granted": 0,
+  "tool_proficiencies": ["Musical Instrument"],
+  
+  "equipment": ["Musical instrument", "Travel clothes", "10 bronze"],
+  
+  "feature": {
+    "name": "Wayfarer's Lore",
+    "description": "You know a song, story, or saying from nearly every region. This grants advantage on Charisma checks when trying to fit in with unfamiliar cultures."
+  },
+  
+  "personality_tables": {
+    "traits": [
+      {"roll": 1, "text": "I collect stories everywhere I go.", "morality": 0, "reputation": 0},
+      {"roll": 2, "text": "I speak with a mix of accents from many lands.", "morality": 0, "reputation": 0},
+      {"roll": 3, "text": "I am always ready to move on.", "morality": 0, "reputation": 0},
+      {"roll": 4, "text": "I make friends quickly but rarely keep them.", "morality": 0, "reputation": 0},
+      {"roll": 5, "text": "I am curious about every new culture.", "morality": 0, "reputation": 0},
+      {"roll": 6, "text": "I never sleep in the same place twice if I can help it.", "morality": 0, "reputation": 0},
+      {"roll": 7, "text": "I tell elaborate lies about my past.", "morality": 0, "reputation": 0},
+      {"roll": 8, "text": "I carry trinkets from every place I've visited.", "morality": 0, "reputation": 0}
+    ],
+    "ideals": [
+      {"roll": 1, "text": "Freedom. The road is life.", "morality": 1, "reputation": 0},
+      {"roll": 2, "text": "Change. Nothing should stay the same forever.", "morality": 0, "reputation": 0},
+      {"roll": 3, "text": "Knowledge. Every journey teaches something new.", "morality": 0, "reputation": 0},
+      {"roll": 4, "text": "People. I'm loyal to my friends, not places.", "morality": 1, "reputation": 1},
+      {"roll": 5, "text": "Aspiration. Somewhere out there is a place I'll call home.", "morality": 0, "reputation": 0},
+      {"roll": 6, "text": "Escape. I run from my past.", "morality": 0, "reputation": -1}
+    ],
+    "bonds": [
+      {"roll": 1, "text": "I protect a song or story above all else.", "morality": 0, "reputation": 0},
+      {"roll": 2, "text": "A fellow traveler saved my life.", "morality": 1, "reputation": 0},
+      {"roll": 3, "text": "I seek a legendary place I heard about.", "morality": 0, "reputation": 0},
+      {"roll": 4, "text": "I left someone behind and regret it.", "morality": 0, "reputation": 0},
+      {"roll": 5, "text": "My instrument is my most precious possession.", "morality": 0, "reputation": 0},
+      {"roll": 6, "text": "I carry a map to somewhere I've never been.", "morality": 0, "reputation": 0}
+    ],
+    "flaws": [
+      {"roll": 1, "text": "I never stay to face consequences.", "morality": -1, "reputation": -1},
+      {"roll": 2, "text": "I cannot commit to anything or anyone.", "morality": 0, "reputation": -1},
+      {"roll": 3, "text": "I steal small trinkets compulsively.", "morality": -1, "reputation": -1},
+      {"roll": 4, "text": "I lie about my origins reflexively.", "morality": 0, "reputation": -1},
+      {"roll": 5, "text": "I am restless and bored easily.", "morality": 0, "reputation": 0},
+      {"roll": 6, "text": "I trust strangers over those who know me.", "morality": 0, "reputation": 0}
+    ]
+  }
+}

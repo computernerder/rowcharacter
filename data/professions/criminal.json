@@ -1,0 +1,30 @@
+{
+  "id": "criminal",
+  "name": "Criminal",
+  "description": "A rogue who survives through secrets, favors, and back alley connections.",
+  
+  "base_hp": 8,
+  
+  "feature": {
+    "name": "Underworld Contact",
+    "description": "You maintain a reliable link to local smugglers or fixers who can move small items, spread rumors, or provide safe hideouts."
+  },
+  
+  "armor_proficiencies": ["Light"],
+  "weapon_proficiencies": ["Simple", "Light"],
+  "tool_proficiencies": ["Thieves' Tools"],
+  
+  "tool_choices": null,
+  
+  "skill_choices": {
+    "count": 2,
+    "options": ["Stealth", "Sleight of Hand", "Deception", "Insight", "Streetwise", "Perception"]
+  },
+  
+  "suggested_paths": ["Exploitation", "Martial"],
+  
+  "duties": [],
+  
+  "equipment_pack": "Criminal's Pack (dagger, lockpicks, cloak, quiet boots)",
+  "gold_alternative": 40
+}

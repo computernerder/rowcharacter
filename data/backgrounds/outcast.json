@@ -1,0 +1,53 @@
+{
+  "id": "outcast",
+  "name": "Outcast",
+  "description": "Shunned by society, you survived in the wild or hidden on the fringes of cities. You carry mistrust but also resourcefulness.",
+  
+  "skill_proficiencies": ["Stealth", "Survival"],
+  "languages_granted": 0,
+  "tool_proficiencies": [],
+  
+  "equipment": ["Staff", "Crude charm", "Traveler's clothes", "10 bronze"],
+  
+  "feature": {
+    "name": "Wanderer's Memory",
+    "description": "You can recall routes, hidden paths, and safe places in regions you've traveled. You gain advantage on Survival checks to navigate terrain you've previously explored."
+  },
+  
+  "personality_tables": {
+    "traits": [
+      {"roll": 1, "text": "I avoid eye contact and conversation.", "morality": 0, "reputation": 0},
+      {"roll": 2, "text": "I hoard food and supplies obsessively.", "morality": 0, "reputation": 0},
+      {"roll": 3, "text": "I speak bluntly and without social grace.", "morality": 0, "reputation": -1},
+      {"roll": 4, "text": "I am fiercely independent.", "morality": 0, "reputation": 0},
+      {"roll": 5, "text": "I watch others carefully before acting.", "morality": 0, "reputation": 0},
+      {"roll": 6, "text": "I am slow to trust but loyal once trust is earned.", "morality": 1, "reputation": 0},
+      {"roll": 7, "text": "I prefer the company of animals to people.", "morality": 0, "reputation": 0},
+      {"roll": 8, "text": "I never forget a kindness or a slight.", "morality": 0, "reputation": 0}
+    ],
+    "ideals": [
+      {"roll": 1, "text": "Freedom. No one should be chained by society.", "morality": 1, "reputation": 0},
+      {"roll": 2, "text": "Survival. Only the strong endure.", "morality": 0, "reputation": 0},
+      {"roll": 3, "text": "Self-Reliance. I depend on no one.", "morality": 0, "reputation": 0},
+      {"roll": 4, "text": "Revenge. I will make those who cast me out pay.", "morality": -1, "reputation": -1},
+      {"roll": 5, "text": "Redemption. I will prove my worth.", "morality": 1, "reputation": 1},
+      {"roll": 6, "text": "Nature. The wild is pure; civilization is corrupt.", "morality": 0, "reputation": 0}
+    ],
+    "bonds": [
+      {"roll": 1, "text": "A wild place is my sanctuary.", "morality": 0, "reputation": 0},
+      {"roll": 2, "text": "Someone helped me survive; I owe them everything.", "morality": 1, "reputation": 1},
+      {"roll": 3, "text": "I seek to find others like me.", "morality": 0, "reputation": 0},
+      {"roll": 4, "text": "I protect the weak and outcast.", "morality": 1, "reputation": 1},
+      {"roll": 5, "text": "A keepsake reminds me of my former life.", "morality": 0, "reputation": 0},
+      {"roll": 6, "text": "I will reclaim what was taken from me.", "morality": 0, "reputation": 0}
+    ],
+    "flaws": [
+      {"roll": 1, "text": "I am suspicious of everyone.", "morality": 0, "reputation": -1},
+      {"roll": 2, "text": "I react violently to perceived threats.", "morality": -1, "reputation": -1},
+      {"roll": 3, "text": "I cannot abide enclosed spaces.", "morality": 0, "reputation": 0},
+      {"roll": 4, "text": "I am bitter and resentful.", "morality": -1, "reputation": -1},
+      {"roll": 5, "text": "I have trouble following rules.", "morality": 0, "reputation": -1},
+      {"roll": 6, "text": "I push away those who try to get close.", "morality": 0, "reputation": 0}
+    ]
+  }
+}

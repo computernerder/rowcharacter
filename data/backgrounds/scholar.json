@@ -1,22 +1,13 @@
 {
   "id": "scholar",
   "name": "Scholar",
-  "description": "You spent years studying in a library, university, or under a master's tutelage, gaining expertise in academic pursuits.",
+  "description": "Your life was spent in study, poring over scrolls, learning from sages, and unraveling mysteries.",
   
   "skill_proficiencies": ["Arcana", "History"],
-  
   "languages_granted": 2,
-  
   "tool_proficiencies": [],
   
-  "equipment": [
-    "Ink and quills",
-    "Parchment",
-    "Small knife",
-    "Reference book",
-    "Common clothes",
-    "10 bronze"
-  ],
+  "equipment": ["Writing kit", "Book of lore", "Simple clothes", "10 bronze"],
   
   "feature": {
     "name": "Researcher",
@@ -25,38 +16,38 @@
   
   "personality_tables": {
     "traits": [
-      {"roll": 1, "text": "I use polysyllabic words that convey the impression of great erudition.", "morality": 0, "reputation": 0},
-      {"roll": 2, "text": "I've read every book in the world's greatest libraries.", "morality": 0, "reputation": 0},
-      {"roll": 3, "text": "I'm used to helping out those who aren't as smart as I am.", "morality": 0, "reputation": -1},
-      {"roll": 4, "text": "There's nothing I like more than a good mystery.", "morality": 0, "reputation": 0},
-      {"roll": 5, "text": "I'm willing to listen to every side of an argument before making a decision.", "morality": 1, "reputation": 1},
-      {"roll": 6, "text": "I... speak... slowly... when talking... to idiots.", "morality": 0, "reputation": -1},
-      {"roll": 7, "text": "I am horribly awkward in social situations.", "morality": 0, "reputation": 0},
-      {"roll": 8, "text": "I'm convinced people are always trying to steal my work.", "morality": 0, "reputation": 0}
+      {"roll": 1, "text": "I quote obscure facts at every opportunity.", "morality": 0, "reputation": 0},
+      {"roll": 2, "text": "I use polysyllabic words that convey the impression of great erudition.", "morality": 0, "reputation": 0},
+      {"roll": 3, "text": "I am absent-minded and easily distracted by new information.", "morality": 0, "reputation": 0},
+      {"roll": 4, "text": "I am patient and methodical in all things.", "morality": 0, "reputation": 0},
+      {"roll": 5, "text": "I am convinced that people are always trying to steal my secrets.", "morality": 0, "reputation": 0},
+      {"roll": 6, "text": "I am condescending to those who lack my education.", "morality": 0, "reputation": -1},
+      {"roll": 7, "text": "I have read about everything but experienced little.", "morality": 0, "reputation": 0},
+      {"roll": 8, "text": "I speak slowly, choosing my words with great care.", "morality": 0, "reputation": 0}
     ],
     "ideals": [
-      {"roll": 1, "text": "Knowledge. The path to power is through knowledge.", "morality": 0, "reputation": 0},
-      {"roll": 2, "text": "Beauty. What is beautiful points us beyond itself.", "morality": 0, "reputation": 0},
-      {"roll": 3, "text": "Logic. Emotions must not cloud our logical thinking.", "morality": 0, "reputation": 0},
-      {"roll": 4, "text": "No Limits. Nothing should fetter infinite possibility.", "morality": -1, "reputation": 0},
-      {"roll": 5, "text": "Power. Knowledge is the path to power and domination.", "morality": -1, "reputation": 0},
-      {"roll": 6, "text": "Self-Improvement. The goal of life is betterment of oneself.", "morality": 1, "reputation": 1}
+      {"roll": 1, "text": "Knowledge. Truth must be pursued regardless of cost.", "morality": 0, "reputation": 0},
+      {"roll": 2, "text": "Logic. Emotions must not cloud our logical thinking.", "morality": 0, "reputation": 0},
+      {"roll": 3, "text": "Power. Knowledge is the path to power and domination.", "morality": -1, "reputation": 0},
+      {"roll": 4, "text": "Self-Improvement. The goal of a life of study is the betterment of oneself.", "morality": 0, "reputation": 0},
+      {"roll": 5, "text": "Sharing. Knowledge must be shared freely.", "morality": 1, "reputation": 1},
+      {"roll": 6, "text": "Beauty. The elegant solution is always the best.", "morality": 0, "reputation": 0}
     ],
     "bonds": [
-      {"roll": 1, "text": "It is my duty to protect my students.", "morality": 1, "reputation": 1},
-      {"roll": 2, "text": "I have an ancient text that holds terrible secrets.", "morality": 0, "reputation": 0},
-      {"roll": 3, "text": "I work to preserve a library or university.", "morality": 1, "reputation": 1},
-      {"roll": 4, "text": "My life's work is a series of tomes.", "morality": 0, "reputation": 0},
-      {"roll": 5, "text": "I've been searching for an answer my whole life.", "morality": 0, "reputation": 0},
-      {"roll": 6, "text": "I sold my soul for knowledge. I hope to find a way out.", "morality": -1, "reputation": 0}
+      {"roll": 1, "text": "My mentor still guides me.", "morality": 1, "reputation": 0},
+      {"roll": 2, "text": "I seek an ancient text that holds great secrets.", "morality": 0, "reputation": 0},
+      {"roll": 3, "text": "My library is my greatest treasure.", "morality": 0, "reputation": 0},
+      {"roll": 4, "text": "I owe everything to my institution.", "morality": 1, "reputation": 1},
+      {"roll": 5, "text": "I work to preserve endangered knowledge.", "morality": 1, "reputation": 1},
+      {"roll": 6, "text": "It is my duty to protect my students.", "morality": 1, "reputation": 1}
     ],
     "flaws": [
-      {"roll": 1, "text": "I am easily distracted by the promise of information.", "morality": 0, "reputation": 0},
-      {"roll": 2, "text": "Most people scream and run when they see a demon. I stop and take notes.", "morality": 0, "reputation": 0},
-      {"roll": 3, "text": "Unlocking an ancient mystery is worth the price of a civilization.", "morality": -1, "reputation": -1},
-      {"roll": 4, "text": "I overlook obvious solutions in favor of complicated ones.", "morality": 0, "reputation": 0},
-      {"roll": 5, "text": "I speak without really thinking through my words, insulting others.", "morality": 0, "reputation": -1},
-      {"roll": 6, "text": "I can't keep a secret to save my life.", "morality": 0, "reputation": -1}
+      {"roll": 1, "text": "I hoard knowledge and refuse to share.", "morality": -1, "reputation": -1},
+      {"roll": 2, "text": "I am easily distracted by the promise of information.", "morality": 0, "reputation": 0},
+      {"roll": 3, "text": "I overlook obvious solutions in favor of complicated ones.", "morality": 0, "reputation": 0},
+      {"roll": 4, "text": "I speak without thinking, often insulting others.", "morality": 0, "reputation": -1},
+      {"roll": 5, "text": "I cannot keep a secret if it relates to my studies.", "morality": 0, "reputation": -1},
+      {"roll": 6, "text": "Most people scream and run when they see a demon. I stop and take notes.", "morality": 0, "reputation": 0}
     ]
   }
 }

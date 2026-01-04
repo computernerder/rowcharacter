@@ -1,0 +1,53 @@
+{
+  "id": "artisan",
+  "name": "Artisan",
+  "description": "You learned a trade at the hands of masters. Whether smith, weaver, or mason, your craft ties you to guilds and communities.",
+  
+  "skill_proficiencies": ["Investigation", "Insight"],
+  "languages_granted": 0,
+  "tool_proficiencies": ["Artisan's Tools"],
+  
+  "equipment": ["Artisan's tools", "Guild token", "Work clothes", "15 bronze"],
+  
+  "feature": {
+    "name": "Guild Bonds",
+    "description": "You can call upon fellow guild members for simple assistance. Guild halls offer lodging and may have connections to local merchants and officials."
+  },
+  
+  "personality_tables": {
+    "traits": [
+      {"roll": 1, "text": "I take great pride in my work.", "morality": 0, "reputation": 1},
+      {"roll": 2, "text": "I judge others by the quality of their craft.", "morality": 0, "reputation": 0},
+      {"roll": 3, "text": "I always look for ways to improve things.", "morality": 0, "reputation": 0},
+      {"roll": 4, "text": "I enjoy talking shop with fellow artisans.", "morality": 0, "reputation": 0},
+      {"roll": 5, "text": "I am meticulous about every detail.", "morality": 0, "reputation": 0},
+      {"roll": 6, "text": "I keep my tools in perfect condition.", "morality": 0, "reputation": 0},
+      {"roll": 7, "text": "I see everything as a potential material.", "morality": 0, "reputation": 0},
+      {"roll": 8, "text": "I believe honest work is the highest virtue.", "morality": 1, "reputation": 1}
+    ],
+    "ideals": [
+      {"roll": 1, "text": "Community. My work serves the greater good.", "morality": 1, "reputation": 1},
+      {"roll": 2, "text": "Generosity. I use my skills to help others.", "morality": 1, "reputation": 1},
+      {"roll": 3, "text": "Freedom. Everyone should be free to create.", "morality": 0, "reputation": 0},
+      {"roll": 4, "text": "Greed. I work only for profit.", "morality": -1, "reputation": -1},
+      {"roll": 5, "text": "Tradition. I honor the methods of my masters.", "morality": 0, "reputation": 1},
+      {"roll": 6, "text": "Innovation. Old ways must give way to the new.", "morality": 0, "reputation": 0}
+    ],
+    "bonds": [
+      {"roll": 1, "text": "My guild is my second family.", "morality": 1, "reputation": 1},
+      {"roll": 2, "text": "I owe my master everything.", "morality": 1, "reputation": 0},
+      {"roll": 3, "text": "I created something I am deeply proud of.", "morality": 0, "reputation": 0},
+      {"roll": 4, "text": "Someone stole my greatest work.", "morality": 0, "reputation": 0},
+      {"roll": 5, "text": "I am working on a masterpiece.", "morality": 0, "reputation": 0},
+      {"roll": 6, "text": "I seek rare materials for a special project.", "morality": 0, "reputation": 0}
+    ],
+    "flaws": [
+      {"roll": 1, "text": "I refuse to compromise on quality, even when impractical.", "morality": 0, "reputation": 0},
+      {"roll": 2, "text": "I am jealous of superior craftsmen.", "morality": 0, "reputation": -1},
+      {"roll": 3, "text": "I hoard valuable materials.", "morality": 0, "reputation": -1},
+      {"roll": 4, "text": "I cannot resist showing off my work.", "morality": 0, "reputation": 0},
+      {"roll": 5, "text": "I am dismissive of those who cannot create.", "morality": 0, "reputation": -1},
+      {"roll": 6, "text": "I trust my creations more than people.", "morality": 0, "reputation": 0}
+    ]
+  }
+}

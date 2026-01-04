@@ -1,0 +1,53 @@
+{
+  "id": "seafarer",
+  "name": "Seafarer",
+  "description": "You lived your life on rivers or seas, steering ships or mending sails. Salt is in your blood.",
+  
+  "skill_proficiencies": ["Athletics", "Nature"],
+  "languages_granted": 0,
+  "tool_proficiencies": ["Navigator's Tools"],
+  
+  "equipment": ["Rope", "Lucky charm", "Sailor's clothes", "10 bronze"],
+  
+  "feature": {
+    "name": "Ship Passage",
+    "description": "You can secure passage on friendly ships for yourself and your companions. In return, you may be expected to assist the crew during the voyage."
+  },
+  
+  "personality_tables": {
+    "traits": [
+      {"roll": 1, "text": "I tell tall tales of the sea.", "morality": 0, "reputation": 0},
+      {"roll": 2, "text": "I use nautical terms in everyday speech.", "morality": 0, "reputation": 0},
+      {"roll": 3, "text": "I am superstitious about the sea.", "morality": 0, "reputation": 0},
+      {"roll": 4, "text": "I am restless when away from water.", "morality": 0, "reputation": 0},
+      {"roll": 5, "text": "I sing sea shanties constantly.", "morality": 0, "reputation": 0},
+      {"roll": 6, "text": "I can predict weather by smell and wind.", "morality": 0, "reputation": 0},
+      {"roll": 7, "text": "I work best as part of a crew.", "morality": 0, "reputation": 0},
+      {"roll": 8, "text": "I am never seasick but hate horses.", "morality": 0, "reputation": 0}
+    ],
+    "ideals": [
+      {"roll": 1, "text": "Freedom. The sea makes all equal.", "morality": 1, "reputation": 0},
+      {"roll": 2, "text": "Respect. Every sailor earns their place.", "morality": 0, "reputation": 1},
+      {"roll": 3, "text": "Mastery. I will captain my own ship.", "morality": 0, "reputation": 0},
+      {"roll": 4, "text": "Fairness. We all share the dangers and rewards.", "morality": 1, "reputation": 1},
+      {"roll": 5, "text": "People. I'm committed to my crewmates.", "morality": 1, "reputation": 1},
+      {"roll": 6, "text": "Aspiration. Someday I'll own a fleet.", "morality": 0, "reputation": 0}
+    ],
+    "bonds": [
+      {"roll": 1, "text": "I love my ship more than life.", "morality": 0, "reputation": 0},
+      {"roll": 2, "text": "My captain gave me a chance when no one else would.", "morality": 1, "reputation": 0},
+      {"roll": 3, "text": "I seek vengeance on pirates who killed my crew.", "morality": 0, "reputation": 0},
+      {"roll": 4, "text": "I carry a map to hidden treasure.", "morality": 0, "reputation": 0},
+      {"roll": 5, "text": "I will return to the sea where my loved one was lost.", "morality": 0, "reputation": 0},
+      {"roll": 6, "text": "The sea is my home, not any port.", "morality": 0, "reputation": 0}
+    ],
+    "flaws": [
+      {"roll": 1, "text": "I drink excessively.", "morality": 0, "reputation": -1},
+      {"roll": 2, "text": "I gamble away my earnings.", "morality": 0, "reputation": -1},
+      {"roll": 3, "text": "I cannot swim, which I hide desperately.", "morality": 0, "reputation": 0},
+      {"roll": 4, "text": "I brawl at the slightest provocation.", "morality": 0, "reputation": -1},
+      {"roll": 5, "text": "I abandoned ship once and feel guilty.", "morality": -1, "reputation": -1},
+      {"roll": 6, "text": "I trust the sea more than people.", "morality": 0, "reputation": 0}
+    ]
+  }
+}

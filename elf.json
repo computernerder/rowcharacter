@@ -1,0 +1,377 @@
+{
+  "id": "",
+  "character_name": "Trela",
+  "player": "Jeric",
+  "profession": "Blacksmith",
+  "primary_path": "Power",
+  "race": "Elf",
+  "ancestry": "Sylari",
+  "background": "Village Champion",
+  "level": 1,
+  "total_experience": 0,
+  "stored_advance": "",
+  "ability_scores": {
+    "Might": {
+      "mod": 3,
+      "saving_throw": 3,
+      "total": 17,
+      "roll": 15,
+      "race": 0,
+      "misc": 2
+    },
+    "Agility": {
+      "mod": 2,
+      "saving_throw": 2,
+      "total": 14,
+      "roll": 14,
+      "race": 0,
+      "misc": 0
+    },
+    "Endurance": {
+      "mod": 2,
+      "saving_throw": 2,
+      "total": 15,
+      "roll": 13,
+      "race": 0,
+      "misc": 2
+    },
+    "Wisdom": {
+      "mod": 0,
+      "saving_throw": 0,
+      "total": 11,
+      "roll": 10,
+      "race": 1,
+      "misc": 0
+    },
+    "Intellect": {
+      "mod": 1,
+      "saving_throw": 1,
+      "total": 13,
+      "roll": 12,
+      "race": 1,
+      "misc": 0
+    },
+    "Charisma": {
+      "mod": -1,
+      "saving_throw": -1,
+      "total": 8,
+      "roll": 8,
+      "race": 0,
+      "misc": 0
+    }
+  },
+  "defense": {
+    "base": 9,
+    "agility": 2,
+    "shield": "",
+    "misc": 0,
+    "total": 11
+  },
+  "speed": 30,
+  "initiative": 2,
+  "health": {
+    "max": 11,
+    "current": 11,
+    "wounds": 0
+  },
+  "armor_hp": {
+    "max": 0,
+    "current": 0
+  },
+  "life_points": {
+    "max": 15,
+    "current": 15
+  },
+  "focus": {
+    "max": 0,
+    "current": 0
+  },
+  "passive": {
+    "perception": {
+      "base": 10,
+      "skill": 0,
+      "misc": 0,
+      "total": 10
+    },
+    "insight": {
+      "base": 10,
+      "skill": 1,
+      "misc": 0,
+      "total": 11
+    }
+  },
+  "attack_mods": {
+    "melee": {
+      "attr": 3,
+      "misc": 2,
+      "total": 5
+    },
+    "ranged": {
+      "attr": 2,
+      "misc": 0,
+      "total": 2
+    }
+  },
+  "skills": {
+    "Acrobatics": {
+      "trained": false,
+      "mod": 2,
+      "rank": 0,
+      "misc": 0,
+      "total": 2
+    },
+    "Animal Handling": {
+      "trained": false,
+      "mod": 0,
+      "rank": 0,
+      "misc": 0,
+      "total": 0
+    },
+    "Appraisal": {
+      "trained": false,
+      "mod": 1,
+      "rank": 0,
+      "misc": 0,
+      "total": 1
+    },
+    "Arcana": {
+      "trained": false,
+      "mod": 1,
+      "rank": 0,
+      "misc": 0,
+      "total": 1
+    },
+    "Athletics": {
+      "trained": true,
+      "mod": 3,
+      "rank": 1,
+      "misc": 0,
+      "total": 4
+    },
+    "Crafting": {
+      "trained": true,
+      "mod": 1,
+      "rank": 1,
+      "misc": 0,
+      "total": 2
+    },
+    "Desception": {
+      "trained": false,
+      "mod": -1,
+      "rank": 0,
+      "misc": 0,
+      "total": -1
+    },
+    "Diplomacy": {
+      "trained": false,
+      "mod": -1,
+      "rank": 0,
+      "misc": 0,
+      "total": -1
+    },
+    "History": {
+      "trained": false,
+      "mod": 1,
+      "rank": 0,
+      "misc": 0,
+      "total": 1
+    },
+    "Insight": {
+      "trained": false,
+      "mod": 1,
+      "rank": 0,
+      "misc": 0,
+      "total": 1
+    },
+    "Intimidation": {
+      "trained": false,
+      "mod": -1,
+      "rank": 0,
+      "misc": 0,
+      "total": -1
+    },
+    "Investigation": {
+      "trained": false,
+      "mod": 1,
+      "rank": 0,
+      "misc": 0,
+      "total": 1
+    },
+    "Medicine": {
+      "trained": false,
+      "mod": 1,
+      "rank": 0,
+      "misc": 0,
+      "total": 1
+    },
+    "Nature": {
+      "trained": false,
+      "mod": 1,
+      "rank": 0,
+      "misc": 0,
+      "total": 1
+    },
+    "Perception": {
+      "trained": false,
+      "mod": 0,
+      "rank": 0,
+      "misc": 0,
+      "total": 0
+    },
+    "Performance": {
+      "trained": false,
+      "mod": -1,
+      "rank": 0,
+      "misc": 0,
+      "total": -1
+    },
+    "Persuasion": {
+      "trained": true,
+      "mod": -1,
+      "rank": 1,
+      "misc": 0,
+      "total": 0
+    },
+    "Religion": {
+      "trained": false,
+      "mod": 1,
+      "rank": 0,
+      "misc": 0,
+      "total": 1
+    },
+    "Slight of Hand": {
+      "trained": false,
+      "mod": 2,
+      "rank": 0,
+      "misc": 0,
+      "total": 2
+    },
+    "Stealth": {
+      "trained": false,
+      "mod": 2,
+      "rank": 0,
+      "misc": 0,
+      "total": 2
+    },
+    "Streetwise": {
+      "trained": false,
+      "mod": 1,
+      "rank": 0,
+      "misc": 0,
+      "total": 1
+    },
+    "Survival": {
+      "trained": false,
+      "mod": 0,
+      "rank": 0,
+      "misc": 0,
+      "total": 0
+    },
+    "Taming": {
+      "trained": false,
+      "mod": 0,
+      "rank": 0,
+      "misc": 0,
+      "total": 0
+    }
+  },
+  "proficiencies": [
+    "Light",
+    "Medium",
+    "Heavy",
+    "Simple",
+    "Two-Handed",
+    "Smithing Tools"
+  ],
+  "languages": [
+    "Common",
+    "Elvish",
+    "Sylvan",
+    "Aquan",
+    "Tauric"
+  ],
+  "attacks": [],
+  "talents": [],
+  "features": [
+    {
+      "name": "Darkvision",
+      "text": "You can see in dim light within 60 feet as if it were bright light, and in darkness as if it were dim light."
+    },
+    {
+      "name": "Fey Ancestry",
+      "text": "You have advantage on saving throws against being charmed, and magic can't put you to sleep."
+    },
+    {
+      "name": "Life Bond",
+      "text": "Once per long rest, you may touch yourself or an ally to restore 2d6 hit points."
+    },
+    {
+      "name": "Smith's Guild Bond",
+      "text": "Your guild grants workspace, material access, and help with forging or repairing basic gear."
+    },
+    {
+      "name": "Adrenal Surge",
+      "text": "When you roll a natural 20 on a Might check or melee attack, gain temporary Health Points equal to your Might modifier."
+    },
+    {
+      "name": "Relentless Drive",
+      "text": "When an attack reduces you below half Health Points, you may make a reaction attack to an enemy within 5 feet of you. This does not have to be the same enemy that attacked you."
+    },
+    {
+      "name": "Furious Momentum",
+      "text": "When you reduce a creature to 0 LP, you may move up to 10 ft as part of the same action without provoking opportunity attacks."
+    },
+    {
+      "name": "Folk Hero",
+      "text": "Common people will shelter and aid you. You can find a place to hide, rest, or recuperate among commoners, unless you have shown yourself to be a danger to them."
+    }
+  ],
+  "spellcrafting": {
+    "save_dc": 0,
+    "attack_bonus": 0,
+    "crafting_points": {
+      "max": 0
+    },
+    "casting": "",
+    "spells": []
+  },
+  "inventory": {
+    "items": [
+      "Token from your community",
+      "Common clothes",
+      "15 bronze"
+    ],
+    "total_weight": ""
+  },
+  "notes": "",
+  "physical_traits": {
+    "height": "",
+    "weight": "",
+    "size": "Medium",
+    "age": "",
+    "creature_type": "Humanoid (Elf)",
+    "eyes": "",
+    "skin": "",
+    "hair": ""
+  },
+  "personality": {
+    "traits": "I brag about my deeds, even small ones.",
+    "ideal": "Justice. Everyone deserves fair treatment.",
+    "bond": "My village is my heart.",
+    "flaw": "I am boastful and arrogant."
+  },
+  "alignment": {
+    "alignment": "",
+    "mod": 2
+  },
+  "reputation": {
+    "reputation": "",
+    "mod": 2
+  },
+  "qr_payload": "",
+  "footer": {
+    "datecode": "",
+    "config": "",
+    "id": ""
+  }
+}

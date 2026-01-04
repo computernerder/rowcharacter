@@ -1,0 +1,49 @@
+{
+  "id": "survival",
+  "name": "Survival",
+  "description": "Those who thrive where others perish. Hunters, scouts, and trackers who endure the wilds through instinct, adaptation, and relentless focus.",
+  
+  "prerequisites": {
+    "primary": {
+      "attribute": "Wisdom",
+      "minimum": 15
+    },
+    "secondary": {
+      "options": ["Agility", "Endurance"],
+      "minimum": 13
+    }
+  },
+  
+  "primary_bonus": {
+    "Agility": 2,
+    "Wisdom": 2
+  },
+  
+  "talent_points_attribute": "Wisdom",
+  
+  "attack_bonus_melee": 0,
+  "attack_bonus_ranged": 2,
+  
+  "role": "Specialist",
+  
+  "features": [
+    {
+      "name": "Natural Resilience",
+      "description": "You gain advantage on Survival and Navigation checks in nonmagical terrain."
+    },
+    {
+      "name": "Hunter's Reflex",
+      "description": "When rolling Initiative, you may move up to 10 ft immediately before combat begins."
+    },
+    {
+      "name": "Keen Eyes",
+      "description": "You can identify creature tracks, terrain signs, or nearby movement with a Wisdom (Perception) check as a Bonus Action."
+    },
+    {
+      "name": "Beast Companion",
+      "description": "You may befriend a beast with a DR equal to your character level divided by four (rounded down). Command them as a bonus action; they take their turn immediately after yours in initiative."
+    }
+  ],
+  
+  "talents": ["hunter", "adapt_explorer", "agile_protector", "beast_bond", "defensive_footwork", "trackers_instinct", "wilderness_adaptation", "master_of_survival"]
+}

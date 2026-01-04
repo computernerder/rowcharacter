@@ -4,21 +4,14 @@
   "description": "You served in a temple, shrine, or faith community, dedicating yourself to the service of gods or cosmic truths.",
   
   "skill_proficiencies": ["Insight", "History"],
-  
   "languages_granted": 2,
-  
   "tool_proficiencies": [],
   
-  "equipment": [
-    "Symbol of faith",
-    "Ritual book or prayer beads",
-    "Common clothes",
-    "10 bronze"
-  ],
+  "equipment": ["Symbol of faith", "Ritual book or prayer beads", "Common clothes", "10 bronze"],
   
   "feature": {
     "name": "Shelter of the Faithful",
-    "description": "You command the respect of those who share your faith, and you can perform the religious ceremonies of your deity. You and your companions can expect free healing and care at temples of your faith, though you must provide material components for spells."
+    "description": "You command the respect of those who share your faith. You and your companions can expect free healing and care at temples of your faith, though you must provide material components for spells."
   },
   
   "personality_tables": {

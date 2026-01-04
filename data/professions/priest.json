@@ -1,0 +1,30 @@
+{
+  "id": "priest",
+  "name": "Priest",
+  "description": "A healer or spiritual guide trained under a temple or diocese.",
+  
+  "base_hp": 6,
+  
+  "feature": {
+    "name": "Diocese Ties",
+    "description": "You may request simple lodging, healing herbs, or access to temple archives."
+  },
+  
+  "armor_proficiencies": [],
+  "weapon_proficiencies": ["Simple"],
+  "tool_proficiencies": [],
+  
+  "tool_choices": null,
+  
+  "skill_choices": {
+    "count": 2,
+    "options": ["Religion", "Insight", "Medicine", "Diplomacy", "History", "Perception"]
+  },
+  
+  "suggested_paths": ["Divine", "Martial"],
+  
+  "duties": [],
+  
+  "equipment_pack": "Priest's Pack (holy symbol, travel robes, medical pouch)",
+  "gold_alternative": 45
+}

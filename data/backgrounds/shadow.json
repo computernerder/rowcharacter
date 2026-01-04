@@ -1,0 +1,53 @@
+{
+  "id": "shadow",
+  "name": "Shadow",
+  "description": "You learned to keep secrets, to observe, and to strike unseen.",
+  
+  "skill_proficiencies": ["Stealth", "Investigation"],
+  "languages_granted": 0,
+  "tool_proficiencies": ["Disguise Kit"],
+  
+  "equipment": ["Disguise kit", "Concealed dagger", "Dark clothes", "15 bronze"],
+  
+  "feature": {
+    "name": "Silent Network",
+    "description": "You have contacts in the underworld who pass along rumors and information. You can send and receive messages through criminal channels."
+  },
+  
+  "personality_tables": {
+    "traits": [
+      {"roll": 1, "text": "I fade into the background.", "morality": 0, "reputation": 0},
+      {"roll": 2, "text": "I speak in riddles and half-truths.", "morality": 0, "reputation": 0},
+      {"roll": 3, "text": "I never use my real name.", "morality": 0, "reputation": 0},
+      {"roll": 4, "text": "I watch exits in every room.", "morality": 0, "reputation": 0},
+      {"roll": 5, "text": "I am paranoid about being followed.", "morality": 0, "reputation": 0},
+      {"roll": 6, "text": "I have multiple identities prepared.", "morality": 0, "reputation": 0},
+      {"roll": 7, "text": "I speak softly so others must lean in.", "morality": 0, "reputation": 0},
+      {"roll": 8, "text": "I remember faces but forget names on purpose.", "morality": 0, "reputation": 0}
+    ],
+    "ideals": [
+      {"roll": 1, "text": "Loyalty. My network is my family.", "morality": 1, "reputation": 0},
+      {"roll": 2, "text": "Greed. I do what pays.", "morality": -1, "reputation": -1},
+      {"roll": 3, "text": "Freedom. No one controls me.", "morality": 0, "reputation": 0},
+      {"roll": 4, "text": "Redemption. I want to leave this life behind.", "morality": 1, "reputation": 0},
+      {"roll": 5, "text": "People. I help those who cannot help themselves.", "morality": 1, "reputation": 1},
+      {"roll": 6, "text": "Power. Knowledge is the greatest power.", "morality": 0, "reputation": 0}
+    ],
+    "bonds": [
+      {"roll": 1, "text": "I owe my life to a contact.", "morality": 1, "reputation": 0},
+      {"roll": 2, "text": "Someone knows my true identity.", "morality": 0, "reputation": 0},
+      {"roll": 3, "text": "I work to bring down a corrupt organization.", "morality": 1, "reputation": 0},
+      {"roll": 4, "text": "I protect someone who doesn't know what I do.", "morality": 1, "reputation": 0},
+      {"roll": 5, "text": "I stole something I cannot fence.", "morality": 0, "reputation": 0},
+      {"roll": 6, "text": "My mentor was killed; I seek answers.", "morality": 0, "reputation": 0}
+    ],
+    "flaws": [
+      {"roll": 1, "text": "I lie constantly.", "morality": -1, "reputation": -1},
+      {"roll": 2, "text": "I cannot resist a valuable secret.", "morality": 0, "reputation": -1},
+      {"roll": 3, "text": "I betray people if the price is right.", "morality": -1, "reputation": -2},
+      {"roll": 4, "text": "I am always looking for an angle.", "morality": 0, "reputation": -1},
+      {"roll": 5, "text": "I trust no one, not even allies.", "morality": 0, "reputation": 0},
+      {"roll": 6, "text": "My past catches up with me at the worst times.", "morality": 0, "reputation": 0}
+    ]
+  }
+}

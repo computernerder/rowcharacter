@@ -1,0 +1,53 @@
+{
+  "id": "noble_heir",
+  "name": "Noble Heir",
+  "description": "Your family is known, whether for wealth, power, or infamy. Your bearing marks you as someone of importance.",
+  
+  "skill_proficiencies": ["Persuasion", "History"],
+  "languages_granted": 0,
+  "tool_proficiencies": [],
+  
+  "equipment": ["Signet ring", "Fine clothes", "25 bronze"],
+  
+  "feature": {
+    "name": "Noble Privilege",
+    "description": "You can secure audiences with other nobles and officials. Common people tend to defer to you, and you can leverage your family name for favors."
+  },
+  
+  "personality_tables": {
+    "traits": [
+      {"roll": 1, "text": "I speak with confidence and authority.", "morality": 0, "reputation": 1},
+      {"roll": 2, "text": "I am gracious to those beneath my station.", "morality": 1, "reputation": 1},
+      {"roll": 3, "text": "I expect the best accommodations.", "morality": 0, "reputation": 0},
+      {"roll": 4, "text": "I know the proper etiquette for every occasion.", "morality": 0, "reputation": 0},
+      {"roll": 5, "text": "I am unaccustomed to manual labor.", "morality": 0, "reputation": 0},
+      {"roll": 6, "text": "I carry myself with dignity at all times.", "morality": 0, "reputation": 1},
+      {"roll": 7, "text": "I am fascinated by common folk.", "morality": 0, "reputation": 0},
+      {"roll": 8, "text": "I drop my family name at every opportunity.", "morality": 0, "reputation": 0}
+    ],
+    "ideals": [
+      {"roll": 1, "text": "Responsibility. Nobility demands service to others.", "morality": 1, "reputation": 1},
+      {"roll": 2, "text": "Power. Strength is the right to rule.", "morality": -1, "reputation": 0},
+      {"roll": 3, "text": "Family. Blood is thicker than water.", "morality": 0, "reputation": 1},
+      {"roll": 4, "text": "Independence. I must prove myself outside my family's shadow.", "morality": 0, "reputation": 0},
+      {"roll": 5, "text": "Noble Obligation. I must protect those beneath me.", "morality": 1, "reputation": 1},
+      {"roll": 6, "text": "Tradition. The old ways preserve order.", "morality": 0, "reputation": 1}
+    ],
+    "bonds": [
+      {"roll": 1, "text": "My house is my pride.", "morality": 1, "reputation": 1},
+      {"roll": 2, "text": "I owe a debt to a commoner who helped me.", "morality": 1, "reputation": 0},
+      {"roll": 3, "text": "I will restore my family's fallen honor.", "morality": 0, "reputation": 0},
+      {"roll": 4, "text": "I carry a family heirloom of great value.", "morality": 0, "reputation": 0},
+      {"roll": 5, "text": "Someone in my family was wrongly accused.", "morality": 0, "reputation": 0},
+      {"roll": 6, "text": "My family has enemies I must face.", "morality": 0, "reputation": 0}
+    ],
+    "flaws": [
+      {"roll": 1, "text": "I am arrogant to a fault.", "morality": 0, "reputation": -1},
+      {"roll": 2, "text": "I cannot handle being disrespected.", "morality": 0, "reputation": -1},
+      {"roll": 3, "text": "I hide a shameful family secret.", "morality": 0, "reputation": 0},
+      {"roll": 4, "text": "I look down on common people.", "morality": -1, "reputation": -1},
+      {"roll": 5, "text": "I am easily manipulated by flattery.", "morality": 0, "reputation": 0},
+      {"roll": 6, "text": "I believe I deserve special treatment always.", "morality": 0, "reputation": -1}
+    ]
+  }
+}

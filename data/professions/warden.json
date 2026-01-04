@@ -1,0 +1,33 @@
+{
+  "id": "warden",
+  "name": "Warden of the Wild",
+  "description": "Nature-based scout, herbalist, or caretaker of untamed places.",
+  
+  "base_hp": 8,
+  
+  "feature": {
+    "name": "Natural Steward",
+    "description": "You have friendly ties with druid circles, scouting lodges, or wildlife keepers who offer shelter or guidance."
+  },
+  
+  "armor_proficiencies": ["Light", "Medium"],
+  "weapon_proficiencies": ["Simple", "Melee"],
+  "tool_proficiencies": [],
+  
+  "tool_choices": {
+    "count": 1,
+    "options": ["Herbal Kit", "Hunting Tools"]
+  },
+  
+  "skill_choices": {
+    "count": 2,
+    "options": ["Nature", "Perception", "Animal Handling", "Medicine", "Stealth", "Athletics"]
+  },
+  
+  "suggested_paths": ["Divine", "Survival"],
+  
+  "duties": [],
+  
+  "equipment_pack": "Warden's Pack (bow or spear, bedroll, herb kit)",
+  "gold_alternative": 50
+}

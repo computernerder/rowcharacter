@@ -1,0 +1,53 @@
+{
+  "id": "village_champion",
+  "name": "Village Champion",
+  "description": "You stood for your people against corruption, beasts, or tyranny. Ordinary folk still look to you as a symbol of hope.",
+  
+  "skill_proficiencies": ["Athletics", "Persuasion"],
+  "languages_granted": 2,
+  "tool_proficiencies": [],
+  
+  "equipment": ["Token from your community", "Common clothes", "15 bronze"],
+  
+  "feature": {
+    "name": "Folk Hero",
+    "description": "Common people will shelter and aid you. You can find a place to hide, rest, or recuperate among commoners, unless you have shown yourself to be a danger to them."
+  },
+  
+  "personality_tables": {
+    "traits": [
+      {"roll": 1, "text": "I brag about my deeds, even small ones.", "morality": 0, "reputation": 0},
+      {"roll": 2, "text": "I treat everyone as equals.", "morality": 1, "reputation": 1},
+      {"roll": 3, "text": "I am uncomfortable around nobility.", "morality": 0, "reputation": 0},
+      {"roll": 4, "text": "I always help those in need.", "morality": 1, "reputation": 1},
+      {"roll": 5, "text": "I speak simply and directly.", "morality": 0, "reputation": 0},
+      {"roll": 6, "text": "I am fiercely protective of the innocent.", "morality": 1, "reputation": 1},
+      {"roll": 7, "text": "I never back down from a challenge.", "morality": 0, "reputation": 0},
+      {"roll": 8, "text": "I remember every face from my village.", "morality": 0, "reputation": 0}
+    ],
+    "ideals": [
+      {"roll": 1, "text": "Justice. Everyone deserves fair treatment.", "morality": 1, "reputation": 1},
+      {"roll": 2, "text": "Protection. The strong must defend the weak.", "morality": 1, "reputation": 1},
+      {"roll": 3, "text": "Freedom. No one should live under tyranny.", "morality": 1, "reputation": 1},
+      {"roll": 4, "text": "Destiny. I was born for great things.", "morality": 0, "reputation": 0},
+      {"roll": 5, "text": "Community. Together we are stronger.", "morality": 1, "reputation": 1},
+      {"roll": 6, "text": "Glory. My name will be remembered.", "morality": 0, "reputation": 0}
+    ],
+    "bonds": [
+      {"roll": 1, "text": "My village is my heart.", "morality": 1, "reputation": 1},
+      {"roll": 2, "text": "I fight for someone I lost.", "morality": 0, "reputation": 0},
+      {"roll": 3, "text": "I carry a token from someone I saved.", "morality": 0, "reputation": 0},
+      {"roll": 4, "text": "I must return home victorious.", "morality": 0, "reputation": 0},
+      {"roll": 5, "text": "I protect a secret that could harm my people.", "morality": 0, "reputation": 0},
+      {"roll": 6, "text": "A mentor taught me everything I know.", "morality": 1, "reputation": 0}
+    ],
+    "flaws": [
+      {"roll": 1, "text": "I am boastful and arrogant.", "morality": 0, "reputation": -1},
+      {"roll": 2, "text": "I cannot resist a damsel in distress.", "morality": 0, "reputation": 0},
+      {"roll": 3, "text": "I make enemies of the powerful.", "morality": 0, "reputation": -1},
+      {"roll": 4, "text": "I rush into danger without thinking.", "morality": 0, "reputation": 0},
+      {"roll": 5, "text": "I am haunted by a failure to protect someone.", "morality": 0, "reputation": 0},
+      {"roll": 6, "text": "I believe my own legend too much.", "morality": 0, "reputation": -1}
+    ]
+  }
+}

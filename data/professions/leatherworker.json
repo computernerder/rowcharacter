@@ -1,0 +1,30 @@
+{
+  "id": "leatherworker",
+  "name": "Leatherworker",
+  "description": "A tanner and hide crafter working under a leatherworkers guild.",
+  
+  "base_hp": 8,
+  
+  "feature": {
+    "name": "Leather Guild Access",
+    "description": "You may use guild workshops and request basic help with crafting or repairing leather items."
+  },
+  
+  "armor_proficiencies": ["Light", "Medium"],
+  "weapon_proficiencies": ["Simple", "Light"],
+  "tool_proficiencies": ["Leatherworking Tools"],
+  
+  "tool_choices": null,
+  
+  "skill_choices": {
+    "count": 2,
+    "options": ["Crafting", "Nature", "Appraisal", "Sleight of Hand", "Animal Handling", "Stealth"]
+  },
+  
+  "suggested_paths": ["Defense", "Survival"],
+  
+  "duties": [],
+  
+  "equipment_pack": "Leatherworker's Pack (leather tools and kit, utility belt)",
+  "gold_alternative": 45
+}

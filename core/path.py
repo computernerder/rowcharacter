@@ -118,6 +118,9 @@ class Path:
     # Combat/narrative role
     role: str = ""
     
+    # Whether this path grants spellcasting (Mystic)
+    spellcasting: bool = False
+    
     # Features (narrative abilities)
     features: List[Feature] = field(default_factory=list)
     
@@ -139,6 +142,7 @@ class Path:
             attack_bonus_melee=data.get("attack_bonus_melee", 0),
             attack_bonus_ranged=data.get("attack_bonus_ranged", 0),
             role=data.get("role", ""),
+            spellcasting=data.get("spellcasting", False),
             features=[Feature.from_dict(f) for f in data.get("features", [])],
             talents=data.get("talents", []),
         )
@@ -153,6 +157,7 @@ class Path:
             "attack_bonus_melee": self.attack_bonus_melee,
             "attack_bonus_ranged": self.attack_bonus_ranged,
             "role": self.role,
+            "spellcasting": self.spellcasting,
             "features": [f.to_dict() for f in self.features],
             "talents": self.talents,
         }

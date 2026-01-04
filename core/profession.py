@@ -104,6 +104,12 @@ class Profession:
     # Tool choices: {"count": 1, "options": ["artisan tool", "gaming set"]}
     tool_choices: Optional[Dict[str, Any]] = None
     
+    # Proficiency choices (for Free Agent): {"count": 6, "options": "any_armor_weapon_tool"}
+    proficiency_choices: Optional[Dict[str, Any]] = None
+    
+    # Skill proficiencies granted automatically
+    skill_proficiencies: List[str] = field(default_factory=list)
+    
     # Skill choices: {"count": 2, "options": ["Athletics", "Intimidation", "Perception"]}
     skill_choices: Optional[Dict[str, Any]] = None
     
@@ -134,6 +140,8 @@ class Profession:
             weapon_proficiencies=data.get("weapon_proficiencies", []),
             tool_proficiencies=data.get("tool_proficiencies", []),
             tool_choices=data.get("tool_choices"),
+            proficiency_choices=data.get("proficiency_choices"),
+            skill_proficiencies=data.get("skill_proficiencies", []),
             skill_choices=data.get("skill_choices"),
             suggested_paths=data.get("suggested_paths", []),
             duties=duties,
@@ -159,6 +167,10 @@ class Profession:
             result["feature"] = self.feature.to_dict()
         if self.tool_choices:
             result["tool_choices"] = self.tool_choices
+        if self.proficiency_choices:
+            result["proficiency_choices"] = self.proficiency_choices
+        if self.skill_proficiencies:
+            result["skill_proficiencies"] = self.skill_proficiencies
         if self.skill_choices:
             result["skill_choices"] = self.skill_choices
         return result
@@ -210,6 +222,13 @@ class Profession:
             for tool in chosen_tools:
                 if tool not in character.proficiencies:
                     character.proficiencies.append(tool)
+        
+        # Add automatic skill proficiencies (e.g., Free Agent gets Persuasion)
+        for skill in self.skill_proficiencies:
+            if skill in character.skills:
+                character.skills[skill].trained = True
+                if character.skills[skill].rank == 0:
+                    character.skills[skill].rank = 1
         
         # Train chosen skills
         if chosen_skills:

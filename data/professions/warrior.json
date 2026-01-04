@@ -16,7 +16,7 @@
   
   "tool_choices": {
     "count": 1,
-    "options": ["Artisan tool", "Gaming set"]
+    "options": ["Artisan Tool", "Gaming Set"]
   },
   
   "skill_choices": {
@@ -36,7 +36,7 @@
       "weapon_proficiencies": ["Martial"],
       "tool_choices": {
         "count": 1,
-        "options": ["Whetstone kit", "Armorer's tools", "Drill-sergeant whistle"]
+        "options": ["Whetstone Kit", "Armorer's Tools", "Drill-Sergeant Whistle"]
       },
       "skill_choices": {
         "count": 1,
@@ -50,11 +50,11 @@
       "name": "Ranger",
       "description": "Scout and tracker skilled at fighting in the wilds.",
       "suggested_paths": ["Defense", "Survival"],
-      "armor_proficiencies": ["Medium"],
+      "armor_proficiencies": [],
       "weapon_proficiencies": ["Finesse", "Ranged"],
       "tool_choices": {
         "count": 1,
-        "options": ["Hunting tools", "Snare kit", "Herbal pouch"]
+        "options": ["Hunting Tools", "Snare Kit", "Herbal Pouch"]
       },
       "skill_choices": {
         "count": 1,

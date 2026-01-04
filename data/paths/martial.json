@@ -1,0 +1,45 @@
+{
+  "id": "martial",
+  "name": "Martial",
+  "description": "For those who master motion itself, striking with purpose, balance, and perfect control.",
+  
+  "prerequisites": {
+    "primary": {
+      "attribute": "Agility",
+      "minimum": 15
+    },
+    "secondary": {
+      "options": ["Intellect", "Wisdom"],
+      "minimum": 13
+    }
+  },
+  
+  "primary_bonus": {
+    "Agility": 2,
+    "Wisdom": 2
+  },
+  
+  "talent_points_attribute": "Agility",
+  
+  "attack_bonus_melee": 1,
+  "attack_bonus_ranged": 1,
+  
+  "role": "Striker",
+  
+  "features": [
+    {
+      "name": "Fluid Motion",
+      "description": "You may use Agility instead of Might for Melee Attacks and damage rolls with unarmed or finesse weapons."
+    },
+    {
+      "name": "Momentum Strike",
+      "description": "When you take the Disengage action, you may make one unarmed strike as part of that action."
+    },
+    {
+      "name": "Focus Within",
+      "description": "Once per short rest, as a Bonus Action, gain advantage on Agility saving throws until the start of your next turn."
+    }
+  ],
+  
+  "talents": ["martial_arts", "balanced_stance", "defensive_stance", "quick_hands", "terrain_flow", "unencumbered_thought", "vertical_ascension", "master_of_martial"]
+}

@@ -1,0 +1,53 @@
+{
+  "id": "soldier",
+  "name": "Soldier",
+  "description": "You fought in wars or border skirmishes, standing in ranks with comrades. The habits of war remain with you.",
+  
+  "skill_proficiencies": ["Athletics", "Perception"],
+  "languages_granted": 0,
+  "tool_proficiencies": [],
+  
+  "equipment": ["Military insignia", "Weapon", "Uniform", "15 bronze"],
+  
+  "feature": {
+    "name": "Military Rank",
+    "description": "Fellow soldiers and veterans recognize your rank and service. You can invoke your rank to exert influence over other soldiers and requisition simple equipment or horses."
+  },
+  
+  "personality_tables": {
+    "traits": [
+      {"roll": 1, "text": "I speak with the clipped tone of military discipline.", "morality": 0, "reputation": 0},
+      {"roll": 2, "text": "I am haunted by memories of war.", "morality": 0, "reputation": 0},
+      {"roll": 3, "text": "I face problems head-on.", "morality": 0, "reputation": 0},
+      {"roll": 4, "text": "I maintain my gear obsessively.", "morality": 0, "reputation": 0},
+      {"roll": 5, "text": "I judge others by their discipline.", "morality": 0, "reputation": 0},
+      {"roll": 6, "text": "I share stories of comrades lost and battles won.", "morality": 0, "reputation": 0},
+      {"roll": 7, "text": "I have a crude sense of humor.", "morality": 0, "reputation": 0},
+      {"roll": 8, "text": "I am always punctual and expect others to be.", "morality": 0, "reputation": 0}
+    ],
+    "ideals": [
+      {"roll": 1, "text": "Duty. My oath defines me.", "morality": 1, "reputation": 1},
+      {"roll": 2, "text": "Greater Good. We must protect those who cannot fight.", "morality": 1, "reputation": 1},
+      {"roll": 3, "text": "Independence. When people follow orders blindly, they embrace tyranny.", "morality": 0, "reputation": 0},
+      {"roll": 4, "text": "Nation. My country, right or wrong.", "morality": 0, "reputation": 1},
+      {"roll": 5, "text": "Live and Let Live. I've seen enough death.", "morality": 0, "reputation": 0},
+      {"roll": 6, "text": "Might. In life as in war, the stronger force wins.", "morality": -1, "reputation": 0}
+    ],
+    "bonds": [
+      {"roll": 1, "text": "I fight for fallen comrades.", "morality": 1, "reputation": 0},
+      {"roll": 2, "text": "I will never forget who saved my life on the battlefield.", "morality": 1, "reputation": 0},
+      {"roll": 3, "text": "Someone I loved died because of a mistake I made.", "morality": 0, "reputation": 0},
+      {"roll": 4, "text": "My honor is my life.", "morality": 0, "reputation": 1},
+      {"roll": 5, "text": "I still serve my old commander in spirit.", "morality": 0, "reputation": 0},
+      {"roll": 6, "text": "I would lay down my life for the soldiers beside me.", "morality": 1, "reputation": 1}
+    ],
+    "flaws": [
+      {"roll": 1, "text": "I follow orders blindly.", "morality": 0, "reputation": 0},
+      {"roll": 2, "text": "The enemy I fought still terrifies me.", "morality": 0, "reputation": 0},
+      {"roll": 3, "text": "I have little respect for those who haven't served.", "morality": 0, "reputation": -1},
+      {"roll": 4, "text": "I made a terrible mistake in battle that cost lives.", "morality": 0, "reputation": 0},
+      {"roll": 5, "text": "I drink to forget the things I've done.", "morality": 0, "reputation": -1},
+      {"roll": 6, "text": "I cannot abide cowardice.", "morality": 0, "reputation": 0}
+    ]
+  }
+}

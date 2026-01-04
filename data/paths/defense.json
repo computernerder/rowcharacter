@@ -1,7 +1,7 @@
 {
   "id": "defense",
   "name": "Defense",
-  "description": "Masters of protection and endurance, Defense path characters excel at holding the line and shielding allies from harm.",
+  "description": "For those who stand unbroken, shielding others from chaos and leading through courage and conviction.",
   
   "prerequisites": {
     "primary": {
@@ -29,7 +29,7 @@
   "features": [
     {
       "name": "Hold the Line",
-      "description": "When a hostile creature you can see moves within 5 feet of you, you may use your Reaction to make a melee attack against them. On a hit, the creature's speed becomes 0 until the end of your next turn."
+      "description": "When a hostile creature you can see moves within 5 ft of you, you may use your Reaction to make a melee attack. On a hit, the creature's speed becomes 0 until the end of your next turn."
     },
     {
       "name": "Read the Threat",
@@ -37,17 +37,9 @@
     },
     {
       "name": "Unyielding Focus",
-      "description": "You have advantage on saving throws made to resist being knocked prone, disarmed, or shoved."
+      "description": "You have advantage on saves made to resist being knocked prone, disarmed, or shoved."
     }
   ],
   
-  "talents": [
-    "protector",
-    "guard", 
-    "adrenal_push",
-    "tactics",
-    "keen_mind",
-    "last_stand",
-    "master_of_defense"
-  ]
+  "talents": ["protector", "guard", "adrenal_push", "tactics", "keen_mind", "last_stand", "master_of_defense"]
 }

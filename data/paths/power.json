@@ -1,0 +1,45 @@
+{
+  "id": "power",
+  "name": "Power",
+  "description": "Those who unleash their inner fury to become living engines of destruction. Warriors of instinct and endurance who trade control for devastating strength.",
+  
+  "prerequisites": {
+    "primary": {
+      "attribute": "Might",
+      "minimum": 15
+    },
+    "secondary": {
+      "options": ["Agility", "Endurance"],
+      "minimum": 13
+    }
+  },
+  
+  "primary_bonus": {
+    "Might": 2,
+    "Endurance": 2
+  },
+  
+  "talent_points_attribute": "Might",
+  
+  "attack_bonus_melee": 2,
+  "attack_bonus_ranged": 0,
+  
+  "role": "Striker",
+  
+  "features": [
+    {
+      "name": "Adrenal Surge",
+      "description": "When you roll a natural 20 on a Might check or melee attack, gain temporary Health Points equal to your Might modifier."
+    },
+    {
+      "name": "Relentless Drive",
+      "description": "When an attack reduces you below half Health Points, you may make a reaction attack to an enemy within 5 feet of you. This does not have to be the same enemy that attacked you."
+    },
+    {
+      "name": "Furious Momentum",
+      "description": "When you reduce a creature to 0 LP, you may move up to 10 ft as part of the same action without provoking opportunity attacks."
+    }
+  ],
+  
+  "talents": ["rage", "brutal_strike", "detect_danger", "primal_armor", "primal_instinct", "reckless_tactics", "savage_momentum", "master_of_power"]
+}

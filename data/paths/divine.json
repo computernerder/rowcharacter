@@ -1,0 +1,45 @@
+{
+  "id": "divine",
+  "name": "Divine",
+  "description": "Those who draw abilities from the gifts allowed to them by their deity, not enchantment. Their belief becomes their armor, their will the weapon that shields others and purifies corruption.",
+  
+  "prerequisites": {
+    "primary": {
+      "attribute": "Wisdom",
+      "minimum": 15
+    },
+    "secondary": {
+      "options": ["Endurance", "Intellect"],
+      "minimum": 13
+    }
+  },
+  
+  "primary_bonus": {
+    "Wisdom": 3,
+    "Charisma": 3
+  },
+  
+  "talent_points_attribute": "Wisdom",
+  
+  "attack_bonus_melee": 0,
+  "attack_bonus_ranged": 0,
+  
+  "role": "Support",
+  
+  "features": [
+    {
+      "name": "Channel Conviction",
+      "description": "You can channel radiant energy through words or gestures. When you strike with a melee attack or cast a divine ability, add +1 radiant damage to the result."
+    },
+    {
+      "name": "Sanctified Will",
+      "description": "You gain advantage on saving throws against fear and charm effects."
+    },
+    {
+      "name": "Light of Resolve",
+      "description": "Once per short rest, as a Bonus Action, you and allies within 10 ft gain +1 Defense against all attacks until the start of your next turn."
+    }
+  ],
+  
+  "talents": ["divinity", "enlightened", "divine_burst", "faiths_guard", "conviction_aura", "master_of_divinity"]
+}

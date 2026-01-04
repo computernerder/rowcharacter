@@ -1,0 +1,30 @@
+{
+  "id": "blacksmith",
+  "name": "Blacksmith",
+  "description": "A trained metalworker belonging to a crafting guild.",
+  
+  "base_hp": 10,
+  
+  "feature": {
+    "name": "Smith's Guild Bond",
+    "description": "Your guild grants workspace, material access, and help with forging or repairing basic gear."
+  },
+  
+  "armor_proficiencies": ["Light", "Medium", "Heavy"],
+  "weapon_proficiencies": ["Simple", "Two-Handed"],
+  "tool_proficiencies": ["Smithing Tools"],
+  
+  "tool_choices": null,
+  
+  "skill_choices": {
+    "count": 2,
+    "options": ["Crafting", "Athletics", "Appraisal", "History", "Insight", "Streetwise"]
+  },
+  
+  "suggested_paths": ["Defense", "Power"],
+  
+  "duties": [],
+  
+  "equipment_pack": "Smith's Pack (hammer, apron, smithing kit)",
+  "gold_alternative": 55
+}

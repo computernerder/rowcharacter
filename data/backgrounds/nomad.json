@@ -1,0 +1,53 @@
+{
+  "id": "nomad",
+  "name": "Nomad",
+  "description": "Your people travel by herds, caravans, or stars. The road is your home and tradition your guide.",
+  
+  "skill_proficiencies": ["Animal Handling", "Survival"],
+  "languages_granted": 0,
+  "tool_proficiencies": [],
+  
+  "equipment": ["Heirloom trinket", "Travel clothes", "10 bronze"],
+  
+  "feature": {
+    "name": "Tribal Hospitality",
+    "description": "Among your kin or allied clans, you can expect food, shelter, and aid. Other nomadic peoples may recognize kinship and offer similar courtesy."
+  },
+  
+  "personality_tables": {
+    "traits": [
+      {"roll": 1, "text": "I feel restless if I stay in one place.", "morality": 0, "reputation": 0},
+      {"roll": 2, "text": "I honor the old traditions above all.", "morality": 0, "reputation": 1},
+      {"roll": 3, "text": "I measure wealth in animals and stories.", "morality": 0, "reputation": 0},
+      {"roll": 4, "text": "I trust the stars more than maps.", "morality": 0, "reputation": 0},
+      {"roll": 5, "text": "I share everything with my companions.", "morality": 1, "reputation": 1},
+      {"roll": 6, "text": "I am uncomfortable in cities.", "morality": 0, "reputation": 0},
+      {"roll": 7, "text": "I know songs and stories of my ancestors.", "morality": 0, "reputation": 0},
+      {"roll": 8, "text": "I am slow to anger but fierce when roused.", "morality": 0, "reputation": 0}
+    ],
+    "ideals": [
+      {"roll": 1, "text": "Community. The clan is stronger than any one member.", "morality": 1, "reputation": 1},
+      {"roll": 2, "text": "Tradition. The old ways preserve us.", "morality": 0, "reputation": 1},
+      {"roll": 3, "text": "Nature. We must live in harmony with the land.", "morality": 1, "reputation": 0},
+      {"roll": 4, "text": "Honor. My word is my bond.", "morality": 1, "reputation": 1},
+      {"roll": 5, "text": "Freedom. No walls can hold my spirit.", "morality": 0, "reputation": 0},
+      {"roll": 6, "text": "Change. We must adapt to survive.", "morality": 0, "reputation": 0}
+    ],
+    "bonds": [
+      {"roll": 1, "text": "My caravan is my family.", "morality": 1, "reputation": 1},
+      {"roll": 2, "text": "I carry an heirloom that connects me to my ancestors.", "morality": 0, "reputation": 0},
+      {"roll": 3, "text": "I was separated from my people and seek them.", "morality": 0, "reputation": 0},
+      {"roll": 4, "text": "I must complete a journey my elder could not.", "morality": 0, "reputation": 0},
+      {"roll": 5, "text": "A rival clan wronged my family.", "morality": 0, "reputation": 0},
+      {"roll": 6, "text": "I protect the sacred places of my people.", "morality": 1, "reputation": 0}
+    ],
+    "flaws": [
+      {"roll": 1, "text": "I am distrustful of settled folk.", "morality": 0, "reputation": -1},
+      {"roll": 2, "text": "I am stubborn about traditions.", "morality": 0, "reputation": 0},
+      {"roll": 3, "text": "I take offense at perceived insults to my clan.", "morality": 0, "reputation": -1},
+      {"roll": 4, "text": "I am superstitious to a fault.", "morality": 0, "reputation": 0},
+      {"roll": 5, "text": "I struggle to understand city customs.", "morality": 0, "reputation": 0},
+      {"roll": 6, "text": "I hold grudges against those who wrong my people.", "morality": 0, "reputation": -1}
+    ]
+  }
+}

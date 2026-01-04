@@ -1,7 +1,7 @@
 {
   "id": "mystic",
   "name": "Mystic",
-  "description": "Wielders of arcane power, Mystic path characters harness magical energies to devastating effect.",
+  "description": "Masters of thought, will, and the unseen threads that bind reality.",
   
   "prerequisites": {
     "primary": {
@@ -26,10 +26,12 @@
   
   "role": "Specialist",
   
+  "spellcasting": true,
+  
   "features": [
     {
       "name": "Arcane Initiate",
-      "description": "You gain a Spellcrafting Book, an arcane focus, and basic training in shaping magical energy."
+      "description": "You gain a Spellcrafting Book containing six Rank 1 Novice spells, an arcane focus, and basic training in shaping energy."
     },
     {
       "name": "Spell Attunement",
@@ -37,17 +39,9 @@
     },
     {
       "name": "Flow of Thought",
-      "description": "Once per short rest, as a Bonus Action, you gain advantage on Intellect saving throws until the start of your next turn."
+      "description": "Once per short rest, as a Bonus Action, gain advantage on Intellect saving throws until the start of your next turn."
     }
   ],
   
-  "talents": [
-    "spellcrafting",
-    "blood_pact",
-    "divination",
-    "scholar",
-    "spell_focus",
-    "warding",
-    "master_of_mystic"
-  ]
+  "talents": ["spellcrafting", "blood_pact", "divination", "scholar", "spell_focus", "warding", "master_of_mystics"]
 }

@@ -1,0 +1,40 @@
+{
+  "id": "free_agent",
+  "name": "Free Agent",
+  "description": "A self-driven wanderer who owes loyalty to no one and follows whatever opportunity brings the most benefit.",
+  
+  "base_hp": 8,
+  
+  "feature": {
+    "name": "Self-Made",
+    "description": "You have loose ties in many places and can call in small favors from almost any walk of life. You gain proficiency in Persuasion with a miscellaneous bonus equal to your reputation."
+  },
+  
+  "armor_proficiencies": [],
+  "weapon_proficiencies": [],
+  "tool_proficiencies": [],
+  
+  "tool_choices": null,
+  
+  "proficiency_choices": {
+    "count": 6,
+    "options": "any_armor_weapon_tool",
+    "description": "You may select any six armor, weapon, or tool proficiencies."
+  },
+  
+  "skill_proficiencies": ["Persuasion"],
+  
+  "skill_choices": {
+    "count": 2,
+    "options": "any",
+    "description": "Choose any two skills from the full skill list."
+  },
+  
+  "suggested_paths": [],
+  
+  "duties": [],
+  
+  "equipment_pack": "Select any one armory pack",
+  "gold_alternative": 20,
+  "gold_roll": "1d10 x 4"
+}

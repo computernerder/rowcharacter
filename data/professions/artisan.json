@@ -1,0 +1,33 @@
+{
+  "id": "artisan",
+  "name": "Artisan",
+  "description": "A creative or technical specialist from a guild such as carpenters, jewelers, painters, or masons.",
+  
+  "base_hp": 6,
+  
+  "feature": {
+    "name": "Guild Membership",
+    "description": "Your guild offers workspace, trade materials, and connections with other artisans."
+  },
+  
+  "armor_proficiencies": ["Light"],
+  "weapon_proficiencies": ["Simple", "Light"],
+  "tool_proficiencies": [],
+  
+  "tool_choices": {
+    "count": 1,
+    "options": ["Carpenter's Tools", "Jeweler's Tools", "Painter's Tools", "Mason's Tools", "Artisan Tool"]
+  },
+  
+  "skill_choices": {
+    "count": 2,
+    "options": ["Crafting", "History", "Insight", "Appraisal", "Diplomacy", "Performance"]
+  },
+  
+  "suggested_paths": ["Mystic", "Survival"],
+  
+  "duties": [],
+  
+  "equipment_pack": "Artisan's Pack (artisan tool of choice, fine clothes, trade kit)",
+  "gold_alternative": 40
+}
