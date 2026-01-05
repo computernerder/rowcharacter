@@ -660,7 +660,6 @@ class CharacterTemplate:
             "talents": [t if isinstance(t, dict) else t.to_dict() for t in self.talents],
             "features": [f if isinstance(f, dict) else f.to_dict() for f in self.features],
             "spellcrafting": self.spellcrafting.to_dict(),
-            "inventory": self.inventory.to_dict(),
             "notes": self.notes,
             "physical_traits": self.physical_traits.to_dict(),
             "personality": self.personality.to_dict(),

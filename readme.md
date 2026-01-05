@@ -17,6 +17,7 @@ This document describes the character creation process for Realm of Warriors (Ro
 - `exports/`: Generated PDFs (e.g., `blank_sheet.pdf`, `character_sheet.pdf`)
 - `characters/`: Saved character sheets
 - `data/`: Game data JSON (races, ancestries, paths, etc.)
+- `data/weapons/weapons.json`: Reference weapon list (not used for “equipped” tracking)
 - `core/`: Core domain models and loaders
 - `docs/`: Planning notes (`plans.md`)
 - Run the CLIs from the project root: `python tools/interactive_builder.py` or `python tools/interactive_levelup.py`
@@ -31,6 +32,9 @@ This document describes the character creation process for Realm of Warriors (Ro
 - Tests (`tests/`): regression coverage for builder/core/player flows; run with `python -m pytest tests` from the project root.
 - Assets (`assets/`): HTML/CSS and example templates for PDF output and UI shaping; customize to change sheet look and feel.
 
+### Scope Note
+This tool focuses on character **status** (abilities, skills, proficiencies, talents, derived combat stats). It does **not** track narrative inventory state such as “what is equipped”.
+
 ---
 
 ## Character Creation Steps (in order)
@@ -42,7 +46,6 @@ This document describes the character creation process for Realm of Warriors (Ro
 5. **Background Selection**
 6. **Calculate Derived Stats**
 7. **Purchase Talents with Talent Points**
-8. **Record Equipment**
 
 ---
 
@@ -221,7 +224,7 @@ This document describes the character creation process for Realm of Warriors (Ro
 
 ## 3. Professions
 
-Professions determine starting HP, proficiencies, skills, and equipment.
+Professions determine starting HP, proficiencies, skills, and starting pack/gold recommendations (not tracked by the tool).
 
 ### Warrior
 - **Base HP:** 10
@@ -390,7 +393,7 @@ Each path has:
 
 ## 6. Backgrounds
 
-Backgrounds provide: 2 skill proficiencies, languages or tools, equipment, a feature, and personality traits.
+Backgrounds provide: 2 skill proficiencies, languages or tools, a feature, and personality traits. Starting equipment is not tracked by the tool.
 
 ### Available Backgrounds
 | Background | Skills | Feature |
@@ -629,10 +632,7 @@ Expended when casting; regained on long rest.
     bonds: { text: string, moralityValue: number, repModifier: number }[],
     flaws: { text: string, moralityValue: number, repModifier: number }[]
   },
-  
-  equipment: Item[],
-  gold: number,
-  
+
   level: number,
   experiencePoints: number
 }

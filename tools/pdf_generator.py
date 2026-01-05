@@ -26,6 +26,7 @@ from typing import Optional, Union
 import sys
 import json
 import tempfile
+from copy import deepcopy
 from jinja2 import Environment, FileSystemLoader, BaseLoader
 from ROW_constants import Skill, Attribute
 
@@ -38,6 +39,13 @@ except ImportError:  # pragma: no cover
 ROOT_DIR = Path(__file__).resolve().parent.parent
 if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
+
+
+def _safe_int(value: object, default: int = 0) -> int:
+    try:
+        return int(value)  # type: ignore[arg-type]
+    except Exception:
+        return default
 
 
 class CharacterSheetPDF:
@@ -485,6 +493,100 @@ class SharedSheetPDF:
     def __init__(self, sheet_root: Union[str, Path, None] = None):
         self.sheet_root = Path(sheet_root) if sheet_root else ROOT_DIR / "external" / "rowcharactersheet"
         self.template_path = self.sheet_root / "standalone.html"
+        self._talents_flat_cache: Optional[dict] = None
+
+    def _get_talents_flat(self) -> dict:
+        if self._talents_flat_cache is not None:
+            return self._talents_flat_cache
+
+        # Lazy import: keeps optional Playwright usage lightweight.
+        from core.talent import load_all_talents, get_all_talents_flat
+
+        talents_dir = ROOT_DIR / "data" / "talents"
+        categories = load_all_talents(str(talents_dir))
+        self._talents_flat_cache = get_all_talents_flat(categories)
+        return self._talents_flat_cache
+
+    def _build_feature_definitions(self, sheet_data: dict) -> list[str]:
+        defs: list[str] = []
+        for feat in (sheet_data.get("features") or []):
+            if isinstance(feat, str):
+                if feat.strip():
+                    defs.append(feat.strip())
+                continue
+            if not isinstance(feat, dict):
+                continue
+            name = (feat.get("name") or "").strip()
+            text = (feat.get("text") or "").strip()
+            if name and text:
+                defs.append(f"{name}: {text}")
+            elif name:
+                defs.append(name)
+            elif text:
+                defs.append(text)
+        return defs
+
+    def _build_talent_definitions(self, sheet_data: dict) -> list[str]:
+        talents_flat = self._get_talents_flat()
+        defs: list[str] = []
+
+        for t in (sheet_data.get("talents") or []):
+            if isinstance(t, str):
+                if t.strip():
+                    defs.append(t.strip())
+                continue
+            if not isinstance(t, dict):
+                continue
+
+            talent_id = (t.get("talent_id") or t.get("id") or "").strip()
+            rank = _safe_int(t.get("rank"), default=1)
+            if rank <= 0:
+                rank = 1
+
+            td = talents_flat.get(talent_id) if talent_id else None
+            name = (t.get("name") or (td.name if td else talent_id) or "Talent").strip()
+
+            parts: list[str] = []
+            if td is not None:
+                base = (td.description or "").strip()
+                if base:
+                    parts.append(base)
+                cumulative = (td.get_cumulative_description(rank) or "").strip()
+                if cumulative:
+                    parts.append(cumulative)
+            else:
+                text = (t.get("text") or "").strip()
+                if text:
+                    parts.append(text)
+
+            choice_data = t.get("choice_data")
+            if isinstance(choice_data, dict) and choice_data:
+                for k, v in choice_data.items():
+                    key = str(k).strip()
+                    val = "" if v is None else str(v).strip()
+                    if key and val:
+                        parts.append(f"{key}: {val}")
+                    elif val:
+                        parts.append(val)
+
+            rest = "\n".join([p for p in parts if p]).strip()
+            if rest:
+                defs.append(f"{name}: {rest}")
+            else:
+                defs.append(name)
+
+        return defs
+
+    def _prepare_sheet_data_for_pdf(self, sheet_data: dict) -> dict:
+        """Add explicit definition lists for overflow pages.
+
+        The upstream JS only fills the *overflow* tables when overflow is detected.
+        For PDF exports we want the definitions pages populated deterministically.
+        """
+        prepared = deepcopy(sheet_data or {})
+        prepared.setdefault("feature_definitions", self._build_feature_definitions(prepared))
+        prepared.setdefault("talent_definitions", self._build_talent_definitions(prepared))
+        return prepared
 
     def _ensure_playwright(self) -> None:
         if sync_playwright is None:  # pragma: no cover - optional dependency
@@ -544,12 +646,14 @@ class SharedSheetPDF:
         self._ensure_playwright()
         self._assert_template()
 
+        prepared_data = self._prepare_sheet_data_for_pdf(sheet_data)
+
         with sync_playwright() as p:  # type: ignore[call-arg]
             browser = p.chromium.launch(args=["--no-sandbox"], headless=True)
             try:
                 context = browser.new_context()
                 page = context.new_page()
-                page.add_init_script(self._build_init_script(sheet_data, fallback_data))
+                page.add_init_script(self._build_init_script(prepared_data, fallback_data))
                 rendered_html = self._render_template()
                 with tempfile.NamedTemporaryFile("w", suffix=".html", delete=False, dir=self.sheet_root) as tmp:
                     tmp.write(rendered_html)

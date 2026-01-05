@@ -25,6 +25,7 @@ Usage:
 """
 
 import json
+import re
 from dataclasses import dataclass, field
 from typing import Dict, List, Any, Optional, Tuple
 from pathlib import Path
@@ -322,11 +323,29 @@ class LevelUpManager:
         path_name = self.character.primary_path
         if not path_name:
             return None
+
+        token = str(path_name.value if hasattr(path_name, "value") else path_name).strip()
+        if not token:
+            return None
+
+        def _norm(value: str) -> str:
+            return "".join(ch for ch in value.lower() if ch.isalnum())
+
+        token_norm = _norm(token)
+
+        # Direct match by id (e.g., "martial")
+        if token in self.paths:
+            return self.paths[token]
+        if token.lower() in self.paths:
+            return self.paths[token.lower()]
         
         # Find path by name
         for path_id, path in self.paths.items():
-            if path.name == path_name:
-                return path
+            try:
+                if _norm(path_id) == token_norm or _norm(getattr(path, "name", "")) == token_norm:
+                    return path
+            except Exception:
+                continue
         
         return None
 
@@ -339,9 +358,27 @@ class LevelUpManager:
         if not path_name:
             return None
 
+        token = str(path_name.value if hasattr(path_name, "value") else path_name).strip()
+        if not token:
+            return None
+
+        def _norm(value: str) -> str:
+            return "".join(ch for ch in value.lower() if ch.isalnum())
+
+        token_norm = _norm(token)
+
+        # Direct match by id
+        if token in self.paths:
+            return token
+        if token.lower() in self.paths:
+            return token.lower()
+
         for path_id, path in self.paths.items():
-            if path.name == path_name:
-                return path_id
+            try:
+                if _norm(path_id) == token_norm or _norm(getattr(path, "name", "")) == token_norm:
+                    return path_id
+            except Exception:
+                continue
 
         return None
     
@@ -380,6 +417,58 @@ class LevelUpManager:
             return max(2, modifier)
         
         return 2
+
+    def _get_stored_point_pools(self) -> tuple[int, int]:
+        """Return stored (AP, TP) parsed from CharacterTemplate.stored_advance.
+
+        This is intentionally forgiving: it supports empty values, simple
+        token formats like "AP:2 TP:1" / "AP=2;TP=1", and a JSON object string
+        like '{"ap":2,"tp":1}'. Unknown formats fall back to (0, 0).
+        """
+        if not self.character:
+            return (0, 0)
+
+        raw = (getattr(self.character, "stored_advance", "") or "").strip()
+        if not raw:
+            return (0, 0)
+
+        # JSON object string support.
+        if raw.startswith("{") and raw.endswith("}"):
+            try:
+                parsed = json.loads(raw)
+                ap = int(parsed.get("ap", 0) or 0)
+                tp = int(parsed.get("tp", 0) or 0)
+                return (max(0, ap), max(0, tp))
+            except Exception:
+                return (0, 0)
+
+        # Token parsing: AP/TP with separators.
+        ap = 0
+        tp = 0
+        try:
+            ap_m = re.search(r"\bap\b\s*[:=]\s*(\d+)", raw, flags=re.IGNORECASE)
+            tp_m = re.search(r"\btp\b\s*[:=]\s*(\d+)", raw, flags=re.IGNORECASE)
+            if ap_m:
+                ap = int(ap_m.group(1))
+            if tp_m:
+                tp = int(tp_m.group(1))
+        except Exception:
+            return (0, 0)
+
+        return (max(0, ap), max(0, tp))
+
+    @staticmethod
+    def _format_stored_point_pools(ap: int, tp: int) -> str:
+        ap_i = int(ap or 0)
+        tp_i = int(tp or 0)
+        if ap_i <= 0 and tp_i <= 0:
+            return ""
+        parts: list[str] = []
+        if ap_i > 0:
+            parts.append(f"AP:{ap_i}")
+        if tp_i > 0:
+            parts.append(f"TP:{tp_i}")
+        return " ".join(parts)
     
     def get_trained_skills(self) -> List[str]:
         """Get list of trained skill names."""
@@ -407,8 +496,9 @@ class LevelUpManager:
         if target <= current:
             raise ValueError(f"Target level {target} must be higher than current level {current}")
         
-        tp = self.calculate_talent_points()
-        ap = self.calculate_advancement_points()
+        stored_ap, stored_tp = self._get_stored_point_pools()
+        tp = self.calculate_talent_points() + stored_tp
+        ap = self.calculate_advancement_points() + stored_ap
 
         # Level-ups do not enforce the level-1 creation rule (4 TP in primary).
         min_primary = 0
@@ -641,6 +731,18 @@ class LevelUpManager:
         
         # Increment level
         self.character.level = options.new_level
+
+        # Ensure XP is at least the minimum required for the new level.
+        try:
+            min_xp = int(self.get_xp_for_level(self.character.level))
+            current_xp = int(getattr(self.character, "total_experience", 0) or 0)
+            self.character.total_experience = max(current_xp, min_xp)
+        except Exception:
+            # If XP field is malformed, be conservative and set to minimum.
+            try:
+                self.character.total_experience = int(self.get_xp_for_level(self.character.level))
+            except Exception:
+                pass
         
         # Apply ability increase if this level grants it
         if options.grants_ability_increase and ability_increase:
@@ -661,6 +763,17 @@ class LevelUpManager:
         if advancement_choices:
             for choice in advancement_choices:
                 self._apply_advancement_choice(choice)
+
+        # Persist unspent AP/TP into stored pools for the next level.
+        try:
+            spent_tp = sum(int(c.points_spent or 0) for c in talent_choices)
+            spent_ap = sum(int(c.points_spent or 0) for c in advancement_choices)
+            remaining_tp = max(0, int(options.talent_points) - spent_tp)
+            remaining_ap = max(0, int(options.advancement_points) - spent_ap)
+            self.character.stored_advance = self._format_stored_point_pools(remaining_ap, remaining_tp)
+        except Exception:
+            # Don't fail the level-up if bookkeeping formatting fails.
+            pass
         
         # Apply HP increase
         self._apply_hp_increase(hp_roll)

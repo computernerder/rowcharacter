@@ -1,0 +1,191 @@
+2026-01-05 10:45:23,067 INFO App status: Loaded 10 characters
+2026-01-05 10:45:34,444 INFO App status: Loaded 10 characters
+2026-01-05 10:45:46,071 INFO Wizard status: Step 1 of 8: Heritage
+2026-01-05 10:47:10,336 INFO Wizard close requested
+2026-01-05 10:47:13,138 INFO App status: Loaded 10 characters
+2026-01-05 10:47:14,750 INFO Wizard status: Step 1 of 8: Heritage
+2026-01-05 10:47:22,118 INFO Wizard status: Step 2 of 8: Basics
+2026-01-05 10:47:26,242 INFO Wizard status: A character with this name and player already exists
+2026-01-05 10:47:31,100 INFO Wizard status: Step 3 of 8: Profession
+2026-01-05 10:47:58,554 INFO Wizard status: Step 4 of 8: Ability Scores
+2026-01-05 10:48:02,445 INFO Wizard status: Point buy over budget
+2026-01-05 10:48:04,867 INFO Wizard status: Point buy over budget
+2026-01-05 10:48:05,481 INFO Wizard status: Point buy over budget
+2026-01-05 10:48:06,320 INFO Wizard status: Point buy over budget
+2026-01-05 10:49:10,242 INFO Wizard status: Step 5 of 8: Path
+2026-01-05 10:49:21,710 INFO Wizard status: Step 6 of 8: Background
+2026-01-05 10:49:25,945 INFO Wizard status: Step 7 of 8: Choices
+2026-01-05 10:49:36,914 INFO Wizard status: Step 8 of 8: Talents
+2026-01-05 10:49:52,822 INFO Wizard status: Step 8 of 8: Talents
+2026-01-05 10:49:54,771 INFO Wizard status: Step 8 of 8: Talents
+2026-01-05 10:49:56,102 INFO Wizard status: Step 8 of 8: Talents
+2026-01-05 10:49:58,199 INFO Wizard status: Step 8 of 8: Talents
+2026-01-05 10:50:02,766 INFO Wizard status: Step 8 of 8: Talents
+2026-01-05 10:50:05,922 INFO Wizard status: Step 8 of 8: Talents
+2026-01-05 10:50:09,889 INFO Wizard status: Step 8 of 8: Talents
+2026-01-05 10:50:12,367 INFO Wizard status: Step 8 of 8: Talents
+2026-01-05 10:50:15,728 INFO Talent validation: tp_total=8 min_primary=4 spent_total=8 spent_primary=4 selected={'warding': 1, 'scholar': 1, 'blood_pact': 1, 'spellcrafting': 1, 'common_sense': 1, 'alertness': 1, 'archery_focus': 1, 'lucky': 1}
+2026-01-05 10:50:15,728 INFO Finalize start: race=halffolk ancestry=brindleford prof=criminal duty= path=mystic * bg=scholar mode=Roll
+2026-01-05 10:50:15,744 INFO App status: Saved C:\Projects\FightingSystem\characters\New_Herodsf_Player.json
+2026-01-05 10:50:15,760 INFO App status: Loaded 11 characters
+2026-01-05 10:50:58,272 INFO App status: Selected New_Herodsf_Player.json
+2026-01-05 10:51:04,977 INFO App status: PDF saved to C:\Projects\FightingSystem\exports\New_Herodsf_Player.pdf
+2026-01-05 10:51:48,047 INFO App status: Loaded 11 characters
+2026-01-05 10:56:56,196 INFO App status: Loaded 11 characters
+2026-01-05 10:56:57,916 INFO App status: Selected elf.json
+2026-01-05 10:56:59,491 INFO LevelUpWizard status: Step 1 of 5: Summary
+2026-01-05 10:57:19,045 INFO LevelUpWizard status: Step 2 of 5: Talents
+2026-01-05 10:57:53,371 INFO LevelUpWizard status: Step 3 of 5: Advancements
+2026-01-05 10:58:04,447 INFO LevelUpWizard status: Enter a target
+2026-01-05 10:58:23,493 INFO LevelUpWizard status: Step 4 of 5: HP
+2026-01-05 10:58:30,075 INFO LevelUpWizard status: Step 5 of 5: Confirm
+2026-01-05 10:58:35,823 INFO App status: Leveled up: elf.json
+2026-01-05 10:58:35,834 INFO App status: Loaded 11 characters
+2026-01-05 10:58:38,467 INFO App status: Selected myname.json
+2026-01-05 10:58:43,899 INFO App status: Loaded 11 characters
+2026-01-05 10:58:47,535 INFO App status: Selected myname.json
+2026-01-05 11:32:59,268 INFO App status: Loaded 11 characters
+2026-01-05 11:33:00,976 INFO Wizard status: Step 1 of 8: Heritage
+2026-01-05 11:33:04,654 INFO Wizard status: Step 2 of 8: Basics
+2026-01-05 11:33:08,294 INFO Wizard status: A character with this name and player already exists
+2026-01-05 11:33:14,539 INFO Wizard status: Step 3 of 8: Profession
+2026-01-05 11:33:16,726 INFO Wizard status: Step 4 of 8: Ability Scores
+2026-01-05 11:33:28,601 INFO Wizard status: Point buy over budget
+2026-01-05 11:33:28,764 INFO Wizard status: Point buy over budget
+2026-01-05 11:33:30,185 INFO Wizard status: Step 5 of 8: Path
+2026-01-05 11:33:40,680 INFO Wizard status: Step 6 of 8: Background
+2026-01-05 11:33:43,819 INFO Wizard status: Step 7 of 8: Choices
+2026-01-05 11:33:51,363 INFO Wizard status: Step 8 of 8: Talents
+2026-01-05 11:33:58,109 INFO Wizard status: Step 8 of 8: Talents
+2026-01-05 11:33:59,601 INFO Wizard status: Step 8 of 8: Talents
+2026-01-05 11:34:00,586 INFO Wizard status: Step 8 of 8: Talents
+2026-01-05 11:34:01,601 INFO Wizard status: Step 8 of 8: Talents
+2026-01-05 11:34:05,367 INFO Wizard status: Step 8 of 8: Talents
+2026-01-05 11:34:11,508 INFO Wizard status: Step 8 of 8: Talents
+2026-01-05 11:34:14,285 INFO Wizard status: Step 8 of 8: Talents
+2026-01-05 11:34:16,992 INFO Wizard status: Step 8 of 8: Talents
+2026-01-05 11:34:18,701 INFO Wizard status: Step 8 of 8: Talents
+2026-01-05 11:34:26,591 INFO Talent validation: tp_total=9 min_primary=4 spent_total=9 spent_primary=7 selected={'rage': 1, 'brutal_strike': 1, 'master_of_power': 1, 'primal_instinct': 1, 'primal_armor': 1, 'savage_momentum': 1, 'reckless_tactics': 1, 'archery_focus': 1, 'lucky': 1}
+2026-01-05 11:34:26,591 INFO Finalize start: race=dwarf ancestry=grundari prof=artisan duty= path=power * bg=artisan mode=Point Buy
+2026-01-05 11:34:26,597 INFO App status: Saved C:\Projects\FightingSystem\characters\New_Heroswerwe_Player.json
+2026-01-05 11:34:26,607 INFO App status: Loaded 12 characters
+2026-01-05 11:34:29,777 INFO App status: Selected New_Heroswerwe_Player.json
+2026-01-05 11:34:34,526 INFO App status: PDF saved to C:\Projects\FightingSystem\exports\New_Heroswerwe_Player.pdf
+2026-01-05 11:47:41,715 INFO App status: Loaded 12 characters
+2026-01-05 11:47:43,726 INFO App status: Selected elf.json
+2026-01-05 11:47:55,758 INFO App status: PDF saved to C:\Projects\FightingSystem\exports\Trela_Jeric.pdf
+2026-01-05 11:55:52,977 INFO App status: Loaded 12 characters
+2026-01-05 11:55:54,836 INFO App status: Selected elf.json
+2026-01-05 11:56:07,793 INFO App status: PDF saved to C:\Projects\FightingSystem\exports\Trela_Jeric.pdf
+2026-01-05 11:57:44,783 INFO App status: Loaded 0 characters
+2026-01-05 11:57:45,850 INFO Wizard status: Step 1 of 8: Heritage
+2026-01-05 11:57:51,467 INFO Wizard status: Step 2 of 8: Basics
+2026-01-05 11:58:13,704 INFO Wizard status: Step 3 of 8: Profession
+2026-01-05 11:58:18,569 INFO Wizard status: Step 4 of 8: Ability Scores
+2026-01-05 11:58:25,743 INFO Wizard status: Step 5 of 8: Path
+2026-01-05 11:58:31,733 INFO Wizard status: Step 6 of 8: Background
+2026-01-05 11:58:36,304 INFO Wizard status: Step 7 of 8: Choices
+2026-01-05 11:58:42,714 INFO Wizard status: Step 8 of 8: Talents
+2026-01-05 12:00:22,945 INFO Wizard status: Step 8 of 8: Talents
+2026-01-05 12:00:24,361 INFO Wizard status: Step 8 of 8: Talents
+2026-01-05 12:00:25,947 INFO Wizard status: Step 8 of 8: Talents
+2026-01-05 12:00:27,060 INFO Wizard status: Step 8 of 8: Talents
+2026-01-05 12:00:30,367 INFO Talent validation: tp_total=9 min_primary=4 spent_total=4 spent_primary=4 selected={'savage_momentum': 1, 'primal_armor': 1, 'brutal_strike': 1, 'rage': 1}
+2026-01-05 12:00:30,367 INFO Finalize start: race=dwarf ancestry=grundari prof=criminal duty= path=power * bg=soldier mode=Standard Array
+2026-01-05 12:00:30,367 INFO App status: Saved C:\Projects\FightingSystem\characters\Orgoth_Sara.json
+2026-01-05 12:00:30,390 INFO App status: Loaded 1 characters
+2026-01-05 12:00:41,763 INFO App status: Selected Orgoth_Sara.json
+2026-01-05 12:01:01,074 INFO App status: PDF saved to C:\Projects\FightingSystem\exports\Orgoth_Sara.pdf
+2026-01-05 12:02:04,606 INFO App status: Loaded 1 characters
+2026-01-05 12:02:06,500 INFO Wizard status: Step 1 of 8: Heritage
+2026-01-05 12:02:13,227 INFO Wizard status: Step 2 of 8: Basics
+2026-01-05 12:02:27,165 INFO Wizard status: Step 3 of 8: Profession
+2026-01-05 12:02:37,015 INFO Wizard status: Step 4 of 8: Ability Scores
+2026-01-05 12:03:01,742 INFO Wizard status: Step 5 of 8: Path
+2026-01-05 12:03:08,882 INFO Wizard status: Step 6 of 8: Background
+2026-01-05 12:03:16,226 INFO Wizard status: Step 7 of 8: Choices
+2026-01-05 12:06:38,214 INFO Wizard status: Duplicate language selection: Elvish
+2026-01-05 12:06:50,971 INFO Wizard status: Duplicate language selection: Elvish
+2026-01-05 12:06:52,555 INFO Wizard status: Duplicate language selection: Elvish
+2026-01-05 12:06:57,539 INFO Wizard status: Duplicate skill selection: Athletics
+2026-01-05 12:07:09,492 INFO Wizard status: Duplicate skill selection: Intimidation
+2026-01-05 12:07:27,974 INFO Wizard status: Step 8 of 8: Talents
+2026-01-05 12:07:33,201 INFO Wizard status: Step 8 of 8: Talents
+2026-01-05 12:07:34,246 INFO Wizard status: Step 8 of 8: Talents
+2026-01-05 12:07:35,225 INFO Wizard status: Step 8 of 8: Talents
+2026-01-05 12:07:37,094 INFO Wizard status: Step 8 of 8: Talents
+2026-01-05 12:07:39,244 INFO Wizard status: Step 8 of 8: Talents
+2026-01-05 12:07:40,167 INFO Wizard status: Step 8 of 8: Talents
+2026-01-05 12:07:41,034 INFO Wizard status: Step 8 of 8: Talents
+2026-01-05 12:07:41,743 INFO Wizard status: Step 8 of 8: Talents
+2026-01-05 12:07:48,152 INFO Wizard status: Step 8 of 8: Talents
+2026-01-05 12:08:31,996 INFO Wizard status: Step 8 of 8: Talents
+2026-01-05 12:08:38,665 INFO Talent validation: tp_total=9 min_primary=4 spent_total=9 spent_primary=5 selected={'martial_arts': 1, 'balanced_stance': 1, 'master_of_martial': 1, 'quick_hands': 1, 'alertness': 1, 'archery_focus': 1, 'armor_training': 1, 'athlete': 1, 'fighting_style': 0, 'vertical_ascension': 1}
+2026-01-05 12:08:38,665 INFO Finalize start: race=human ancestry=velari prof=warrior duty=fighter path=martial * bg=mercenary mode=Roll
+2026-01-05 12:08:38,678 INFO App status: Saved C:\Projects\FightingSystem\characters\Arrow_Chloe.json
+2026-01-05 12:08:38,689 INFO App status: Loaded 2 characters
+2026-01-05 12:08:38,696 INFO Wizard status: Created. You can level up, export PDF, or exit.
+2026-01-05 12:08:53,039 INFO Wizard status: PDF saved to C:\Projects\FightingSystem\exports\Arrow_Chloe.pdf
+2026-01-05 12:10:09,421 INFO LevelUpWizard status: Step 1 of 5: Summary
+2026-01-05 12:10:17,149 INFO LevelUpWizard status: Step 2 of 5: Talents
+2026-01-05 12:10:42,743 INFO LevelUpWizard status: Step 3 of 5: Advancements
+2026-01-05 12:15:22,384 INFO LevelUpWizard status: Step 4 of 5: HP
+2026-01-05 12:15:26,243 INFO LevelUpWizard status: Step 5 of 5: Confirm
+2026-01-05 12:15:28,663 INFO App status: Loaded 2 characters
+2026-01-05 12:15:28,663 INFO Wizard status: Level up complete
+2026-01-05 12:15:39,259 INFO Wizard status: PDF export failed: [Errno 13] Permission denied: 'C:\\Projects\\FightingSystem\\exports\\Arrow_Chloe.pdf'
+2026-01-05 12:15:58,740 INFO Wizard status: PDF saved to C:\Projects\FightingSystem\exports\Arrow_Chloe.pdf
+2026-01-05 12:18:01,787 INFO Wizard close requested
+2026-01-05 12:18:09,984 INFO App status: Loaded 2 characters
+2026-01-05 12:18:12,976 INFO Wizard status: Step 1 of 8: Heritage
+2026-01-05 12:18:23,355 INFO Wizard status: Step 2 of 8: Basics
+2026-01-05 12:18:39,458 INFO Wizard status: Step 3 of 8: Profession
+2026-01-05 12:18:57,675 INFO Wizard status: Step 4 of 8: Ability Scores
+2026-01-05 12:19:06,118 INFO Wizard status: Step 5 of 8: Path
+2026-01-05 12:19:11,371 INFO Wizard status: Step 6 of 8: Background
+2026-01-05 12:19:17,630 INFO Wizard status: Step 7 of 8: Choices
+2026-01-05 12:19:46,766 INFO Wizard status: Step 8 of 8: Talents
+2026-01-05 12:19:53,361 INFO Wizard status: Step 8 of 8: Talents
+2026-01-05 12:19:59,617 INFO Wizard status: Step 8 of 8: Talents
+2026-01-05 12:20:04,033 INFO Wizard status: Step 8 of 8: Talents
+2026-01-05 12:20:11,274 INFO Wizard status: Step 8 of 8: Talents
+2026-01-05 12:20:16,727 INFO Wizard status: Step 8 of 8: Talents
+2026-01-05 12:20:25,024 INFO Talent validation: tp_total=8 min_primary=4 spent_total=8 spent_primary=8 selected={'protector': 3, 'guard': 1, 'adrenal_push': 1}
+2026-01-05 12:20:25,024 INFO Finalize start: race=taurin ancestry=stonegrave prof=warrior duty=fighter path=defense * bg=village_champion mode=Standard Array
+2026-01-05 12:20:25,031 INFO App status: Saved C:\Projects\FightingSystem\characters\Minotour_Player.json
+2026-01-05 12:20:25,040 INFO App status: Loaded 3 characters
+2026-01-05 12:20:25,070 INFO Wizard status: Created. You can level up, export PDF, or exit.
+2026-01-05 12:20:29,526 INFO Wizard close requested
+2026-01-05 12:20:31,727 INFO App status: Selected Minotour_Player.json
+2026-01-05 12:20:35,295 INFO App status: PDF saved to C:\Projects\FightingSystem\exports\Minotour_Player.pdf
+2026-01-05 12:26:34,189 INFO App status: Selected Minotour_Player.json
+2026-01-05 12:27:30,972 INFO App status: Loaded 3 characters
+2026-01-05 12:27:33,004 INFO App status: Selected Arrow_Chloe.json
+2026-01-05 12:27:34,100 INFO App status: Selected Minotour_Player.json
+2026-01-05 12:27:45,704 INFO LevelUpWizard status: Step 1 of 5: Summary
+2026-01-05 12:27:54,932 INFO LevelUpWizard status: Step 2 of 5: Talents
+2026-01-05 12:28:51,783 INFO LevelUpWizard status: Step 3 of 5: Advancements
+2026-01-05 12:30:48,164 INFO LevelUpWizard status: Not enough AP remaining
+2026-01-05 12:30:56,899 INFO LevelUpWizard status: Not enough AP remaining
+2026-01-05 12:32:51,367 INFO LevelUpWizard status: Step 4 of 5: HP
+2026-01-05 12:32:58,971 INFO LevelUpWizard status: Step 5 of 5: Confirm
+2026-01-05 12:33:01,877 INFO App status: Leveled up: Minotour_Player.json
+2026-01-05 12:33:01,884 INFO App status: Loaded 3 characters
+2026-01-05 12:33:13,569 INFO App status: Selected Minotour_Player.json
+2026-01-05 12:33:14,858 INFO LevelUpWizard status: Step 1 of 5: Summary
+2026-01-05 12:33:20,773 INFO LevelUpWizard status: Step 2 of 5: Talents
+2026-01-05 12:34:42,283 INFO LevelUpWizard status: Step 3 of 5: Advancements
+2026-01-05 12:34:50,882 INFO LevelUpWizard status: Step 4 of 5: HP
+2026-01-05 12:34:55,320 INFO LevelUpWizard status: Step 5 of 5: Confirm
+2026-01-05 12:34:57,664 INFO App status: Leveled up: Minotour_Player.json
+2026-01-05 12:34:57,690 INFO App status: Loaded 3 characters
+2026-01-05 12:35:05,171 INFO App status: Selected Minotour_Player.json
+2026-01-05 12:35:06,874 INFO LevelUpWizard status: Step 1 of 6: Summary
+2026-01-05 12:35:16,202 INFO LevelUpWizard status: Step 2 of 6: Ability Increase
+2026-01-05 12:35:23,502 INFO LevelUpWizard status: Step 3 of 6: Talents
+2026-01-05 12:35:45,623 INFO LevelUpWizard status: Step 4 of 6: Advancements
+2026-01-05 12:35:56,673 INFO LevelUpWizard status: Step 5 of 6: HP
+2026-01-05 12:35:59,351 INFO LevelUpWizard status: Step 6 of 6: Confirm
+2026-01-05 12:36:30,851 INFO App status: Leveled up: Minotour_Player.json
+2026-01-05 12:36:30,870 INFO App status: Loaded 3 characters
+2026-01-05 12:37:01,085 INFO App status: Loaded 3 characters

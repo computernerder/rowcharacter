@@ -1,0 +1,455 @@
+{
+  "id": "",
+  "character_name": "Arrow",
+  "player": "Chloe",
+  "profession": "warrior",
+  "primary_path": "Martial",
+  "race": "human",
+  "ancestry": "Velari",
+  "background": "mercenary",
+  "level": 2,
+  "total_experience": 0,
+  "stored_advance": "",
+  "ability_scores": {
+    "Might": {
+      "mod": 4,
+      "saving_throw": 4,
+      "total": 18,
+      "roll": 18,
+      "race": 0,
+      "misc": 0
+    },
+    "Agility": {
+      "mod": 4,
+      "saving_throw": 4,
+      "total": 18,
+      "roll": 15,
+      "race": 0,
+      "misc": 3
+    },
+    "Endurance": {
+      "mod": 0,
+      "saving_throw": 0,
+      "total": 11,
+      "roll": 11,
+      "race": 0,
+      "misc": 0
+    },
+    "Wisdom": {
+      "mod": 2,
+      "saving_throw": 2,
+      "total": 14,
+      "roll": 12,
+      "race": 0,
+      "misc": 2
+    },
+    "Intellect": {
+      "mod": 2,
+      "saving_throw": 2,
+      "total": 14,
+      "roll": 13,
+      "race": 1,
+      "misc": 0
+    },
+    "Charisma": {
+      "mod": -2,
+      "saving_throw": -2,
+      "total": 7,
+      "roll": 7,
+      "race": 0,
+      "misc": 0
+    }
+  },
+  "defense": {
+    "base": 9,
+    "agility": 4,
+    "shield": "",
+    "misc": 0,
+    "total": 13
+  },
+  "speed": 30,
+  "initiative": 4,
+  "health": {
+    "max": 15,
+    "current": 15,
+    "wounds": 0
+  },
+  "armor_hp": {
+    "max": 0,
+    "current": 0
+  },
+  "life_points": {
+    "max": 11,
+    "current": 11
+  },
+  "focus": {
+    "max": 0,
+    "current": 0
+  },
+  "passive": {
+    "perception": {
+      "base": 10,
+      "skill": 2,
+      "misc": 0,
+      "total": 12
+    },
+    "insight": {
+      "base": 10,
+      "skill": 3,
+      "misc": 0,
+      "total": 13
+    }
+  },
+  "attack_mods": {
+    "melee": {
+      "attr": 4,
+      "misc": 1,
+      "total": 5
+    },
+    "ranged": {
+      "attr": 4,
+      "misc": 1,
+      "total": 5
+    }
+  },
+  "skills": {
+    "Acrobatics": {
+      "trained": false,
+      "mod": 4,
+      "rank": 0,
+      "misc": 0,
+      "total": 4
+    },
+    "Animal Handling": {
+      "trained": false,
+      "mod": 2,
+      "rank": 0,
+      "misc": 0,
+      "total": 2
+    },
+    "Appraisal": {
+      "trained": false,
+      "mod": 2,
+      "rank": 0,
+      "misc": 0,
+      "total": 2
+    },
+    "Arcana": {
+      "trained": false,
+      "mod": 2,
+      "rank": 0,
+      "misc": 0,
+      "total": 2
+    },
+    "Athletics": {
+      "trained": true,
+      "mod": 4,
+      "rank": 1,
+      "misc": 0,
+      "total": 5
+    },
+    "Crafting": {
+      "trained": false,
+      "mod": 2,
+      "rank": 0,
+      "misc": 0,
+      "total": 2
+    },
+    "Deception": {
+      "trained": false,
+      "mod": -2,
+      "rank": 0,
+      "misc": 0,
+      "total": -2
+    },
+    "Diplomacy": {
+      "trained": false,
+      "mod": -2,
+      "rank": 0,
+      "misc": 0,
+      "total": -2
+    },
+    "History": {
+      "trained": true,
+      "mod": 2,
+      "rank": 2,
+      "misc": 0,
+      "total": 4
+    },
+    "Insight": {
+      "trained": true,
+      "mod": 2,
+      "rank": 1,
+      "misc": 0,
+      "total": 3
+    },
+    "Intimidation": {
+      "trained": true,
+      "mod": -2,
+      "rank": 1,
+      "misc": 0,
+      "total": -1
+    },
+    "Investigation": {
+      "trained": false,
+      "mod": 2,
+      "rank": 0,
+      "misc": 0,
+      "total": 2
+    },
+    "Medicine": {
+      "trained": false,
+      "mod": 2,
+      "rank": 0,
+      "misc": 0,
+      "total": 2
+    },
+    "Nature": {
+      "trained": true,
+      "mod": 2,
+      "rank": 1,
+      "misc": 0,
+      "total": 3
+    },
+    "Perception": {
+      "trained": false,
+      "mod": 2,
+      "rank": 0,
+      "misc": 0,
+      "total": 2
+    },
+    "Performance": {
+      "trained": false,
+      "mod": -2,
+      "rank": 0,
+      "misc": 0,
+      "total": -2
+    },
+    "Persuasion": {
+      "trained": false,
+      "mod": -2,
+      "rank": 0,
+      "misc": 0,
+      "total": -2
+    },
+    "Religion": {
+      "trained": false,
+      "mod": 2,
+      "rank": 0,
+      "misc": 0,
+      "total": 2
+    },
+    "Sleight of Hand": {
+      "trained": false,
+      "mod": 4,
+      "rank": 0,
+      "misc": 0,
+      "total": 4
+    },
+    "Stealth": {
+      "trained": false,
+      "mod": 4,
+      "rank": 0,
+      "misc": 0,
+      "total": 4
+    },
+    "Streetwise": {
+      "trained": true,
+      "mod": 2,
+      "rank": 1,
+      "misc": 0,
+      "total": 3
+    },
+    "Survival": {
+      "trained": false,
+      "mod": 2,
+      "rank": 0,
+      "misc": 0,
+      "total": 2
+    },
+    "Taming": {
+      "trained": false,
+      "mod": 2,
+      "rank": 0,
+      "misc": 0,
+      "total": 2
+    }
+  },
+  "proficiencies": [
+    "Light",
+    "Medium",
+    "Simple",
+    "Heavy",
+    "Martial",
+    "Artisan Tool",
+    "Armorer's Tools"
+  ],
+  "languages": [
+    "Common",
+    "Elvish",
+    "Dwarvish"
+  ],
+  "attacks": [],
+  "talents": [
+    {
+      "talent_id": "martial_arts",
+      "name": "Martial Arts",
+      "rank": 1,
+      "path_id": "martial",
+      "choice_data": {},
+      "path": "martial",
+      "text": "Martial Arts (Rank 1)"
+    },
+    {
+      "talent_id": "balanced_stance",
+      "name": "Balanced Stance",
+      "rank": 1,
+      "path_id": "martial",
+      "choice_data": {},
+      "path": "martial",
+      "text": "Balanced Stance (Rank 1)"
+    },
+    {
+      "talent_id": "master_of_martial",
+      "name": "Master of Martial",
+      "rank": 1,
+      "path_id": "martial",
+      "choice_data": {},
+      "path": "martial",
+      "text": "Master of Martial (Rank 1)"
+    },
+    {
+      "talent_id": "quick_hands",
+      "name": "Quick Hands",
+      "rank": 1,
+      "path_id": "martial",
+      "choice_data": {},
+      "path": "martial",
+      "text": "Quick Hands (Rank 1)"
+    },
+    {
+      "talent_id": "vertical_ascension",
+      "name": "Vertical Ascension",
+      "rank": 1,
+      "path_id": "martial",
+      "choice_data": {},
+      "path": "martial",
+      "text": "Vertical Ascension (Rank 1)"
+    },
+    {
+      "talent_id": "alertness",
+      "name": "Alertness",
+      "rank": 2,
+      "path_id": "general",
+      "choice_data": {},
+      "path": "general",
+      "text": "Alertness (Rank 1)"
+    },
+    {
+      "talent_id": "archery_focus",
+      "name": "Archery Focus",
+      "rank": 2,
+      "path_id": "general",
+      "choice_data": {},
+      "path": "general",
+      "text": "Archery Focus (Rank 1)"
+    },
+    {
+      "talent_id": "armor_training",
+      "name": "Armor Training",
+      "rank": 1,
+      "path_id": "general",
+      "choice_data": {},
+      "path": "general",
+      "text": "Armor Training (Rank 1)"
+    },
+    {
+      "talent_id": "athlete",
+      "name": "Athlete",
+      "rank": 1,
+      "path_id": "general",
+      "choice_data": {},
+      "path": "general",
+      "text": "Athlete (Rank 1)"
+    },
+    {
+      "talent_id": "common_sense",
+      "name": "Common Sense",
+      "rank": 1,
+      "path_id": "general",
+      "path": "general",
+      "choice_data": {},
+      "text": "Common Sense (Rank 1)"
+    }
+  ],
+  "features": [
+    {
+      "name": "Adaptability",
+      "text": "Gain two additional skill proficiencies of your choice."
+    },
+    {
+      "name": "Keen Mind",
+      "text": "You are proficient in History checks and gain advantage when attempting to recall lore, maps, or spoken words."
+    },
+    {
+      "name": "Soldier's Network",
+      "text": "You have ties to local fighters, guards, and mercenaries who can offer basic shelter, news, or introductions."
+    },
+    {
+      "name": "Fluid Motion",
+      "text": "You may use Agility instead of Might for Melee Attacks and damage rolls with unarmed or finesse weapons."
+    },
+    {
+      "name": "Momentum Strike",
+      "text": "When you take the Disengage action, you may make one unarmed strike as part of that action."
+    },
+    {
+      "name": "Focus Within",
+      "text": "Once per short rest, as a Bonus Action, gain advantage on Agility saving throws until the start of your next turn."
+    },
+    {
+      "name": "Mercenary Contacts",
+      "text": "You know how to find mercenary work and can make contacts in sellsword companies. You can identify mercenary bands by their insignia and know their reputations."
+    }
+  ],
+  "spellcrafting": {
+    "save_dc": 0,
+    "attack_bonus": 0,
+    "crafting_points": {
+      "max": 0
+    },
+    "casting": "",
+    "spells": []
+  },
+  "notes": "",
+  "physical_traits": {
+    "height": "4'2\"",
+    "weight": "196 lb",
+    "size": "Medium",
+    "age": "79",
+    "creature_type": "Humanoid",
+    "eyes": "Green",
+    "skin": "Ruddy",
+    "hair": "Brown"
+  },
+  "personality": {
+    "traits": "I talk about past battles constantly.",
+    "ideal": "Loyalty. My comrades are my family.",
+    "bond": "I will never abandon my companions.",
+    "flaw": "I am ruthless to enemies."
+  },
+  "alignment": {
+    "alignment": "",
+    "mod": 1
+  },
+  "reputation": {
+    "reputation": "",
+    "mod": 2
+  },
+  "qr_payload": "",
+  "footer": {
+    "datecode": "",
+    "config": "",
+    "id": ""
+  }
+}

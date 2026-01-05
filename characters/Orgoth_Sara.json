@@ -1,22 +1,22 @@
 {
   "id": "",
-  "character_name": "New Herosdf",
-  "player": "Player",
-  "profession": "Leatherworker",
+  "character_name": "Orgoth",
+  "player": "Sara",
+  "profession": "Criminal",
   "primary_path": "Power",
-  "race": "Elf",
-  "ancestry": "Sylari",
-  "background": "Outcast",
+  "race": "Dwarf",
+  "ancestry": "Grundari",
+  "background": "Soldier",
   "level": 1,
   "total_experience": 0,
   "stored_advance": "",
   "ability_scores": {
     "Might": {
-      "mod": 3,
-      "saving_throw": 3,
-      "total": 17,
+      "mod": 4,
+      "saving_throw": 4,
+      "total": 18,
       "roll": 15,
-      "race": 0,
+      "race": 1,
       "misc": 2
     },
     "Agility": {
@@ -28,34 +28,34 @@
       "misc": 0
     },
     "Endurance": {
-      "mod": 2,
-      "saving_throw": 2,
-      "total": 15,
+      "mod": 3,
+      "saving_throw": 3,
+      "total": 16,
       "roll": 13,
-      "race": 0,
+      "race": 1,
       "misc": 2
     },
     "Wisdom": {
       "mod": 0,
       "saving_throw": 0,
       "total": 11,
-      "roll": 10,
-      "race": 1,
+      "roll": 11,
+      "race": 0,
       "misc": 0
     },
     "Intellect": {
       "mod": 1,
       "saving_throw": 1,
-      "total": 13,
+      "total": 12,
       "roll": 12,
-      "race": 1,
+      "race": 0,
       "misc": 0
     },
     "Charisma": {
-      "mod": -1,
-      "saving_throw": -1,
-      "total": 8,
-      "roll": 8,
+      "mod": 0,
+      "saving_throw": 0,
+      "total": 10,
+      "roll": 10,
       "race": 0,
       "misc": 0
     }
@@ -67,11 +67,11 @@
     "misc": 0,
     "total": 11
   },
-  "speed": 30,
+  "speed": 25,
   "initiative": 2,
   "health": {
-    "max": 9,
-    "current": 9,
+    "max": 11,
+    "current": 8,
     "wounds": 0
   },
   "armor_hp": {
@@ -79,8 +79,8 @@
     "current": 0
   },
   "life_points": {
-    "max": 15,
-    "current": 15
+    "max": 16,
+    "current": 16
   },
   "focus": {
     "max": 0,
@@ -89,9 +89,9 @@
   "passive": {
     "perception": {
       "base": 10,
-      "skill": 0,
+      "skill": 1,
       "misc": 0,
-      "total": 10
+      "total": 11
     },
     "insight": {
       "base": 10,
@@ -102,9 +102,9 @@
   },
   "attack_mods": {
     "melee": {
-      "attr": 3,
+      "attr": 4,
       "misc": 2,
-      "total": 5
+      "total": 6
     },
     "ranged": {
       "attr": 2,
@@ -142,32 +142,32 @@
       "total": 1
     },
     "Athletics": {
-      "trained": false,
-      "mod": 3,
-      "rank": 0,
-      "misc": 0,
-      "total": 3
-    },
-    "Crafting": {
       "trained": true,
-      "mod": 1,
+      "mod": 4,
       "rank": 1,
       "misc": 0,
-      "total": 2
+      "total": 5
     },
-    "Deception": {
+    "Crafting": {
       "trained": false,
-      "mod": -1,
+      "mod": 1,
       "rank": 0,
       "misc": 0,
-      "total": -1
+      "total": 1
+    },
+    "Deception": {
+      "trained": true,
+      "mod": 0,
+      "rank": 1,
+      "misc": 0,
+      "total": 1
     },
     "Diplomacy": {
       "trained": false,
-      "mod": -1,
+      "mod": 0,
       "rank": 0,
       "misc": 0,
-      "total": -1
+      "total": 0
     },
     "History": {
       "trained": false,
@@ -185,10 +185,10 @@
     },
     "Intimidation": {
       "trained": false,
-      "mod": -1,
+      "mod": 0,
       "rank": 0,
       "misc": 0,
-      "total": -1
+      "total": 0
     },
     "Investigation": {
       "trained": false,
@@ -205,32 +205,32 @@
       "total": 1
     },
     "Nature": {
-      "trained": true,
+      "trained": false,
       "mod": 1,
-      "rank": 1,
+      "rank": 0,
       "misc": 0,
-      "total": 2
+      "total": 1
     },
     "Perception": {
+      "trained": true,
+      "mod": 0,
+      "rank": 1,
+      "misc": 0,
+      "total": 1
+    },
+    "Performance": {
       "trained": false,
       "mod": 0,
       "rank": 0,
       "misc": 0,
       "total": 0
     },
-    "Performance": {
-      "trained": false,
-      "mod": -1,
-      "rank": 0,
-      "misc": 0,
-      "total": -1
-    },
     "Persuasion": {
       "trained": false,
-      "mod": -1,
+      "mod": 0,
       "rank": 0,
       "misc": 0,
-      "total": -1
+      "total": 0
     },
     "Religion": {
       "trained": false,
@@ -247,11 +247,11 @@
       "total": 2
     },
     "Stealth": {
-      "trained": true,
+      "trained": false,
       "mod": 2,
-      "rank": 1,
+      "rank": 0,
       "misc": 0,
-      "total": 3
+      "total": 2
     },
     "Streetwise": {
       "trained": false,
@@ -261,11 +261,11 @@
       "total": 1
     },
     "Survival": {
-      "trained": true,
+      "trained": false,
       "mod": 0,
-      "rank": 1,
+      "rank": 0,
       "misc": 0,
-      "total": 1
+      "total": 0
     },
     "Taming": {
       "trained": false,
@@ -276,34 +276,76 @@
     }
   },
   "proficiencies": [
+    "Blacksmith Tools",
+    "Leatherworker Tools",
     "Light",
-    "Medium",
     "Simple",
-    "Leatherworking Tools"
+    "Thieves' Tools"
   ],
   "languages": [
     "Common",
-    "Elvish",
-    "Sylvan"
+    "Dwarvish",
+    "Goblin"
   ],
   "attacks": [],
-  "talents": [],
+  "talents": [
+    {
+      "talent_id": "rage",
+      "name": "Rage",
+      "rank": 1,
+      "path_id": "power",
+      "choice_data": {},
+      "path": "power",
+      "text": "Rage (Rank 1)"
+    },
+    {
+      "talent_id": "brutal_strike",
+      "name": "Brutal Strike",
+      "rank": 1,
+      "path_id": "power",
+      "choice_data": {},
+      "path": "power",
+      "text": "Brutal Strike (Rank 1)"
+    },
+    {
+      "talent_id": "primal_armor",
+      "name": "Primal Armor",
+      "rank": 1,
+      "path_id": "power",
+      "choice_data": {},
+      "path": "power",
+      "text": "Primal Armor (Rank 1)"
+    },
+    {
+      "talent_id": "savage_momentum",
+      "name": "Savage Momentum",
+      "rank": 1,
+      "path_id": "power",
+      "choice_data": {},
+      "path": "power",
+      "text": "Savage Momentum (Rank 1)"
+    }
+  ],
   "features": [
     {
       "name": "Darkvision",
       "text": "You can see in dim light within 60 feet as if it were bright light, and in darkness as if it were dim light."
     },
     {
-      "name": "Fey Ancestry",
-      "text": "You have advantage on saving throws against being charmed, and magic can't put you to sleep."
+      "name": "Stonecunning",
+      "text": "You are proficient in History checks and gain advantage when related to stonework."
     },
     {
-      "name": "Life Bond",
-      "text": "Once per long rest, you may touch yourself or an ally to restore 2d6 hit points."
+      "name": "Iron Stomach",
+      "text": "You have resistance to poison damage."
     },
     {
-      "name": "Leather Guild Access",
-      "text": "You may use guild workshops and request basic help with crafting or repairing leather items."
+      "name": "Forged",
+      "text": "You are proficient with Blacksmith and Leatherworker tools. These kits repair at twice the regular amount per charge."
+    },
+    {
+      "name": "Underworld Contact",
+      "text": "You maintain a reliable link to local smugglers or fixers who can move small items, spread rumors, or provide safe hideouts."
     },
     {
       "name": "Adrenal Surge",
@@ -318,9 +360,9 @@
       "text": "When you reduce a creature to 0 LP, you may move up to 10 ft as part of the same action without provoking opportunity attacks."
     },
     {
-      "name": "Wanderer's Memory",
-      "text": "You can recall routes, hidden paths, and safe places in regions you've traveled. You gain advantage on Survival checks to navigate terrain you've previously explored.",
-      "source": "Background: Outcast"
+      "name": "Military Rank",
+      "text": "Fellow soldiers and veterans recognize your rank and service. You can invoke your rank to exert influence over other soldiers and requisition simple equipment or horses.",
+      "source": "Background: Soldier"
     }
   ],
   "spellcrafting": {
@@ -332,34 +374,30 @@
     "casting": "",
     "spells": []
   },
-  "inventory": {
-    "items": [],
-    "total_weight": ""
-  },
   "notes": "",
   "physical_traits": {
-    "height": "5'8\"",
-    "weight": "160 lb",
+    "height": "4'1\"",
+    "weight": "143 lb",
     "size": "Medium",
-    "age": "25",
-    "creature_type": "Humanoid (Elf)",
-    "eyes": "Brown",
+    "age": "35",
+    "creature_type": "Humanoid (Dwarf)",
+    "eyes": "Hazel",
     "skin": "Tan",
-    "hair": "Brown"
+    "hair": "Gray"
   },
   "personality": {
-    "traits": "I avoid eye contact and conversation.",
-    "ideal": "Freedom. No one should be chained by society.",
-    "bond": "A wild place is my sanctuary.",
-    "flaw": "I am suspicious of everyone."
+    "traits": "I speak with the clipped tone of military discipline.",
+    "ideal": "Duty. My oath defines me.",
+    "bond": "I fight for fallen comrades.",
+    "flaw": "I follow orders blindly."
   },
   "alignment": {
     "alignment": "",
-    "mod": 1
+    "mod": 2
   },
   "reputation": {
     "reputation": "",
-    "mod": 0
+    "mod": 2
   },
   "qr_payload": "",
   "footer": {

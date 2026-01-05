@@ -80,6 +80,7 @@ To satisfy references: races → ancestries → professions → paths → talent
 - Scope covers builder/core/player; extend with cases for new validation rules and data regressions.
 
 ## Near-Term Enhancements
-- Expand validation coverage for equipment and spellcrafting once those systems land.
+- Keep scope focused on character status (stats/skills/proficiencies/talents); narrative equipment/equipped tracking is out of scope.
+- Expand validation coverage for spellcrafting once that system lands.
 - Add richer talent/path data (general talents JSON) and hook into LevelUpManager options display.
 - Add CLI ergonomics: redo prompts for mass choice resolution and better error display.

@@ -1,0 +1,378 @@
+[
+  {
+    "id": "club",
+    "name": "Club",
+    "category": "simple",
+    "type": "melee",
+    "damage_die": "1d4",
+    "damage_type": "bludgeoning",
+    "properties": ["light"],
+    "range": null
+  },
+  {
+    "id": "dagger",
+    "name": "Dagger",
+    "category": "simple",
+    "type": "melee",
+    "damage_die": "1d4",
+    "damage_type": "piercing",
+    "properties": ["light", "precise", "thrown"],
+    "range": {"normal": 20, "max": 60}
+  },
+  {
+    "id": "greatclub",
+    "name": "Greatclub",
+    "category": "simple",
+    "type": "melee",
+    "damage_die": "1d8",
+    "damage_type": "bludgeoning",
+    "properties": ["two‑handed"],
+    "range": null
+  },
+  {
+    "id": "handaxe",
+    "name": "Handaxe",
+    "category": "simple",
+    "type": "melee",
+    "damage_die": "1d6",
+    "damage_type": "slashing",
+    "properties": ["light", "thrown"],
+    "range": {"normal": 20, "max": 60}
+  },
+  {
+    "id": "javelin",
+    "name": "Javelin",
+    "category": "simple",
+    "type": "melee",
+    "damage_die": "1d6",
+    "damage_type": "piercing",
+    "properties": ["thrown"],
+    "range": {"normal": 30, "max": 120}
+  },
+  {
+    "id": "light_hammer",
+    "name": "Light Hammer",
+    "category": "simple",
+    "type": "melee",
+    "damage_die": "1d4",
+    "damage_type": "bludgeoning",
+    "properties": ["light", "thrown"],
+    "range": {"normal": 20, "max": 60}
+  },
+  {
+    "id": "mace",
+    "name": "Mace",
+    "category": "simple",
+    "type": "melee",
+    "damage_die": "1d6",
+    "damage_type": "bludgeoning",
+    "properties": [],
+    "range": null
+  },
+  {
+    "id": "quarterstaff",
+    "name": "Quarterstaff",
+    "category": "simple",
+    "type": "melee",
+    "damage_die": "1d6",
+    "damage_type": "bludgeoning",
+    "dual_grip_damage": "1d8",
+    "properties": ["dual‑grip"],
+    "range": null
+  },
+  {
+    "id": "sickle",
+    "name": "Sickle",
+    "category": "simple",
+    "type": "melee",
+    "damage_die": "1d4",
+    "damage_type": "slashing",
+    "properties": ["light"],
+    "range": null
+  },
+  {
+    "id": "spear",
+    "name": "Spear",
+    "category": "simple",
+    "type": "melee",
+    "damage_die": "1d6",
+    "damage_type": "piercing",
+    "dual_grip_damage": "1d8",
+    "properties": ["thrown", "dual‑grip"],
+    "range": {"normal": 20, "max": 60}
+  },
+  {
+    "id": "crossbow_light",
+    "name": "Light Crossbow",
+    "category": "simple",
+    "type": "ranged",
+    "damage_die": "1d8",
+    "damage_type": "piercing",
+    "properties": ["two‑handed", "loading"],
+    "range": {"normal": 80, "max": 240}
+  },
+  {
+    "id": "dart",
+    "name": "Dart",
+    "category": "simple",
+    "type": "ranged",
+    "damage_die": "1d4",
+    "damage_type": "piercing",
+    "properties": ["precise", "thrown"],
+    "range": {"normal": 20, "max": 60}
+  },
+  {
+    "id": "shortbow",
+    "name": "Shortbow",
+    "category": "simple",
+    "type": "ranged",
+    "damage_die": "1d6",
+    "damage_type": "piercing",
+    "properties": ["ammunition", "two‑handed"],
+    "range": {"normal": 80, "max": 240}
+  },
+  {
+    "id": "sling",
+    "name": "Sling",
+    "category": "simple",
+    "type": "ranged",
+    "damage_die": "1d4",
+    "damage_type": "bludgeoning",
+    "properties": ["ammunition"],
+    "range": {"normal": 30, "max": 120}
+  },
+  {
+    "id": "battleaxe",
+    "name": "Battleaxe",
+    "category": "martial",
+    "type": "melee",
+    "damage_die": "1d8",
+    "damage_type": "slashing",
+    "dual_grip_damage": "1d10",
+    "properties": ["dual‑grip"],
+    "range": null
+  },
+  {
+    "id": "flail",
+    "name": "Flail",
+    "category": "martial",
+    "type": "melee",
+    "damage_die": "1d8",
+    "damage_type": "bludgeoning",
+    "properties": [],
+    "range": null
+  },
+  {
+    "id": "glaive",
+    "name": "Glaive",
+    "category": "martial",
+    "type": "melee",
+    "damage_die": "1d10",
+    "damage_type": "slashing",
+    "properties": ["heavy", "reach", "two‑handed"],
+    "range": null
+  },
+  {
+    "id": "greataxe",
+    "name": "Greataxe",
+    "category": "martial",
+    "type": "melee",
+    "damage_die": "1d12",
+    "damage_type": "slashing",
+    "properties": ["heavy", "two‑handed"],
+    "range": null
+  },
+  {
+    "id": "greatsword",
+    "name": "Greatsword",
+    "category": "martial",
+    "type": "melee",
+    "damage_die": "2d6",
+    "damage_type": "slashing",
+    "properties": ["heavy", "two‑handed"],
+    "range": null
+  },
+  {
+    "id": "halberd",
+    "name": "Halberd",
+    "category": "martial",
+    "type": "melee",
+    "damage_die": "1d10",
+    "damage_type": "slashing",
+    "properties": ["heavy", "reach", "two‑handed"],
+    "range": null
+  },
+  {
+    "id": "lance",
+    "name": "Lance",
+    "category": "martial",
+    "type": "melee",
+    "damage_die": "1d12",
+    "damage_type": "piercing",
+    "properties": ["reach", "special"],
+    "range": null
+  },
+  {
+    "id": "longsword",
+    "name": "Longsword",
+    "category": "martial",
+    "type": "melee",
+    "damage_die": "1d8",
+    "damage_type": "slashing",
+    "dual_grip_damage": "1d10",
+    "properties": ["dual‑grip"],
+    "range": null
+  },
+  {
+    "id": "maul",
+    "name": "Maul",
+    "category": "martial",
+    "type": "melee",
+    "damage_die": "2d6",
+    "damage_type": "bludgeoning",
+    "properties": ["heavy", "two‑handed"],
+    "range": null
+  },
+  {
+    "id": "morningstar",
+    "name": "Morningstar",
+    "category": "martial",
+    "type": "melee",
+    "damage_die": "1d8",
+    "damage_type": "piercing",
+    "properties": [],
+    "range": null
+  },
+  {
+    "id": "pike",
+    "name": "Pike",
+    "category": "martial",
+    "type": "melee",
+    "damage_die": "1d10",
+    "damage_type": "piercing",
+    "properties": ["heavy", "reach", "two‑handed"],
+    "range": null
+  },
+  {
+    "id": "rapier",
+    "name": "Rapier",
+    "category": "martial",
+    "type": "melee",
+    "damage_die": "1d8",
+    "damage_type": "piercing",
+    "properties": ["precise"],
+    "range": null
+  },
+  {
+    "id": "scimitar",
+    "name": "Scimitar",
+    "category": "martial",
+    "type": "melee",
+    "damage_die": "1d6",
+    "damage_type": "slashing",
+    "properties": ["light", "precise"],
+    "range": null
+  },
+  {
+    "id": "shortsword",
+    "name": "Shortsword",
+    "category": "martial",
+    "type": "melee",
+    "damage_die": "1d6",
+    "damage_type": "piercing",
+    "properties": ["light", "precise", "two‑handed"],
+    "range": null
+  },
+  {
+    "id": "trident",
+    "name": "Trident",
+    "category": "martial",
+    "type": "melee",
+    "damage_die": "1d6",
+    "damage_type": "piercing",
+    "dual_grip_damage": "1d8",
+    "properties": ["thrown", "dual‑grip"],
+    "range": {"normal": 20, "max": 60}
+  },
+  {
+    "id": "war_pick",
+    "name": "War Pick",
+    "category": "martial",
+    "type": "melee",
+    "damage_die": "1d8",
+    "damage_type": "piercing",
+    "properties": [],
+    "range": null
+  },
+  {
+    "id": "warhammer",
+    "name": "Warhammer",
+    "category": "martial",
+    "type": "melee",
+    "damage_die": "1d8",
+    "damage_type": "bludgeoning",
+    "dual_grip_damage": "1d10",
+    "properties": ["dual‑grip"],
+    "range": null
+  },
+  {
+    "id": "whip",
+    "name": "Whip",
+    "category": "martial",
+    "type": "melee",
+    "damage_die": "1d4",
+    "damage_type": "slashing",
+    "properties": ["precise", "reach"],
+    "range": null
+  },
+  {
+    "id": "blowgun",
+    "name": "Blowgun",
+    "category": "martial",
+    "type": "ranged",
+    "damage_die": "1",
+    "damage_type": "piercing",
+    "properties": ["ammunition", "loading"],
+    "range": {"normal": 25, "max": 50}
+  },
+  {
+    "id": "crossbow_hand",
+    "name": "Hand Crossbow",
+    "category": "martial",
+    "type": "ranged",
+    "damage_die": "1d6",
+    "damage_type": "piercing",
+    "properties": ["ammunition", "light", "loading"],
+    "range": {"normal": 30, "max": 90}
+  },
+  {
+    "id": "crossbow_heavy",
+    "name": "Heavy Crossbow",
+    "category": "martial",
+    "type": "ranged",
+    "damage_die": "1d10",
+    "damage_type": "piercing",
+    "properties": ["ammunition", "heavy", "two‑handed", "loading"],
+    "range": {"normal": 100, "max": 300}
+  },
+  {
+    "id": "longbow",
+    "name": "Longbow",
+    "category": "martial",
+    "type": "ranged",
+    "damage_die": "1d8",
+    "damage_type": "piercing",
+    "properties": ["ammunition", "heavy", "two‑handed"],
+    "range": {"normal": 150, "max": 450}
+  },
+  {
+    "id": "net",
+    "name": "Net",
+    "category": "martial",
+    "type": "ranged",
+    "damage_die": null,
+    "damage_type": null,
+    "properties": ["special"],
+    "range": {"normal": 5, "max": 15}
+  }
+]
