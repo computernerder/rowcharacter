@@ -1,0 +1,1491 @@
+<!doctype html>
+<html><head><meta charset='utf-8'><style>@page { 
+    size: letter; 
+    margin: 0; 
+}
+
+* { 
+    box-sizing: border-box; 
+    margin: 0; 
+    padding: 0; 
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body { 
+    font-family: 'Segoe UI', Tahoma, sans-serif; 
+    font-size: 9pt; 
+    line-height: 1.2; 
+}
+
+.page {
+    width: 8.25in;
+    height: 10.5in;
+    margin: 0.25in auto;
+    padding: 0.15in;
+    padding-bottom: 0.5in;
+    position: relative;
+    page-break-after: always;
+    background-image: url('file:///C:/Projects/FightingSystem/external/rowcharactersheet/static/rowcharactersheet/images/background.jpeg');
+    background-repeat: repeat;
+    background-size: auto;
+    background-color: #f5f0e6;
+    border: none;
+    box-shadow: inset 0 0 0 4px #000;
+    overflow: hidden;
+}
+
+.page:last-child {
+    page-break-after: avoid;
+}
+
+/* Corner flourishes - tight to edge */
+.corner {
+    display: none;
+}
+.corner-tl { top: 0; left: 0; }
+.corner-tr { top: 0; right: 0; transform: rotate(90deg); }
+.corner-bl { bottom: 0; left: 0; transform: rotate(-90deg); }
+.corner-br { bottom: 0; right: 0; transform: rotate(180deg); }
+
+/* Footer */
+.page-footer {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    font-size: 7pt;
+    color: #555;
+    padding: 0 14px;
+}
+.page-footer::after {
+    content: "Print at 100% scale (no fit-to-page)";
+    display: block;
+    font-size: 6pt;
+    color: #666;
+    margin-top: 2px;
+}
+.footer-main { text-align: center; }
+.footer-tech {
+    position: absolute;
+    right: 12px;
+    bottom: 0;
+    font-size: 6pt;
+    color: #666;
+    text-align: right;
+}
+
+/* === LAYOUT TABLES === */
+.main-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.main-table > tbody > tr > td {
+    vertical-align: top;
+    padding: 3px;
+}
+
+.col-left { width: 46%; }
+.col-right { width: 54%; }
+
+/* === COMMON STYLES === */
+.section {
+    border: 1.5px solid #000;
+    padding: 5px 7px;
+    margin-bottom: 6px;
+    background: rgba(255,255,255,0.85);
+}
+
+.section-title {
+    font-weight: bold;
+    font-size: 9pt;
+    text-transform: uppercase;
+    background: #000;
+    color: #fff;
+    padding: 3px 6px;
+    margin: -5px -7px 5px -7px;
+    letter-spacing: 0.5px;
+}
+
+.section-title .title-note {
+    font-weight: normal;
+    font-size: 6pt;
+    text-transform: none;
+    margin-left: 6px;
+    color: #e6e6e6;
+}
+
+.label {
+    font-size: 6pt;
+    text-transform: uppercase;
+    color: #333;
+    display: block;
+    font-weight: 600;
+}
+
+.value {
+    font-size: 11pt;
+    font-weight: bold;
+}
+
+.value-lg {
+    font-size: 16pt;
+    font-weight: bold;
+}
+
+.value-box {
+    border: 1px solid #000;
+    min-height: 20px;
+    text-align: center;
+    padding: 2px 3px;
+    background: rgba(255,255,255,0.9);
+}
+
+.value-box-lg {
+    border: 1.5px solid #000;
+    min-height: 28px;
+    text-align: center;
+    padding: 3px;
+    font-size: 14pt;
+    font-weight: bold;
+    background: rgba(255,255,255,0.9);
+}
+
+.empty-box {
+    border: 1.5px solid #000;
+    min-height: 22px;
+    background: rgba(255,255,255,0.95);
+}
+
+.empty-box-lg {
+    border: 2px solid #000;
+    min-height: 30px;
+    background: rgba(255,255,255,0.95);
+}
+
+/* === HEADER === */
+.header {
+    margin-bottom: 8px;
+    text-align: center;
+    position: relative;
+}
+
+.header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 6px;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo {
+    height: 50px;
+    margin-bottom: 0;
+}
+
+.header-box {
+    display: inline-block;
+    border: 2px solid #000;
+    background: rgba(255,255,255,0.9);
+    padding: 6px 15px;
+    margin-bottom: 0;
+}
+
+.header-player {
+    display: inline-block;
+    border: 2px solid #000;
+    background: rgba(255,255,255,0.9);
+    padding: 6px 12px;
+    min-width: 160px;
+    text-align: left;
+}
+
+.player-value {
+    font-size: 12pt;
+    font-weight: bold;
+    min-height: 18px;
+}
+
+.qr-box {
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    border: 2px solid #000;
+    background: #e0eaff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 6;
+}
+.qr-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.header-grid {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 3px;
+    table-layout: fixed;
+}
+
+.header-grid td {
+    border: 1.5px solid #000;
+    padding: 3px 5px;
+    text-align: center;
+    vertical-align: top;
+    background: rgba(255,255,255,0.9);
+}
+
+/* Information block (profession/path/race/etc.) */
+.info-section {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding-left: 7px;
+    padding-right: 7px;
+    margin-top: 4px;
+}
+
+.info-inner {
+    padding: 0 3px;
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.info-grid td {
+    min-height: 36px;
+    font-size: 9pt;
+    padding: 5px 6px;
+    text-align: left;
+    vertical-align: top;
+}
+
+.info-grid .value {
+    font-size: 12pt;
+    display: block;
+    min-height: 18px;
+    text-align: left;
+}
+
+/* === INNER TABLES === */
+table.inner {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+table.inner th,
+table.inner td {
+    border: 1px solid #000;
+    padding: 2px 3px;
+    text-align: center;
+    font-size: 8pt;
+}
+
+table.inner th {
+    background: rgba(0,0,0,0.1);
+    font-size: 7pt;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+/* === STATS TABLE === */
+.stats-table .stat-name {
+    font-weight: bold;
+    background: rgba(0,0,0,0.15);
+    width: 42px;
+    font-size: 9pt;
+}
+
+.stats-table .mod-cell {
+    background: rgba(255,255,255,0.9);
+    font-weight: bold;
+    font-size: 11pt;
+    width: 36px;
+}
+
+.stats-table td {
+    width: 36px;
+    height: 20px;
+}
+
+/* === GRID LAYOUTS (using tables) === */
+.grid-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.grid-table td {
+    border: 1.5px solid #000;
+    padding: 4px;
+    text-align: center;
+    vertical-align: top;
+    background: rgba(255,255,255,0.85);
+}
+
+.grid-table .value,
+.grid-table .value-box,
+.grid-table .empty-box,
+.grid-table .empty-box-lg,
+.grid-table span.value {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.feature-table td,
+.talent-table td {
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+}
+
+.lang-table td,
+.prof-table td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.overflow-table td {
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+}
+
+/* Compact rows for physical traits */
+.physical-grid td {
+    padding: 2px 3px;
+    line-height: 1.15;
+}
+.physical-grid .label {
+    margin-bottom: 0;
+}
+.physical-grid .value {
+    display: block;
+    margin-top: 1px;
+}
+
+/* === SKILLS TABLE === */
+.skills-table { font-size: 7pt; }
+.skills-table th, .skills-table td { border: 1px solid #666; padding: 1px 2px; }
+.skills-table .skill-name { text-align: left; padding-left: 3px; width: 70px; font-size: 8pt; }
+.skills-table .trained-col { width: 16px; }
+.skills-table .attr-col { width: 28px; }
+.skills-table .num-col { width: 26px; }
+
+.checkbox {
+    display: inline-block;
+    width: 11px;
+    height: 11px;
+    border: 1.5px solid #000;
+    text-align: center;
+    line-height: 9px;
+    font-size: 9pt;
+    background: #fff;
+}
+.checkbox.checked::after { content: "X"; }
+
+/* === WEAPONS TABLE === */
+.weapons-table th, .weapons-table td { font-size: 8pt; height: 22.6px; }
+.weapons-table td:first-child {
+    border-left: 2px solid #000;
+    padding-left: 6px;
+}
+
+/* === TEXT AREAS === */
+.text-area {
+    border: 1px solid #000;
+    padding: 4px;
+    font-size: 8pt;
+    white-space: pre-wrap;
+    min-height: 45px;
+    background: rgba(255,255,255,0.9);
+    background-image: repeating-linear-gradient(
+        transparent,
+        transparent 18px,
+        rgba(0, 0, 0, 0.08) 18px,
+        rgba(0, 0, 0, 0.08) 19px
+    );
+}
+.text-area.tall { min-height: 140px; }
+.text-area.medium { min-height: 100px; }
+.text-area.short { min-height: 35px; }
+
+/* === TALENTS === */
+.talent-row {
+    width: 100%;
+    border-collapse: collapse;
+}
+.talent-row td {
+    vertical-align: middle;
+    padding: 2px;
+}
+.stored-box {
+    display: inline-block;
+    border: 2px solid #000;
+    width: 35px;
+    height: 26px;
+    vertical-align: middle;
+    background: rgba(255,255,255,0.95);
+}
+
+/* Handwriting guides on dense areas only */
+.feature-table td,
+.talent-table td {
+    height: 20px;
+    background-image: repeating-linear-gradient(
+        transparent,
+        transparent 18px,
+        rgba(0, 0, 0, 0.08) 18px,
+        rgba(0, 0, 0, 0.08) 19px
+    );
+}
+
+.notes-sticky .text-area {
+    background-image: repeating-linear-gradient(
+        transparent,
+        transparent 18px,
+        rgba(0, 0, 0, 0.08) 18px,
+        rgba(0, 0, 0, 0.08) 19px
+    );
+}
+
+/* === UTILITIES === */
+.mt-1 { margin-top: 5px; }
+.text-left { text-align: left; }
+
+/* === POSITIONING HELPERS ===
+   Goal: make layout tweaks happen in CSS (not inline styles).
+   Edit these variables/classes to reposition/rescale sections.
+*/
+:root {
+    --logo-fallback-font-size: 20pt;
+    --logo-fallback-letter-spacing: 2px;
+    --logo-fallback-margin-bottom: 6px;
+
+    --character-name-font-size: 16pt;
+    --character-name-min-height: 22px;
+    --character-name-min-width: 330px;
+
+    --hdr-profession-width: 20%;
+    --hdr-level-width: 12%;
+    --hdr-experience-width: 18%;
+    --hdr-stored-adv-width: 14%;
+    --hdr-player-width: 18%;
+
+    /* Combat Stats height target to pull it to the bottom of the frame */
+    --combat-stats-min-height: 169px;
+}
+
+.logo-fallback {
+    display: none;
+    font-size: var(--logo-fallback-font-size);
+    font-weight: bold;
+    letter-spacing: var(--logo-fallback-letter-spacing);
+    margin-bottom: var(--logo-fallback-margin-bottom);
+}
+
+.character-name-value {
+    font-size: var(--character-name-font-size);
+    font-weight: bold;
+    min-height: var(--character-name-min-height);
+    min-width: var(--character-name-min-width);
+}
+
+.hdr-profession { width: var(--hdr-profession-width); }
+.hdr-level { width: var(--hdr-level-width); }
+.hdr-experience { width: var(--hdr-experience-width); }
+.hdr-stored-adv { width: var(--hdr-stored-adv-width); }
+.hdr-player { width: var(--hdr-player-width); }
+
+.combat-stats-block { min-height: var(--combat-stats-min-height); }
+
+/* Sticky Notes bar on page 2 */
+.notes-sticky {
+    position: absolute;
+    left: 0.15in;
+    right: 0.15in;
+    bottom: 48px;
+    z-index: 5;
+}
+.notes-inner {
+    padding: 0 3px;
+}
+.notes-sticky .section { margin-bottom: 0; }
+
+.notes-page-body {
+    position: relative;
+    min-height: 620px;
+}
+
+.notes-page-notes {
+    padding-right: 0;
+}
+
+.page-notes {
+    position: relative;
+}
+
+.qr-box-notes {
+    right: 12px;
+    bottom: 20px;
+}
+
+/* General utilities used to replace inline styles */
+.w-50p { width: 50%; }
+.w-33p { width: 33.33%; }
+.w-25p { width: 25%; }
+.w-60p { width: 60%; }
+.w-40p { width: 40%; }
+.w-28p { width: 28%; }
+.w-22p { width: 22%; }
+.w-20p { width: 20%; }
+.w-18p { width: 18%; }
+.w-14p { width: 14%; }
+.w-12p { width: 12%; }
+.w-30p { width: 30%; }
+.w-10p { width: 10%; }
+.w-90px { width: 90px; }
+
+.mt-3 { margin-top: 3px; }
+.mt-5 { margin-top: 5px; }
+.mb-10 { margin-bottom: 10px; }
+.pb-6 { padding-bottom: 6px; }
+.pr-8 { padding-right: 8px; }
+.ml-25 { margin-left: 25px; }
+
+.text-right { text-align: right; }
+.text-center { text-align: center; }
+
+.font-bold { font-weight: bold; }
+.text-black { color: #000; }
+.fz-14pt { font-size: 14pt; }
+.fz-10pt { font-size: 10pt; }
+.fz-12pt { font-size: 12pt; }
+.fz-8pt { font-size: 8pt; }
+.fz-6pt { font-size: 6pt; }
+.text-muted { color: #666; }
+
+.border-none { border: none; }
+.border-bottom-3 { border-bottom: 3px solid #000; }
+
+.value-box-total {
+    font-weight: bold;
+    border-width: 2px;
+}
+
+.value-box-total-lg {
+    font-weight: bold;
+    border-width: 2px;
+    font-size: 11pt;
+}
+
+.label-strong {
+    font-weight: bold;
+    color: #000;
+}
+
+.label-strong-8pt {
+    font-size: 8pt;
+    font-weight: bold;
+    color: #000;
+}
+
+.page2-header {
+    text-align: center;
+    margin-bottom: 10px;
+    border-bottom: 3px solid #000;
+    padding-bottom: 6px;
+    background: rgba(255,255,255,0.9);
+}
+
+/* Languages table rows */
+.lang-table td { height: 18px; }
+.prof-table td {
+    height: 18px;
+}
+.prof-table { min-height: 160px; }
+.lang-table { min-height: 90px; }
+.feature-table td,
+.talent-table td {
+    height: 20px;
+}
+.skills-table tbody tr:nth-child(even) td { background: rgba(0,0,0,0.04); }
+
+.weight-row {
+    margin-top: 2px;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.equipment-section {
+    min-height: 300px;
+}
+</style></head><body><script>window.sheetData = {"id": "", "character_name": "Mike", "player": "Josh", "profession": "Scholar", "primary_path": "Mystic", "race": "Human", "ancestry": "Velari", "background": "Scholar", "level": 1, "total_experience": 0, "stored_advance": "", "ability_scores": {"Might": {"mod": 1, "saving_throw": 1, "total": 13, "roll": 12, "race": 0, "misc": 1}, "Agility": {"mod": 1, "saving_throw": 1, "total": 12, "roll": 12, "race": 0, "misc": 0}, "Endurance": {"mod": 1, "saving_throw": 1, "total": 12, "roll": 12, "race": 0, "misc": 0}, "Wisdom": {"mod": 2, "saving_throw": 2, "total": 14, "roll": 12, "race": 0, "misc": 2}, "Intellect": {"mod": 2, "saving_throw": 2, "total": 15, "roll": 12, "race": 1, "misc": 2}, "Charisma": {"mod": 1, "saving_throw": 1, "total": 12, "roll": 12, "race": 0, "misc": 0}}, "defense": {"base": 9, "agility": 1, "shield": "", "misc": 0, "total": 10}, "speed": 30, "initiative": 1, "health": {"max": 9, "current": 9, "wounds": 0}, "armor_hp": {"max": 0, "current": 0}, "life_points": {"max": 12, "current": 12}, "focus": {"max": 0, "current": 0}, "passive": {"perception": {"base": 10, "skill": 2, "misc": 0, "total": 12}, "insight": {"base": 10, "skill": 2, "misc": 0, "total": 12}}, "attack_mods": {"melee": {"attr": 1, "misc": 0, "total": 1}, "ranged": {"attr": 1, "misc": 2, "total": 3}}, "skills": {"Acrobatics": {"trained": true, "mod": 1, "rank": 1, "misc": 0, "total": 2}, "Animal Handling": {"trained": true, "mod": 2, "rank": 1, "misc": 0, "total": 3}, "Appraisal": {"trained": false, "mod": 2, "rank": 0, "misc": 0, "total": 2}, "Arcana": {"trained": true, "mod": 2, "rank": 1, "misc": 0, "total": 3}, "Athletics": {"trained": false, "mod": 1, "rank": 0, "misc": 0, "total": 1}, "Crafting": {"trained": false, "mod": 2, "rank": 0, "misc": 0, "total": 2}, "Desception": {"trained": false, "mod": 1, "rank": 0, "misc": 0, "total": 1}, "Diplomacy": {"trained": false, "mod": 1, "rank": 0, "misc": 0, "total": 1}, "History": {"trained": true, "mod": 2, "rank": 1, "misc": 0, "total": 3}, "Insight": {"trained": false, "mod": 2, "rank": 0, "misc": 0, "total": 2}, "Intimidation": {"trained": false, "mod": 1, "rank": 0, "misc": 0, "total": 1}, "Investigation": {"trained": true, "mod": 2, "rank": 1, "misc": 0, "total": 3}, "Medicine": {"trained": false, "mod": 2, "rank": 0, "misc": 0, "total": 2}, "Nature": {"trained": false, "mod": 2, "rank": 0, "misc": 0, "total": 2}, "Perception": {"trained": false, "mod": 2, "rank": 0, "misc": 0, "total": 2}, "Performance": {"trained": false, "mod": 1, "rank": 0, "misc": 0, "total": 1}, "Persuasion": {"trained": false, "mod": 1, "rank": 0, "misc": 0, "total": 1}, "Religion": {"trained": false, "mod": 2, "rank": 0, "misc": 0, "total": 2}, "Slight of Hand": {"trained": false, "mod": 1, "rank": 0, "misc": 0, "total": 1}, "Stealth": {"trained": false, "mod": 1, "rank": 0, "misc": 0, "total": 1}, "Streetwise": {"trained": false, "mod": 2, "rank": 0, "misc": 0, "total": 2}, "Survival": {"trained": false, "mod": 2, "rank": 0, "misc": 0, "total": 2}, "Taming": {"trained": false, "mod": 2, "rank": 0, "misc": 0, "total": 2}}, "proficiencies": ["Simple", "Arcane Focus"], "languages": ["Common", "Velkarran", "Dwarvish", "Elvish"], "attacks": [], "talents": [], "features": [{"name": "Adaptability", "text": "Gain two additional skill proficiencies of your choice."}, {"name": "Keen Mind", "text": "You are proficient in History checks and gain advantage when attempting to recall lore, maps, or spoken words."}, {"name": "Academic Circles", "text": "You can request help from scribes, professors, and archivists who share information or grant access to rare texts."}, {"name": "Academic Circles", "text": "You can request help from scribes, professors, and archivists who share information or grant access to rare texts."}, {"name": "Arcane Initiate", "text": "You gain a Spellcrafting Book, an arcane focus, and basic training in shaping magical energy."}, {"name": "Spell Attunement", "text": "Your Spell Attack modifier equals your Intellect modifier. Your Spell Save TN equals 8 + your Intellect modifier."}, {"name": "Flow of Thought", "text": "Once per short rest, as a Bonus Action, you gain advantage on Intellect saving throws until the start of your next turn."}, {"name": "Researcher", "text": "When you attempt to learn or recall a piece of lore, if you do not know that information, you often know where and from whom you can obtain it. Usually, this information comes from a library, scriptorium, university, or a sage."}], "spellcrafting": {"save_dc": 0, "attack_bonus": 0, "crafting_points": {"max": 0}, "casting": "", "spells": []}, "inventory": {"items": ["Ink and quills", "Parchment", "Small knife", "Reference book", "Common clothes", "10 bronze"], "total_weight": ""}, "notes": "", "physical_traits": {"height": "", "weight": "", "size": "Medium", "age": "", "creature_type": "Humanoid", "eyes": "", "skin": "", "hair": ""}, "personality": {"traits": "I use polysyllabic words that convey the impression of great erudition.", "ideal": "Logic. Emotions must not cloud our logical thinking.", "bond": "It is my duty to protect my students.", "flaw": "I am easily distracted by the promise of information."}, "alignment": {"alignment": "", "mod": 1}, "reputation": {"reputation": "", "mod": 2}, "qr_payload": "", "footer": {"datecode": "", "config": "", "id": ""}};</script><div class="sheet-embed" style="margin:20px auto; max-width:850px;">
+  <!-- ==================== PAGE 1 ==================== -->
+    <div class="page page-notes">
+    <div class="page-footer">
+        <span class="footer-main">© 2026 MagiTomes LLC. Copying is permitted for personal use.</span>
+        <span class="footer-tech">Datecode: <span class="footer-datecode" data-field="footer_datecode"></span> | Config: <span class="footer-config" data-field="footer_config"></span> | ID: <span class="footer-id" data-field="footer_id"></span></span>
+    </div>
+
+    <!-- HEADER -->
+    <div class="header">
+        <div class="header-top">
+            <div class="header-left">
+                <div class="logo-fallback">REALM OF WARRIORS</div>
+                
+                <div class="header-box">
+                    <span class="label">Character Name</span>
+                    <div class="character-name-value" data-field="character_name"></div>
+                </div>
+            </div>
+
+            <div class="header-player">
+                <span class="label">Player</span>
+                <div class="player-value" data-field="player"></div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- MAIN TWO-COLUMN LAYOUT -->
+    <table class="main-table">
+        <tr>
+            <!-- LEFT COLUMN -->
+            <td class="col-left">
+                <!-- INFORMATION -->
+                <div class="section info-section">
+                    <div class="section-title">Information</div>
+                    <table class="header-grid info-grid">
+                        <tr>
+                            <td><span class="label">Profession</span><span class="value" data-field="profession"></span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="label">Primary Path</span><span class="value" data-field="primary_path"></span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="label">Race / Ancestry / Background</span><span class="value" data-field="race_block"></span></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- ABILITY SCORES -->
+                <div class="section">
+                    <div class="section-title">Ability Scores</div>
+                    <table class="inner stats-table">
+                        <thead>
+                            <tr><th></th><th>MOD</th><th>SAVE</th><th>TOTAL</th><th>ROLL</th><th>RACE</th><th>MISC</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr data-ability="Might">
+                                <td class="stat-name">MGT</td>
+                                <td class="mod-cell" data-part="mod"></td>
+                                <td data-part="saving_throw"></td>
+                                <td data-part="total"></td>
+                                <td data-part="roll"></td>
+                                <td data-part="race"></td>
+                                <td data-part="misc"></td>
+                            </tr>
+                            <tr data-ability="Agility">
+                                <td class="stat-name">AGL</td>
+                                <td class="mod-cell" data-part="mod"></td>
+                                <td data-part="saving_throw"></td>
+                                <td data-part="total"></td>
+                                <td data-part="roll"></td>
+                                <td data-part="race"></td>
+                                <td data-part="misc"></td>
+                            </tr>
+                            <tr data-ability="Endurance">
+                                <td class="stat-name">END</td>
+                                <td class="mod-cell" data-part="mod"></td>
+                                <td data-part="saving_throw"></td>
+                                <td data-part="total"></td>
+                                <td data-part="roll"></td>
+                                <td data-part="race"></td>
+                                <td data-part="misc"></td>
+                            </tr>
+                            <tr data-ability="Intellect">
+                                <td class="stat-name">INT</td>
+                                <td class="mod-cell" data-part="mod"></td>
+                                <td data-part="saving_throw"></td>
+                                <td data-part="total"></td>
+                                <td data-part="roll"></td>
+                                <td data-part="race"></td>
+                                <td data-part="misc"></td>
+                            </tr>
+                            <tr data-ability="Wisdom">
+                                <td class="stat-name">WIS</td>
+                                <td class="mod-cell" data-part="mod"></td>
+                                <td data-part="saving_throw"></td>
+                                <td data-part="total"></td>
+                                <td data-part="roll"></td>
+                                <td data-part="race"></td>
+                                <td data-part="misc"></td>
+                            </tr>
+                            <tr data-ability="Charisma">
+                                <td class="stat-name">CHA</td>
+                                <td class="mod-cell" data-part="mod"></td>
+                                <td data-part="saving_throw"></td>
+                                <td data-part="total"></td>
+                                <td data-part="roll"></td>
+                                <td data-part="race"></td>
+                                <td data-part="misc"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- ATTACK MODIFIERS -->
+                <div class="section">
+                    <div class="section-title">Attack Modifiers</div>
+                    <table class="grid-table">
+                        <tr>
+                            <td style="width:50%">
+                                <span class="label" style="font-size:8pt;font-weight:bold;color:#000">Melee</span>
+                                <table class="inner" style="margin-top:3px">
+                                    <tr>
+                                        <td><span class="label">MGT</span><div class="value-box" data-field="attack_melee_attr"></div></td>
+                                        <td><span class="label">Misc</span><div class="value-box" data-field="attack_melee_misc"></div></td>
+                                        <td><span class="label" style="font-weight:bold;color:#000">Total</span><div class="value-box" style="font-weight:bold;border-width:2px;font-size:11pt" data-field="attack_melee_total"></div></td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td style="width:50%">
+                                <span class="label" style="font-size:8pt;font-weight:bold;color:#000">Ranged</span>
+                                <table class="inner" style="margin-top:3px">
+                                    <tr>
+                                        <td><span class="label">AGL</span><div class="value-box" data-field="attack_ranged_attr"></div></td>
+                                        <td><span class="label">Misc</span><div class="value-box" data-field="attack_ranged_misc"></div></td>
+                                        <td><span class="label" style="font-weight:bold;color:#000">Total</span><div class="value-box" style="font-weight:bold;border-width:2px;font-size:11pt" data-field="attack_ranged_total"></div></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- PASSIVE STATS -->
+                <div class="section">
+                    <div class="section-title">Passive Stats</div>
+                    <table class="grid-table">
+                        <tr>
+                            <td style="width:50%">
+                                <span class="label">Perception (WIS)</span>
+                                <table class="inner" style="margin-top:3px">
+                                    <tr>
+                                        <td style="width:25%"><span class="label">Base</span><div class="value-box" data-field="passive_perception_base">10</div></td>
+                                        <td style="width:25%"><span class="label">Skill</span><div class="value-box" data-field="passive_perception_skill"></div></td>
+                                        <td style="width:25%"><span class="label">Misc</span><div class="value-box" data-field="passive_perception_misc"></div></td>
+                                        <td style="width:25%"><span class="label">Total</span><div class="value-box" style="font-weight:bold;border-width:2px" data-field="passive_perception_total"></div></td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td style="width:50%">
+                                <span class="label">Insight (INT)</span>
+                                <table class="inner" style="margin-top:3px">
+                                    <tr>
+                                        <td style="width:25%"><span class="label">Base</span><div class="value-box" data-field="passive_insight_base">10</div></td>
+                                        <td style="width:25%"><span class="label">Skill</span><div class="value-box" data-field="passive_insight_skill"></div></td>
+                                        <td style="width:25%"><span class="label">Misc</span><div class="value-box" data-field="passive_insight_misc"></div></td>
+                                        <td style="width:25%"><span class="label">Total</span><div class="value-box" style="font-weight:bold;border-width:2px" data-field="passive_insight_total"></div></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- FEATURES & TRAITS -->
+                <div class="section">
+                    <div class="section-title">Features & Traits</div>
+                    <table class="inner feature-table" data-list="features">
+                        <tbody>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- TALENTS -->
+                <div class="section">
+                    <div class="section-title">Talents</div>
+                    <table class="talent-row">
+                        <tr>
+                            <td class="text-left"><span class="label">Talent List</span></td>
+                            <td style="width:90px;text-align:right">
+                                <span class="label" style="display:inline;margin-right:5px">Stored:</span>
+                                <div class="stored-box" data-field="stored_advance"></div>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="inner talent-table" data-list="talents">
+                        <tbody>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                            <tr><td></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </td>
+
+            <!-- RIGHT COLUMN -->
+            <td class="col-right">
+                <!-- COMBAT STATS -->
+                <div class="section combat-stats-block">
+                    <div class="section-title">Combat Stats</div>
+                    <table class="grid-table">
+                        <tr>
+                            <td style="width:50%">
+                                <span class="label">Defense</span>
+                                <table class="inner" style="margin-top:3px">
+                                    <tr>
+                                        <td><span class="label">Base</span><div class="value-box" data-field="defense_base">9</div></td>
+                                        <td><span class="label">AGL</span><div class="value-box" data-field="defense_agility"></div></td>
+                                        <td><span class="label">Shield</span><div class="empty-box" data-field="defense_shield"></div></td>
+                                        <td><span class="label">Misc</span><div class="value-box" data-field="defense_misc"></div></td>
+                                        <td><span class="label" style="font-weight:bold;color:#000">Total</span><div class="value-box" style="font-weight:bold;border-width:2px;font-size:11pt" data-field="defense_total"></div></td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td style="width:25%">
+                                <span class="label">Initiative</span>
+                                <div class="value-box-lg" style="margin-top:3px" data-field="initiative"></div>
+                            </td>
+                            <td style="width:25%">
+                                <span class="label">Walk Speed</span>
+                                <div class="value-box-lg" style="margin-top:3px" data-field="speed"></div>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <table class="grid-table mt-1">
+                        <tr>
+                            <td style="width:33.33%">
+                                <span class="label">Armor HP</span>
+                                <table class="inner" style="margin-top:3px">
+                                    <tr>
+                                        <td><span class="label">Cur</span><div class="empty-box-lg" data-field="armor_hp_current"></div></td>
+                                        <td><span class="label">Max</span><div class="value-box-lg" data-field="armor_hp_max"></div></td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td style="width:33.33%">
+                                <span class="label">Health HP</span>
+                                <table class="inner" style="margin-top:3px">
+                                    <tr>
+                                        <td><span class="label">Cur</span><div class="empty-box-lg" data-field="health_current"></div></td>
+                                        <td><span class="label">Max</span><div class="value-box-lg" data-field="health_max"></div></td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td style="width:33.33%">
+                                <span class="label">Life Points</span>
+                                <table class="inner" style="margin-top:3px">
+                                    <tr>
+                                        <td><span class="label">Cur</span><div class="empty-box-lg" data-field="life_points_current"></div></td>
+                                        <td><span class="label">Max</span><div class="value-box-lg" data-field="life_points_max"></div></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- WEAPONS & ATTACKS -->
+                <div class="section">
+                    <div class="section-title">Weapons & Attacks</div>
+                    <table class="inner weapons-table" data-list="attacks">
+                        <thead>
+                            <tr>
+                                <th style="width:28%">Attack Action</th>
+                                <th style="width:12%">Bonus</th>
+                                <th style="width:18%">Damage</th>
+                                <th style="width:20%">Type</th>
+                                <th style="width:22%">Range</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr>
+                            <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr>
+                            <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr>
+                            <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr>
+                            <tr><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- SKILLS -->
+                <div class="section">
+                    <div class="section-title">Skills <span class="title-note">T = trained</span></div>
+                    <table class="inner skills-table">
+                        <thead>
+                            <tr>
+                                <th class="trained-col">T</th>
+                                <th class="skill-name">Skill Name</th>
+                                <th class="attr-col">Attr</th>
+                                <th class="num-col">Mod</th>
+                                <th class="num-col">Rank</th>
+                                <th class="num-col">Misc</th>
+                                <th class="num-col">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-skill="">
+                                <td><span class="checkbox"></span></td>
+                                <td class="skill-name"></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </td>
+        </tr>
+    </table>
+  </div>
+
+  <!-- ==================== PAGE 2 ==================== -->
+  <div class="page">
+    <div class="page-footer">© 2026 MagiTomes LLC. Copying is permitted for personal use.</div>
+
+    <!-- Page 2 Header -->
+    <div style="text-align:center;margin-bottom:10px;border-bottom:3px solid #000;padding-bottom:6px;background:rgba(255,255,255,0.9)">
+        <span style="font-size:14pt;font-weight:bold" data-field="character_name"></span>
+        <span style="font-size:10pt;color:#666;margin-left:25px">Page 2</span>
+    </div>
+
+    <table class="main-table">
+        <tr>
+            <!-- LEFT COLUMN -->
+            <td class="col-left">
+                <!-- ALIGNMENT & REPUTATION -->
+                <div class="section">
+                    <div class="section-title">Alignment & Reputation</div>
+                    <table class="grid-table">
+                        <tr>
+                            <td style="width:35%"><span class="label">Alignment</span><div style="min-height:20px;font-weight:bold" data-field="alignment_alignment"></div></td>
+                            <td style="width:15%"><span class="label">Mod</span><div style="min-height:20px;font-weight:bold;font-size:12pt" data-field="alignment_mod"></div></td>
+                            <td style="width:35%"><span class="label">Reputation</span><div style="min-height:20px;font-weight:bold" data-field="reputation_reputation"></div></td>
+                            <td style="width:15%"><span class="label">Mod</span><div style="min-height:20px;font-weight:bold;font-size:12pt" data-field="reputation_mod"></div></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- PERSONALITY -->
+                <div class="section">
+                    <div class="section-title">Personality Traits</div>
+                    <table class="grid-table">
+                        <tr>
+                            <td><span class="label" style="font-weight:bold;color:#000;border-bottom:1px solid #999;margin-bottom:2px;padding-bottom:2px">Traits</span><div style="min-height:45px" data-field="personality_traits"></div></td>
+                            <td><span class="label" style="font-weight:bold;color:#000;border-bottom:1px solid #999;margin-bottom:2px;padding-bottom:2px">Ideal</span><div style="min-height:45px" data-field="personality_ideal"></div></td>
+                        </tr>
+                        <tr>
+                            <td><span class="label" style="font-weight:bold;color:#000;border-bottom:1px solid #999;margin-bottom:2px;padding-bottom:2px">Bond</span><div style="min-height:45px" data-field="personality_bond"></div></td>
+                            <td><span class="label" style="font-weight:bold;color:#000;border-bottom:1px solid #999;margin-bottom:2px;padding-bottom:2px">Flaw</span><div style="min-height:45px" data-field="personality_flaw"></div></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- ADVANCEMENT -->
+                <div class="section">
+                    <div class="section-title">Advancement</div>
+                    <table class="grid-table">
+                        <tr>
+                            <td style="width:33%"><span class="label">Level</span><div class="value" data-field="level"></div></td>
+                            <td style="width:34%"><span class="label">Experience (XP)</span><div class="value" data-field="total_experience"></div></td>
+                            <td style="width:33%"><span class="label">Stored Advance</span><div class="value" data-field="stored_advance"></div></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- PROFICIENCIES -->
+                <div class="section">
+                    <div class="section-title">Proficiencies</div>
+                    <table class="inner prof-table" style="width:100%" data-list="proficiencies">
+                        <tbody>
+                            <tr><td></td><td></td></tr>
+                            <tr><td></td><td></td></tr>
+                            <tr><td></td><td></td></tr>
+                            <tr><td></td><td></td></tr>
+                            <tr><td></td><td></td></tr>
+                            <tr><td></td><td></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- LANGUAGES -->
+                <div class="section">
+                    <div class="section-title">Languages</div>
+                    <table class="inner lang-table" style="width:100%" data-list="languages">
+                        <tbody>
+                            <tr><td></td><td></td></tr>
+                            <tr><td></td><td></td></tr>
+                            <tr><td></td><td></td></tr>
+                            <tr><td></td><td></td></tr>
+                            <tr><td></td><td></td></tr>
+                            <tr><td></td><td></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </td>
+
+            <!-- RIGHT COLUMN -->
+            <td class="col-right">
+                <!-- SPELLCRAFTING -->
+                <div class="section">
+                    <div class="section-title">Spellcrafting</div>
+                    <table class="grid-table">
+                        <tr>
+                            <td style="width:25%"><span class="label">Spell TN Save</span><br><span class="value" data-field="spell_save_dc"></span><div style="font-size:6pt;color:#666">8 + INT Mod</div></td>
+                            <td style="width:25%"><span class="label">Attack Bonus</span><br><span class="value" data-field="spell_attack_bonus"></span><div style="font-size:6pt;color:#666">INT Mod</div></td>
+                            <td style="width:25%">
+                                <span class="label">Crafting Pts</span>
+                                <table class="inner" style="margin-top:3px;border:none">
+                                    <tr>
+                                        <td style="border:none"><span class="label">Cur</span><div class="empty-box" data-field="spell_cp_current"></div></td>
+                                        <td style="border:none"><span class="label">Max</span><div class="value-box" data-field="spell_cp_max"></div></td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td style="width:25%"><span class="label">Casting</span><br><span class="value" data-field="spell_casting"></span></td>
+                        </tr>
+                    </table>
+                    <table class="inner" style="margin-top:5px" data-list="spells">
+                        <thead>
+                            <tr><th style="width:30%">Spell Name</th><th style="width:10%">CP</th><th style="width:60%">Details</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr style="height:18px"><td>&nbsp;</td><td></td><td></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- EQUIPMENT -->
+                <div class="section equipment-section">
+                    <div class="section-title">Equipment & Inventory</div>
+                    <div class="text-area" style="min-height:230px" data-field="inventory_items"></div>
+                    <div class="weight-row">
+                        <span class="label">Total Weight</span>
+                        <div class="value-box" style="width:80px;min-height:20px" data-field="inventory_total_weight"></div>
+                    </div>
+                </div>
+
+                <!-- CURRENCY -->
+                <div class="section">
+                    <div class="section-title">Currency</div>
+                    <table class="grid-table">
+                        <tr>
+                            <td><span class="label" style="font-weight:bold;color:#000">CP</span><div class="empty-box-lg"></div></td>
+                            <td><span class="label" style="font-weight:bold;color:#000">BP</span><div class="empty-box-lg"></div></td>
+                            <td><span class="label" style="font-weight:bold;color:#000">SP</span><div class="empty-box-lg"></div></td>
+                            <td><span class="label" style="font-weight:bold;color:#000">GP</span><div class="empty-box-lg"></div></td>
+                            <td><span class="label" style="font-weight:bold;color:#000">PP</span><div class="empty-box-lg"></div></td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+  </div>
+
+  <!-- ==================== PAGE 3 (DEFINITIONS / OVERFLOW) ==================== -->
+  <div class="page">
+    <div class="page-footer">© 2026 MagiTomes LLC. Copying is permitted for personal use.</div>
+
+    <!-- Page 3 Header -->
+    <div style="text-align:center;margin-bottom:10px;border-bottom:3px solid #000;padding-bottom:6px;background:rgba(255,255,255,0.9)">
+        <span style="font-size:14pt;font-weight:bold" data-field="character_name"></span>
+        <span style="font-size:10pt;color:#666;margin-left:25px">Page 3 — Definitions</span>
+    </div>
+
+    <table class="main-table">
+        <tr>
+            <td class="col-left" colspan="2">
+                <div class="section">
+                    <div class="section-title">Physical Traits</div>
+                    <table class="grid-table physical-grid">
+                        <tr>
+                            <td><span class="label">Height</span><br><span class="value" data-field="height"></span></td>
+                            <td><span class="label">Weight</span><br><span class="value" data-field="weight"></span></td>
+                            <td><span class="label">Size</span><br><span class="value" data-field="size"></span></td>
+                            <td><span class="label">Age</span><br><span class="value" data-field="age"></span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="label">Creature Type</span><br><span class="value" data-field="creature_type"></span></td>
+                            <td><span class="label">Eyes</span><br><span class="value" data-field="eyes"></span></td>
+                            <td><span class="label">Skin</span><br><span class="value" data-field="skin"></span></td>
+                            <td><span class="label">Hair</span><br><span class="value" data-field="hair"></span></td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="col-left">
+                <div class="section">
+                    <div class="section-title">Feature Definitions (Overflow)</div>
+                    <table class="inner feature-table overflow-table" data-list="features-overflow">
+                        <tbody>
+                            <tr><td></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </td>
+            <td class="col-right">
+                <div class="section">
+                    <div class="section-title">Talent Definitions (Overflow)</div>
+                    <table class="inner talent-table overflow-table" data-list="talents-overflow">
+                        <tbody>
+                            <tr><td></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">Additional Overflow</div>
+                    <div class="text-area" style="min-height:200px" data-field="overflow_notes"></div>
+                </div>
+            </td>
+        </tr>
+    </table>
+  </div>
+
+  <!-- ==================== PAGE 4 (NOTES) ==================== -->
+  <div class="page">
+    <div class="page-footer">© 2026 MagiTomes LLC. Copying is permitted for personal use.</div>
+
+    <!-- Page 4 Header -->
+    <div style="text-align:center;margin-bottom:10px;border-bottom:3px solid #000;padding-bottom:6px;background:rgba(255,255,255,0.9)">
+        <span style="font-size:14pt;font-weight:bold" data-field="character_name"></span>
+        <span style="font-size:10pt;color:#666;margin-left:25px">Page 4 — Notes</span>
+    </div>
+
+    <table class="main-table">
+        <tr>
+            <td class="col-left" colspan="2">
+                <div class="section">
+                    <div class="section-title">Notes</div>
+                    <div class="notes-page-body">
+                        <div class="text-area notes-page-notes" style="min-height:620px" data-field="notes"></div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <div class="qr-box qr-box-notes">
+        <img src="/characters/{{ character.code }}/qr/" alt="QR Code">
+    </div>
+  </div>
+</div>
+
+<script>
+    window.sheetData = {{ data_json|safe }} || {};
+    window.sheetFallback = {
+        code: "{{ character.code|escapejs }}",
+        name: "{{ character.name|escapejs }}",
+        player: "{{ character.player|escapejs }}",
+        profession: "{{ character.profession|escapejs }}"
+    };
+</script><script>'use strict';
+
+(() => {
+  const data = (typeof window !== 'undefined' && window.sheetData) ? window.sheetData : {};
+  const fallback = (typeof window !== 'undefined' && window.sheetFallback) ? window.sheetFallback : {};
+  const abilities = data.ability_scores || {};
+  const skills = data.skills || {};
+
+  const setField = (name, value, allowEmpty = false) => {
+    if (value === undefined || value === null) return;
+    if (!allowEmpty && value === "") return;
+    const el = document.querySelector(`[data-field="${name}"]`);
+    if (el) el.textContent = value;
+  };
+
+  setField("character_name", data.character_name || fallback.name || "");
+  setField("player", data.player || fallback.player || "");
+  setField("profession", data.profession || fallback.profession || "");
+  setField("primary_path", data.primary_path || "");
+  const raceBlock = [data.race, data.ancestry, data.background]
+    .map(v => (v ?? "").toString().trim())
+    .filter(Boolean)
+    .join(" / ");
+  setField("race_block", raceBlock);
+  setField("background", data.background || "");
+  setField("race", data.race || "");
+  setField("ancestry", data.ancestry || "");
+  setField("stored_advance", data.stored_advance || "");
+  setField("speed", data.speed ?? "");
+  setField("initiative", data.initiative ?? "");
+
+  const def = data.defense || {};
+  setField("defense_base", def.base ?? "");
+  setField("defense_agility", def.agility ?? "");
+  setField("defense_shield", def.shield ?? "");
+  setField("defense_misc", def.misc ?? "");
+  setField("defense_total", def.total ?? "");
+
+  const health = data.health || {};
+  setField("health_max", health.max ?? "");
+  setField("health_current", health.current ?? "");
+  setField("health_wounds", health.wounds ?? "");
+
+  const armor_hp = data.armor_hp || {};
+  setField("armor_hp_max", armor_hp.max ?? "");
+  setField("armor_hp_current", armor_hp.current ?? "");
+
+  const life = data.life_points || {};
+  setField("life_points_max", life.max ?? "");
+  setField("life_points_current", life.current ?? "");
+
+  const passive = data.passive || {};
+  const percep = passive.perception || {};
+  setField("passive_perception_base", percep.base ?? "");
+  setField("passive_perception_skill", percep.skill ?? "");
+  setField("passive_perception_misc", percep.misc ?? "");
+  setField("passive_perception_total", percep.total ?? "");
+  const insight = passive.insight || {};
+  setField("passive_insight_base", insight.base ?? "");
+  setField("passive_insight_skill", insight.skill ?? "");
+  setField("passive_insight_misc", insight.misc ?? "");
+  setField("passive_insight_total", insight.total ?? "");
+
+  const attacks = data.attack_mods || {};
+  const melee = attacks.melee || {};
+  setField("attack_melee_attr", melee.attr ?? "");
+  setField("attack_melee_misc", melee.misc ?? "");
+  setField("attack_melee_total", melee.total ?? "");
+  const ranged = attacks.ranged || {};
+  setField("attack_ranged_attr", ranged.attr ?? "");
+  setField("attack_ranged_misc", ranged.misc ?? "");
+  setField("attack_ranged_total", ranged.total ?? "");
+
+  const align = data.alignment || {};
+  setField("alignment_alignment", align.alignment ?? "");
+  setField("alignment_mod", align.mod ?? "");
+  const rep = data.reputation || {};
+  setField("reputation_reputation", rep.reputation ?? "");
+  setField("reputation_mod", rep.mod ?? "");
+
+  setField("level", data.level ?? "");
+  setField("total_experience", data.total_experience ?? "");
+
+  const phys = data.physical_traits || {};
+  ["height","weight","size","age","creature_type","eyes","skin","hair"].forEach(k => setField(k, phys[k] ?? ""));
+
+  const personality = data.personality || {};
+  ["traits","ideal","bond","flaw"].forEach(k => setField(`personality_${k}`, personality[k] ?? ""));
+
+  const footer = data.footer || {};
+  setField("footer_datecode", footer.datecode ?? "");
+  setField("footer_config", footer.config ?? "");
+  setField("footer_id", footer.id ?? "");
+
+  setField("inventory_total_weight", (data.inventory || {}).total_weight ?? "");
+  setField("notes", data.notes ?? "");
+
+  const spell = data.spellcrafting || {};
+  setField("spell_save_dc", spell.save_dc ?? "");
+  setField("spell_attack_bonus", spell.attack_bonus ?? "");
+  const crafting = spell.crafting_points || {};
+  setField("spell_cp_max", crafting.max ?? "");
+  setField("spell_cp_current", crafting.current ?? "");
+  setField("spell_casting", spell.casting ?? "");
+
+  // Ability scores
+  document.querySelectorAll("[data-ability]").forEach(row => {
+    const label = row.getAttribute("data-ability");
+    const parts = abilities[label] || {};
+    row.querySelectorAll("[data-part]").forEach(cell => {
+      const part = cell.getAttribute("data-part");
+      const val = parts[part];
+      cell.textContent = (val ?? "") === 0 ? 0 : (val ?? "");
+    });
+  });
+
+  // Skills
+  document.querySelectorAll("[data-skill]").forEach(row => {
+    const name = row.getAttribute("data-skill");
+    const skill = skills[name] || {};
+    const tds = row.querySelectorAll("td");
+    const checkbox = row.querySelector(".checkbox");
+    if (skill.trained) checkbox.classList.add("checked");
+    const parts = ["mod","rank","misc","total"];
+    parts.forEach((part, idx) => {
+      const val = skill[part];
+      const target = tds[idx + 3];
+      if (target) target.textContent = (val ?? "") === 0 ? 0 : (val ?? "");
+    });
+  });
+
+  // Weapons
+  const attackRows = document.querySelectorAll('[data-list="attacks"] tbody tr');
+  (data.attacks || []).forEach((atk, idx) => {
+    if (!attackRows[idx]) return;
+    const cells = attackRows[idx].querySelectorAll("td");
+    cells[0].textContent = atk.attack_action || "";
+    cells[1].textContent = atk.bonus ?? "";
+    cells[2].textContent = atk.damage || "";
+    cells[3].textContent = atk.type || "";
+    cells[4].textContent = atk.range || "";
+  });
+
+  // Lists
+  const fillList = (selector, items) => {
+    const cells = document.querySelectorAll(`${selector} td`);
+    if (!cells.length) return;
+    (items || []).forEach((item, idx) => {
+      if (cells[idx]) cells[idx].textContent = item;
+    });
+  };
+
+  const fillOverflowRich = (selector, items, fallbackLabel) => {
+    const cells = document.querySelectorAll(`${selector} td`);
+    if (!cells.length) return;
+    (items || []).forEach((item, idx) => {
+      const cell = cells[idx];
+      if (!cell) return;
+      cell.textContent = "";
+      const parts = (item || "").split(":");
+      const name = (parts.shift() || fallbackLabel || "Item").trim();
+      const rest = parts.join(":").trim();
+      const strong = document.createElement("strong");
+      strong.textContent = name;
+      cell.appendChild(strong);
+      if (rest) cell.appendChild(document.createTextNode(`: ${rest}`));
+    });
+  };
+
+  // Render lists with overflow handling: chunk labels into rows; send full items to definitions when lines exceed visible rows or items are too long
+  const renderListWithOverflow = (mainSelector, overflowSelector, items, labels) => {
+    const table = document.querySelector(mainSelector);
+    if (!table) return;
+    const cells = table.querySelectorAll('td');
+    const MAX_ROWS = cells.length;
+    const MAX_ITEM_CHARS = 80;
+    const MAX_LINE_CHARS = 70;
+
+    const labelList = (labels && labels.length ? labels : items || []).map(l => l || "");
+
+    // Build lines that respect MAX_LINE_CHARS to avoid natural wrapping
+    const lines = [];
+    let current = "";
+    labelList.forEach(label => {
+      const piece = label.trim();
+      if (!piece) return;
+      if (!current) {
+        current = piece;
+      } else if ((current + ", " + piece).length <= MAX_LINE_CHARS) {
+        current += ", " + piece;
+      } else {
+        lines.push(current);
+        current = piece;
+      }
+    });
+    if (current) lines.push(current);
+
+    const hasLongItems = (items || []).some(it => (it || "").length > MAX_ITEM_CHARS);
+    const needsOverflow = hasLongItems || lines.length > MAX_ROWS;
+
+    // Render lines into visible rows
+    cells.forEach(c => c.textContent = "");
+    lines.slice(0, MAX_ROWS).forEach((line, idx) => {
+      if (cells[idx]) cells[idx].textContent = line;
+    });
+
+    if (needsOverflow) {
+      fillOverflowRich(overflowSelector, items, labels && labels[0] ? labels[0] : "Item");
+    }
+  };
+
+  const featureItems = (data.features || []).map(f => f.name ? `${f.name}: ${f.text || ""}` : f.text || "");
+  const talentItems = (data.talents || []).map(t => t.name ? `${t.name}: ${t.text || ""}` : t.text || "");
+  const featureLabels = (data.features || []).map(f => f.name || (f.text || "").split(":")[0] || "Feature");
+  const talentLabels = (data.talents || []).map(t => t.name || (t.text || "").split(":")[0] || "Talent");
+
+  renderListWithOverflow('[data-list="features"]', '[data-list="features-overflow"]', featureItems, featureLabels);
+  renderListWithOverflow('[data-list="talents"]', '[data-list="talents-overflow"]', talentItems, talentLabels);
+
+  fillList('[data-list="proficiencies"]', data.proficiencies || []);
+  fillList('[data-list="languages"]', data.languages || []);
+
+  // Inventory items
+  const inv = data.inventory || {};
+  if (inv.items && inv.items.length) {
+    const invEl = document.querySelector('[data-field="inventory_items"]');
+    if (invEl) invEl.textContent = inv.items.join("\n");
+  }
+
+  // Spells
+  const spellRows = document.querySelectorAll('[data-list="spells"] tbody tr');
+  (spell.spells || []).forEach((sp, idx) => {
+    if (!spellRows[idx]) return;
+    const cells = spellRows[idx].querySelectorAll("td");
+    cells[0].textContent = sp.name || "";
+    cells[1].textContent = sp.cp ?? "";
+    cells[2].textContent = sp.details || "";
+  });
+})();
+
+
+(() => {
+  const skills = (window.sheetData && window.sheetData.skills) || {};
+  const skillBody = document.querySelector('.skills-table tbody');
+  if (skillBody) {
+    skillBody.innerHTML = '';
+    const names = Object.keys(skills);
+    const fallback = names.length ? names : Array.from({length: 12}, (_, i) => `Skill ${i + 1}`);
+    fallback.forEach(name => {
+      const tr = document.createElement('tr');
+      tr.setAttribute('data-skill', name);
+      tr.innerHTML = '<td><span class="checkbox"></span></td><td class="skill-name"></td><td></td><td></td><td></td><td></td><td></td>';
+      tr.querySelector('.skill-name').textContent = name;
+      skillBody.appendChild(tr);
+    });
+  }
+
+  const ensureRows = (selector, rowHtml, count) => {
+    const target = document.querySelector(selector);
+    if (!target) return;
+    target.innerHTML = '';
+    const total = Math.max(count, 1);
+    for (let i = 0; i < total; i++) {
+      const wrapper = document.createElement('tbody');
+      wrapper.innerHTML = rowHtml.trim();
+      const row = wrapper.firstElementChild;
+      if (row) target.appendChild(row);
+    }
+  };
+
+  ensureRows('[data-list="spells"] tbody', '<tr style="height:18px"><td>&nbsp;</td><td></td><td></td></tr>', 12);
+  ensureRows('[data-list="features-overflow"] tbody', '<tr><td></td></tr>', 12);
+  ensureRows('[data-list="talents-overflow"] tbody', '<tr><td></td></tr>', 12);
+})();
+</script></body></html>

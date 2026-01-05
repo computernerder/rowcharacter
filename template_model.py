@@ -260,15 +260,59 @@ class Attack:
 
 @dataclass
 class Talent:
+    # New format (rulebook-accurate + stable references)
+    talent_id: str = ""
     name: str = ""
+    rank: int = 1
+    path_id: str = ""  # e.g. "general", "defense", "martial"
+    choice_data: Dict[str, Any] = field(default_factory=dict)
+
+    # Legacy display text (kept for backwards compatibility)
     text: str = ""
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "Talent":
-        return cls(name=data.get("name", ""), text=data.get("text", ""))
+        # Backwards-compatible loader:
+        # - old: {"name": "Rage", "text": "..."}
+        # - new: {"talent_id": "rage", "name": "Rage", "rank": 2, "path_id": "martial", "choice_data": {...}}
+        talent_id = data.get("talent_id") or data.get("id") or ""
+        name = data.get("name", "")
+        rank = data.get("rank", 1)
+        path_id = data.get("path_id") or data.get("path") or ""
+        choice_data = data.get("choice_data") or data.get("choice") or {}
+        text = data.get("text", "")
+
+        # If this is a legacy entry that lacks rank, treat as rank 1.
+        try:
+            rank = int(rank)
+        except Exception:
+            rank = 1
+
+        return cls(
+            talent_id=str(talent_id),
+            name=str(name),
+            rank=rank,
+            path_id=str(path_id),
+            choice_data=dict(choice_data) if isinstance(choice_data, dict) else {},
+            text=str(text),
+        )
 
     def to_dict(self) -> Dict[str, Any]:
-        return {"name": self.name, "text": self.text}
+        result = {
+            "talent_id": self.talent_id,
+            "name": self.name,
+            "rank": self.rank,
+            "path_id": self.path_id,
+            "choice_data": self.choice_data,
+        }
+
+        # Keep legacy keys for older consumers
+        if self.path_id:
+            result["path"] = self.path_id
+        if self.text:
+            result["text"] = self.text
+
+        return result
 
 
 @dataclass

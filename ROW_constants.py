@@ -24,7 +24,7 @@ class Skill(str, Enum):
     ARCANA = "Arcana"
     ATHLETICS = "Athletics"
     CRAFTING = "Crafting"
-    DECEPTION = "Desception"
+    DECEPTION = "Deception"
     DIPLOMACY = "Diplomacy"
     HISTORY = "History"
     INSIGHT = "Insight"

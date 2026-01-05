@@ -9,10 +9,17 @@ import json
 import os
 import textwrap
 import random
+from pathlib import Path
 from typing import List, Optional, Set
 
 from character_builder import CharacterBuilder, BuilderStep, PendingChoice
 from template_model import dump_character_template
+from tools.pdf_generator import SharedSheetPDF
+
+
+def _safe_slug(text: str, fallback: str) -> str:
+    cleaned = "".join(ch for ch in text if ch.isalnum() or ch in "-_ ").strip().replace(" ", "_")
+    return cleaned or fallback
 
 
 def clear_screen():
@@ -707,6 +714,31 @@ def resolve_pending_choices(builder: CharacterBuilder):
         input("\n  Press Enter to continue...")
 
 
+def export_pdf(char) -> None:
+    """Export the current character to a PDF in exports/."""
+    exports_dir = Path("exports")
+    exports_dir.mkdir(exist_ok=True)
+
+    default_name = _safe_slug(getattr(char, "character_name", ""), "character")
+    default_player = _safe_slug(getattr(char, "player", ""), "player")
+    default_path = exports_dir / f"{default_name}_{default_player}.pdf"
+
+    path_input = input(f"  PDF path (default: {default_path}) > ").strip()
+    pdf_path = Path(path_input) if path_input else default_path
+
+    sheet_data = dump_character_template(char)
+
+    try:
+        generator = SharedSheetPDF()
+        generator.generate_to_file(sheet_data=sheet_data, output_path=pdf_path)
+        print(f"\n  ✓ PDF saved to {pdf_path}")
+    except ImportError as e:
+        print(f"\n  ✗ Playwright not installed: {e}")
+        print("    Install with: pip install playwright && playwright install chromium")
+    except Exception as e:  # pragma: no cover - user environment specific
+        print(f"\n  ✗ Failed to generate PDF: {e}")
+
+
 def finalize_character(builder: CharacterBuilder):
     """Finalize and export the character."""
     print_header("FINALIZE CHARACTER")
@@ -739,40 +771,43 @@ def finalize_character(builder: CharacterBuilder):
     print(f"  Melee Attack: {char.attack_mods_melee.total:+d}")
     print(f"  Ranged Attack: {char.attack_mods_ranged.total:+d}")
     
-    # Export options
-    print_subheader("Export")
-    print("  1. Save to JSON file")
-    print("  2. Print JSON to screen")
-    print("  3. Done (exit)")
-    
-    export = input("\n  > ").strip()
-    
-    if export == "1":
-        def _safe_slug(text: str, fallback: str) -> str:
-            cleaned = "".join(ch for ch in text if ch.isalnum() or ch in "-_ ").strip().replace(" ", "_")
-            return cleaned or fallback
+    while True:
+        print_subheader("Export")
+        print("  1. Save to JSON file")
+        print("  2. Print JSON to screen")
+        print("  3. Save PDF to exports/")
+        print("  4. Done (exit)")
 
-        default_name = _safe_slug(builder.character.character_name, "character")
-        default_player = _safe_slug(builder.character.player, "player")
-        target_dir = os.path.join(os.getcwd(), "characters")
-        os.makedirs(target_dir, exist_ok=True)
-        default_filename = os.path.join(target_dir, f"{default_name}_{default_player}.json")
+        export = input("\n  > ").strip()
 
-        filename = input(f"  Filename (default: {default_filename}) > ").strip()
-        if not filename:
-            filename = default_filename
-        if not filename.endswith(".json"):
-            filename += ".json"
-        
-        output = dump_character_template(char)
-        with open(filename, "w", encoding="utf-8") as f:
-            json.dump(output, f, indent=2)
-        print(f"\n  ✓ Saved to {filename}")
-    
-    elif export == "2":
-        output = dump_character_template(char)
-        print("\n" + json.dumps(output, indent=2))
-    
+        if export == "1":
+            default_name = _safe_slug(builder.character.character_name, "character")
+            default_player = _safe_slug(builder.character.player, "player")
+            target_dir = os.path.join(os.getcwd(), "characters")
+            os.makedirs(target_dir, exist_ok=True)
+            default_filename = os.path.join(target_dir, f"{default_name}_{default_player}.json")
+
+            filename = input(f"  Filename (default: {default_filename}) > ").strip()
+            if not filename:
+                filename = default_filename
+            if not filename.endswith(".json"):
+                filename += ".json"
+
+            output = dump_character_template(char)
+            with open(filename, "w", encoding="utf-8") as f:
+                json.dump(output, f, indent=2)
+            print(f"\n  ✓ Saved to {filename}")
+
+        elif export == "2":
+            output = dump_character_template(char)
+            print("\n" + json.dumps(output, indent=2))
+
+        elif export == "3":
+            export_pdf(char)
+
+        else:
+            break
+
     input("\n  Press Enter to exit...")
 
 

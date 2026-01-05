@@ -248,13 +248,17 @@ class Talent:
         failures = []
         current_talents = current_talents or {}
         
-        # Check if already at max rank
+        # Check rank progression + max rank
         current_rank = current_talents.get(self.id, 0)
         if target_rank > self.max_rank:
             failures.append(f"Max rank is {self.max_rank}")
-        
+
         if target_rank <= current_rank:
             failures.append(f"Already at rank {current_rank}")
+
+        # Must advance sequentially (cannot skip ranks)
+        if target_rank != current_rank + 1:
+            failures.append(f"Must advance sequentially: next rank is {current_rank + 1}")
         
         # Check prerequisites
         if self.prerequisites:
@@ -274,11 +278,9 @@ class Talent:
         """
         if to_rank <= from_rank:
             return 0
-        
-        total = 0
-        for r in range(from_rank + 1, to_rank + 1):
-            total += r
-        return total
+
+        # Rulebook: buying rank N costs N TP (not cumulative)
+        return to_rank
 
 
 @dataclass

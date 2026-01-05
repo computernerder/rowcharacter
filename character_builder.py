@@ -2,10 +2,10 @@
 Character Builder - Orchestrates the character creation process.
 
 This class manages the step-by-step creation of a character:
-1. Set ability scores
-2. Choose race
-3. Choose ancestry
-4. Choose profession (and duty if applicable)
+1. Choose race
+2. Choose ancestry
+3. Choose profession (and duty if applicable)
+4. Set ability scores
 5. Choose path
 6. Choose background
 
@@ -145,9 +145,11 @@ class CharacterBuilder:
         for name, value in scores.items():
             if name in self.character.ability_scores:
                 score = self.character.ability_scores[name]
+                # Treat input as the "natural" (base) score.
+                # If race/ancestry/profession already applied earlier, preserve those modifiers.
                 score.roll = value
-                score.total = value
-                score.mod = (value - 10) // 2
+                score.total = score.roll + score.race + score.misc
+                score.mod = (score.total - 10) // 2
                 score.saving_throw = score.mod
         
         self.current_step = BuilderStep.RACE
@@ -621,6 +623,16 @@ class CharacterBuilder:
             score.total = score.roll + score.race + score.misc
             score.mod = (score.total - 10) // 2
             score.saving_throw = score.mod
+
+        # Recalculate profession-based HP once ability mods are known.
+        if self.chosen_profession is not None:
+            end_mod = self.character.ability_scores.get("Endurance").mod if "Endurance" in self.character.ability_scores else 0
+            self.character.health.max = self.chosen_profession.base_hp + end_mod
+            # Keep current HP within bounds
+            if self.character.health.current > self.character.health.max:
+                self.character.health.current = self.character.health.max
+            elif self.character.health.current <= 0:
+                self.character.health.current = self.character.health.max
         
         # Recalculate skill totals
         for skill_name, entry in self.character.skills.items():
@@ -680,8 +692,8 @@ class CharacterBuilder:
         # Recalculate life points from Endurance
         if "Endurance" in self.character.ability_scores:
             end_total = self.character.ability_scores["Endurance"].total
-            # Life points = 10 + (END - 10), minimum 1
-            self.character.life_points.max = max(1, end_total)
+            # Rulebook table rounds down odd scores (10-11 ->10, 12-13 ->12, etc.)
+            self.character.life_points.max = max(1, (end_total // 2) * 2)
             self.character.life_points.current = self.character.life_points.max
 
     def _recalculate_modifier(self, ability_name: str) -> None:
@@ -696,7 +708,7 @@ class CharacterBuilder:
         """Get a list of available languages to choose from."""
         # Common languages - could be loaded from data
         return [
-            "Common", "Elvish", "Dwarvish", "Orcish", "Goblin", 
+            "Common", "Elvish", "Dwarvish", "Ancient Dwarvish", "Orcish", "Goblin", 
             "Halffolk", "Draconic", "Celestial", "Infernal", 
             "Sylvan", "Aquan", "Tauric", "Simarru", "Velkarran"
         ]

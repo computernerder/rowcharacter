@@ -1,23 +1,23 @@
 {
   "id": "",
-  "character_name": "",
-  "player": "",
-  "profession": "Scholar",
-  "primary_path": "Mystic",
+  "character_name": "New Herosdf",
+  "player": "Player",
+  "profession": "Leatherworker",
+  "primary_path": "Power",
   "race": "Elf",
   "ancestry": "Sylari",
-  "background": "Scholar",
+  "background": "Outcast",
   "level": 1,
   "total_experience": 0,
   "stored_advance": "",
   "ability_scores": {
     "Might": {
-      "mod": 0,
-      "saving_throw": 0,
-      "total": 10,
-      "roll": 10,
+      "mod": 3,
+      "saving_throw": 3,
+      "total": 17,
+      "roll": 15,
       "race": 0,
-      "misc": 0
+      "misc": 2
     },
     "Agility": {
       "mod": 2,
@@ -28,28 +28,28 @@
       "misc": 0
     },
     "Endurance": {
-      "mod": 1,
-      "saving_throw": 1,
-      "total": 13,
-      "roll": 13,
-      "race": 0,
-      "misc": 0
-    },
-    "Wisdom": {
       "mod": 2,
       "saving_throw": 2,
       "total": 15,
-      "roll": 12,
-      "race": 1,
+      "roll": 13,
+      "race": 0,
       "misc": 2
     },
-    "Intellect": {
-      "mod": 4,
-      "saving_throw": 4,
-      "total": 18,
-      "roll": 15,
+    "Wisdom": {
+      "mod": 0,
+      "saving_throw": 0,
+      "total": 11,
+      "roll": 10,
       "race": 1,
-      "misc": 2
+      "misc": 0
+    },
+    "Intellect": {
+      "mod": 1,
+      "saving_throw": 1,
+      "total": 13,
+      "roll": 12,
+      "race": 1,
+      "misc": 0
     },
     "Charisma": {
       "mod": -1,
@@ -79,8 +79,8 @@
     "current": 0
   },
   "life_points": {
-    "max": 12,
-    "current": 12
+    "max": 15,
+    "current": 15
   },
   "focus": {
     "max": 0,
@@ -89,27 +89,27 @@
   "passive": {
     "perception": {
       "base": 10,
-      "skill": 2,
+      "skill": 0,
       "misc": 0,
-      "total": 12
+      "total": 10
     },
     "insight": {
       "base": 10,
-      "skill": 4,
+      "skill": 1,
       "misc": 0,
-      "total": 14
+      "total": 11
     }
   },
   "attack_mods": {
     "melee": {
-      "attr": 0,
-      "misc": 0,
-      "total": 0
+      "attr": 3,
+      "misc": 2,
+      "total": 5
     },
     "ranged": {
       "attr": 2,
-      "misc": 2,
-      "total": 4
+      "misc": 0,
+      "total": 2
     }
   },
   "skills": {
@@ -122,38 +122,38 @@
     },
     "Animal Handling": {
       "trained": false,
-      "mod": 2,
-      "rank": 0,
-      "misc": 0,
-      "total": 2
-    },
-    "Appraisal": {
-      "trained": false,
-      "mod": 4,
-      "rank": 0,
-      "misc": 0,
-      "total": 4
-    },
-    "Arcana": {
-      "trained": true,
-      "mod": 4,
-      "rank": 1,
-      "misc": 0,
-      "total": 5
-    },
-    "Athletics": {
-      "trained": false,
       "mod": 0,
       "rank": 0,
       "misc": 0,
       "total": 0
     },
-    "Crafting": {
+    "Appraisal": {
       "trained": false,
-      "mod": 4,
+      "mod": 1,
       "rank": 0,
       "misc": 0,
-      "total": 4
+      "total": 1
+    },
+    "Arcana": {
+      "trained": false,
+      "mod": 1,
+      "rank": 0,
+      "misc": 0,
+      "total": 1
+    },
+    "Athletics": {
+      "trained": false,
+      "mod": 3,
+      "rank": 0,
+      "misc": 0,
+      "total": 3
+    },
+    "Crafting": {
+      "trained": true,
+      "mod": 1,
+      "rank": 1,
+      "misc": 0,
+      "total": 2
     },
     "Deception": {
       "trained": false,
@@ -170,18 +170,18 @@
       "total": -1
     },
     "History": {
-      "trained": true,
-      "mod": 4,
-      "rank": 1,
+      "trained": false,
+      "mod": 1,
+      "rank": 0,
       "misc": 0,
-      "total": 5
+      "total": 1
     },
     "Insight": {
       "trained": false,
-      "mod": 4,
+      "mod": 1,
       "rank": 0,
       "misc": 0,
-      "total": 4
+      "total": 1
     },
     "Intimidation": {
       "trained": false,
@@ -192,31 +192,31 @@
     },
     "Investigation": {
       "trained": false,
-      "mod": 4,
+      "mod": 1,
       "rank": 0,
       "misc": 0,
-      "total": 4
+      "total": 1
     },
     "Medicine": {
       "trained": false,
-      "mod": 4,
+      "mod": 1,
       "rank": 0,
       "misc": 0,
-      "total": 4
+      "total": 1
     },
     "Nature": {
-      "trained": false,
-      "mod": 4,
-      "rank": 0,
+      "trained": true,
+      "mod": 1,
+      "rank": 1,
       "misc": 0,
-      "total": 4
+      "total": 2
     },
     "Perception": {
       "trained": false,
-      "mod": 2,
+      "mod": 0,
       "rank": 0,
       "misc": 0,
-      "total": 2
+      "total": 0
     },
     "Performance": {
       "trained": false,
@@ -234,10 +234,10 @@
     },
     "Religion": {
       "trained": false,
-      "mod": 4,
+      "mod": 1,
       "rank": 0,
       "misc": 0,
-      "total": 4
+      "total": 1
     },
     "Slight of Hand": {
       "trained": false,
@@ -247,36 +247,39 @@
       "total": 2
     },
     "Stealth": {
-      "trained": false,
+      "trained": true,
       "mod": 2,
-      "rank": 0,
+      "rank": 1,
       "misc": 0,
-      "total": 2
+      "total": 3
     },
     "Streetwise": {
       "trained": false,
-      "mod": 4,
+      "mod": 1,
       "rank": 0,
       "misc": 0,
-      "total": 4
+      "total": 1
     },
     "Survival": {
-      "trained": false,
-      "mod": 2,
-      "rank": 0,
+      "trained": true,
+      "mod": 0,
+      "rank": 1,
       "misc": 0,
-      "total": 2
+      "total": 1
     },
     "Taming": {
       "trained": false,
-      "mod": 2,
+      "mod": 0,
       "rank": 0,
       "misc": 0,
-      "total": 2
+      "total": 0
     }
   },
   "proficiencies": [
-    "Simple"
+    "Light",
+    "Medium",
+    "Simple",
+    "Leatherworking Tools"
   ],
   "languages": [
     "Common",
@@ -299,25 +302,25 @@
       "text": "Once per long rest, you may touch yourself or an ally to restore 2d6 hit points."
     },
     {
-      "name": "Academic Circles",
-      "text": "You may request help from scribes, professors, and archivists who share information or grant access to rare texts."
+      "name": "Leather Guild Access",
+      "text": "You may use guild workshops and request basic help with crafting or repairing leather items."
     },
     {
-      "name": "Arcane Initiate",
-      "text": "You gain a Spellcrafting Book containing six Rank 1 Novice spells, an arcane focus, and basic training in shaping energy."
+      "name": "Adrenal Surge",
+      "text": "When you roll a natural 20 on a Might check or melee attack, gain temporary Health Points equal to your Might modifier."
     },
     {
-      "name": "Spell Attunement",
-      "text": "Your Spell Attack modifier equals your Intellect modifier. Your Spell Save TN equals 8 + your Intellect modifier."
+      "name": "Relentless Drive",
+      "text": "When an attack reduces you below half Health Points, you may make a reaction attack to an enemy within 5 feet of you. This does not have to be the same enemy that attacked you."
     },
     {
-      "name": "Flow of Thought",
-      "text": "Once per short rest, as a Bonus Action, gain advantage on Intellect saving throws until the start of your next turn."
+      "name": "Furious Momentum",
+      "text": "When you reduce a creature to 0 LP, you may move up to 10 ft as part of the same action without provoking opportunity attacks."
     },
     {
-      "name": "Researcher",
-      "text": "When you attempt to learn or recall a piece of lore, if you do not know that information, you often know where and from whom you can obtain it. Usually, this information comes from a library, scriptorium, university, or a sage.",
-      "source": "Background: Scholar"
+      "name": "Wanderer's Memory",
+      "text": "You can recall routes, hidden paths, and safe places in regions you've traveled. You gain advantage on Survival checks to navigate terrain you've previously explored.",
+      "source": "Background: Outcast"
     }
   ],
   "spellcrafting": {
@@ -335,24 +338,24 @@
   },
   "notes": "",
   "physical_traits": {
-    "height": "",
-    "weight": "",
+    "height": "5'8\"",
+    "weight": "160 lb",
     "size": "Medium",
-    "age": "",
+    "age": "25",
     "creature_type": "Humanoid (Elf)",
-    "eyes": "",
-    "skin": "",
-    "hair": ""
+    "eyes": "Brown",
+    "skin": "Tan",
+    "hair": "Brown"
   },
   "personality": {
-    "traits": "I quote obscure facts at every opportunity.",
-    "ideal": "Knowledge. Truth must be pursued regardless of cost.",
-    "bond": "My mentor still guides me.",
-    "flaw": "I hoard knowledge and refuse to share."
+    "traits": "I avoid eye contact and conversation.",
+    "ideal": "Freedom. No one should be chained by society.",
+    "bond": "A wild place is my sanctuary.",
+    "flaw": "I am suspicious of everyone."
   },
   "alignment": {
     "alignment": "",
-    "mod": 0
+    "mod": 1
   },
   "reputation": {
     "reputation": "",

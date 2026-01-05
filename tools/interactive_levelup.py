@@ -80,7 +80,7 @@ def show_character_summary(manager: LevelUpManager):
             print(f"    ... and {len(char.talents) - 5} more")
 
 
-def show_level_up_options(options: LevelUpOptions):
+def show_level_up_options(manager: LevelUpManager, options: LevelUpOptions):
     """Display what's available at this level up."""
     print_subheader(f"Level Up: {options.current_level} → {options.new_level}")
     
@@ -104,8 +104,10 @@ def show_level_up_options(options: LevelUpOptions):
     
     if options.current_talents:
         print("\n  Current Talents:")
-        for name, rank in options.current_talents.items():
-            print(f"    - {name}: Rank {rank}")
+        for talent_id, rank in options.current_talents.items():
+            tdef = getattr(manager, "talents_flat", {}).get(talent_id)
+            label = f"{tdef.name} ({talent_id})" if tdef else talent_id
+            print(f"    - {label}: Rank {rank}")
     
     if options.trained_skills:
         print(f"\n  Trained Skills: {', '.join(options.trained_skills)}")
@@ -175,60 +177,89 @@ def choose_talents(manager: LevelUpManager, options: LevelUpOptions) -> List[Tal
     remaining_tp = options.talent_points
     primary_tp_spent = 0
     
-    # Simplified talent selection - in a full implementation, this would
-    # load talent data and show available options
-    
     print(f"\n  You have {remaining_tp} TP to spend.")
-    print(f"  At least {options.min_primary_path_points} must go to primary path talents.")
-    print()
-    print("  For this simplified version, enter talents as:")
-    print("    talent_name:rank:points:path")
-    print("  Example: rage:2:2:primary")
-    print("  Or type 'done' when finished, 'skip' to skip talent allocation")
+    if options.min_primary_path_points:
+        print(f"  At least {options.min_primary_path_points} must go to primary path talents.")
+    print("\n  Choose talents from the available list.")
+    print("  Type the number to buy the next rank, 'done' when finished, or 'skip' to skip.")
     
     while remaining_tp > 0:
+        available = [t for t in (options.available_talents or []) if t.get("tp_cost", 0) <= remaining_tp]
+        if not available:
+            print("\n  No available talents you can afford with remaining TP.")
+            break
+
         print(f"\n  Remaining TP: {remaining_tp}")
+        for i, t in enumerate(available, 1):
+            name = t.get("name", "?")
+            talent_id = t.get("talent_id", "")
+            cur = t.get("current_rank", 0)
+            nxt = t.get("next_rank", cur + 1)
+            cost = t.get("tp_cost", nxt)
+            path_id = t.get("path_id", "general")
+            suffix = ""
+            if t.get("requires_choice"):
+                suffix = " (requires choice)"
+            print(f"    {i}. {name} [{talent_id}]  Rank {cur} → {nxt}  Cost {cost}  ({path_id}){suffix}")
+
         entry = input("  > ").strip().lower()
-        
         if entry == "done":
             break
-        
         if entry == "skip":
             return []
-        
+
         try:
-            parts = entry.split(":")
-            if len(parts) != 4:
-                print("  Format: talent_name:rank:points:path")
-                continue
-            
-            name = parts[0].strip()
-            rank = int(parts[1])
-            points = int(parts[2])
-            path = parts[3].strip()
-            
-            if points > remaining_tp:
-                print(f"  Not enough TP! Have {remaining_tp}, need {points}")
-                continue
-            
-            choice = TalentChoice(
-                talent_id=name.lower().replace(" ", "_"),
-                talent_name=name.title(),
-                new_rank=rank,
-                points_spent=points,
-                path_id=path,
-            )
-            
-            choices.append(choice)
-            remaining_tp -= points
-            
-            if path == "primary":
-                primary_tp_spent += points
-            
-            print(f"  ✓ Added {name} (Rank {rank}) for {points} TP")
-            
+            idx = int(entry) - 1
         except ValueError:
-            print("  Invalid format")
+            print("  Enter a number, 'done', or 'skip'.")
+            continue
+
+        if idx < 0 or idx >= len(available):
+            print("  Invalid selection.")
+            continue
+
+        t = available[idx]
+        talent_id = t.get("talent_id", "")
+        name = t.get("name", talent_id)
+        new_rank = int(t.get("next_rank", 1))
+        cost = int(t.get("tp_cost", new_rank))
+        path_id = t.get("path_id", "general")
+        choice_data: Dict[str, Any] = {}
+
+        if t.get("requires_choice"):
+            opts = list(t.get("choice_options", []) or [])
+            if not opts:
+                print("  This talent requires a choice but has no options listed.")
+                continue
+            print("\n  Choose an option:")
+            for j, opt in enumerate(opts, 1):
+                print(f"    {j}. {opt}")
+            while True:
+                sel = input("  > ").strip()
+                try:
+                    j = int(sel) - 1
+                except ValueError:
+                    print("  Enter a number.")
+                    continue
+                if 0 <= j < len(opts):
+                    choice_key = t.get("choice_type") or "choice"
+                    choice_data = {choice_key: opts[j]}
+                    break
+                print("  Invalid choice.")
+
+        choices.append(TalentChoice(
+            talent_id=talent_id,
+            talent_name=name,
+            new_rank=new_rank,
+            points_spent=cost,
+            path_id=path_id,
+            choice_data=choice_data,
+        ))
+        remaining_tp -= cost
+        if path_id == "primary":
+            primary_tp_spent += cost
+
+        print(f"  ✓ Added {name} (Rank {new_rank}) for {cost} TP")
     
     # Validate minimum primary path spending
     if primary_tp_spent < options.min_primary_path_points and choices:
@@ -368,7 +399,7 @@ def do_level_up(manager: LevelUpManager, target_level: int = None):
     """Perform a single level up."""
     options = manager.get_level_up_options(target_level)
     
-    show_level_up_options(options)
+    show_level_up_options(manager, options)
     
     # Handle ability increase if applicable
     ability_increase = None

@@ -293,15 +293,15 @@ def step_ability_scores(builder: CharacterBuilder) -> bool:
     
     if method == "1":
         # Point Draw system
-        print("\n  POINT DRAW")
-        print("  You have 27 points to spend. All abilities start at 8.")
-        print("  Cost: 8=0, 9=1, 10=2, 11=3, 12=4, 13=5, 14=7, 15=9")
+        print("\n  POINT BUY")
+        print("  You have 30 points to spend. All abilities start at 8.")
+        print("  Cost: 8=0, 9=1, 10=2, 11=3, 12=4, 13=5, 14=7, 15=9, 16=11")
         print()
         
         # Point costs for each score
-        point_costs = {8: 0, 9: 1, 10: 2, 11: 3, 12: 4, 13: 5, 14: 7, 15: 9}
+        point_costs = {8: 0, 9: 1, 10: 2, 11: 3, 12: 4, 13: 5, 14: 7, 15: 9, 16: 11}
         scores = {attr: 8 for attr in attributes}
-        points_remaining = 27
+        points_remaining = 30
         
         while True:
             # Show current allocation
@@ -317,12 +317,12 @@ def step_ability_scores(builder: CharacterBuilder) -> bool:
             
             if choice == "0":
                 scores = {attr: 8 for attr in attributes}
-                points_remaining = 27
+                points_remaining = 30
                 continue
             
             if choice == "7":
                 if points_remaining >= 0:
-                    if not _validate_scores(scores, "point_draw"):
+                    if not _validate_scores(scores, "point_buy"):
                         continue
                     builder.set_ability_scores(scores)
                     show_path_availability(builder)

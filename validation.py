@@ -10,7 +10,7 @@ Usage:
     validator = CharacterValidator(data_dir="data")
     
     # Validate ability scores
-    result = validator.validate_ability_scores(scores, method="point_draw")
+    result = validator.validate_ability_scores(scores, method="point_buy")
     if not result.valid:
         print(result.errors)
     
@@ -54,7 +54,8 @@ class ValidationResult:
 
 class AbilityScoreMethod(Enum):
     """Methods for generating ability scores."""
-    POINT_DRAW = "point_draw"
+    POINT_BUY = "point_buy"  # preferred naming (rulebook)
+    POINT_DRAW = "point_draw"  # backward-compat alias
     STANDARD_ARRAY = "standard_array"
     ROLL = "roll"
     QUICK_TEST = "quick_test"
@@ -64,10 +65,12 @@ class AbilityScoreMethod(Enum):
 # Constants for validation
 ABILITY_NAMES = {"Might", "Agility", "Endurance", "Intellect", "Wisdom", "Charisma"}
 
-STANDARD_ARRAY = [15, 14, 13, 12, 10, 8]
+# Rulebook standard array (7 numbers, choose any 6)
+STANDARD_ARRAY = [15, 14, 13, 12, 11, 10, 8]
 
-POINT_DRAW_COSTS = {8: 0, 9: 1, 10: 2, 11: 3, 12: 4, 13: 5, 14: 7, 15: 9}
-POINT_DRAW_TOTAL = 27
+# Point buy/draw (rulebook): 30 points, allow up to 16 with cost 11
+POINT_BUY_COSTS = {8: 0, 9: 1, 10: 2, 11: 3, 12: 4, 13: 5, 14: 7, 15: 9, 16: 11}
+POINT_BUY_TOTAL = 30
 
 SKILLS = {
     # Might-based
@@ -225,7 +228,7 @@ class CharacterValidator:
         
         Args:
             scores: Dict mapping ability name to score value
-            method: Generation method (point_draw, standard_array, roll, manual)
+            method: Generation method (point_buy/point_draw, standard_array, roll, manual)
         
         Returns:
             ValidationResult
@@ -255,7 +258,7 @@ class CharacterValidator:
                 result.add_warning(f"{name} is unusually low ({value})")
         
         # Method-specific validation
-        if method == "point_draw":
+        if method in ("point_buy", "point_draw"):
             result.merge(self._validate_point_draw(scores))
         elif method == "standard_array":
             result.merge(self._validate_standard_array(scores))
@@ -266,22 +269,22 @@ class CharacterValidator:
         return result
     
     def _validate_point_draw(self, scores: Dict[str, int]) -> ValidationResult:
-        """Validate point draw method."""
+        """Validate point buy/draw method (rulebook)."""
         result = ValidationResult(valid=True)
         
         total_cost = 0
         for name, value in scores.items():
             if value < 8:
-                result.add_error(f"Point draw: {name} cannot be below 8 (got {value})")
-            elif value > 15:
-                result.add_error(f"Point draw: {name} cannot exceed 15 (got {value})")
-            elif value in POINT_DRAW_COSTS:
-                total_cost += POINT_DRAW_COSTS[value]
+                result.add_error(f"Point buy: {name} cannot be below 8 (got {value})")
+            elif value > 16:
+                result.add_error(f"Point buy: {name} cannot exceed 16 (got {value})")
+            elif value in POINT_BUY_COSTS:
+                total_cost += POINT_BUY_COSTS[value]
         
-        if total_cost > POINT_DRAW_TOTAL:
-            result.add_error(f"Point draw: spent {total_cost} points (max {POINT_DRAW_TOTAL})")
-        elif total_cost < POINT_DRAW_TOTAL:
-            result.add_warning(f"Point draw: only spent {total_cost} of {POINT_DRAW_TOTAL} points")
+        if total_cost > POINT_BUY_TOTAL:
+            result.add_error(f"Point buy: spent {total_cost} points (max {POINT_BUY_TOTAL})")
+        elif total_cost < POINT_BUY_TOTAL:
+            result.add_warning(f"Point buy: only spent {total_cost} of {POINT_BUY_TOTAL} points")
         
         return result
     
@@ -290,12 +293,20 @@ class CharacterValidator:
         result = ValidationResult(valid=True)
         
         values = sorted(scores.values(), reverse=True)
-        expected = sorted(STANDARD_ARRAY, reverse=True)
-        
-        if values != expected:
-            result.add_error(
-                f"Standard array must use exactly {STANDARD_ARRAY}, got {list(scores.values())}"
-            )
+        # Rulebook lists 7 numbers; allow any 6 without reuse.
+        allowed = sorted(STANDARD_ARRAY, reverse=True)
+        if len(values) != 6:
+            result.add_error(f"Standard array must assign exactly 6 scores, got {len(values)}")
+            return result
+        remaining = allowed.copy()
+        for v in values:
+            if v in remaining:
+                remaining.remove(v)
+            else:
+                result.add_error(
+                    f"Standard array values must be chosen from {STANDARD_ARRAY} without reuse; got {list(scores.values())}"
+                )
+                break
         
         return result
     
@@ -566,7 +577,8 @@ class CharacterValidator:
         self,
         choices: List[Dict],
         available_tp: int,
-        min_primary_path: int = 4
+        min_primary_path: int = 4,
+        primary_path_id: str = ""
     ) -> ValidationResult:
         """Validate total talent point allocation."""
         result = ValidationResult(valid=True)
@@ -578,7 +590,13 @@ class CharacterValidator:
             points = choice.get("points_spent", choice.get("new_rank", 0))
             total_spent += points
             
-            if choice.get("path_id") == "primary":
+            path_id = choice.get("path_id") or ""
+            is_primary = (
+                choice.get("is_primary_path") is True
+                or path_id == "primary"
+                or (primary_path_id and path_id == primary_path_id)
+            )
+            if is_primary:
                 primary_spent += points
         
         if total_spent > available_tp:
@@ -699,11 +717,16 @@ class CharacterValidator:
         """Validate a complete character."""
         result = ValidationResult(valid=True)
         
-        # Basic required fields
+        def _enum_to_value(value):
+            return value.value if hasattr(value, "value") else value
+
+        # Basic required fields (accept enums or strings)
         required = ["race", "ancestry", "profession", "primary_path", "background"]
         for field in required:
-            if not character.get(field):
+            if field not in character or character.get(field) in (None, ""):
                 result.add_error(f"Missing required field: {field}")
+            else:
+                character[field] = _enum_to_value(character[field])
         
         # Validate ability scores
         if "ability_scores" in character:
@@ -719,12 +742,13 @@ class CharacterValidator:
         
         # Validate individual selections
         if character.get("race"):
-            # Convert name to id if needed
-            race_id = character["race"].lower().replace(" ", "_")
+            race_val = _enum_to_value(character["race"])
+            race_id = str(race_val).lower().replace(" ", "_")
             result.merge(self.validate_race(race_id))
         
         if character.get("primary_path"):
-            path_id = character["primary_path"].lower().replace(" ", "_")
+            path_val = _enum_to_value(character["primary_path"])
+            path_id = str(path_val).lower().replace(" ", "_")
             result.merge(self.validate_path(
                 path_id, 
                 character.get("ability_scores"),
@@ -755,7 +779,9 @@ class CharacterValidator:
         advancement_choices: List[Dict] = None,
         ability_increase: Dict[str, int] = None,
         available_tp: int = 0,
-        available_ap: int = 0
+        available_ap: int = 0,
+        min_primary_path_points: int = 0,
+        primary_path_id: str = ""
     ) -> ValidationResult:
         """Validate a level up operation."""
         result = ValidationResult(valid=True)
@@ -766,7 +792,10 @@ class CharacterValidator:
         # Validate talent choices
         if talent_choices:
             result.merge(self.validate_talent_points_allocation(
-                talent_choices, available_tp
+                talent_choices,
+                available_tp,
+                min_primary_path=min_primary_path_points,
+                primary_path_id=primary_path_id,
             ))
             for choice in talent_choices:
                 result.merge(self.validate_talent_choice(

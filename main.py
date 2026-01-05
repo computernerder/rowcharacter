@@ -178,8 +178,9 @@ class Player:
         self.defense[3] = misc_bonus  #Update misc bonus
         return self.get_defense_total()  #recalculate total defense and return it
 
-    def standard_array(self) -> list:        
-        return [15, 14, 13, 12, 10, 8]
+    def standard_array(self) -> list:
+        # Rulebook array (7 numbers); choose any 6 without reuse.
+        return [15, 14, 13, 12, 11, 10, 8]
     
     def roll_for_attributes(self) -> list:
         import random

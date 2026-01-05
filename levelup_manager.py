@@ -31,6 +31,7 @@ from pathlib import Path
 
 from template_model import CharacterTemplate, load_character_template, dump_character_template
 from core import Path as CharacterPath, load_all_paths
+from core.talent import load_all_talents, get_all_talents_flat
 from validation import CharacterValidator, ValidationResult
 
 
@@ -145,6 +146,7 @@ class TalentChoice:
     new_rank: int
     points_spent: int
     path_id: str  # "general", "primary", or secondary path id
+    choice_data: Dict[str, Any] = field(default_factory=dict)
 
 
 @dataclass
@@ -175,7 +177,8 @@ class LevelUpManager:
         self.character: Optional[CharacterTemplate] = None
         self.character_data: Optional[Dict[str, Any]] = None
         self.paths: Dict[str, CharacterPath] = {}
-        self.general_talents: List[Dict[str, Any]] = []
+        self.talent_categories: Dict[str, Any] = {}
+        self.talents_flat: Dict[str, Any] = {}
         self.validator = CharacterValidator(data_dir=self.data_dir)
         self.last_validation: Optional[ValidationResult] = None
         
@@ -189,12 +192,15 @@ class LevelUpManager:
         except Exception as e:
             print(f"Warning: Could not load paths: {e}")
             self.paths = {}
-        
-        # Load general talents if available
-        talents_file = data_path / "talents" / "general.json"
-        if talents_file.exists():
-            with open(talents_file, "r", encoding="utf-8") as f:
-                self.general_talents = json.load(f)
+
+        # Load all talents (general + per-path categories)
+        try:
+            self.talent_categories = load_all_talents(str(data_path / "talents"))
+            self.talents_flat = get_all_talents_flat(self.talent_categories)
+        except Exception as e:
+            print(f"Warning: Could not load talents: {e}")
+            self.talent_categories = {}
+            self.talents_flat = {}
     
     def load_character(self, filepath: str) -> bool:
         """
@@ -323,6 +329,21 @@ class LevelUpManager:
                 return path
         
         return None
+
+    def get_primary_path_id(self) -> Optional[str]:
+        """Get the character's primary path id (data id), if known."""
+        if not self.character:
+            return None
+
+        path_name = self.character.primary_path
+        if not path_name:
+            return None
+
+        for path_id, path in self.paths.items():
+            if path.name == path_name:
+                return path_id
+
+        return None
     
     def calculate_talent_points(self, level: int = None) -> int:
         """
@@ -388,9 +409,9 @@ class LevelUpManager:
         
         tp = self.calculate_talent_points()
         ap = self.calculate_advancement_points()
-        
-        # At least 4 points must go to primary path talents
-        min_primary = min(4, tp)
+
+        # Level-ups do not enforce the level-1 creation rule (4 TP in primary).
+        min_primary = 0
         
         # Check for special level benefits
         grants_ability = target in ABILITY_INCREASE_LEVELS
@@ -409,15 +430,73 @@ class LevelUpManager:
             sp_gain = int_mod + target
             cp_gain = int_mod + target
         
-        # Get current talents
-        current_talents = {}
+        # Get current talents (prefer stable talent_id, fallback to name)
+        current_talents: Dict[str, int] = {}
+        name_to_id = {t.name.lower(): t.id for t in self.talents_flat.values() if getattr(t, "name", None)}
+
         for talent in self.character.talents:
-            name = talent.get("name", "") if isinstance(talent, dict) else talent.name
-            rank = talent.get("rank", 1) if isinstance(talent, dict) else getattr(talent, "rank", 1)
-            current_talents[name] = rank
+            if isinstance(talent, dict):
+                tid = talent.get("talent_id") or talent.get("id") or ""
+                name = talent.get("name", "")
+                rank = talent.get("rank", 1)
+            else:
+                tid = getattr(talent, "talent_id", "") or getattr(talent, "id", "")
+                name = getattr(talent, "name", "")
+                rank = getattr(talent, "rank", 1)
+
+            if not tid and name:
+                tid = name_to_id.get(str(name).lower(), "")
+
+            if tid:
+                try:
+                    current_talents[tid] = int(rank)
+                except Exception:
+                    current_talents[tid] = 1
         
         # Get trained skills
         trained_skills = self.get_trained_skills()
+
+        # Compute available talents (general + primary path)
+        available_talents: List[Dict[str, Any]] = []
+        primary_path_id = self.get_primary_path_id()
+        category_keys = ["general"]
+        if primary_path_id:
+            category_keys.append(primary_path_id)
+
+        for key in category_keys:
+            cat = self.talent_categories.get(key)
+            if not cat:
+                continue
+            for t in getattr(cat, "talents", []):
+                current_rank = current_talents.get(t.id, 0)
+                next_rank = current_rank + 1
+                if next_rank > t.max_rank:
+                    continue
+
+                can, _reasons = t.can_acquire(
+                    ability_scores=self.character.ability_scores,
+                    level=target,
+                    current_talents=current_talents,
+                    target_rank=next_rank,
+                )
+                if not can:
+                    continue
+
+                tp_cost = t.get_tp_cost(current_rank, next_rank)
+                available_talents.append({
+                    "talent_id": t.id,
+                    "name": t.name,
+                    "path_id": t.path_id or "general",
+                    "category": t.category,
+                    "current_rank": current_rank,
+                    "next_rank": next_rank,
+                    "tp_cost": tp_cost,
+                    "max_rank": t.max_rank,
+                    "requires_choice": t.requires_choice,
+                    "choice_type": t.choice_type,
+                    "choice_options": list(t.choice_options or []),
+                    "description": t.description,
+                })
         
         return LevelUpOptions(
             current_level=current,
@@ -427,6 +506,7 @@ class LevelUpManager:
             advancement_points=ap,
             grants_ability_increase=grants_ability,
             grants_extra_attack=grants_extra_attack,
+            available_talents=available_talents,
             current_talents=current_talents,
             trained_skills=trained_skills,
             spellcrafting_points=sp_gain,
@@ -447,13 +527,14 @@ class LevelUpManager:
 
         current_talents = options.current_talents or {}
         for choice in talent_choices:
-            current_rank = current_talents.get(choice.talent_name, 0)
+            current_rank = current_talents.get(choice.talent_id, 0)
             talent_payload.append({
                 "talent_id": choice.talent_id,
                 "new_rank": choice.new_rank,
                 "current_rank": current_rank,
                 "points_spent": choice.points_spent,
                 "path_id": choice.path_id,
+                "choice_data": choice.choice_data,
             })
 
         for choice in advancement_choices:
@@ -463,6 +544,7 @@ class LevelUpManager:
                 "points_spent": choice.points_spent,
             })
 
+        primary_path_id = self.get_primary_path_id() or ""
         result = self.validator.validate_level_up(
             current_level=options.current_level,
             target_level=options.new_level,
@@ -471,6 +553,8 @@ class LevelUpManager:
             ability_increase=None,
             available_tp=options.talent_points,
             available_ap=options.advancement_points,
+            min_primary_path_points=options.min_primary_path_points,
+            primary_path_id=primary_path_id,
         )
 
         # Ensure ability increases are handled even when empty
@@ -491,6 +575,34 @@ class LevelUpManager:
                 known_languages=known_languages,
                 known_proficiencies=known_proficiencies,
             ))
+
+        # Enforce talent prerequisites and rank costs using loaded talent data
+        if talent_choices:
+            for choice in talent_choices:
+                tdef = self.talents_flat.get(choice.talent_id)
+                if not tdef:
+                    result.add_error(f"Unknown talent id: {choice.talent_id}")
+                    continue
+
+                from_rank = int(current_talents.get(choice.talent_id, 0))
+                expected_cost = tdef.get_tp_cost(from_rank, choice.new_rank)
+                if choice.points_spent != expected_cost:
+                    result.add_error(
+                        f"{tdef.name}: expected {expected_cost} TP for rank {choice.new_rank} (spent {choice.points_spent})"
+                    )
+
+                if getattr(tdef, "is_capstone", False) and options.new_level < 20:
+                    result.add_error(f"{tdef.name} is a capstone (requires level 20)")
+
+                can, reasons = tdef.can_acquire(
+                    ability_scores=self.character.ability_scores,
+                    level=options.new_level,
+                    current_talents=current_talents,
+                    target_rank=choice.new_rank,
+                )
+                if not can:
+                    for r in reasons:
+                        result.add_error(f"{tdef.name}: {r}")
 
         return result
     
@@ -610,8 +722,12 @@ class LevelUpManager:
         # Find existing talent
         existing = None
         for i, talent in enumerate(self.character.talents):
-            name = talent.get("name", "") if isinstance(talent, dict) else talent.name
-            if name == choice.talent_name:
+            if isinstance(talent, dict):
+                tid = talent.get("talent_id") or talent.get("id") or ""
+            else:
+                tid = getattr(talent, "talent_id", "") or getattr(talent, "id", "")
+
+            if tid == choice.talent_id:
                 existing = (i, talent)
                 break
         
@@ -625,10 +741,13 @@ class LevelUpManager:
         else:
             # Add new talent
             new_talent = {
+                "talent_id": choice.talent_id,
                 "name": choice.talent_name,
                 "rank": choice.new_rank,
+                "path_id": choice.path_id,
                 "path": choice.path_id,
-                "text": f"{choice.talent_name} (Rank {choice.new_rank})"
+                "choice_data": choice.choice_data,
+                "text": f"{choice.talent_name} (Rank {choice.new_rank})",
             }
             self.character.talents.append(new_talent)
     

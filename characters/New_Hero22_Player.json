@@ -1,33 +1,17 @@
 {
   "id": "",
-  "character_name": "",
-  "player": "",
-  "profession": "Scholar",
-  "primary_path": "Mystic",
-  "race": "Elf",
-  "ancestry": "Sylari",
-  "background": "Scholar",
+  "character_name": "New Hero22",
+  "player": "Player",
+  "profession": "Artisan",
+  "primary_path": "Defense",
+  "race": "Dwarf",
+  "ancestry": "Molvryn",
+  "background": "Seafarer",
   "level": 1,
   "total_experience": 0,
   "stored_advance": "",
   "ability_scores": {
     "Might": {
-      "mod": 0,
-      "saving_throw": 0,
-      "total": 10,
-      "roll": 10,
-      "race": 0,
-      "misc": 0
-    },
-    "Agility": {
-      "mod": 2,
-      "saving_throw": 2,
-      "total": 14,
-      "roll": 14,
-      "race": 0,
-      "misc": 0
-    },
-    "Endurance": {
       "mod": 1,
       "saving_throw": 1,
       "total": 13,
@@ -35,21 +19,37 @@
       "race": 0,
       "misc": 0
     },
-    "Wisdom": {
-      "mod": 2,
-      "saving_throw": 2,
-      "total": 15,
+    "Agility": {
+      "mod": 1,
+      "saving_throw": 1,
+      "total": 12,
       "roll": 12,
-      "race": 1,
-      "misc": 2
+      "race": 0,
+      "misc": 0
     },
-    "Intellect": {
+    "Endurance": {
       "mod": 4,
       "saving_throw": 4,
       "total": 18,
       "roll": 15,
       "race": 1,
       "misc": 2
+    },
+    "Wisdom": {
+      "mod": 3,
+      "saving_throw": 3,
+      "total": 17,
+      "roll": 14,
+      "race": 1,
+      "misc": 2
+    },
+    "Intellect": {
+      "mod": 0,
+      "saving_throw": 0,
+      "total": 10,
+      "roll": 10,
+      "race": 0,
+      "misc": 0
     },
     "Charisma": {
       "mod": -1,
@@ -62,16 +62,16 @@
   },
   "defense": {
     "base": 9,
-    "agility": 2,
+    "agility": 1,
     "shield": "",
     "misc": 0,
-    "total": 11
+    "total": 10
   },
-  "speed": 30,
-  "initiative": 2,
+  "speed": 25,
+  "initiative": 1,
   "health": {
-    "max": 9,
-    "current": 9,
+    "max": 8,
+    "current": 8,
     "wounds": 0
   },
   "armor_hp": {
@@ -79,8 +79,8 @@
     "current": 0
   },
   "life_points": {
-    "max": 12,
-    "current": 12
+    "max": 18,
+    "current": 18
   },
   "focus": {
     "max": 0,
@@ -89,71 +89,71 @@
   "passive": {
     "perception": {
       "base": 10,
-      "skill": 2,
+      "skill": 3,
       "misc": 0,
-      "total": 12
+      "total": 13
     },
     "insight": {
       "base": 10,
-      "skill": 4,
+      "skill": 0,
       "misc": 0,
-      "total": 14
+      "total": 10
     }
   },
   "attack_mods": {
     "melee": {
-      "attr": 0,
-      "misc": 0,
-      "total": 0
+      "attr": 1,
+      "misc": 1,
+      "total": 2
     },
     "ranged": {
-      "attr": 2,
-      "misc": 2,
-      "total": 4
+      "attr": 1,
+      "misc": 1,
+      "total": 2
     }
   },
   "skills": {
     "Acrobatics": {
       "trained": false,
-      "mod": 2,
+      "mod": 1,
       "rank": 0,
       "misc": 0,
-      "total": 2
+      "total": 1
     },
     "Animal Handling": {
       "trained": false,
-      "mod": 2,
+      "mod": 3,
       "rank": 0,
       "misc": 0,
-      "total": 2
+      "total": 3
     },
     "Appraisal": {
-      "trained": false,
-      "mod": 4,
-      "rank": 0,
-      "misc": 0,
-      "total": 4
-    },
-    "Arcana": {
       "trained": true,
-      "mod": 4,
+      "mod": 0,
       "rank": 1,
       "misc": 0,
-      "total": 5
+      "total": 1
     },
-    "Athletics": {
+    "Arcana": {
       "trained": false,
       "mod": 0,
       "rank": 0,
       "misc": 0,
       "total": 0
     },
+    "Athletics": {
+      "trained": true,
+      "mod": 1,
+      "rank": 1,
+      "misc": 0,
+      "total": 2
+    },
     "Crafting": {
       "trained": false,
-      "mod": 4,
+      "mod": 0,
       "rank": 0,
       "misc": 0,
-      "total": 4
+      "total": 0
     },
     "Deception": {
       "trained": false,
@@ -163,25 +163,25 @@
       "total": -1
     },
     "Diplomacy": {
-      "trained": false,
-      "mod": -1,
-      "rank": 0,
-      "misc": 0,
-      "total": -1
-    },
-    "History": {
       "trained": true,
-      "mod": 4,
+      "mod": -1,
       "rank": 1,
       "misc": 0,
-      "total": 5
+      "total": 0
+    },
+    "History": {
+      "trained": false,
+      "mod": 0,
+      "rank": 0,
+      "misc": 0,
+      "total": 0
     },
     "Insight": {
       "trained": false,
-      "mod": 4,
+      "mod": 0,
       "rank": 0,
       "misc": 0,
-      "total": 4
+      "total": 0
     },
     "Intimidation": {
       "trained": false,
@@ -192,31 +192,31 @@
     },
     "Investigation": {
       "trained": false,
-      "mod": 4,
+      "mod": 0,
       "rank": 0,
       "misc": 0,
-      "total": 4
+      "total": 0
     },
     "Medicine": {
       "trained": false,
-      "mod": 4,
+      "mod": 0,
       "rank": 0,
       "misc": 0,
-      "total": 4
+      "total": 0
     },
     "Nature": {
-      "trained": false,
-      "mod": 4,
-      "rank": 0,
+      "trained": true,
+      "mod": 0,
+      "rank": 1,
       "misc": 0,
-      "total": 4
+      "total": 1
     },
     "Perception": {
       "trained": false,
-      "mod": 2,
+      "mod": 3,
       "rank": 0,
       "misc": 0,
-      "total": 2
+      "total": 3
     },
     "Performance": {
       "trained": false,
@@ -234,54 +234,57 @@
     },
     "Religion": {
       "trained": false,
-      "mod": 4,
+      "mod": 0,
       "rank": 0,
       "misc": 0,
-      "total": 4
+      "total": 0
     },
     "Slight of Hand": {
       "trained": false,
-      "mod": 2,
+      "mod": 1,
       "rank": 0,
       "misc": 0,
-      "total": 2
+      "total": 1
     },
     "Stealth": {
       "trained": false,
-      "mod": 2,
+      "mod": 1,
       "rank": 0,
       "misc": 0,
-      "total": 2
+      "total": 1
     },
     "Streetwise": {
       "trained": false,
-      "mod": 4,
+      "mod": 0,
       "rank": 0,
       "misc": 0,
-      "total": 4
+      "total": 0
     },
     "Survival": {
       "trained": false,
-      "mod": 2,
+      "mod": 3,
       "rank": 0,
       "misc": 0,
-      "total": 2
+      "total": 3
     },
     "Taming": {
       "trained": false,
-      "mod": 2,
+      "mod": 3,
       "rank": 0,
       "misc": 0,
-      "total": 2
+      "total": 3
     }
   },
   "proficiencies": [
-    "Simple"
+    "Light",
+    "Simple",
+    "Navigator's Tools",
+    "Jeweler's Tools"
   ],
   "languages": [
     "Common",
-    "Elvish",
-    "Sylvan"
+    "Dwarvish",
+    "Ancient Dwarvish"
   ],
   "attacks": [],
   "talents": [],
@@ -291,33 +294,37 @@
       "text": "You can see in dim light within 60 feet as if it were bright light, and in darkness as if it were dim light."
     },
     {
-      "name": "Fey Ancestry",
-      "text": "You have advantage on saving throws against being charmed, and magic can't put you to sleep."
+      "name": "Stonecunning",
+      "text": "You are proficient in History checks and gain advantage when related to stonework."
     },
     {
-      "name": "Life Bond",
-      "text": "Once per long rest, you may touch yourself or an ally to restore 2d6 hit points."
+      "name": "Iron Stomach",
+      "text": "You have resistance to poison damage."
     },
     {
-      "name": "Academic Circles",
-      "text": "You may request help from scribes, professors, and archivists who share information or grant access to rare texts."
+      "name": "Rune Sense",
+      "text": "You have advantage on checks involving magical inscriptions or runes."
     },
     {
-      "name": "Arcane Initiate",
-      "text": "You gain a Spellcrafting Book containing six Rank 1 Novice spells, an arcane focus, and basic training in shaping energy."
+      "name": "Guild Membership",
+      "text": "Your guild offers workspace, trade materials, and connections with other artisans."
     },
     {
-      "name": "Spell Attunement",
-      "text": "Your Spell Attack modifier equals your Intellect modifier. Your Spell Save TN equals 8 + your Intellect modifier."
+      "name": "Hold the Line",
+      "text": "When a hostile creature you can see moves within 5 ft of you, you may use your Reaction to make a melee attack. On a hit, the creature's speed becomes 0 until the end of your next turn."
     },
     {
-      "name": "Flow of Thought",
-      "text": "Once per short rest, as a Bonus Action, gain advantage on Intellect saving throws until the start of your next turn."
+      "name": "Read the Threat",
+      "text": "At the start of combat, you may make an Insight check with advantage to identify the most dangerous visible enemy (TN 8+DR). On a success, your first attack against that enemy has advantage."
     },
     {
-      "name": "Researcher",
-      "text": "When you attempt to learn or recall a piece of lore, if you do not know that information, you often know where and from whom you can obtain it. Usually, this information comes from a library, scriptorium, university, or a sage.",
-      "source": "Background: Scholar"
+      "name": "Unyielding Focus",
+      "text": "You have advantage on saves made to resist being knocked prone, disarmed, or shoved."
+    },
+    {
+      "name": "Ship Passage",
+      "text": "You can secure passage on friendly ships for yourself and your companions. In return, you may be expected to assist the crew during the voyage.",
+      "source": "Background: Seafarer"
     }
   ],
   "spellcrafting": {
@@ -339,20 +346,20 @@
     "weight": "",
     "size": "Medium",
     "age": "",
-    "creature_type": "Humanoid (Elf)",
+    "creature_type": "Humanoid (Dwarf)",
     "eyes": "",
     "skin": "",
     "hair": ""
   },
   "personality": {
-    "traits": "I quote obscure facts at every opportunity.",
-    "ideal": "Knowledge. Truth must be pursued regardless of cost.",
-    "bond": "My mentor still guides me.",
-    "flaw": "I hoard knowledge and refuse to share."
+    "traits": "I tell tall tales of the sea.",
+    "ideal": "Freedom. The sea makes all equal.",
+    "bond": "I love my ship more than life.",
+    "flaw": "I drink excessively."
   },
   "alignment": {
     "alignment": "",
-    "mod": 0
+    "mod": 1
   },
   "reputation": {
     "reputation": "",
