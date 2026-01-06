@@ -15,6 +15,7 @@ from __future__ import annotations
 import json
 import os
 import sys
+import shutil
 from pathlib import Path
 from typing import Dict, Any, List
 import logging
@@ -80,6 +81,44 @@ CHAR_DIR = ROOT_DIR / "characters"
 EXPORTS_DIR = ROOT_DIR / "exports"
 CHAR_DIR.mkdir(exist_ok=True)
 EXPORTS_DIR.mkdir(exist_ok=True)
+
+LEVEL_UP_OLD_DIRNAME = "Level Up Old"
+CHAR_LEVELUP_OLD_DIR = CHAR_DIR / LEVEL_UP_OLD_DIRNAME
+EXPORTS_LEVELUP_OLD_DIR = EXPORTS_DIR / LEVEL_UP_OLD_DIRNAME
+CHAR_LEVELUP_OLD_DIR.mkdir(exist_ok=True)
+EXPORTS_LEVELUP_OLD_DIR.mkdir(exist_ok=True)
+
+
+def _character_basename(name: str, player: str, level: int) -> str:
+    lvl = int(level or 1)
+    return f"{_safe_slug(name, 'character')}_{_safe_slug(player, 'player')}_L{lvl}"
+
+
+def _unique_dest(dest: Path) -> Path:
+    """Return a non-colliding destination path by appending _oldN."""
+    if not dest.exists():
+        return dest
+    stem = dest.stem
+    suffix = dest.suffix
+    for i in range(1, 1000):
+        candidate = dest.with_name(f"{stem}_old{i}{suffix}")
+        if not candidate.exists():
+            return candidate
+    # Fallback: last-resort timestamp-ish
+    return dest.with_name(f"{stem}_old{random.randint(1000, 9999)}{suffix}")
+
+
+def _move_to_levelup_old(src: Path, archive_dir: Path) -> Path | None:
+    """Move src into archive_dir if it exists; returns new path or None."""
+    try:
+        if not src or not src.exists():
+            return None
+        archive_dir.mkdir(exist_ok=True)
+        dest = _unique_dest(archive_dir / src.name)
+        shutil.move(str(src), str(dest))
+        return dest
+    except Exception:
+        return None
 
 # External HTML sheet assets
 SHEET_ROOT = ROOT_DIR / "external" / "rowcharactersheet"
@@ -2723,11 +2762,19 @@ class LevelUpWizard(ctk.CTkToplevel):
         self.ability_plus1_a = ctk.StringVar(value=self.abilities[0] if self.abilities else "")
         self.ability_plus1_b = ctk.StringVar(value=self.abilities[1] if len(self.abilities) > 1 else (self.abilities[0] if self.abilities else ""))
 
-        # Talent selections: talent_id -> payload
+        # Talent selections (multi-rank): talent_id -> payload
+        # payload keys: talent_id, name, path_id, base_rank, target_rank, max_rank,
+        # requires_choice, choice_type, choice_data
         self.selected_talents: Dict[str, Dict[str, Any]] = {}
 
         # Advancement selections: list of dicts
         self.advancements: List[Dict[str, Any]] = []
+
+        # Ability increase (as an AP advancement) UI state
+        self.ap_asi_mode = ctk.StringVar(value="")  # "plus2" | "plus1" | ""
+        self.ap_asi_plus2 = ctk.StringVar(value=self.abilities[0] if self.abilities else "")
+        self.ap_asi_plus1_a = ctk.StringVar(value=self.abilities[0] if self.abilities else "")
+        self.ap_asi_plus1_b = ctk.StringVar(value=self.abilities[1] if len(self.abilities) > 1 else (self.abilities[0] if self.abilities else ""))
 
         # Advancements UI state
         self.ap_target_menu = None
@@ -2758,6 +2805,128 @@ class LevelUpWizard(ctk.CTkToplevel):
         self.btn_next.grid(row=0, column=2, padx=6)
 
         self._render()
+
+    def _talent_step_cost(self, talent_id: str, from_rank: int, to_rank: int) -> int:
+        """Return TP cost for a single rank increase (from_rank -> to_rank)."""
+        try:
+            tdef = self.manager.talents_flat.get(talent_id)
+            if tdef:
+                return int(tdef.get_tp_cost(int(from_rank), int(to_rank)))
+        except Exception:
+            pass
+        # Fallback: ROW generally uses rank as cost.
+        try:
+            return int(to_rank)
+        except Exception:
+            return 0
+
+    def _compute_talent_spend(self) -> int:
+        """Total TP spent across all planned rank purchases."""
+        total = 0
+        for tid, entry in (self.selected_talents or {}).items():
+            try:
+                base = int(entry.get("base_rank", 0) or 0)
+                target = int(entry.get("target_rank", base) or base)
+            except Exception:
+                continue
+            if target <= base:
+                continue
+            for r in range(base + 1, target + 1):
+                total += self._talent_step_cost(tid, r - 1, r)
+        return int(total)
+
+    def _compute_talent_cost_for(self, talent_id: str) -> int:
+        """Total TP spent for a specific talent's planned upgrades."""
+        entry = (self.selected_talents or {}).get(talent_id) or {}
+        try:
+            base = int(entry.get("base_rank", 0) or 0)
+            target = int(entry.get("target_rank", base) or base)
+        except Exception:
+            return 0
+        if target <= base:
+            return 0
+        total = 0
+        for r in range(base + 1, target + 1):
+            total += self._talent_step_cost(talent_id, r - 1, r)
+        return int(total)
+
+    def _get_effective_talent_ranks(self) -> Dict[str, int]:
+        """Return a rank map including all planned purchases (base -> target)."""
+        ranks: Dict[str, int] = dict(self.options.current_talents or {})
+        for tid, entry in (self.selected_talents or {}).items():
+            try:
+                target = int(entry.get("target_rank", 0) or 0)
+            except Exception:
+                continue
+            if target > 0:
+                ranks[tid] = max(int(ranks.get(tid, 0) or 0), target)
+        return ranks
+
+    def _update_talent_choice_data(self, talent_id: str, choice_type: str, selected_value: str):
+        """Persist dropdown selections so re-renders keep the choice."""
+        entry = self.selected_talents.get(talent_id)
+        if not entry:
+            return
+        val = (selected_value or "").strip()
+        entry["choice_data"] = ({choice_type: val} if val else {})
+        self._update_tp_label()
+
+    def _get_owned_talent_choice_data(self, talent_id: str) -> Dict[str, Any]:
+        """Return existing choice_data for a talent the character already has."""
+        char = self.manager.character
+        if not char:
+            return {}
+        try:
+            for t in (char.talents or []):
+                if isinstance(t, dict):
+                    tid = t.get("talent_id") or t.get("id") or ""
+                    cdata = t.get("choice_data") or t.get("choice") or {}
+                else:
+                    tid = getattr(t, "talent_id", "") or getattr(t, "id", "")
+                    cdata = getattr(t, "choice_data", {}) or {}
+                if str(tid) == str(talent_id) and isinstance(cdata, dict):
+                    return dict(cdata)
+        except Exception:
+            return {}
+        return {}
+
+    def _can_increase_talent(self, talent_id: str, *, current_rank: int, next_rank: int, max_rank: int, requires_choice: bool, choice_data: Dict[str, Any]) -> tuple[bool, str]:
+        if next_rank > int(max_rank):
+            return (False, "At max rank")
+
+        if requires_choice and not (choice_data or {}):
+            return (False, "Requires a choice")
+
+        step_cost = self._talent_step_cost(talent_id, current_rank, next_rank)
+        spent = self._compute_talent_spend()
+        total = int(self.options.talent_points)
+        if spent + step_cost > total:
+            return (False, "Not enough TP")
+
+        # Best-effort prerequisite check with planned ranks.
+        try:
+            tdef = self.manager.talents_flat.get(talent_id)
+            if tdef:
+                char = self.manager.character
+                if not char:
+                    return (False, "No character loaded")
+                temp = self._get_effective_talent_ranks()
+                # Ensure this talent's current rank is reflected (pre-increase).
+                temp[talent_id] = int(current_rank)
+                can, reasons = tdef.can_acquire(
+                    ability_scores=char.ability_scores,
+                    level=int(self.options.new_level),
+                    current_talents=temp,
+                    target_rank=int(next_rank),
+                )
+                if not can:
+                    reason = str(reasons[0]) if reasons else "Prerequisites not met"
+                    return (False, reason)
+        except Exception:
+            # If talent definitions are malformed, defer to manager-side validation.
+            pass
+
+        return (True, "")
 
     def _set_status(self, msg: str):
         self.status.configure(text=msg)
@@ -2888,22 +3057,36 @@ class LevelUpWizard(ctk.CTkToplevel):
             for t in available:
                 tid = t.get("talent_id", "")
                 name = t.get("name", tid)
-                cur = t.get("current_rank", 0)
-                nxt = t.get("next_rank", cur + 1)
-                cost = t.get("tp_cost", nxt)
+                base_rank = int(t.get("current_rank", 0) or 0)
+                max_rank = int(t.get("max_rank", base_rank) or base_rank)
                 path_id = t.get("path_id", "general")
                 requires_choice = bool(t.get("requires_choice"))
                 choice_type = t.get("choice_type") or "choice"
                 choice_options = list(t.get("choice_options") or [])
 
+                selected_entry = self.selected_talents.get(tid)
+                target_rank = base_rank
+                if selected_entry:
+                    try:
+                        target_rank = int(selected_entry.get("target_rank", base_rank) or base_rank)
+                    except Exception:
+                        target_rank = base_rank
+
+                next_rank = (target_rank + 1) if target_rank < max_rank else None
+                next_cost = self._talent_step_cost(tid, target_rank, next_rank) if next_rank is not None else 0
+
                 row = ctk.CTkFrame(scroll)
                 row.pack(fill="x", padx=6, pady=4)
                 row.grid_columnconfigure(0, weight=1)
-                label = f"{name}  Rank {cur} → {nxt}  Cost {cost}  ({path_id})"
+                label = f"{name}  Rank {base_rank} → {target_rank}  ({path_id})"
+                if next_rank is not None:
+                    label += f"  Next +1 cost {next_cost}"
+                else:
+                    label += "  (max)"
                 ctk.CTkLabel(row, text=label, anchor="w", justify="left", wraplength=520).grid(row=0, column=0, sticky="w", padx=6, pady=(6, 2))
 
                 tdef = self.manager.talents_flat.get(tid)
-                details = _format_talent_ui_details(tdef, current_rank=cur, next_rank=nxt, mode="next")
+                details = _format_talent_ui_details(tdef, current_rank=target_rank, next_rank=next_rank, mode="next")
                 if details:
                     ctk.CTkLabel(row, text=details, anchor="w", justify="left", wraplength=520).grid(
                         row=1,
@@ -2917,43 +3100,116 @@ class LevelUpWizard(ctk.CTkToplevel):
                 if requires_choice:
                     choice_var = ctk.StringVar(value="")
                     existing = (self.selected_talents.get(tid) or {}).get("choice_data") or {}
+                    if not existing:
+                        existing = self._get_owned_talent_choice_data(tid)
                     if existing and choice_type in existing:
                         choice_var.set(str(existing.get(choice_type, "")))
-                    menu = ctk.CTkOptionMenu(row, variable=choice_var, values=[""] + choice_options, width=160)
+                    menu = ctk.CTkOptionMenu(
+                        row,
+                        variable=choice_var,
+                        values=[""] + choice_options,
+                        width=160,
+                        command=lambda v, _tid=tid, _ct=choice_type: self._update_talent_choice_data(_tid, _ct, v),
+                    )
                     menu.grid(row=0, column=1, padx=6, pady=6)
                 else:
                     choice_var = None
 
-                def _toggle_select(_tid=tid, _t=t, _choice_var=choice_var, _choice_type=choice_type):
-                    if _tid in self.selected_talents:
+                def _increase(_tid=tid, _name=name, _path_id=path_id, _base=base_rank, _max=max_rank, _requires=requires_choice, _choice_var=choice_var, _choice_type=choice_type):
+                    entry = self.selected_talents.get(_tid)
+                    if not entry:
+                        entry = {
+                            "talent_id": _tid,
+                            "name": _name,
+                            "path_id": _path_id,
+                            "base_rank": int(_base),
+                            "target_rank": int(_base),
+                            "max_rank": int(_max),
+                            "requires_choice": bool(_requires),
+                            "choice_type": _choice_type,
+                            "choice_data": {},
+                        }
+                        self.selected_talents[_tid] = entry
+
+                    current_rank = int(entry.get("target_rank", _base) or _base)
+                    next_rank = current_rank + 1
+                    if next_rank > int(entry.get("max_rank", _max) or _max):
+                        return
+
+                    choice_data = dict(entry.get("choice_data") or {})
+                    if not choice_data and bool(entry.get("requires_choice")):
+                        # If upgrading an already-owned talent, prefer its existing choice_data.
+                        choice_data = self._get_owned_talent_choice_data(_tid)
+                    if _choice_var is not None:
+                        sel = _choice_var.get().strip()
+                        if sel:
+                            choice_data = {_choice_type: sel}
+                    entry["choice_data"] = choice_data
+
+                    can, reason = self._can_increase_talent(
+                        _tid,
+                        current_rank=current_rank,
+                        next_rank=next_rank,
+                        max_rank=int(entry.get("max_rank", _max) or _max),
+                        requires_choice=bool(entry.get("requires_choice")),
+                        choice_data=choice_data,
+                    )
+                    if not can:
+                        self._set_status(reason)
+                        return
+
+                    entry["target_rank"] = int(next_rank)
+                    self._update_tp_label()
+                    self._render_talents()
+
+                def _decrease(_tid=tid, _base=base_rank):
+                    entry = self.selected_talents.get(_tid)
+                    if not entry:
+                        return
+                    try:
+                        base = int(entry.get("base_rank", _base) or _base)
+                        cur_target = int(entry.get("target_rank", base) or base)
+                    except Exception:
+                        self.selected_talents.pop(_tid, None)
+                        self._render_talents()
+                        return
+
+                    new_target = max(base, cur_target - 1)
+                    if new_target <= base:
                         self.selected_talents.pop(_tid, None)
                     else:
-                        choice_data = {}
-                        if _choice_var is not None:
-                            sel = _choice_var.get().strip()
-                            if sel:
-                                choice_data = {_choice_type: sel}
-                        self.selected_talents[_tid] = {
-                            "talent_id": _tid,
-                            "name": _t.get("name", _tid),
-                            "new_rank": int(_t.get("next_rank", 1)),
-                            "points_spent": int(_t.get("tp_cost", _t.get("next_rank", 1))),
-                            "path_id": _t.get("path_id", "general"),
-                            "requires_choice": bool(_t.get("requires_choice")),
-                            "choice_type": _t.get("choice_type") or "choice",
-                            "choice_data": choice_data,
-                        }
+                        entry["target_rank"] = int(new_target)
                     self._update_tp_label()
-                    self._render_talents()  # refresh button states / choice pickers
+                    self._render_talents()
 
-                selected = (tid in self.selected_talents)
-                btn_text = "Remove" if selected else "Add"
-                ctk.CTkButton(row, text=btn_text, width=80, command=_toggle_select).grid(row=0, column=2, padx=6, pady=6)
+                # Buttons: - / + for multi-rank purchases.
+                minus_state = "normal" if (selected_entry and int(target_rank) > int(base_rank)) else "disabled"
+                ctk.CTkButton(row, text="-", width=36, command=_decrease, state=minus_state).grid(row=0, column=2, padx=(6, 2), pady=6)
+
+                plus_state = "disabled"
+                if next_rank is not None:
+                    existing_choice_data = (self.selected_talents.get(tid) or {}).get("choice_data") or {}
+                    if not existing_choice_data:
+                        existing_choice_data = self._get_owned_talent_choice_data(tid)
+                    if choice_var is not None:
+                        sel = choice_var.get().strip()
+                        if sel:
+                            existing_choice_data = {choice_type: sel}
+                    can, _reason = self._can_increase_talent(
+                        tid,
+                        current_rank=int(target_rank),
+                        next_rank=int(next_rank),
+                        max_rank=int(max_rank),
+                        requires_choice=requires_choice,
+                        choice_data=existing_choice_data,
+                    )
+                    plus_state = "normal" if can else "disabled"
+                ctk.CTkButton(row, text="+", width=36, command=_increase, state=plus_state).grid(row=0, column=3, padx=(2, 6), pady=6)
 
         self._update_tp_label()
 
     def _update_tp_label(self):
-        spent = sum(int(v.get("points_spent", 0) or 0) for v in self.selected_talents.values())
+        spent = self._compute_talent_spend()
         total = int(self.options.talent_points)
         remaining = total - spent
         if hasattr(self, "tp_label") and self.tp_label is not None:
@@ -2978,7 +3234,7 @@ class LevelUpWizard(ctk.CTkToplevel):
 
         legend = ctk.CTkLabel(
             frame,
-            text="Costs: Skill rank +1 = 1 AP | Train new skill = 4 AP | Proficiency = 10 AP | Language = 10 AP",
+            text="Costs: Skill rank +1 = 1 AP | Train new skill = 4 AP | Ability increase = 7 AP | Proficiency = 10 AP | Language = 10 AP",
             anchor="w",
         )
         legend.grid(row=1, column=0, sticky="ew", padx=14, pady=(0, 6))
@@ -2992,23 +3248,49 @@ class LevelUpWizard(ctk.CTkToplevel):
         type_menu = ctk.CTkOptionMenu(
             form,
             variable=self.ap_type_var,
-            values=["skill_rank", "train_skill", "proficiency", "language"],
-            command=lambda _=None: self._refresh_ap_target_choices(),
+            values=["skill_rank", "train_skill", "proficiency", "language", "ability_increase"],
+            command=lambda _=None: self._render_advancements(),
         )
         type_menu.grid(row=0, column=1, padx=6, pady=6, sticky="w")
         ctk.CTkLabel(form, text="Target").grid(row=0, column=2, padx=6, pady=6, sticky="e")
         self.ap_target_menu = ctk.CTkOptionMenu(form, variable=self.ap_target_var, values=[""], width=220)
         self.ap_target_menu.grid(row=0, column=3, padx=6, pady=6, sticky="w")
 
-        trained = list(self.options.trained_skills or [])
-        if trained:
-            ctk.CTkLabel(form, text="Trained skills:").grid(row=1, column=0, padx=6, pady=(0, 6), sticky="e")
-            ctk.CTkLabel(form, text=", ".join(trained[:10]) + ("..." if len(trained) > 10 else ""), anchor="w").grid(row=1, column=1, columnspan=3, padx=6, pady=(0, 6), sticky="w")
+        ctype_now = self.ap_type_var.get().strip()
+
+        # Ability increase picker (only shown when selected).
+        if ctype_now == "ability_increase":
+            asi = ctk.CTkFrame(form)
+            asi.grid(row=1, column=0, columnspan=5, sticky="ew", padx=6, pady=(0, 6))
+            asi.grid_columnconfigure(5, weight=1)
+
+            ctk.CTkLabel(asi, text="Ability Increase", anchor="w").grid(row=0, column=0, padx=6, pady=(6, 2), sticky="w")
+            r1 = ctk.CTkRadioButton(asi, text="+2 to one", variable=self.ap_asi_mode, value="plus2")
+            r1.grid(row=1, column=0, padx=6, pady=4, sticky="w")
+            ctk.CTkOptionMenu(asi, variable=self.ap_asi_plus2, values=self.abilities, width=160).grid(row=1, column=1, padx=6, pady=4, sticky="w")
+
+            r2 = ctk.CTkRadioButton(asi, text="+1 to two", variable=self.ap_asi_mode, value="plus1")
+            r2.grid(row=2, column=0, padx=6, pady=4, sticky="w")
+            ctk.CTkOptionMenu(asi, variable=self.ap_asi_plus1_a, values=self.abilities, width=160).grid(row=2, column=1, padx=6, pady=4, sticky="w")
+            ctk.CTkOptionMenu(asi, variable=self.ap_asi_plus1_b, values=self.abilities, width=160).grid(row=2, column=2, padx=6, pady=4, sticky="w")
+
+            # Target dropdown isn't used for ability increases.
+            try:
+                self.ap_target_menu.configure(state="disabled", values=[""])
+            except Exception:
+                pass
+            self.ap_target_var.set("")
+        else:
+            trained = list(self.options.trained_skills or [])
+            if trained:
+                ctk.CTkLabel(form, text="Trained skills:").grid(row=1, column=0, padx=6, pady=(0, 6), sticky="e")
+                ctk.CTkLabel(form, text=", ".join(trained[:10]) + ("..." if len(trained) > 10 else ""), anchor="w").grid(row=1, column=1, columnspan=3, padx=6, pady=(0, 6), sticky="w")
 
         ctk.CTkButton(form, text="Add", width=90, command=self._add_advancement).grid(row=0, column=4, padx=6, pady=6)
 
         # Seed dropdown options based on current type/character.
-        self._refresh_ap_target_choices()
+        if ctype_now != "ability_increase":
+            self._refresh_ap_target_choices()
 
         list_box = ctk.CTkScrollableFrame(frame)
         list_box.grid(row=3, column=0, sticky="nsew", padx=8, pady=(0, 8))
@@ -3020,7 +3302,11 @@ class LevelUpWizard(ctk.CTkToplevel):
                 row = ctk.CTkFrame(list_box)
                 row.pack(fill="x", padx=6, pady=4)
                 row.grid_columnconfigure(0, weight=1)
-                ctk.CTkLabel(row, text=f"{item['choice_type']} → {item['target']} (AP {item['points_spent']})", anchor="w").grid(row=0, column=0, sticky="w", padx=6, pady=6)
+                if item.get("choice_type") == "ability_increase":
+                    disp = str(item.get("display") or item.get("target") or "")
+                    ctk.CTkLabel(row, text=f"ability_increase → {disp} (AP {item['points_spent']})", anchor="w").grid(row=0, column=0, sticky="w", padx=6, pady=6)
+                else:
+                    ctk.CTkLabel(row, text=f"{item['choice_type']} → {item['target']} (AP {item['points_spent']})", anchor="w").grid(row=0, column=0, sticky="w", padx=6, pady=6)
                 ctk.CTkButton(row, text="Remove", width=80, command=lambda i=idx: self._remove_advancement(i)).grid(row=0, column=1, padx=6, pady=6)
 
         self._update_ap_label()
@@ -3044,9 +3330,38 @@ class LevelUpWizard(ctk.CTkToplevel):
     def _add_advancement(self):
         ctype = self.ap_type_var.get().strip()
         target = self.ap_target_var.get().strip()
-        if not target:
-            self._set_status("Pick a target")
-            return
+
+        if ctype == "ability_increase":
+            mode = self.ap_asi_mode.get().strip()
+            if mode == "plus2":
+                a = self.ap_asi_plus2.get().strip()
+                if not a:
+                    self._set_status("Pick the +2 ability")
+                    return
+                inc = {a: 2}
+            elif mode == "plus1":
+                a = self.ap_asi_plus1_a.get().strip()
+                b = self.ap_asi_plus1_b.get().strip()
+                if not a or not b:
+                    self._set_status("Pick both +1 abilities")
+                    return
+                if a == b:
+                    self._set_status("Choose two different abilities")
+                    return
+                inc = {a: 1, b: 1}
+            else:
+                self._set_status("Choose +2 or +1/+1")
+                return
+
+            # Encode target for validation/apply.
+            target = ",".join([f"{k}:+{v}" for k, v in inc.items()])
+            display = ", ".join([f"{k} +{v}" for k, v in inc.items()])
+        else:
+            if not target:
+                self._set_status("Pick a target")
+                return
+            display = ""
+
         cost = int(AP_COSTS.get(ctype, 0) or 0)
         if cost <= 0:
             self._set_status("Invalid advancement type")
@@ -3055,7 +3370,10 @@ class LevelUpWizard(ctk.CTkToplevel):
         if spent + cost > int(self.options.advancement_points):
             self._set_status("Not enough AP remaining")
             return
-        self.advancements.append({"choice_type": ctype, "target": target, "points_spent": cost})
+        payload = {"choice_type": ctype, "target": target, "points_spent": cost}
+        if display:
+            payload["display"] = display
+        self.advancements.append(payload)
         self.ap_target_var.set("")
         self._render_advancements()
 
@@ -3174,7 +3492,7 @@ class LevelUpWizard(ctk.CTkToplevel):
 
         # Show what will carry over into stored_advance.
         try:
-            spent_tp = sum(int(v.get("points_spent", 0) or 0) for v in self.selected_talents.values())
+            spent_tp = int(self._compute_talent_spend())
             spent_ap = sum(int(v.get("points_spent", 0) or 0) for v in self.advancements)
             remaining_tp = max(0, int(self.options.talent_points) - spent_tp)
             remaining_ap = max(0, int(self.options.advancement_points) - spent_ap)
@@ -3196,7 +3514,18 @@ class LevelUpWizard(ctk.CTkToplevel):
         if self.selected_talents:
             lines.append("Talents:")
             for t in self.selected_talents.values():
-                lines.append(f"  {t['name']} (to Rank {t['new_rank']}) [TP {t['points_spent']}]")
+                try:
+                    base = int(t.get("base_rank", 0) or 0)
+                    target = int(t.get("target_rank", base) or base)
+                except Exception:
+                    base = 0
+                    target = base
+                tp_cost = 0
+                try:
+                    tp_cost = self._compute_talent_cost_for(str(t.get("talent_id", "")))
+                except Exception:
+                    tp_cost = 0
+                lines.append(f"  {t.get('name', t.get('talent_id', 'Talent'))} (Rank {base} → {target}) [TP {tp_cost}]")
             lines.append("")
         else:
             lines.append("Talents: (none)")
@@ -3205,7 +3534,11 @@ class LevelUpWizard(ctk.CTkToplevel):
         if self.advancements:
             lines.append("Advancements:")
             for a in self.advancements:
-                lines.append(f"  {a['choice_type']} → {a['target']} [AP {a['points_spent']}]")
+                if a.get("choice_type") == "ability_increase":
+                    disp = a.get("display") or a.get("target")
+                    lines.append(f"  ability_increase → {disp} [AP {a['points_spent']}]")
+                else:
+                    lines.append(f"  {a['choice_type']} → {a['target']} [AP {a['points_spent']}]")
             lines.append("")
         else:
             lines.append("Advancements: (none)")
@@ -3253,12 +3586,18 @@ class LevelUpWizard(ctk.CTkToplevel):
             return True
 
         if step == "Talents":
-            spent = sum(int(v.get("points_spent", 0) or 0) for v in self.selected_talents.values())
+            spent = int(self._compute_talent_spend())
             if spent > int(self.options.talent_points):
                 self._set_status("Spent more TP than available")
                 return False
             for v in self.selected_talents.values():
-                if v.get("requires_choice") and not (v.get("choice_data") or {}):
+                try:
+                    base = int(v.get("base_rank", 0) or 0)
+                    target = int(v.get("target_rank", base) or base)
+                except Exception:
+                    base = 0
+                    target = base
+                if target > base and v.get("requires_choice") and not (v.get("choice_data") or {}):
                     self._set_status(f"{v.get('name', 'Talent')} requires a choice")
                     return False
             return True
@@ -3289,15 +3628,93 @@ class LevelUpWizard(ctk.CTkToplevel):
             ability_inc = self._ability_increase_payload() or {}
 
             talent_choices: List[LevelTalentChoice] = []
-            for t in self.selected_talents.values():
-                talent_choices.append(LevelTalentChoice(
-                    talent_id=t["talent_id"],
-                    talent_name=t["name"],
-                    new_rank=int(t["new_rank"]),
-                    points_spent=int(t["points_spent"]),
-                    path_id=t.get("path_id", "general"),
-                    choice_data=t.get("choice_data") or {},
-                ))
+            # Expand planned base->target into sequential rank purchases.
+            # Also try to order purchases so prerequisites can be satisfied in one apply.
+            planned: Dict[str, Dict[str, Any]] = {k: dict(v) for k, v in (self.selected_talents or {}).items()}
+            temp_ranks: Dict[str, int] = dict(self.options.current_talents or {})
+
+            def _next_step_for(tid: str) -> tuple[int, int] | None:
+                entry = planned.get(tid) or {}
+                try:
+                    base = int(entry.get("base_rank", 0) or 0)
+                    target = int(entry.get("target_rank", base) or base)
+                except Exception:
+                    return None
+                cur = int(temp_ranks.get(tid, base) or base)
+                cur = max(cur, base)
+                if cur >= target:
+                    return None
+                return (cur, cur + 1)
+
+            remaining = {tid for tid, e in planned.items() if int(e.get("target_rank", e.get("base_rank", 0) or 0) or 0) > int(e.get("base_rank", 0) or 0)}
+            safety = 0
+            while remaining and safety < 500:
+                safety += 1
+                progressed = False
+                for tid in sorted(list(remaining)):
+                    step = _next_step_for(tid)
+                    if not step:
+                        remaining.discard(tid)
+                        continue
+                    from_rank, to_rank = step
+                    entry = planned.get(tid) or {}
+                    tdef = self.manager.talents_flat.get(tid)
+                    can = True
+                    if tdef:
+                        try:
+                            char = self.manager.character
+                            if not char:
+                                can = False
+                            else:
+                                can, _reasons = tdef.can_acquire(
+                                    ability_scores=char.ability_scores,
+                                    level=int(self.options.new_level),
+                                    current_talents=dict(temp_ranks),
+                                    target_rank=int(to_rank),
+                                )
+                        except Exception:
+                            can = True
+                    if not can:
+                        continue
+
+                    cost = self._talent_step_cost(tid, from_rank, to_rank)
+                    talent_choices.append(LevelTalentChoice(
+                        talent_id=str(entry.get("talent_id", tid)),
+                        talent_name=str(entry.get("name", tid)),
+                        new_rank=int(to_rank),
+                        points_spent=int(cost),
+                        path_id=str(entry.get("path_id", "general")),
+                        choice_data=entry.get("choice_data") or {},
+                    ))
+                    temp_ranks[tid] = int(to_rank)
+                    progressed = True
+
+                if not progressed:
+                    # Could not satisfy ordering based on prerequisites; emit the rest deterministically.
+                    for tid in sorted(list(remaining)):
+                        entry = planned.get(tid) or {}
+                        try:
+                            base = int(entry.get("base_rank", 0) or 0)
+                            target = int(entry.get("target_rank", base) or base)
+                        except Exception:
+                            continue
+                        cur = int(temp_ranks.get(tid, base) or base)
+                        cur = max(cur, base)
+                        while cur < target:
+                            nxt = cur + 1
+                            cost = self._talent_step_cost(tid, cur, nxt)
+                            talent_choices.append(LevelTalentChoice(
+                                talent_id=str(entry.get("talent_id", tid)),
+                                talent_name=str(entry.get("name", tid)),
+                                new_rank=int(nxt),
+                                points_spent=int(cost),
+                                path_id=str(entry.get("path_id", "general")),
+                                choice_data=entry.get("choice_data") or {},
+                            ))
+                            temp_ranks[tid] = int(nxt)
+                            cur = nxt
+                        remaining.discard(tid)
+                    break
 
             advancement_choices: List[LevelAdvancementChoice] = []
             for a in self.advancements:
@@ -3331,12 +3748,51 @@ class LevelUpWizard(ctk.CTkToplevel):
                     pass
                 return
 
-            if not self.manager.save_character(str(self.character_path)):
-                self._set_status("Failed to save character")
-                return
+            # Archive previous JSON/PDF, then save new JSON/PDF with level in filename.
+            try:
+                char = self.manager.character
+                if not char:
+                    self._set_status("No character loaded")
+                    return
+
+                old_json = Path(self.character_path)
+                old_level = int(self.options.current_level)
+                new_level = int(getattr(char, "level", self.options.new_level) or self.options.new_level)
+                base_old = _character_basename(str(getattr(char, "character_name", "") or ""), str(getattr(char, "player", "") or ""), old_level)
+                base_new = _character_basename(str(getattr(char, "character_name", "") or ""), str(getattr(char, "player", "") or ""), new_level)
+
+                # Move old JSON file (whatever it was named).
+                _move_to_levelup_old(old_json, CHAR_LEVELUP_OLD_DIR)
+
+                # Move old PDFs if present (legacy and level-tagged).
+                candidates = [
+                    EXPORTS_DIR / f"{base_old}.pdf",
+                    EXPORTS_DIR / f"{_safe_slug(str(getattr(char, 'character_name', '') or ''), 'character')}_{_safe_slug(str(getattr(char, 'player', '') or ''), 'player')}.pdf",
+                ]
+                for c in candidates:
+                    _move_to_levelup_old(c, EXPORTS_LEVELUP_OLD_DIR)
+
+                new_json = CHAR_DIR / f"{base_new}.json"
+                if not self.manager.save_character(str(new_json)):
+                    self._set_status("Failed to save character")
+                    return
+
+                new_pdf = EXPORTS_DIR / f"{base_new}.pdf"
+                try:
+                    SharedSheetPDF().generate_to_file(sheet_data=char.to_dict(), output_path=new_pdf)
+                except Exception as e:  # pragma: no cover
+                    self._set_status(f"Saved {new_json.name} (PDF failed: {e})")
+
+                self.character_path = new_json
+            except Exception as e:
+                self._set_status(f"Saved level-up but archiving/naming failed: {e}")
 
             if self.on_saved:
-                self.on_saved()
+                try:
+                    self.on_saved(self.character_path)
+                except TypeError:
+                    # Backward-compatible callback signature.
+                    self.on_saved()
             self.destroy()
         except Exception as e:
             try:
@@ -3435,12 +3891,22 @@ class App(ctk.CTk):
 
     def _save_new_character(self, char):
         data = dump_character_template(char)
-        filename = f"{_safe_slug(char.character_name, 'character')}_{_safe_slug(char.player, 'player')}.json"
-        target = CHAR_DIR / filename
-        target.write_text(json.dumps(data, indent=2), encoding="utf-8")
-        self._set_status(f"Saved {target}")
+        lvl = int(getattr(char, "level", 1) or 1)
+        base = _character_basename(str(getattr(char, "character_name", "") or ""), str(getattr(char, "player", "") or ""), lvl)
+
+        json_path = CHAR_DIR / f"{base}.json"
+        json_path.write_text(json.dumps(data, indent=2), encoding="utf-8")
+
+        # Also generate a PDF by default.
+        pdf_path = EXPORTS_DIR / f"{base}.pdf"
+        try:
+            SharedSheetPDF().generate_to_file(sheet_data=char.to_dict(), output_path=pdf_path)
+            self._set_status(f"Saved {json_path.name} and {pdf_path.name}")
+        except Exception as e:  # pragma: no cover
+            self._set_status(f"Saved {json_path.name} (PDF failed: {e})")
+
         self._refresh_list()
-        return target
+        return json_path
 
     def _edit_character(self):
         path = self.selected_path
@@ -3520,8 +3986,9 @@ class App(ctk.CTk):
             self._set_status(f"Failed to load: {e}")
             return
 
-        pdf_name = f"{_safe_slug(char.character_name, 'character')}_{_safe_slug(char.player, 'player')}.pdf"
-        pdf_path = EXPORTS_DIR / pdf_name
+        lvl = int(getattr(char, "level", 1) or 1)
+        base = _character_basename(str(getattr(char, "character_name", "") or ""), str(getattr(char, "player", "") or ""), lvl)
+        pdf_path = EXPORTS_DIR / f"{base}.pdf"
         try:
             SharedSheetPDF().generate_to_file(sheet_data=char.to_dict(), output_path=pdf_path)
             self._set_status(f"PDF saved to {pdf_path}")
@@ -3534,8 +4001,9 @@ class App(ctk.CTk):
             self._set_status("No character selected")
             return
 
-        def _after_save():
-            self._set_status(f"Leveled up: {path.name}")
+        def _after_save(new_path: Path | None = None):
+            shown = (new_path.name if isinstance(new_path, Path) else path.name)
+            self._set_status(f"Leveled up: {shown}")
             self._refresh_list()
 
         LevelUpWizard(self, path, on_saved=_after_save)

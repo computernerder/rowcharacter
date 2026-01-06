@@ -615,9 +615,11 @@ class LevelUpManager:
         talent_payload = []
         advancement_payload = []
 
-        current_talents = options.current_talents or {}
-        for choice in talent_choices:
-            current_rank = current_talents.get(choice.talent_id, 0)
+        # Validate talent choices using an evolving rank map so multiple sequential
+        # purchases (e.g., Rank 1 then Rank 2) are supported in a single level-up.
+        current_talents = dict(options.current_talents or {})
+        for choice in (talent_choices or []):
+            current_rank = int(current_talents.get(choice.talent_id, 0) or 0)
             talent_payload.append({
                 "talent_id": choice.talent_id,
                 "new_rank": choice.new_rank,
@@ -626,6 +628,11 @@ class LevelUpManager:
                 "path_id": choice.path_id,
                 "choice_data": choice.choice_data,
             })
+            # Advance temp state for subsequent validations.
+            try:
+                current_talents[choice.talent_id] = int(choice.new_rank)
+            except Exception:
+                current_talents[choice.talent_id] = choice.new_rank
 
         for choice in advancement_choices:
             advancement_payload.append({
@@ -666,15 +673,17 @@ class LevelUpManager:
                 known_proficiencies=known_proficiencies,
             ))
 
-        # Enforce talent prerequisites and rank costs using loaded talent data
+        # Enforce talent prerequisites and rank costs using loaded talent data.
+        # Use an evolving map so multiple sequential upgrades can be validated.
         if talent_choices:
+            temp_talents = dict(options.current_talents or {})
             for choice in talent_choices:
                 tdef = self.talents_flat.get(choice.talent_id)
                 if not tdef:
                     result.add_error(f"Unknown talent id: {choice.talent_id}")
                     continue
 
-                from_rank = int(current_talents.get(choice.talent_id, 0))
+                from_rank = int(temp_talents.get(choice.talent_id, 0) or 0)
                 expected_cost = tdef.get_tp_cost(from_rank, choice.new_rank)
                 if choice.points_spent != expected_cost:
                     result.add_error(
@@ -687,12 +696,15 @@ class LevelUpManager:
                 can, reasons = tdef.can_acquire(
                     ability_scores=self.character.ability_scores,
                     level=options.new_level,
-                    current_talents=current_talents,
+                    current_talents=temp_talents,
                     target_rank=choice.new_rank,
                 )
                 if not can:
                     for r in reasons:
                         result.add_error(f"{tdef.name}: {r}")
+                else:
+                    # Advance temp state so subsequent rank purchases validate correctly.
+                    temp_talents[choice.talent_id] = int(choice.new_rank)
 
         return result
     
@@ -899,8 +911,23 @@ class LevelUpManager:
         
         elif choice.choice_type == "ability_increase":
             # +2 to one or +1 to two abilities (costs 7 AP)
-            # This is handled separately via ability_increase parameter
-            pass
+            # Target format: "Might:+2" OR "Might:+1,Agility:+1"
+            try:
+                raw = str(choice.target or "").strip()
+                parts = [p.strip() for p in raw.split(",") if p.strip()]
+                for p in parts:
+                    if ":" not in p:
+                        continue
+                    ability, val = p.split(":", 1)
+                    ability = ability.strip()
+                    val = val.strip().replace("+", "")
+                    if not ability or ability not in self.character.ability_scores:
+                        continue
+                    bonus = int(val)
+                    self.character.ability_scores[ability].misc += bonus
+            except Exception:
+                # If malformed, ignore here; validator should have blocked it.
+                pass
     
     def _apply_hp_increase(self, hp_roll: int = None):
         """Apply HP increase for level up."""

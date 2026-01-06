@@ -7,9 +7,9 @@
   "race": "human",
   "ancestry": "Velari",
   "background": "mercenary",
-  "level": 2,
-  "total_experience": 0,
-  "stored_advance": "",
+  "level": 4,
+  "total_experience": 3000,
+  "stored_advance": "AP:4",
   "ability_scores": {
     "Might": {
       "mod": 4,
@@ -20,12 +20,12 @@
       "misc": 0
     },
     "Agility": {
-      "mod": 4,
-      "saving_throw": 4,
-      "total": 18,
+      "mod": 5,
+      "saving_throw": 5,
+      "total": 20,
       "roll": 15,
       "race": 0,
-      "misc": 3
+      "misc": 5
     },
     "Endurance": {
       "mod": 0,
@@ -62,16 +62,16 @@
   },
   "defense": {
     "base": 9,
-    "agility": 4,
+    "agility": 5,
     "shield": "",
     "misc": 0,
-    "total": 13
+    "total": 14
   },
   "speed": 30,
-  "initiative": 4,
+  "initiative": 5,
   "health": {
-    "max": 15,
-    "current": 15,
+    "max": 27,
+    "current": 27,
     "wounds": 0
   },
   "armor_hp": {
@@ -107,9 +107,9 @@
       "total": 5
     },
     "ranged": {
-      "attr": 4,
+      "attr": 5,
       "misc": 1,
-      "total": 5
+      "total": 6
     }
   },
   "skills": {
@@ -294,7 +294,7 @@
     {
       "talent_id": "martial_arts",
       "name": "Martial Arts",
-      "rank": 1,
+      "rank": 4,
       "path_id": "martial",
       "choice_data": {},
       "path": "martial",
@@ -303,7 +303,7 @@
     {
       "talent_id": "balanced_stance",
       "name": "Balanced Stance",
-      "rank": 1,
+      "rank": 3,
       "path_id": "martial",
       "choice_data": {},
       "path": "martial",
@@ -321,7 +321,7 @@
     {
       "talent_id": "quick_hands",
       "name": "Quick Hands",
-      "rank": 1,
+      "rank": 2,
       "path_id": "martial",
       "choice_data": {},
       "path": "martial",
@@ -377,9 +377,27 @@
       "name": "Common Sense",
       "rank": 1,
       "path_id": "general",
-      "path": "general",
       "choice_data": {},
+      "path": "general",
       "text": "Common Sense (Rank 1)"
+    },
+    {
+      "talent_id": "terrain_flow",
+      "name": "Terrain Flow",
+      "rank": 1,
+      "path_id": "martial",
+      "path": "martial",
+      "choice_data": {},
+      "text": "Terrain Flow (Rank 1)"
+    },
+    {
+      "talent_id": "unencumbered_thought",
+      "name": "Unencumbered Thought",
+      "rank": 1,
+      "path_id": "martial",
+      "path": "martial",
+      "choice_data": {},
+      "text": "Unencumbered Thought (Rank 1)"
     }
   ],
   "features": [
@@ -410,6 +428,10 @@
     {
       "name": "Mercenary Contacts",
       "text": "You know how to find mercenary work and can make contacts in sellsword companies. You can identify mercenary bands by their insignia and know their reputations."
+    },
+    {
+      "name": "Extra Attack (3)",
+      "text": "You can attack twice when you take the Attack action (gained at level 3)."
     }
   ],
   "spellcrafting": {

@@ -1,0 +1,505 @@
+{
+  "id": "",
+  "character_name": "Minotour",
+  "player": "Player",
+  "profession": "warrior",
+  "primary_path": "Defense",
+  "race": "taurin",
+  "ancestry": "Stonegrave",
+  "background": "village champion",
+  "level": 5,
+  "total_experience": 7000,
+  "stored_advance": "AP:3 TP:8",
+  "ability_scores": {
+    "Might": {
+      "mod": 4,
+      "saving_throw": 4,
+      "total": 18,
+      "roll": 15,
+      "race": 1,
+      "misc": 2
+    },
+    "Agility": {
+      "mod": 2,
+      "saving_throw": 2,
+      "total": 14,
+      "roll": 14,
+      "race": 0,
+      "misc": 0
+    },
+    "Endurance": {
+      "mod": 3,
+      "saving_throw": 3,
+      "total": 17,
+      "roll": 13,
+      "race": 2,
+      "misc": 2
+    },
+    "Wisdom": {
+      "mod": 1,
+      "saving_throw": 1,
+      "total": 13,
+      "roll": 11,
+      "race": 0,
+      "misc": 2
+    },
+    "Intellect": {
+      "mod": 1,
+      "saving_throw": 1,
+      "total": 12,
+      "roll": 12,
+      "race": 0,
+      "misc": 0
+    },
+    "Charisma": {
+      "mod": -1,
+      "saving_throw": -1,
+      "total": 9,
+      "roll": 10,
+      "race": -1,
+      "misc": 0
+    }
+  },
+  "defense": {
+    "base": 9,
+    "agility": 2,
+    "shield": "",
+    "misc": 0,
+    "total": 11
+  },
+  "speed": 30,
+  "initiative": 2,
+  "health": {
+    "max": 50,
+    "current": 50,
+    "wounds": 0
+  },
+  "armor_hp": {
+    "max": 0,
+    "current": 0
+  },
+  "life_points": {
+    "max": 17,
+    "current": 17
+  },
+  "focus": {
+    "max": 0,
+    "current": 0
+  },
+  "passive": {
+    "perception": {
+      "base": 10,
+      "skill": 2,
+      "misc": 0,
+      "total": 12
+    },
+    "insight": {
+      "base": 10,
+      "skill": 1,
+      "misc": 0,
+      "total": 11
+    }
+  },
+  "attack_mods": {
+    "melee": {
+      "attr": 4,
+      "misc": 1,
+      "total": 5
+    },
+    "ranged": {
+      "attr": 2,
+      "misc": 1,
+      "total": 3
+    }
+  },
+  "skills": {
+    "Acrobatics": {
+      "trained": false,
+      "mod": 2,
+      "rank": 0,
+      "misc": 0,
+      "total": 2
+    },
+    "Animal Handling": {
+      "trained": false,
+      "mod": 1,
+      "rank": 0,
+      "misc": 0,
+      "total": 1
+    },
+    "Appraisal": {
+      "trained": true,
+      "mod": 1,
+      "rank": 5,
+      "misc": 0,
+      "total": 6
+    },
+    "Arcana": {
+      "trained": false,
+      "mod": 1,
+      "rank": 0,
+      "misc": 0,
+      "total": 1
+    },
+    "Athletics": {
+      "trained": true,
+      "mod": 3,
+      "rank": 1,
+      "misc": 0,
+      "total": 4
+    },
+    "Crafting": {
+      "trained": false,
+      "mod": 1,
+      "rank": 0,
+      "misc": 0,
+      "total": 1
+    },
+    "Deception": {
+      "trained": false,
+      "mod": -1,
+      "rank": 0,
+      "misc": 0,
+      "total": -1
+    },
+    "Diplomacy": {
+      "trained": false,
+      "mod": -1,
+      "rank": 0,
+      "misc": 0,
+      "total": -1
+    },
+    "History": {
+      "trained": false,
+      "mod": 1,
+      "rank": 0,
+      "misc": 0,
+      "total": 1
+    },
+    "Insight": {
+      "trained": false,
+      "mod": 1,
+      "rank": 0,
+      "misc": 0,
+      "total": 1
+    },
+    "Intimidation": {
+      "trained": true,
+      "mod": -1,
+      "rank": 2,
+      "misc": 0,
+      "total": 1
+    },
+    "Investigation": {
+      "trained": false,
+      "mod": 1,
+      "rank": 0,
+      "misc": 0,
+      "total": 1
+    },
+    "Medicine": {
+      "trained": false,
+      "mod": 1,
+      "rank": 0,
+      "misc": 0,
+      "total": 1
+    },
+    "Nature": {
+      "trained": false,
+      "mod": 1,
+      "rank": 0,
+      "misc": 0,
+      "total": 1
+    },
+    "Perception": {
+      "trained": true,
+      "mod": 1,
+      "rank": 1,
+      "misc": 0,
+      "total": 2
+    },
+    "Performance": {
+      "trained": false,
+      "mod": -1,
+      "rank": 0,
+      "misc": 0,
+      "total": -1
+    },
+    "Persuasion": {
+      "trained": true,
+      "mod": -1,
+      "rank": 1,
+      "misc": 0,
+      "total": 0
+    },
+    "Religion": {
+      "trained": false,
+      "mod": 1,
+      "rank": 0,
+      "misc": 0,
+      "total": 1
+    },
+    "Sleight of Hand": {
+      "trained": false,
+      "mod": 2,
+      "rank": 0,
+      "misc": 0,
+      "total": 2
+    },
+    "Stealth": {
+      "trained": false,
+      "mod": 2,
+      "rank": 0,
+      "misc": 0,
+      "total": 2
+    },
+    "Streetwise": {
+      "trained": false,
+      "mod": 1,
+      "rank": 0,
+      "misc": 0,
+      "total": 1
+    },
+    "Survival": {
+      "trained": false,
+      "mod": 1,
+      "rank": 0,
+      "misc": 0,
+      "total": 1
+    },
+    "Taming": {
+      "trained": false,
+      "mod": 1,
+      "rank": 0,
+      "misc": 0,
+      "total": 1
+    }
+  },
+  "proficiencies": [
+    "Light",
+    "Medium",
+    "Simple",
+    "Heavy",
+    "Martial",
+    "Artisan Tool",
+    "Whetstone Kit"
+  ],
+  "languages": [
+    "Common",
+    "Tauric",
+    "Dwarvish",
+    "Ancient Dwarvish",
+    "Goblin"
+  ],
+  "attacks": [],
+  "talents": [
+    {
+      "talent_id": "protector",
+      "name": "Protector",
+      "rank": 3,
+      "path_id": "defense",
+      "choice_data": {},
+      "path": "defense",
+      "text": "Protector (Rank 3)"
+    },
+    {
+      "talent_id": "adrenal_push",
+      "name": "Adrenal Push",
+      "rank": 1,
+      "path_id": "defense",
+      "choice_data": {},
+      "path": "defense",
+      "text": "Adrenal Push (Rank 1)"
+    },
+    {
+      "talent_id": "guard",
+      "name": "Guard",
+      "rank": 1,
+      "path_id": "defense",
+      "choice_data": {},
+      "path": "defense",
+      "text": "Guard (Rank 1)"
+    },
+    {
+      "talent_id": "quick_learner",
+      "name": "Quick Learner",
+      "rank": 1,
+      "path_id": "general",
+      "choice_data": {},
+      "path": "general",
+      "text": "Quick Learner (Rank 1)"
+    },
+    {
+      "talent_id": "athlete",
+      "name": "Athlete",
+      "rank": 1,
+      "path_id": "general",
+      "choice_data": {},
+      "path": "general",
+      "text": "Athlete (Rank 1)"
+    },
+    {
+      "talent_id": "archery_focus",
+      "name": "Archery Focus",
+      "rank": 2,
+      "path_id": "general",
+      "choice_data": {},
+      "path": "general",
+      "text": "Archery Focus (Rank 1)"
+    },
+    {
+      "talent_id": "alertness",
+      "name": "Alertness",
+      "rank": 2,
+      "path_id": "general",
+      "choice_data": {},
+      "path": "general",
+      "text": "Alertness (Rank 1)"
+    },
+    {
+      "talent_id": "armor_training",
+      "name": "Armor Training",
+      "rank": 1,
+      "path_id": "general",
+      "choice_data": {},
+      "path": "general",
+      "text": "Armor Training (Rank 1)"
+    },
+    {
+      "talent_id": "book_smart",
+      "name": "Book Smart",
+      "rank": 1,
+      "path_id": "general",
+      "choice_data": {},
+      "path": "general",
+      "text": "Book Smart (Rank 1)"
+    },
+    {
+      "talent_id": "weapon_mastery",
+      "name": "Weapon Mastery",
+      "rank": 1,
+      "path_id": "general",
+      "choice_data": {},
+      "path": "general",
+      "text": "Weapon Mastery (Rank 1)"
+    },
+    {
+      "talent_id": "mobile",
+      "name": "Mobile",
+      "rank": 1,
+      "path_id": "general",
+      "choice_data": {},
+      "path": "general",
+      "text": "Mobile (Rank 1)"
+    },
+    {
+      "talent_id": "dual_wielding",
+      "name": "Dual Wielding",
+      "rank": 1,
+      "path_id": "general",
+      "choice_data": {},
+      "path": "general",
+      "text": "Dual Wielding (Rank 1)"
+    },
+    {
+      "talent_id": "defensive_training",
+      "name": "Defensive Training",
+      "rank": 1,
+      "path_id": "general",
+      "choice_data": {},
+      "path": "general",
+      "text": "Defensive Training (Rank 1)"
+    },
+    {
+      "talent_id": "common_sense",
+      "name": "Common Sense",
+      "rank": 1,
+      "path_id": "general",
+      "choice_data": {},
+      "path": "general",
+      "text": "Common Sense (Rank 1)"
+    }
+  ],
+  "features": [
+    {
+      "name": "Primal Senses",
+      "text": "You are proficient in Perception checks and have advantage on Perception checks."
+    },
+    {
+      "name": "Horn Attack",
+      "text": "You are proficient with your horns. You may make an unarmed attack dealing 1d6 + Might modifier piercing damage."
+    },
+    {
+      "name": "Immovable",
+      "text": "You have advantage on checks and saving throws to resist being shoved or knocked prone."
+    },
+    {
+      "name": "Stonehide",
+      "text": "Add your Endurance modifier as temporary hit points. You regain these points after a short rest."
+    },
+    {
+      "name": "Soldier's Network",
+      "text": "You have ties to local fighters, guards, and mercenaries who can offer basic shelter, news, or introductions."
+    },
+    {
+      "name": "Hold the Line",
+      "text": "When a hostile creature you can see moves within 5 ft of you, you may use your Reaction to make a melee attack. On a hit, the creature's speed becomes 0 until the end of your next turn."
+    },
+    {
+      "name": "Read the Threat",
+      "text": "At the start of combat, you may make an Insight check with advantage to identify the most dangerous visible enemy (TN 8+DR). On a success, your first attack against that enemy has advantage."
+    },
+    {
+      "name": "Unyielding Focus",
+      "text": "You have advantage on saves made to resist being knocked prone, disarmed, or shoved."
+    },
+    {
+      "name": "Folk Hero",
+      "text": "Common people will shelter and aid you. You can find a place to hide, rest, or recuperate among commoners, unless you have shown yourself to be a danger to them."
+    },
+    {
+      "name": "Extra Attack (3)",
+      "text": "You can attack twice when you take the Attack action (gained at level 3)."
+    }
+  ],
+  "spellcrafting": {
+    "save_dc": 0,
+    "attack_bonus": 0,
+    "crafting_points": {
+      "max": 0
+    },
+    "casting": "",
+    "spells": []
+  },
+  "notes": "",
+  "physical_traits": {
+    "height": "10'3\"",
+    "weight": "556 lb",
+    "size": "Medium",
+    "age": "104",
+    "creature_type": "Humanoid",
+    "eyes": "Blue",
+    "skin": "Ruddy",
+    "hair": "Red"
+  },
+  "personality": {
+    "traits": "I brag about my deeds, even small ones.",
+    "ideal": "Justice. Everyone deserves fair treatment.",
+    "bond": "My village is my heart.",
+    "flaw": "I am boastful and arrogant."
+  },
+  "alignment": {
+    "alignment": "",
+    "mod": 2
+  },
+  "reputation": {
+    "reputation": "",
+    "mod": 2
+  },
+  "qr_payload": "",
+  "footer": {
+    "datecode": "",
+    "config": "",
+    "id": ""
+  }
+}

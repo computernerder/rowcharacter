@@ -628,7 +628,7 @@ class CharacterValidator:
         known_languages = known_languages or set()
         known_proficiencies = known_proficiencies or set()
         
-        valid_types = {"skill_rank", "train_skill", "proficiency", "language", "inherit_gold"}
+        valid_types = {"skill_rank", "train_skill", "proficiency", "language", "inherit_gold", "ability_increase"}
         
         if choice_type not in valid_types:
             result.add_error(f"Unknown advancement type: {choice_type}")
@@ -660,6 +660,49 @@ class CharacterValidator:
             result.merge(self.validate_language(target))
             if points_spent != 10:
                 result.add_error(f"Language costs 10 AP (spent {points_spent})")
+
+        elif choice_type == "ability_increase":
+            # +2 to one or +1 to two abilities (costs 7 AP)
+            if points_spent != 7:
+                result.add_error(f"Ability increase costs 7 AP (spent {points_spent})")
+
+            # Target format: "Might:+2" OR "Might:+1,Agility:+1"
+            parsed: Dict[str, int] = {}
+            try:
+                raw = str(target or "").strip()
+                parts = [p.strip() for p in raw.split(",") if p.strip()]
+                for p in parts:
+                    if ":" not in p:
+                        continue
+                    name, val = p.split(":", 1)
+                    name = name.strip()
+                    val = val.strip().replace("+", "")
+                    if not name:
+                        continue
+                    parsed[name] = int(val)
+            except Exception:
+                parsed = {}
+
+            if not parsed:
+                result.add_error("Ability increase target must be like 'Might:+2' or 'Might:+1,Agility:+1'")
+                return result
+
+            total = sum(int(v) for v in parsed.values())
+            count = len(parsed)
+            if total != 2:
+                result.add_error(f"Ability increase must total +2 (got {total})")
+            if count == 1:
+                if list(parsed.values())[0] != 2:
+                    result.add_error("Single ability increase must be +2")
+            elif count == 2:
+                if not all(int(v) == 1 for v in parsed.values()):
+                    result.add_error("Two ability increases must each be +1")
+            else:
+                result.add_error(f"Can increase 1 or 2 abilities, not {count}")
+
+            for ability in parsed:
+                if ability not in ABILITY_NAMES:
+                    result.add_error(f"Unknown ability: {ability}")
         
         return result
     

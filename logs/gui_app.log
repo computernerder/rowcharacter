@@ -189,3 +189,35 @@
 2026-01-05 12:36:30,851 INFO App status: Leveled up: Minotour_Player.json
 2026-01-05 12:36:30,870 INFO App status: Loaded 3 characters
 2026-01-05 12:37:01,085 INFO App status: Loaded 3 characters
+2026-01-05 16:01:47,044 INFO App status: Loaded 3 characters
+2026-01-05 16:01:49,266 INFO App status: Selected Arrow_Chloe.json
+2026-01-05 16:01:50,389 INFO LevelUpWizard status: Step 1 of 5: Summary
+2026-01-05 16:01:56,885 INFO LevelUpWizard status: Step 2 of 5: Talents
+2026-01-05 16:04:37,424 INFO LevelUpWizard status: Step 3 of 5: Advancements
+2026-01-05 16:04:57,091 INFO LevelUpWizard status: Not enough AP remaining
+2026-01-05 16:08:56,244 INFO LevelUpWizard status: Step 4 of 5: HP
+2026-01-05 16:12:48,686 INFO LevelUpWizard status: Step 5 of 5: Confirm
+2026-01-05 16:12:56,618 INFO App status: Leveled up: Arrow_Chloe.json
+2026-01-05 16:12:56,634 INFO App status: Loaded 3 characters
+2026-01-05 18:48:27,031 INFO App status: Loaded 3 characters
+2026-01-05 18:48:29,103 INFO App status: Selected Arrow_Chloe.json
+2026-01-05 18:48:30,511 INFO LevelUpWizard status: Step 1 of 6: Summary
+2026-01-05 18:49:18,390 INFO LevelUpWizard status: Step 2 of 6: Ability Increase
+2026-01-05 18:49:29,481 INFO LevelUpWizard status: Step 3 of 6: Talents
+2026-01-05 18:50:00,218 INFO LevelUpWizard status: Step 4 of 6: Advancements
+2026-01-05 18:50:44,408 INFO LevelUpWizard status: Step 5 of 6: HP
+2026-01-05 18:50:48,205 INFO LevelUpWizard status: Step 6 of 6: Confirm
+2026-01-05 18:51:24,042 INFO App status: Leveled up: Arrow_Chloe.json
+2026-01-05 18:51:24,052 INFO App status: Loaded 3 characters
+2026-01-05 18:51:43,115 INFO App status: Selected Arrow_Chloe.json
+2026-01-05 18:51:44,143 INFO App status: Selected Minotour_Player.json
+2026-01-05 18:51:53,306 INFO App status: PDF export failed: [Errno 13] Permission denied: 'C:\\Projects\\FightingSystem\\exports\\Minotour_Player.pdf'
+2026-01-05 18:56:32,304 INFO App status: Loaded 3 characters
+2026-01-05 18:56:35,391 INFO App status: Selected Minotour_Player.json
+2026-01-05 18:56:40,841 INFO LevelUpWizard status: Step 1 of 5: Summary
+2026-01-05 18:56:52,045 INFO LevelUpWizard status: Step 2 of 5: Talents
+2026-01-05 18:57:13,208 INFO LevelUpWizard status: Step 3 of 5: Advancements
+2026-01-05 19:07:17,788 INFO LevelUpWizard status: Step 4 of 5: HP
+2026-01-05 19:07:23,192 INFO LevelUpWizard status: Step 5 of 5: Confirm
+2026-01-05 19:07:27,370 INFO App status: Leveled up: Minotour_Player_L5.json
+2026-01-05 19:07:27,379 INFO App status: Loaded 3 characters
